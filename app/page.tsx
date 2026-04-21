@@ -10,6 +10,7 @@ import HowItWorks from '@/components/HowItWorks'
 import Testimonials from '@/components/Testimonials'
 import FinalCTA from '@/components/FinalCTA'
 import Footer from '@/components/Footer'
+import CalendlyButton from '@/components/CalendlyButton'
 
 export default function Home() {
   useEffect(() => {
@@ -42,6 +43,8 @@ export default function Home() {
       <Testimonials />
       <FinalCTA />
       <Footer />
+      {/* Calendly popup widget — injectat global */}
+      <CalendlyButton />
     </main>
   )
 }
