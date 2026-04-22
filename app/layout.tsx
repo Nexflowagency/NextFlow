@@ -10,22 +10,22 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Nextflow.ai — Automate your business. Scale without chaos.',
+  title: 'Nextflow.ai — Automatizează-ți afacerea. Crește fără haos.',
   description:
-    'We build AI automation systems that handle your leads, follow-ups, and operations automatically. Stop losing clients to manual processes.',
-  keywords: 'AI automation, lead automation, CRM optimization, business automation, follow-up automation',
+    'Construim sisteme AI care gestionează lead-urile, follow-up-urile și operațiunile tale automat. Oprește-te din a pierde clienți din cauza proceselor manuale.',
+  keywords: 'automatizare AI, automatizare lead-uri, optimizare CRM, automatizare afaceri, follow-up automat',
   openGraph: {
-    title: 'Nextflow.ai — Automate your business. Scale without chaos.',
+    title: 'Nextflow.ai — Automatizează-ți afacerea. Crește fără haos.',
     description:
-      'We build AI systems that handle your leads, follow-ups, and operations automatically.',
+      'Construim sisteme AI care gestionează lead-urile, follow-up-urile și operațiunile tale automat.',
     type: 'website',
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nextflow.ai — Automate your business. Scale without chaos.',
+    title: 'Nextflow.ai — Automatizează-ți afacerea. Crește fără haos.',
     description:
-      'We build AI systems that handle your leads, follow-ups, and operations automatically.',
+      'Construim sisteme AI care gestionează lead-urile, follow-up-urile și operațiunile tale automat.',
   },
 }
 

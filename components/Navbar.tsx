@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react'
 
 const navLinks = [
-  { label: 'How It Works', href: '#how-it-works' },
-  { label: 'Results', href: '#results' },
-  { label: 'Testimonials', href: '#testimonials' },
+  { label: 'Cum Funcționează', href: '#how-it-works' },
+  { label: 'Rezultate', href: '#results' },
+  { label: 'Testimoniale', href: '#testimonials' },
 ]
 
 export default function Navbar() {
@@ -32,14 +32,14 @@ export default function Navbar() {
             {/* Logo */}
             <a href="#" className="flex items-center gap-2.5 group" aria-label="Nextflow.ai">
               <span className="flex items-center justify-center w-9 h-9 rounded-xl transition-all duration-300"
-                style={{ background: 'rgba(245,197,24,0.12)', border: '1px solid rgba(245,197,24,0.25)' }}>
+                style={{ background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.3)' }}>
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <path d="M2 9L6.5 4.5L11 9L15.5 4.5" stroke="#F5C518" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M2 13.5L6.5 9L11 13.5L15.5 9" stroke="#10B981" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" opacity="0.7"/>
+                  <path d="M2 9L6.5 4.5L11 9L15.5 4.5" stroke="#10B981" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2 13.5L6.5 9L11 13.5L15.5 9" stroke="#F5C518" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" opacity="0.8"/>
                 </svg>
               </span>
               <span className="font-black text-white text-xl tracking-tight" style={{ letterSpacing: '-0.03em' }}>
-                Nextflow<span style={{ color: '#F5C518' }}>.ai</span>
+                Nextflow<span style={{ color: '#10B981' }}>.ai</span>
               </span>
             </a>
 
@@ -50,7 +50,7 @@ export default function Navbar() {
                   <a href={link.href}
                     className="text-sm font-medium transition-colors duration-150"
                     style={{ color: 'rgba(255,255,255,0.5)' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#10B981')}
                     onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}>
                     {link.label}
                   </a>
@@ -58,27 +58,27 @@ export default function Navbar() {
               ))}
             </ul>
 
-            {/* Desktop CTA */}
+            {/* CTA */}
             <div className="hidden md:flex items-center gap-3">
               <a href="mailto:hello@nextflow.ai"
                 className="text-sm font-medium transition-colors"
-                style={{ color: 'rgba(255,255,255,0.45)' }}
+                style={{ color: 'rgba(255,255,255,0.4)' }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}>
+                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}>
                 Contact
               </a>
               <a href="#cta" className="btn-primary text-sm px-5 py-2.5">
-                Book a Call
+                Programează un Call
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M2.5 7H11.5M8 3.5L11.5 7L8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </a>
             </div>
 
-            {/* Mobile hamburger */}
+            {/* Hamburger */}
             <button onClick={() => setMenuOpen(!menuOpen)}
               className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5"
-              aria-label="Toggle menu">
+              aria-label="Meniu">
               <span className={`block h-0.5 w-6 bg-white transition-all duration-200 origin-center ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}/>
               <span className={`block h-0.5 bg-white transition-all duration-200 ${menuOpen ? 'w-0 opacity-0' : 'w-5 opacity-100'}`}/>
               <span className={`block h-0.5 w-6 bg-white transition-all duration-200 origin-center ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}/>
@@ -95,14 +95,14 @@ export default function Navbar() {
             <a key={link.label} href={link.href} onClick={() => setMenuOpen(false)}
               className="text-2xl font-bold text-white py-4 border-b transition-colors"
               style={{ borderColor: 'rgba(255,255,255,0.06)', transitionDelay: menuOpen ? `${i * 50}ms` : '0ms' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#F5C518')}
+              onMouseEnter={e => (e.currentTarget.style.color = '#10B981')}
               onMouseLeave={e => (e.currentTarget.style.color = '#FFFFFF')}>
               {link.label}
             </a>
           ))}
           <div className="mt-8">
             <a href="#cta" onClick={() => setMenuOpen(false)} className="btn-primary w-full justify-center text-base">
-              Book a Call
+              Programează un Call
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>

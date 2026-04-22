@@ -23,18 +23,15 @@ export default function Hero() {
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-16"
       style={{ background: '#0B0B0B' }}>
 
-      {/* Dot grid */}
-      <div className="absolute inset-0 dot-grid-bg pointer-events-none opacity-100" />
+      <div className="absolute inset-0 dot-grid-bg pointer-events-none" />
 
-      {/* Yellow top-left glow */}
+      {/* Green top-left glow */}
       <div className="absolute -top-32 -left-32 w-[600px] h-[600px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top left, rgba(245,197,24,0.09) 0%, transparent 65%)' }}/>
-
-      {/* Green top-right glow */}
+        style={{ background: 'radial-gradient(ellipse at top left, rgba(16,185,129,0.1) 0%, transparent 65%)' }}/>
+      {/* Yellow top-right glow */}
       <div className="absolute -top-20 right-0 w-[500px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top right, rgba(16,185,129,0.07) 0%, transparent 65%)' }}/>
+        style={{ background: 'radial-gradient(ellipse at top right, rgba(245,197,24,0.08) 0%, transparent 65%)' }}/>
 
-      {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
         style={{ background: 'linear-gradient(to bottom, transparent, #0B0B0B)' }}/>
 
@@ -45,9 +42,9 @@ export default function Hero() {
           <div className="hero-reveal mb-8"
             style={{ opacity: 0, transform: 'translateY(24px)', transition: 'opacity 0.6s ease, transform 0.6s ease' }}>
             <span className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-sm font-semibold"
-              style={{ background: 'rgba(245,197,24,0.1)', border: '1px solid rgba(245,197,24,0.25)', color: '#F5C518' }}>
-              <span className="yellow-dot" />
-              AI Automation Agency
+              style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', color: '#10B981' }}>
+              <span className="green-dot" />
+              Agenție de Automatizare AI
             </span>
           </div>
 
@@ -61,13 +58,13 @@ export default function Hero() {
               transform: 'translateY(24px)',
               transition: 'opacity 0.7s ease, transform 0.7s ease',
             }}>
-            Automate your business.
+            Automatizează-ți afacerea.
             <br />
-            <span className="text-gradient-yellow">Scale without chaos.</span>
+            <span className="text-gradient-yellow">Crește fără haos.</span>
           </h1>
 
           {/* Sub */}
-          <p className="hero-reveal mb-10 max-w-[560px]"
+          <p className="hero-reveal mb-10 max-w-[580px]"
             style={{
               fontSize: 'clamp(1rem, 2vw, 1.2rem)',
               lineHeight: '1.7',
@@ -76,21 +73,21 @@ export default function Hero() {
               transform: 'translateY(24px)',
               transition: 'opacity 0.7s ease, transform 0.7s ease',
             }}>
-            We build AI systems that handle your leads, follow-ups, and
-            operations automatically — so you focus on growth, not grind.
+            Construim sisteme AI care gestionează lead-urile, follow-up-urile
+            și operațiunile tale automat — tu te concentrezi pe creștere, nu pe muncă de rutină.
           </p>
 
           {/* CTAs */}
           <div className="hero-reveal flex flex-col sm:flex-row gap-3 mb-14"
             style={{ opacity: 0, transform: 'translateY(24px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}>
             <a href="#cta" className="btn-primary text-base px-8 py-4">
-              Book a Free Call
+              Programează un Call Gratuit
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </a>
             <a href="#how-it-works" className="btn-secondary text-base px-8 py-4">
-              See How It Works
+              Vezi cum funcționează
             </a>
           </div>
 
@@ -113,14 +110,13 @@ export default function Hero() {
                 ))}
               </div>
               <span className="font-semibold text-white">50+</span>
-              <span>businesses automated</span>
+              <span>afaceri automatizate</span>
             </div>
           </div>
 
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 opacity-25">
         <span className="text-xs tracking-widest uppercase" style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.65rem' }}>Scroll</span>
         <div className="w-px h-8" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.4), transparent)' }}/>
