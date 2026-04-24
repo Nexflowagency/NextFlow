@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NextFlow.ai — Instagram Carousel Preview</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0A0A0A;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    min-height: 100vh;
+    padding: 48px 32px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .header-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .header-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: rgba(16,185,129,0.12);
+    border: 1px solid rgba(16,185,129,0.3);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .header-logo {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+  }
+  .header-logo span { color: #10B981; }
+  .header h1 {
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .header h1 .yellow { color: #F5C518; }
+  .header p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.38);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  /* Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.2);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #10B981;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+  .badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 0 2px rgba(16,185,129,0.25);
+  }
+
+  /* Separator */
+  .sep {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 48px;
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+  }
+
+  /* Grid of slides */
+  .slides-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 540px);
+    gap: 32px;
+    justify-content: center;
+    margin-bottom: 56px;
+  }
+
+  @media (max-width: 1160px) {
+    .slides-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .slide-frame iframe {
+      width: 100% !important;
+      height: auto !important;
+      aspect-ratio: 1;
+    }
+  }
+
+  .slide-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .slide-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+  }
+  .slide-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .slide-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+  .dot-yellow { background: #F5C518; box-shadow: 0 0 0 2px rgba(245,197,24,0.2); }
+  .dot-green { background: #10B981; box-shadow: 0 0 0 2px rgba(16,185,129,0.2); }
+  .dot-red { background: #EF4444; box-shadow: 0 0 0 2px rgba(239,68,68,0.2); }
+
+  .open-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: all 0.15s;
+    cursor: pointer;
+  }
+  .open-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  /* Slide frame */
+  .slide-frame {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4);
+    position: relative;
+    aspect-ratio: 1;
+    background: #0B0B0B;
+  }
+  .slide-frame iframe {
+    width: 1080px;
+    height: 1080px;
+    border: none;
+    transform-origin: top left;
+    display: block;
+  }
+
+  /* Export instructions */
+  .instructions {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 40px 48px;
+  }
+  .instructions h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.03em;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .instructions h2 span {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: rgba(245,197,24,0.12);
+    border: 1px solid rgba(245,197,24,0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .steps-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 20px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+  }
+  .step-num {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    background: rgba(16,185,129,0.12);
+    border: 1px solid rgba(16,185,129,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    color: #10B981;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-text {
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.5;
+  }
+  .step-text strong { color: #fff; font-weight: 700; }
+  .step-text code {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 1px 8px;
+    font-family: monospace;
+    font-size: 13px;
+    color: #F5C518;
+  }
+
+  /* Caption section */
+  .caption-box {
+    max-width: 900px;
+    margin: 32px auto 0;
+    background: rgba(245,197,24,0.04);
+    border: 1px solid rgba(245,197,24,0.15);
+    border-radius: 20px;
+    padding: 40px 48px;
+  }
+  .caption-box h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #F5C518;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .caption-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.65);
+    white-space: pre-line;
+    font-family: 'Inter', sans-serif;
+  }
+  .caption-text strong { color: #fff; }
+  .caption-text .tag { color: #10B981; }
+
+  /* Copy btn */
+  .copy-btn {
+    margin-top: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(245,197,24,0.1);
+    border: 1px solid rgba(245,197,24,0.2);
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #F5C518;
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.02em;
+  }
+  .copy-btn:hover {
+    background: rgba(245,197,24,0.15);
+    border-color: rgba(245,197,24,0.3);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge"><span class="badge-dot"></span> Instagram Carousel</div>
+  <div class="header-brand">
+    <div class="header-icon">
+      <svg width="20" height="20" viewBox="0 0 18 18" fill="none">
+        <path d="M2 9L6.5 4.5L11 9L15.5 4.5" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 13.5L6.5 9L11 13.5L15.5 9" stroke="#F5C518" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="header-logo">Nextflow<span>.ai</span></div>
+  </div>
+  <h1>Carousel <span class="yellow">gata de postat</span></h1>
+  <p>4 slide-uri · 1080 × 1080px · Deschide fiecare slide și fă screenshot</p>
+</div>
+
+<div class="sep"></div>
+
+<div class="slides-grid" id="slidesGrid">
+
+  <!-- Slide 1 -->
+  <div class="slide-wrapper">
+    <div class="slide-meta">
+      <div class="slide-label">
+        <span class="slide-dot dot-yellow"></span>
+        01 — Hook
+      </div>
+      <a class="open-btn" href="slide1.html" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M2 10L10 2M5 2H10V7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Deschide 1080px
+      </a>
+    </div>
+    <div class="slide-frame" id="frame1">
+      <iframe src="slide1.html" scrolling="no"></iframe>
+    </div>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide-wrapper">
+    <div class="slide-meta">
+      <div class="slide-label">
+        <span class="slide-dot dot-red"></span>
+        02 — Durerea
+      </div>
+      <a class="open-btn" href="slide2.html" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M2 10L10 2M5 2H10V7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Deschide 1080px
+      </a>
+    </div>
+    <div class="slide-frame" id="frame2">
+      <iframe src="slide2.html" scrolling="no"></iframe>
+    </div>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide-wrapper">
+    <div class="slide-meta">
+      <div class="slide-label">
+        <span class="slide-dot dot-green"></span>
+        03 — Soluția
+      </div>
+      <a class="open-btn" href="slide3.html" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M2 10L10 2M5 2H10V7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Deschide 1080px
+      </a>
+    </div>
+    <div class="slide-frame" id="frame3">
+      <iframe src="slide3.html" scrolling="no"></iframe>
+    </div>
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="slide-wrapper">
+    <div class="slide-meta">
+      <div class="slide-label">
+        <span class="slide-dot dot-yellow"></span>
+        04 — CTA
+      </div>
+      <a class="open-btn" href="slide4.html" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M2 10L10 2M5 2H10V7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Deschide 1080px
+      </a>
+    </div>
+    <div class="slide-frame" id="frame4">
+      <iframe src="slide4.html" scrolling="no"></iframe>
+    </div>
+  </div>
+
+</div>
+
+<!-- Export Instructions -->
+<div class="instructions">
+  <h2><span>📸</span> Cum exportezi imaginile</h2>
+  <ol class="steps-list">
+    <li class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        Apasă <strong>„Deschide 1080px"</strong> pe fiecare slide — se deschide la dimensiunea exactă de Instagram (1080×1080px)
+      </div>
+    </li>
+    <li class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        Pe Mac: <code>Cmd + Shift + 4</code> → selectezi fereastra → obții screenshot exact<br>
+        Pe Windows: <code>Win + Shift + S</code> → selectezi zona slide-ului
+      </div>
+    </li>
+    <li class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        Alternativ: <strong>Click dreapta → „Save as image"</strong> în Chrome DevTools sau folosești extensia <strong>GoFullPage</strong>
+      </div>
+    </li>
+    <li class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-text">
+        Cel mai curat rezultat: în Chrome, <code>F12</code> → Device Toolbar → setezi <strong>1080×1080</strong> → Capture screenshot
+      </div>
+    </li>
+    <li class="step-item">
+      <div class="step-num">5</div>
+      <div class="step-text">
+        Uploadezi cele 4 imagini ca <strong>carousel pe Instagram</strong> în ordinea: Hook → Durerea → Soluția → CTA
+      </div>
+    </li>
+  </ol>
+</div>
+
+<!-- Caption -->
+<div class="caption-box">
+  <h2>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M3 4h14M3 8h10M3 12h12M3 16h8" stroke="#F5C518" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    Caption Instagram (copy-paste)
+  </h2>
+  <div class="caption-text" id="captionText">Ai pierdut 3 clienți azi. Nu știi care. ⬇️
+
+În timp ce tu răspundeai manual,
+concurentul tău a închis deal-ul.
+
+Noi construim sisteme AI care:
+→ răspund în 2 minute, nu 2 ore
+→ urmăresc fiecare lead automat
+→ actualizează CRM-ul fără să atingi tastatura
+
+Rezultat?
+✅ +60% leads calificați
+✅ 3 ore de admin eliminate zilnic
+✅ Business care funcționează fără tine
+
+50+ antreprenori din România au ales
+să lucreze mai puțin și să câștige mai mult.
+
+─────────────────────────
+Tu când faci la fel?
+Demo gratuit → link în bio
+─────────────────────────
+
+#automatizareAI #antreprenorRomania #sistemeAI
+#leadgeneration #nextflowai #scalare
+#businessromania #CRM #automatizare</div>
+
+  <button class="copy-btn" onclick="copyCaption()">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <rect x="1" y="4" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M4 4V2.5A1.5 1.5 0 015.5 1H11.5A1.5 1.5 0 0113 2.5V8.5A1.5 1.5 0 0111.5 10H10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+    </svg>
+    Copiază caption-ul
+  </button>
+</div>
+
+<script>
+  // Scale iframes to fit their containers
+  function scaleIframes() {
+    const frames = document.querySelectorAll('.slide-frame');
+    frames.forEach(frame => {
+      const containerWidth = frame.offsetWidth;
+      const scale = containerWidth / 1080;
+      const iframe = frame.querySelector('iframe');
+      if (iframe) {
+        iframe.style.transform = `scale(${scale})`;
+        frame.style.height = (1080 * scale) + 'px';
+      }
+    });
+  }
+
+  scaleIframes();
+  window.addEventListener('resize', scaleIframes);
+
+  function copyCaption() {
+    const text = document.getElementById('captionText').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector('.copy-btn');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '✓ Copiat!';
+      btn.style.color = '#10B981';
+      btn.style.borderColor = 'rgba(16,185,129,0.3)';
+      setTimeout(() => {
+        btn.innerHTML = orig;
+        btn.style.color = '';
+        btn.style.borderColor = '';
+      }, 2000);
+    });
+  }
+</script>
+</body>
+</html>
