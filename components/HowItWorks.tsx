@@ -8,18 +8,21 @@ const steps = [
     title: 'Analizăm',
     description: 'Call de 30 min. Îți mapăm tot fluxul, găsim unde pierzi bani și proiectăm soluția.',
     accent: '#10B981',
+    circleClass: 'step-circle-green',
   },
   {
     step: '02',
     title: 'Construim',
     description: 'Facem totul noi. Captare lead-uri, follow-up, CRM, integrări — livrate în câteva săptămâni.',
     accent: '#F5C518',
+    circleClass: 'step-circle-yellow',
   },
   {
     step: '03',
     title: 'Tu scalezi',
     description: 'Sistemul rulează singur. Tu te concentrezi pe ceea ce contează: să crești.',
     accent: '#10B981',
+    circleClass: 'step-circle-green',
   },
 ]
 
@@ -44,16 +47,21 @@ export default function HowItWorks() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-          {/* Connector */}
+          {/* Connector line */}
           <div className="hidden md:block absolute"
-            style={{ top: '28px', left: 'calc(16.67% + 28px)', right: 'calc(16.67% + 28px)', height: '1px',
-              background: 'linear-gradient(90deg, rgba(16,185,129,0.3) 0%, rgba(245,197,24,0.5) 50%, rgba(16,185,129,0.3) 100%)' }}/>
+            style={{
+              top: '27px',
+              left: 'calc(16.67% + 32px)',
+              right: 'calc(16.67% + 32px)',
+              height: '2px',
+              background: 'linear-gradient(90deg, rgba(16,185,129,0.35) 0%, rgba(245,197,24,0.55) 50%, rgba(16,185,129,0.35) 100%)',
+              borderRadius: '2px',
+            }}/>
 
           {steps.map((step, i) => (
-            <div key={i} className={`reveal reveal-delay-${i + 1} flex flex-col items-center md:items-start text-center md:text-left`}>
-              <div className="relative mb-7">
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center font-black text-xl"
-                  style={{ background: `${step.accent}12`, border: `1px solid ${step.accent}28`, color: step.accent, letterSpacing: '-0.03em' }}>
+            <div key={i} className={`reveal reveal-delay-${i + 1} step-wrapper flex flex-col items-center md:items-start text-center md:text-left`}>
+              <div className="relative mb-7 z-10">
+                <div className={`step-circle ${step.circleClass}`}>
                   {i + 1}
                 </div>
               </div>
@@ -64,7 +72,7 @@ export default function HowItWorks() {
                 style={{ fontSize: '1.5rem', letterSpacing: '-0.03em' }}>
                 {step.title}
               </h3>
-              <p className="text-[#9CA3AF] text-sm leading-relaxed">
+              <p className="text-sm leading-relaxed" style={{ color: '#9CA3AF' }}>
                 {step.description}
               </p>
             </div>

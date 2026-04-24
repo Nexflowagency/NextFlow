@@ -61,9 +61,12 @@ export default function SolutionSection() {
                   style={{ background: 'rgba(16,185,129,0.08)', color: '#10B981', border: '1px solid rgba(16,185,129,0.15)' }}>
                   {item.number}
                 </span>
-                <span className="text-xs font-bold px-3 py-1.5 rounded-lg"
-                  style={{ background: 'rgba(245,197,24,0.1)', color: '#D4A800', border: '1px solid rgba(245,197,24,0.2)' }}>
-                  ✓ {item.outcome}
+                <span className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-lg"
+                  style={{ background: 'rgba(245,197,24,0.1)', color: '#B8860B', border: '1px solid rgba(245,197,24,0.22)' }}>
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <path d="M2 5.5L4 7.5L8 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  {item.outcome}
                 </span>
               </div>
 
@@ -71,7 +74,7 @@ export default function SolutionSection() {
                 style={{ fontSize: '1.3rem', letterSpacing: '-0.025em', lineHeight: '1.2' }}>
                 {item.title}
               </h3>
-              <p className="text-[#9CA3AF] text-sm leading-relaxed">
+              <p className="text-sm leading-relaxed" style={{ color: '#9CA3AF' }}>
                 {item.description}
               </p>
             </div>

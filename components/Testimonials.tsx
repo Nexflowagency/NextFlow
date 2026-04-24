@@ -22,8 +22,10 @@ export default function Testimonials() {
 
   return (
     <section className="section-py relative overflow-hidden" style={{ background: '#111111' }} id="testimonials">
-      <div className="absolute top-0 left-0 w-[400px] h-[400px] pointer-events-none"
+      <div className="absolute top-0 left-0 w-[500px] h-[400px] pointer-events-none"
         style={{ background: 'radial-gradient(ellipse at top left, rgba(16,185,129,0.06) 0%, transparent 65%)' }}/>
+      <div className="absolute bottom-0 right-0 w-[400px] h-[300px] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at bottom right, rgba(245,197,24,0.04) 0%, transparent 65%)' }}/>
 
       <div className="container-main relative z-10" ref={ref}>
         <div className="text-center mb-14">
@@ -42,8 +44,7 @@ export default function Testimonials() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {testimonials.map((t, i) => (
             <div key={i}
-              className={`reveal reveal-delay-${i + 1} rounded-2xl p-8 flex flex-col gap-6`}
-              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
+              className={`testimonial-card reveal reveal-delay-${i + 1} card flex flex-col gap-6`}>
 
               {/* Stars */}
               <div className="flex gap-1">
@@ -54,8 +55,8 @@ export default function Testimonials() {
                 ))}
               </div>
 
-              {/* Quote — short */}
-              <p className="font-semibold text-white leading-relaxed flex-1"
+              {/* Quote */}
+              <p className="font-semibold text-white leading-relaxed flex-1 relative z-10"
                 style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}>
                 &ldquo;{t.quote}&rdquo;
               </p>
@@ -69,7 +70,7 @@ export default function Testimonials() {
                 </div>
                 <div>
                   <div className="font-bold text-white text-sm">{t.name}</div>
-                  <div className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>{t.role}</div>
+                  <div className="text-xs" style={{ color: 'rgba(255,255,255,0.32)' }}>{t.role}</div>
                 </div>
               </div>
             </div>
