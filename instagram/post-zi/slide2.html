@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Post Zi — Slide 2 · Dimineața</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px; height: 1080px;
+    overflow: hidden; background: #0B0B0B;
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    width: 1080px; height: 1080px;
+    position: relative;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 88px 96px; overflow: hidden;
+  }
+
+  .dot-grid {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1.5px, transparent 1.5px);
+    background-size: 36px 36px; pointer-events: none;
+  }
+  .glow-tl {
+    position: absolute; top: -200px; left: -150px;
+    width: 600px; height: 600px;
+    background: radial-gradient(ellipse, rgba(245,197,24,0.07) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .slide-num {
+    position: absolute; top: 52px; right: 60px;
+    font-size: 13px; font-weight: 700;
+    color: rgba(255,255,255,0.18); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  .brand {
+    position: absolute; bottom: 60px; left: 96px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .brand-icon {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.28);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .brand-name { font-size: 18px; font-weight: 900; color: #fff; letter-spacing: -0.03em; }
+  .brand-name span { color: #10B981; }
+
+  .swipe-hint {
+    position: absolute; bottom: 60px; right: 96px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.22); letter-spacing: 0.04em;
+  }
+  .swipe-arrow {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.14);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .content { position: relative; z-index: 10; width: 100%; }
+
+  .time-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: #F5C518;
+    margin-bottom: 32px;
+    padding: 8px 18px;
+    background: rgba(245,197,24,0.08);
+    border: 1px solid rgba(245,197,24,0.22);
+    border-radius: 100px;
+  }
+
+  .headline {
+    font-size: 60px; font-weight: 900;
+    line-height: 1.05; letter-spacing: -0.04em;
+    color: #fff; margin-bottom: 44px;
+  }
+  .headline span { color: rgba(255,255,255,0.35); }
+
+  .cards { display: flex; flex-direction: column; gap: 16px; }
+
+  .card {
+    display: flex; align-items: flex-start; gap: 20px;
+    padding: 24px 28px;
+    background: rgba(255,255,255,0.035);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    border-left: 3px solid rgba(239,68,68,0.5);
+  }
+
+  .card-icon {
+    font-size: 24px; flex-shrink: 0; margin-top: 2px;
+    width: 40px; text-align: center;
+  }
+
+  .card-text {
+    flex: 1;
+  }
+  .card-title {
+    font-size: 22px; font-weight: 700;
+    color: #fff; line-height: 1.3; margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+  .card-sub {
+    font-size: 17px; font-weight: 500;
+    color: rgba(255,255,255,0.38); line-height: 1.4;
+  }
+  .card-sub strong { color: rgba(239,68,68,0.75); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="dot-grid"></div>
+  <div class="glow-tl"></div>
+
+  <div class="slide-num">02 / 05</div>
+
+  <div class="content">
+    <div class="time-badge">⏰ Orele 9:00 — 12:00</div>
+
+    <h2 class="headline">
+      Tu ești<br>
+      <span>managerul</span> de lead-uri.
+    </h2>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <div class="card-text">
+          <div class="card-title">Un client serios a scris ieri la 21:00.</div>
+          <div class="card-sub">Nu l-ai văzut. Dimineața când îl cauți, <strong>vorbește deja cu alt agent.</strong></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">⏱</div>
+        <div class="card-text">
+          <div class="card-title">2 ore consumate pe mesaje de rutină.</div>
+          <div class="card-sub">Întrebări repetitive, prețuri, disponibilitate. <strong>Toate puteau fi automatizate.</strong></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">📉</div>
+        <div class="card-text">
+          <div class="card-title">Lead-ul nu mai are răbdare.</div>
+          <div class="card-sub"><strong>40% din potențiali clienți</strong> pleacă dacă nu primesc răspuns în primele 5 minute.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brand">
+    <div class="brand-icon">
+      <svg width="20" height="20" viewBox="0 0 18 18" fill="none">
+        <path d="M2 9L6.5 4.5L11 9L15.5 4.5" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 13.5L6.5 9L11 13.5L15.5 9" stroke="#F5C518" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="brand-name">Nextflow<span>.ai</span></div>
+  </div>
+
+  <div class="swipe-hint">
+    SWIPE
+    <div class="swipe-arrow">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M3 7H11M7.5 4L11 7L7.5 10" stroke="rgba(255,255,255,0.35)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</div>
+</body>
+</html>

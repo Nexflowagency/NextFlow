@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Post Marco — Slide 2 · Înainte</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px; height: 1080px;
+    overflow: hidden; background: #0B0B0B;
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    width: 1080px; height: 1080px;
+    position: relative;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 80px 96px; overflow: hidden;
+  }
+
+  .dot-grid {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1.5px, transparent 1.5px);
+    background-size: 36px 36px; pointer-events: none;
+  }
+  .glow-red {
+    position: absolute; top: -200px; right: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(ellipse, rgba(239,68,68,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .slide-num {
+    position: absolute; top: 52px; right: 60px;
+    font-size: 13px; font-weight: 700;
+    color: rgba(255,255,255,0.18); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  .brand {
+    position: absolute; bottom: 60px; left: 96px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .brand-icon {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.28);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .brand-name { font-size: 18px; font-weight: 900; color: #fff; letter-spacing: -0.03em; }
+  .brand-name span { color: #10B981; }
+
+  .swipe-hint {
+    position: absolute; bottom: 60px; right: 96px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.22); letter-spacing: 0.04em;
+  }
+  .swipe-arrow {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.14);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .content { position: relative; z-index: 10; width: 100%; }
+
+  .period-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: rgba(239,68,68,0.8);
+    margin-bottom: 16px; padding: 8px 18px;
+    background: rgba(239,68,68,0.08);
+    border: 1px solid rgba(239,68,68,0.2);
+    border-radius: 100px;
+  }
+
+  .who {
+    font-size: 16px; font-weight: 600;
+    color: rgba(255,255,255,0.28); letter-spacing: -0.01em;
+    margin-bottom: 36px;
+  }
+
+  .headline {
+    font-size: 54px; font-weight: 900;
+    line-height: 1.05; letter-spacing: -0.04em;
+    color: #fff; margin-bottom: 36px;
+  }
+
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .card {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 20px 22px;
+    background: rgba(239,68,68,0.05);
+    border: 1px solid rgba(239,68,68,0.15);
+    border-left: 3px solid rgba(239,68,68,0.45);
+    border-radius: 14px;
+  }
+
+  .card-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+
+  .card-body {}
+  .card-title {
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.02em; line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .card-sub {
+    font-size: 15px; font-weight: 500;
+    color: rgba(255,255,255,0.32); line-height: 1.3;
+  }
+  .card-sub .highlight { color: rgba(239,68,68,0.7); font-weight: 700; }
+
+  .bottom-card {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; gap: 14px;
+    padding: 18px 22px;
+    background: rgba(239,68,68,0.05);
+    border: 1px solid rgba(239,68,68,0.15);
+    border-left: 3px solid rgba(239,68,68,0.45);
+    border-radius: 14px;
+  }
+  .bottom-card .card-title { font-size: 20px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="dot-grid"></div>
+  <div class="glow-red"></div>
+
+  <div class="slide-num">02 / 04</div>
+
+  <div class="content">
+    <div class="period-badge">Înainte de Nextflow.ai</div>
+    <div class="who">Marco R. · Agenție imobiliară · București</div>
+
+    <h2 class="headline">Realitatea lui Marco.</h2>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <div class="card-body">
+          <div class="card-title">80+ mesaje/zi</div>
+          <div class="card-sub">Răspunse manual, fiecare în parte</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">📉</div>
+        <div class="card-body">
+          <div class="card-title">40% lead-uri pierdute</div>
+          <div class="card-sub"><span class="highlight">Definitiv</span> — fără să știe de ele</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🔁</div>
+        <div class="card-body">
+          <div class="card-title">3-4 ore/zi admin</div>
+          <div class="card-sub">CRM, rapoarte, notificări — toate manual</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <div class="card-body">
+          <div class="card-title">3 tranzacții/lună</div>
+          <div class="card-sub">Cu efort maxim. Plafonat.</div>
+        </div>
+      </div>
+
+      <div class="bottom-card">
+        <div class="card-icon">😤</div>
+        <div class="card-body">
+          <div class="card-title">"Zilele libere? Un lux pe care nu mi-l pot permite."</div>
+          <div class="card-sub">— Marco R., înainte</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brand">
+    <div class="brand-icon">
+      <svg width="20" height="20" viewBox="0 0 18 18" fill="none">
+        <path d="M2 9L6.5 4.5L11 9L15.5 4.5" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 13.5L6.5 9L11 13.5L15.5 9" stroke="#F5C518" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="brand-name">Nextflow<span>.ai</span></div>
+  </div>
+
+  <div class="swipe-hint">
+    SWIPE
+    <div class="swipe-arrow">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M3 7H11M7.5 4L11 7L7.5 10" stroke="rgba(255,255,255,0.35)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</div>
+</body>
+</html>

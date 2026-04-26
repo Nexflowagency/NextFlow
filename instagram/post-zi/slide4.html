@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Post Zi — Slide 4 · Flip</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px; height: 1080px;
+    overflow: hidden; background: #0B0B0B;
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    width: 1080px; height: 1080px;
+    position: relative;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 88px 96px; overflow: hidden;
+  }
+
+  .dot-grid {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1.5px, transparent 1.5px);
+    background-size: 36px 36px; pointer-events: none;
+  }
+  .glow-tl {
+    position: absolute; top: -200px; left: -150px;
+    width: 700px; height: 700px;
+    background: radial-gradient(ellipse, rgba(16,185,129,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .glow-br {
+    position: absolute; bottom: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(ellipse, rgba(16,185,129,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .slide-num {
+    position: absolute; top: 52px; right: 60px;
+    font-size: 13px; font-weight: 700;
+    color: rgba(255,255,255,0.18); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  .brand {
+    position: absolute; bottom: 60px; left: 96px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .brand-icon {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.28);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .brand-name { font-size: 18px; font-weight: 900; color: #fff; letter-spacing: -0.03em; }
+  .brand-name span { color: #10B981; }
+
+  .swipe-hint {
+    position: absolute; bottom: 60px; right: 96px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.22); letter-spacing: 0.04em;
+  }
+  .swipe-arrow {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.14);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .content { position: relative; z-index: 10; width: 100%; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: #10B981;
+    margin-bottom: 32px; padding: 8px 18px;
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.25);
+    border-radius: 100px;
+  }
+  .eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: #10B981; }
+
+  .headline {
+    font-size: 62px; font-weight: 900;
+    line-height: 1.0; letter-spacing: -0.04em;
+    color: #fff; margin-bottom: 44px;
+  }
+  .headline .green { color: #10B981; }
+
+  .items { display: flex; flex-direction: column; gap: 14px; margin-bottom: 44px; }
+
+  .item {
+    display: flex; align-items: center; gap: 20px;
+    padding: 20px 24px;
+    background: rgba(16,185,129,0.06);
+    border: 1px solid rgba(16,185,129,0.18);
+    border-radius: 14px;
+    border-left: 3px solid #10B981;
+  }
+
+  .check-icon {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: rgba(16,185,129,0.15);
+    border: 1px solid rgba(16,185,129,0.35);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .item-text { flex: 1; }
+  .item-main {
+    font-size: 21px; font-weight: 700;
+    color: #fff; letter-spacing: -0.02em;
+  }
+  .item-sub {
+    font-size: 16px; font-weight: 500;
+    color: rgba(255,255,255,0.38); margin-top: 2px;
+  }
+
+  .bottom-note {
+    font-size: 24px; font-weight: 700;
+    color: rgba(255,255,255,0.5); letter-spacing: -0.02em;
+    border-left: 3px solid rgba(16,185,129,0.5);
+    padding-left: 20px; line-height: 1.4;
+  }
+  .bottom-note strong { color: #10B981; font-weight: 900; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="dot-grid"></div>
+  <div class="glow-tl"></div>
+  <div class="glow-br"></div>
+
+  <div class="slide-num">04 / 05</div>
+
+  <div class="content">
+    <div class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      Ce-ar fi dacă...
+    </div>
+
+    <h2 class="headline">
+      Ziua ta arăta<br>
+      <span class="green">complet altfel.</span>
+    </h2>
+
+    <div class="items">
+      <div class="item">
+        <div class="check-icon">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2.5 7L5.5 10L11.5 4" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-text">
+          <div class="item-main">Lead-uri răspunse în sub 2 minute</div>
+          <div class="item-sub">24/7, la orice oră, fără tine</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="check-icon">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2.5 7L5.5 10L11.5 4" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-text">
+          <div class="item-main">Follow-up trimis automat</div>
+          <div class="item-sub">Fiecare prospect urmărit până devine client</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="check-icon">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2.5 7L5.5 10L11.5 4" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-text">
+          <div class="item-main">CRM actualizat singur</div>
+          <div class="item-sub">Pipeline, scoruri, notificări — zero click-uri manuale</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="check-icon">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2.5 7L5.5 10L11.5 4" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-text">
+          <div class="item-main">Tu la 17:00 — liber</div>
+          <div class="item-sub">Sistemul lucrează. Tu construiești.</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="bottom-note">
+      Nu e un vis.<br>
+      <strong>E un sistem.</strong>
+    </p>
+  </div>
+
+  <div class="brand">
+    <div class="brand-icon">
+      <svg width="20" height="20" viewBox="0 0 18 18" fill="none">
+        <path d="M2 9L6.5 4.5L11 9L15.5 4.5" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 13.5L6.5 9L11 13.5L15.5 9" stroke="#F5C518" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="brand-name">Nextflow<span>.ai</span></div>
+  </div>
+
+  <div class="swipe-hint">
+    SWIPE
+    <div class="swipe-arrow">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M3 7H11M7.5 4L11 7L7.5 10" stroke="rgba(255,255,255,0.35)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</div>
+</body>
+</html>
