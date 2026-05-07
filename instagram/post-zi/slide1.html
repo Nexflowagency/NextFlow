@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Post Zi — Slide 1 · Hook</title>
+<!--
+  CAPTION INSTAGRAM:
+  ──────────────────
+  8:07 AM. 12 mesaje. 0 urgențe.
+  Și totuși, tu vei răspunde la toate.
+
+  Ăsta e începutul zilei pentru 80% din antreprenorii cu care vorbim.
+  Ocupați. Dar nu productivi.
+
+  Swipe să vezi cum arată ziua lor — și cum poate arăta a ta. ➡️
+
+  #automatizare #AI #antreprenori #afaceri #businessromania #nextflowai
+-->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    background: #0B0B0B;
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    width: 1080px;
+    height: 1080px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 96px;
+    overflow: hidden;
+  }
+
+  .dot-grid {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1.5px, transparent 1.5px);
+    background-size: 36px 36px;
+    pointer-events: none;
+  }
+
+  .glow-tl {
+    position: absolute; top: -180px; left: -180px;
+    width: 650px; height: 650px;
+    background: radial-gradient(ellipse at top left, rgba(16,185,129,0.11) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .glow-br {
+    position: absolute; bottom: -120px; right: -80px;
+    width: 480px; height: 480px;
+    background: radial-gradient(ellipse at bottom right, rgba(245,197,24,0.07) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .slide-num {
+    position: absolute; top: 52px; right: 60px;
+    font-size: 13px; font-weight: 700;
+    color: rgba(255,255,255,0.18);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  .brand {
+    position: absolute; bottom: 60px; left: 96px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .brand-icon {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: rgba(16,185,129,0.12);
+    border: 1px solid rgba(16,185,129,0.28);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .brand-name { font-size: 18px; font-weight: 900; color: #fff; letter-spacing: -0.03em; }
+  .brand-name span { color: #10B981; }
+
+  .swipe-hint {
+    position: absolute; bottom: 60px; right: 96px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.22); letter-spacing: 0.04em;
+  }
+  .swipe-arrow {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.14);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .content { position: relative; z-index: 10; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 40px;
+    padding: 7px 18px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 100px;
+  }
+
+  .time-block {
+    font-size: 122px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.06em;
+    color: rgba(255,255,255,0.12);
+    margin-bottom: 8px;
+  }
+
+  .headline {
+    font-size: 90px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .headline .yellow { color: #F5C518; }
+
+  .headline-sub {
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 52px;
+  }
+  .headline-sub strong { color: rgba(255,255,255,0.7); }
+
+  .bottom-statement {
+    font-size: 22px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.38);
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    border-left: 3px solid #10B981;
+    padding-left: 20px;
+    max-width: 520px;
+  }
+  .bottom-statement em { color: rgba(255,255,255,0.65); font-style: normal; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="dot-grid"></div>
+  <div class="glow-tl"></div>
+  <div class="glow-br"></div>
+
+  <div class="slide-num">01 / 05</div>
+
+  <div class="content">
+    <div class="eyebrow">Îți sună cunoscut?</div>
+
+    <div class="time-block">8:07 AM</div>
+
+    <h1 class="headline"><span class="yellow">12</span> mesaje<br>noi.</h1>
+
+    <p class="headline-sub">
+      <strong>0</strong> sunt urgente.<br>
+      Tu le vei citi pe toate.
+    </p>
+
+    <p class="bottom-statement">
+      Și ziua ta tocmai <em>a început.</em>
+    </p>
+  </div>
+
+  <div class="brand">
+    <div class="brand-icon">
+      <svg width="20" height="20" viewBox="0 0 18 18" fill="none">
+        <path d="M2 9L6.5 4.5L11 9L15.5 4.5" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 13.5L6.5 9L11 13.5L15.5 9" stroke="#F5C518" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="brand-name">Nextflow<span>.ai</span></div>
+  </div>
+
+  <div class="swipe-hint">
+    SWIPE
+    <div class="swipe-arrow">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M3 7H11M7.5 4L11 7L7.5 10" stroke="rgba(255,255,255,0.35)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</div>
+</body>
+</html>

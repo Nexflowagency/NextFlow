@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Post Marco — Slide 1 · Hook</title>
+<!--
+  CAPTION INSTAGRAM:
+  ──────────────────
+  Marco pierdea 3 clienți pe săptămână.
+  Nu știa. N-avea cum să știe.
+
+  Până a implementat un sistem.
+
+  Swipe să vezi ce s-a schimbat în 90 de zile ➡️
+
+  (și la final îți spun cum poate arăta același lucru pentru tine)
+
+  #automatizareAI #imobiliare #agentieimobiliara #businessromania #crestereafacere #nextflowai
+-->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px; height: 1080px;
+    overflow: hidden; background: #0B0B0B;
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    width: 1080px; height: 1080px;
+    position: relative;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 96px; overflow: hidden;
+  }
+
+  .dot-grid {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1.5px, transparent 1.5px);
+    background-size: 36px 36px; pointer-events: none;
+  }
+  .glow-tl {
+    position: absolute; top: -180px; left: -180px;
+    width: 700px; height: 700px;
+    background: radial-gradient(ellipse, rgba(16,185,129,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .glow-br {
+    position: absolute; bottom: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(ellipse, rgba(245,197,24,0.07) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .slide-num {
+    position: absolute; top: 52px; right: 60px;
+    font-size: 13px; font-weight: 700;
+    color: rgba(255,255,255,0.18); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  .brand {
+    position: absolute; bottom: 60px; left: 96px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .brand-icon {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.28);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .brand-name { font-size: 18px; font-weight: 900; color: #fff; letter-spacing: -0.03em; }
+  .brand-name span { color: #10B981; }
+
+  .swipe-hint {
+    position: absolute; bottom: 60px; right: 96px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.22); letter-spacing: 0.04em;
+  }
+  .swipe-arrow {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.14);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .content { position: relative; z-index: 10; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: #10B981;
+    margin-bottom: 52px; padding: 8px 18px;
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.25);
+    border-radius: 100px;
+  }
+  .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: #10B981; }
+
+  .headline {
+    font-size: 96px; font-weight: 900;
+    line-height: 0.95; letter-spacing: -0.05em;
+    color: #fff; margin-bottom: 48px;
+  }
+  .headline .yellow { color: #F5C518; }
+  .headline .dim { color: rgba(255,255,255,0.3); font-size: 72px; }
+
+  .verdict {
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .verdict-line {
+    font-size: 28px; font-weight: 600;
+    color: rgba(255,255,255,0.4); letter-spacing: -0.02em;
+  }
+  .verdict-line strong { color: #10B981; font-weight: 800; }
+
+  .accent-line {
+    margin-top: 52px;
+    width: 80px; height: 4px;
+    background: linear-gradient(90deg, #10B981, #F5C518);
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="dot-grid"></div>
+  <div class="glow-tl"></div>
+  <div class="glow-br"></div>
+
+  <div class="slide-num">01 / 04</div>
+
+  <div class="content">
+    <div class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      Studiu de caz real · Imobiliare
+    </div>
+
+    <h1 class="headline">
+      Marco pierdea<br>
+      <span class="yellow">3 clienți</span><br>
+      <span class="dim">pe săptămână.</span>
+    </h1>
+
+    <div class="verdict">
+      <div class="verdict-line">Nu știa.</div>
+      <div class="verdict-line">N-avea cum să știe.</div>
+      <div class="verdict-line">Azi <strong>nu mai pierde niciunul.</strong></div>
+    </div>
+
+    <div class="accent-line"></div>
+  </div>
+
+  <div class="brand">
+    <div class="brand-icon">
+      <svg width="20" height="20" viewBox="0 0 18 18" fill="none">
+        <path d="M2 9L6.5 4.5L11 9L15.5 4.5" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 13.5L6.5 9L11 13.5L15.5 9" stroke="#F5C518" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="brand-name">Nextflow<span>.ai</span></div>
+  </div>
+
+  <div class="swipe-hint">
+    SWIPE
+    <div class="swipe-arrow">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M3 7H11M7.5 4L11 7L7.5 10" stroke="rgba(255,255,255,0.35)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</div>
+</body>
+</html>
