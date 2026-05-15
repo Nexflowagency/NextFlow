@@ -3,8 +3,11 @@
 import { useState, useRef } from 'react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
-// CONFIGURARE: mergi pe formspree.io → New Form → copiază endpoint-ul tău aici:
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID'
+// ─────────────────────────────────────────────────────────────────
+// Urmează pașii din google-apps-script-contact.js → lipești URL-ul
+// web app-ului Google Apps Script aici:
+const GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'
+// ─────────────────────────────────────────────────────────────────
 
 const inputStyle: React.CSSProperties = {
   background: 'rgba(255,255,255,0.04)',
@@ -24,20 +27,33 @@ export default function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL') {
+      setStatus('error')
+      return
+    }
+
     setStatus('sending')
-    const data = new FormData(e.currentTarget)
+    const form = e.currentTarget
+
+    // URLSearchParams e compatibil cu Google Apps Script (e.parameter)
+    const params = new URLSearchParams({
+      name:    (form.elements.namedItem('name')    as HTMLInputElement).value,
+      email:   (form.elements.namedItem('email')   as HTMLInputElement).value,
+      phone:   (form.elements.namedItem('phone')   as HTMLInputElement).value,
+      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+    })
+
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      // no-cors e necesar deoarece Google Apps Script face redirect intern
+      // datele ajung corect în Sheet chiar dacă răspunsul e opac
+      await fetch(GOOGLE_SHEETS_URL, {
         method: 'POST',
-        body: data,
-        headers: { Accept: 'application/json' },
+        mode: 'no-cors',
+        body: params,
       })
-      if (res.ok) {
-        setStatus('success')
-        formRef.current?.reset()
-      } else {
-        setStatus('error')
-      }
+      setStatus('success')
+      formRef.current?.reset()
     } catch {
       setStatus('error')
     }
@@ -79,10 +95,10 @@ export default function ContactSection() {
               </div>
               <h3 className="font-black text-white text-xl mb-2">Mesaj trimis!</h3>
               <p className="text-sm mb-6" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                Te contactăm în cel mai scurt timp.
+                Te contactăm în cel mai scurt timp. Verifică Google Sheet-ul pentru mesajul nou.
               </p>
               <button onClick={() => setStatus('idle')}
-                className="text-sm font-semibold transition-colors"
+                className="text-sm font-semibold"
                 style={{ color: '#10B981' }}
                 onMouseEnter={e => (e.currentTarget.style.textDecoration = 'underline')}
                 onMouseLeave={e => (e.currentTarget.style.textDecoration = 'none')}>
@@ -151,9 +167,10 @@ export default function ContactSection() {
               </div>
 
               {status === 'error' && (
-                <p className="text-sm text-red-400 bg-red-500/10 px-4 py-3 rounded-xl">
-                  Ceva n-a mers. Încearcă din nou sau scrie direct la{' '}
-                  <a href="mailto:hello@nextflow.ai" className="underline">hello@nextflow.ai</a>
+                <p className="text-sm px-4 py-3 rounded-xl" style={{ background: 'rgba(239,68,68,0.1)', color: '#FCA5A5' }}>
+                  {GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL'
+                    ? 'Formularul nu e conectat la Google Sheets. Urmează pașii din google-apps-script-contact.js'
+                    : 'Ceva n-a mers. Încearcă din nou sau scrie la hello@nextflow.ai'}
                 </p>
               )}
 
