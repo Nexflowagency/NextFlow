@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-// ACTUALIZEAZĂ cu linkul tău real de Instagram:
-const INSTAGRAM_URL = 'https://www.instagram.com/nextflowai'
+const INSTAGRAM_URL = 'https://www.instagram.com/nextflow_agency.ai/'
 
 const navLinks = [
   { label: 'Cum Funcționează', href: '#how-it-works' },
@@ -63,7 +62,7 @@ export default function Navbar() {
 
             {/* CTA */}
             <div className="hidden md:flex items-center gap-3">
-              <a href="mailto:hello@nextflow.ai"
+              <a href="#contact"
                 className="text-sm font-medium transition-colors"
                 style={{ color: 'rgba(255,255,255,0.4)' }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
@@ -94,7 +93,7 @@ export default function Navbar() {
       <div className={`fixed inset-0 z-40 transition-all duration-300 md:hidden ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
         style={{ background: '#0B0B0B', paddingTop: '64px' }}>
         <div className="container-main py-8 flex flex-col gap-1">
-          {[...navLinks, { label: 'Contact', href: 'mailto:hello@nextflow.ai' }].map((link, i) => (
+          {[...navLinks, { label: 'Contact', href: '#contact' }].map((link, i) => (
             <a key={link.label} href={link.href} onClick={() => setMenuOpen(false)}
               className="text-2xl font-bold text-white py-4 border-b transition-colors"
               style={{ borderColor: 'rgba(255,255,255,0.06)', transitionDelay: menuOpen ? `${i * 50}ms` : '0ms' }}

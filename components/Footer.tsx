@@ -1,11 +1,10 @@
-// ACTUALIZEAZĂ cu linkul tău real de Instagram:
-const INSTAGRAM_URL = 'https://www.instagram.com/nextflowai'
+const INSTAGRAM_URL = 'https://www.instagram.com/nextflow_agency.ai/'
 
 export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer style={{ background: '#0B0B0B', borderTop: '1px solid rgba(255,255,255,0.07)' }} id="contact">
+    <footer style={{ background: '#0B0B0B', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
       <div className="container-main py-10 md:py-14">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-10">
 
@@ -34,7 +33,7 @@ export default function Footer() {
               { label: 'Servicii', href: '#solution' },
               { label: 'Cum Funcționează', href: '#how-it-works' },
               { label: 'Testimoniale', href: '#testimonials' },
-              { label: 'Contact', href: 'mailto:hello@nextflow.ai' },
+              { label: 'Contact', href: '#contact' },
             ].map(link => (
               <a key={link.label} href={link.href}
                 className="transition-colors"

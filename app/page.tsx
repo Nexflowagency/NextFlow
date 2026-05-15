@@ -9,6 +9,7 @@ import MetricsSection from '@/components/MetricsSection'
 import HowItWorks from '@/components/HowItWorks'
 import Testimonials from '@/components/Testimonials'
 import FinalCTA from '@/components/FinalCTA'
+import ContactSection from '@/components/ContactSection'
 import Footer from '@/components/Footer'
 import CalendlyButton from '@/components/CalendlyButton'
 
@@ -42,6 +43,7 @@ export default function Home() {
       <HowItWorks />
       <Testimonials />
       <FinalCTA />
+      <ContactSection />
       <Footer />
       {/* Calendly popup widget — injectat global */}
       <CalendlyButton />
