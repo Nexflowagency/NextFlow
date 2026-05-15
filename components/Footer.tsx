@@ -1,10 +1,13 @@
+// ACTUALIZEAZĂ cu linkul tău real de Instagram:
+const INSTAGRAM_URL = 'https://www.instagram.com/nextflowai'
+
 export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
     <footer style={{ background: '#0B0B0B', borderTop: '1px solid rgba(255,255,255,0.07)' }} id="contact">
-      <div className="container-main py-14">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
+      <div className="container-main py-10 md:py-14">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-10">
 
           {/* Brand */}
           <div className="flex flex-col gap-4">
@@ -61,14 +64,27 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3"
+        <div className="mt-8 md:mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4"
           style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
           <p className="text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>
             © {year} Nextflow.ai — Toate drepturile rezervate.
           </p>
-          <div className="flex gap-5 text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>
-            <a href="#" className="hover:text-white transition-colors">Politică de Confidențialitate</a>
-            <a href="#" className="hover:text-white transition-colors">Termeni și Condiții</a>
+          <div className="flex items-center gap-5">
+            {/* Instagram */}
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-xs transition-colors"
+              style={{ color: 'rgba(255,255,255,0.2)' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#E1306C')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.2)')}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4.5"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+              </svg>
+              Instagram
+            </a>
+            <a href="#" className="text-xs hover:text-white transition-colors" style={{ color: 'rgba(255,255,255,0.2)' }}>Politică de Confidențialitate</a>
+            <a href="#" className="text-xs hover:text-white transition-colors" style={{ color: 'rgba(255,255,255,0.2)' }}>Termeni și Condiții</a>
           </div>
         </div>
       </div>

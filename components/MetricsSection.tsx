@@ -23,10 +23,10 @@ export default function MetricsSection() {
           style={{ background: 'rgba(255,255,255,0.06)', borderRadius: '20px', overflow: 'hidden' }}>
           {metrics.map((metric, i) => (
             <div key={i}
-              className={`reveal reveal-delay-${i + 1} flex flex-col items-center justify-center text-center py-14 px-6`}
+              className={`reveal reveal-delay-${i + 1} flex flex-col items-center justify-center text-center py-10 px-4 md:py-14 md:px-6`}
               style={{ background: '#0B0B0B' }}>
-              <div className="font-black mb-3"
-                style={{ fontSize: 'clamp(3rem, 6vw, 4.5rem)', lineHeight: '1', letterSpacing: '-0.05em', color: metric.color }}>
+              <div className="font-black mb-2 md:mb-3"
+                style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)', lineHeight: '1', letterSpacing: '-0.05em', color: metric.color }}>
                 {metric.value}
               </div>
               <div className="font-semibold text-sm" style={{ color: 'rgba(255,255,255,0.45)', letterSpacing: '-0.01em' }}>

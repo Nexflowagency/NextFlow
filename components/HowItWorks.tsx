@@ -36,7 +36,7 @@ export default function HowItWorks() {
             Cum funcționează
           </p>
           <h2 className="reveal reveal-delay-1 font-black text-[#0B0B0B]"
-            style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', lineHeight: '1.05', letterSpacing: '-0.035em' }}>
+            style={{ fontSize: 'clamp(1.625rem, 5vw, 3.5rem)', lineHeight: '1.1', letterSpacing: '-0.03em' }}>
             3 pași.
             <br />
             <span style={{ color: '#10B981' }}>Fără bătăi de cap.</span>
@@ -71,8 +71,8 @@ export default function HowItWorks() {
           ))}
         </div>
 
-        <div className="text-center mt-16 reveal">
-          <a href="#cta" className="btn-primary text-base px-9 py-4">
+        <div className="text-center mt-10 md:mt-16 reveal">
+          <a href="#cta" className="btn-primary text-sm sm:text-base px-6 py-3.5 sm:px-9 sm:py-4 inline-flex">
             Vreau să văd cum arată la mine
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>

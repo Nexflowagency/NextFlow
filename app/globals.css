@@ -201,3 +201,20 @@
   background: linear-gradient(90deg, #F5C518, #F5A623);
   border-radius: 2px;
 }
+
+/* Mobile: safe overflow wrap on all headings */
+h1, h2, h3, h4 {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Mobile touch targets — minimum 44px tap area */
+@media (max-width: 640px) {
+  .btn-primary, .btn-secondary, .btn-ghost-dark {
+    min-height: 44px;
+  }
+  .section-py {
+    padding-top: clamp(3rem, 10vw, 5rem);
+    padding-bottom: clamp(3rem, 10vw, 5rem);
+  }
+}

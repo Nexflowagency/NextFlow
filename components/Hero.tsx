@@ -46,8 +46,8 @@ export default function Hero() {
           </div>
 
           {/* H1 */}
-          <h1 className="hr font-black text-white mb-7"
-            style={{ ...anim, fontSize: 'clamp(3rem, 7.5vw, 6rem)', lineHeight: '1.0', letterSpacing: '-0.045em' }}>
+          <h1 className="hr font-black text-white mb-5 md:mb-7"
+            style={{ ...anim, fontSize: 'clamp(1.875rem, 7.5vw, 6rem)', lineHeight: '1.05', letterSpacing: '-0.04em', overflowWrap: 'break-word', wordBreak: 'break-word' }}>
             Nu muncești
             <br />
             <span className="text-gradient-yellow">prea puțin.</span>
@@ -56,22 +56,22 @@ export default function Hero() {
           </h1>
 
           {/* Sub — very short */}
-          <p className="hr mb-12 max-w-[480px]"
-            style={{ ...anim, fontSize: 'clamp(1rem, 1.8vw, 1.15rem)', lineHeight: '1.7', color: 'rgba(255,255,255,0.45)' }}>
+          <p className="hr mb-8 md:mb-12 max-w-[480px]"
+            style={{ ...anim, fontSize: 'clamp(0.9375rem, 1.8vw, 1.15rem)', lineHeight: '1.7', color: 'rgba(255,255,255,0.45)' }}>
             Construim sisteme AI care lucrează în locul tău.
             <br />
             Tu câștigi timp, bani și control.
           </p>
 
           {/* CTAs */}
-          <div className="hr flex flex-col sm:flex-row gap-3 mb-16" style={anim}>
-            <a href="#cta" className="btn-primary text-base px-9 py-4">
+          <div className="hr flex flex-col sm:flex-row gap-3 mb-10 md:mb-16 w-full sm:w-auto" style={anim}>
+            <a href="#cta" className="btn-primary text-base px-7 py-3.5 sm:px-9 sm:py-4 w-full sm:w-auto justify-center">
               Vreau un Demo Gratuit
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </a>
-            <a href="#how-it-works" className="btn-secondary text-base px-9 py-4">
+            <a href="#how-it-works" className="btn-secondary text-base px-7 py-3.5 sm:px-9 sm:py-4 w-full sm:w-auto justify-center">
               Cum funcționează
             </a>
           </div>

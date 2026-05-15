@@ -26,7 +26,7 @@ export default function ProblemSection() {
             Recunoști asta?
           </p>
           <h2 className="reveal reveal-delay-1 font-black text-white"
-            style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', lineHeight: '1.05', letterSpacing: '-0.035em' }}>
+            style={{ fontSize: 'clamp(1.625rem, 5vw, 3.5rem)', lineHeight: '1.1', letterSpacing: '-0.03em' }}>
             Ești ocupat.
             <br />
             <span className="text-gradient-yellow">Dar nu productiv.</span>
@@ -37,7 +37,7 @@ export default function ProblemSection() {
         <div className="max-w-2xl mx-auto flex flex-col gap-3">
           {pains.map((pain, i) => (
             <div key={i}
-              className={`reveal reveal-delay-${i + 1} flex items-center gap-5 rounded-2xl px-7 py-5`}
+              className={`reveal reveal-delay-${i + 1} flex items-center gap-4 rounded-2xl px-5 py-4 md:px-7 md:py-5`}
               style={{
                 background: 'rgba(255,255,255,0.03)',
                 border: '1px solid rgba(255,255,255,0.07)',
@@ -52,7 +52,7 @@ export default function ProblemSection() {
                 e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
               }}>
               <span style={{ fontSize: '1.5rem' }}>{pain.emoji}</span>
-              <p className="font-semibold text-white" style={{ fontSize: '1.0625rem', letterSpacing: '-0.02em' }}>
+              <p className="font-semibold text-white" style={{ fontSize: 'clamp(0.9375rem, 2vw, 1.0625rem)', letterSpacing: '-0.02em' }}>
                 {pain.line}
               </p>
               <div className="ml-auto w-2 h-2 rounded-full bg-red-500 opacity-60 shrink-0"/>

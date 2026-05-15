@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from 'react'
 
+// ACTUALIZEAZĂ cu linkul tău real de Instagram:
+const INSTAGRAM_URL = 'https://www.instagram.com/nextflowai'
+
 const navLinks = [
   { label: 'Cum Funcționează', href: '#how-it-works' },
   { label: 'Rezultate', href: '#results' },
@@ -100,6 +103,19 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer"
+            onClick={() => setMenuOpen(false)}
+            className="text-2xl font-bold text-white py-4 border-b flex items-center gap-3 transition-colors"
+            style={{ borderColor: 'rgba(255,255,255,0.06)' }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#E1306C')}
+            onMouseLeave={e => (e.currentTarget.style.color = '#FFFFFF')}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4.5"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+            Instagram
+          </a>
           <div className="mt-8">
             <a href="#cta" onClick={() => setMenuOpen(false)} className="btn-primary w-full justify-center text-base">
               Programează un Call

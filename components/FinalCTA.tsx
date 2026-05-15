@@ -16,8 +16,8 @@ export default function FinalCTA() {
       <div className="container-main relative z-10" ref={ref}>
         <div className="max-w-2xl mx-auto text-center">
 
-          <h2 className="reveal font-black text-[#0B0B0B] mb-6"
-            style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', lineHeight: '1.0', letterSpacing: '-0.045em' }}>
+          <h2 className="reveal font-black text-[#0B0B0B] mb-5 md:mb-6"
+            style={{ fontSize: 'clamp(1.75rem, 6vw, 4.5rem)', lineHeight: '1.05', letterSpacing: '-0.04em', overflowWrap: 'break-word' }}>
             Nu trebuie să
             <br />
             muncești mai mult.
@@ -32,9 +32,9 @@ export default function FinalCTA() {
             Îți arătăm exact cum ar arăta la tine — gratuit, fără angajament.
           </p>
 
-          <div className="reveal reveal-delay-2 flex flex-col sm:flex-row gap-3 justify-center mb-8">
+          <div className="reveal reveal-delay-2 flex flex-col sm:flex-row gap-3 justify-center mb-6 md:mb-8">
             <a href="mailto:hello@nextflow.ai"
-              className="inline-flex items-center justify-center gap-2 px-9 py-4 text-white text-base font-black rounded-xl transition-all duration-200"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 sm:px-9 sm:py-4 text-white text-base font-black rounded-xl transition-all duration-200"
               style={{ background: '#0B0B0B', boxShadow: '0 4px 20px rgba(0,0,0,0.18)', letterSpacing: '-0.02em' }}
               onMouseEnter={e => {
                 const el = e.currentTarget as HTMLAnchorElement
@@ -53,7 +53,7 @@ export default function FinalCTA() {
                 <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </a>
-            <a href="mailto:hello@nextflow.ai" className="btn-ghost-dark text-base px-9 py-4">
+            <a href="mailto:hello@nextflow.ai" className="btn-ghost-dark text-base px-7 py-3.5 sm:px-9 sm:py-4">
               Scrie-ne acum
             </a>
           </div>

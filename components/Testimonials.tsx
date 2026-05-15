@@ -32,7 +32,7 @@ export default function Testimonials() {
             Rezultate reale
           </p>
           <h2 className="reveal reveal-delay-1 font-black text-white"
-            style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', lineHeight: '1.05', letterSpacing: '-0.035em' }}>
+            style={{ fontSize: 'clamp(1.625rem, 5vw, 3.5rem)', lineHeight: '1.1', letterSpacing: '-0.03em' }}>
             Ei au oprit
             <br />
             <span className="text-gradient-yellow">haosul.</span>

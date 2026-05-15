@@ -43,7 +43,7 @@ export default function SolutionSection() {
             Ce construim
           </p>
           <h2 className="reveal reveal-delay-1 font-black text-[#0B0B0B]"
-            style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', lineHeight: '1.05', letterSpacing: '-0.035em' }}>
+            style={{ fontSize: 'clamp(1.625rem, 5vw, 3.5rem)', lineHeight: '1.1', letterSpacing: '-0.03em' }}>
             Noi facem tot.
             <br />
             <span style={{ color: '#10B981' }}>Tu controlezi.</span>
