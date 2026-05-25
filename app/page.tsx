@@ -84,6 +84,15 @@ const steps = [
   { num: '04', title: 'Rezultate măsurabile', desc: 'Urmărim KPI-urile și optimizăm continuu pentru ROI maxim.' },
 ]
 
+const faqs = [
+  { q: 'Cât costă o automatizare AI?', a: 'Prețul variază în funcție de complexitate. Discutăm în consultația gratuită și îți oferim o ofertă clară, fără costuri ascunse. ROI-ul mediu al clienților noștri depășește investiția în primele 3 luni.' },
+  { q: 'Cât durează implementarea?', a: 'De obicei 2-4 săptămâni. Un chatbot simplu poate fi live în câteva zile, un sistem CRM complet cu agent vocal durează 3-4 săptămâni. Tu primești update-uri săptămânale.' },
+  { q: 'Trebuie să am cunoștințe tehnice?', a: 'Deloc. Ne ocupăm de tot din punct de vedere tehnic: configurare, integrare, testare, lansare. Tu explici procesele de business, noi facem restul.' },
+  { q: 'Se poate integra cu ce folosesc deja?', a: 'Da, în marea majoritate a cazurilor. Integrăm cu HubSpot, Salesforce, Google Workspace, platforme de e-commerce și multe altele. Verificăm compatibilitatea în consultația gratuită.' },
+  { q: 'Ce se întâmplă după implementare?', a: 'Monitorizăm activ sistemele, intervenim rapid la orice problemă și optimizăm continuu. Primești rapoarte lunare cu toate metricile. Suportul nostru este disponibil 24/7.' },
+  { q: 'Pot testa înainte să mă angajez?', a: 'Da! Consultația de 30 de minute este complet gratuită și fără obligații. Îți prezentăm exact ce sistem ar funcționa pentru tine și care sunt rezultatele estimate. Fără presiune.' },
+]
+
 const rotatingServices = [
   'Agent Vocal AI',
   'Social Media AI',
@@ -132,12 +141,15 @@ export default function Home() {
       <Navbar />
 
       {/* ── HERO ── */}
-      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-16" style={{ background: '#0A0A0A' }}>
-        <div className="absolute inset-0 dot-grid-bg pointer-events-none opacity-70" />
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[600px] pointer-events-none animate-float"
-          style={{ background: 'radial-gradient(ellipse at top, rgba(212,175,55,0.16) 0%, transparent 62%)' }} />
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-16 tech-bg">
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(22,196,127,0.12) 0%, transparent 60%)' }} />
+        <div className="absolute -top-20 left-1/4 w-[600px] h-[600px] pointer-events-none animate-float"
+          style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 65%)' }} />
+        <div className="absolute top-1/3 right-0 w-[400px] h-[400px] pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(22,196,127,0.07) 0%, transparent 65%)', animation: 'float 7s ease-in-out infinite reverse' }} />
         <div className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
-          style={{ background: 'linear-gradient(to bottom, transparent, #0A0A0A)' }} />
+          style={{ background: 'linear-gradient(to bottom, transparent, #070D1A)' }} />
 
         <div className="container-main relative z-10" ref={heroRef}>
           <div className="flex flex-col items-center text-center max-w-4xl mx-auto py-20">
@@ -201,7 +213,7 @@ export default function Home() {
       </section>
 
       {/* ── SERVICES OVERVIEW ── */}
-      <section className="section-py" style={{ background: '#111111' }}>
+      <section className="section-py" style={{ background: '#0D1525' }}>
         <div className="container-main">
           <div className="text-center mb-16">
             <p className="section-label justify-center mb-5 reveal">✦ Ce facem ✦</p>
@@ -246,7 +258,7 @@ export default function Home() {
       <div className="container-main"><div className="divider-gold" /></div>
 
       {/* ── PROCESS ── */}
-      <section className="section-py" style={{ background: '#0A0A0A' }}>
+      <section className="section-py tech-bg">
         <div className="container-main">
           <div className="text-center mb-16">
             <p className="section-label justify-center mb-5 reveal">✦ Procesul nostru ✦</p>
@@ -279,6 +291,37 @@ export default function Home() {
                 <path d="M2.5 7H11.5M8 3.5L11.5 7L8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      <div className="container-main"><div className="divider-gold" /></div>
+
+      {/* ── FAQ ── */}
+      <section className="section-py" style={{ background: '#0D1525' }}>
+        <div className="container-main">
+          <div className="text-center mb-14">
+            <p className="section-label justify-center mb-5 reveal" style={{ color: '#16C47F' }}>✦ Întrebări frecvente ✦</p>
+            <h2 className="reveal delay-1 font-serif text-white" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)', lineHeight: '1.08', fontWeight: 600 }}>
+              Ai întrebări? <span className="text-gold-gradient">Noi avem răspunsuri.</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+            {faqs.map((faq, i) => (
+              <div key={i} className={`card reveal delay-${(i % 3) + 1}`}>
+                <div className="flex items-start gap-3 mb-3">
+                  <span className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                    style={{ background: 'rgba(22,196,127,0.15)', border: '1px solid rgba(22,196,127,0.3)' }}>
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                      <path d="M2 5.5L4 7.5L8 3.5" stroke="#16C47F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                  <h3 className="font-bold text-white" style={{ fontSize: '1rem', letterSpacing: '-0.02em' }}>{faq.q}</h3>
+                </div>
+                <p className="text-sm leading-relaxed pl-9" style={{ color: 'var(--text-muted)' }}>{faq.a}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

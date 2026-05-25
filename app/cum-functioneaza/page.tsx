@@ -82,7 +82,7 @@ export default function CumFunctioneazaPage() {
       />
 
       {/* ── STEPS ── */}
-      <section className="section-py" style={{ background: '#111111' }}>
+      <section className="section-py" style={{ background: '#0D1525' }}>
         <div className="container-main">
           <div className="relative max-w-4xl mx-auto">
             {/* Vertical connector line */}
@@ -135,7 +135,7 @@ export default function CumFunctioneazaPage() {
       <div className="container-main"><div className="divider-gold" /></div>
 
       {/* ── FAQ ── */}
-      <section className="section-py" style={{ background: '#0A0A0A' }}>
+      <section className="section-py" style={{ background: '#070D1A' }}>
         <div className="container-main">
           <div className="text-center mb-14">
             <p className="section-label justify-center mb-5 reveal">✦ Întrebări frecvente ✦</p>

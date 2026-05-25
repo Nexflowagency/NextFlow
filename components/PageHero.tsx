@@ -24,15 +24,16 @@ export default function PageHero({ label, title, titleHighlight, subtitle }: Pro
   }, [])
 
   return (
-    <section className="relative overflow-hidden pt-36 pb-20 md:pt-40 md:pb-24" style={{ background: '#0A0A0A' }}>
-      <div className="absolute inset-0 dot-grid-bg pointer-events-none opacity-60" />
+    <section className="relative overflow-hidden pt-36 pb-20 md:pt-40 md:pb-24 tech-bg">
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse 70% 55% at 50% 0%, rgba(22,196,127,0.1) 0%, transparent 60%)' }} />
       <div
         className="absolute -top-48 left-1/2 -translate-x-1/2 w-[900px] h-[460px] pointer-events-none animate-float"
-        style={{ background: 'radial-gradient(ellipse at top, rgba(212,175,55,0.14) 0%, transparent 62%)' }}
+        style={{ background: 'radial-gradient(ellipse at top, rgba(212,175,55,0.12) 0%, transparent 62%)' }}
       />
       <div
         className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, transparent, #0A0A0A)' }}
+        style={{ background: 'linear-gradient(to bottom, transparent, #070D1A)' }}
       />
 
       <div className="container-main relative z-10" ref={ref}>

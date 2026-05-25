@@ -104,7 +104,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div className={`fixed inset-0 z-40 transition-all duration-300 md:hidden ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-        style={{ background: '#0A0A0A', paddingTop: '64px' }}>
+        style={{ background: '#070D1A', paddingTop: '64px' }}>
         <div className="container-main py-8 flex flex-col gap-1">
           {navLinks.map((link, i) => {
             const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))

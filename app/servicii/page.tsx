@@ -94,7 +94,7 @@ export default function ServiciiPage() {
       />
 
       {/* ── SERVICES CARDS ── */}
-      <section className="section-py" style={{ background: '#111111' }}>
+      <section className="section-py" style={{ background: '#0D1525' }}>
         <div className="container-main">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {services.map((s, i) => (

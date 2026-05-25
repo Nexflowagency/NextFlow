@@ -82,7 +82,7 @@ export default function TestimonialePage() {
       />
 
       {/* ── STATS ── */}
-      <section className="py-16" style={{ background: '#111111' }}>
+      <section className="py-16" style={{ background: '#0D1525' }}>
         <div className="container-main">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((s) => (
@@ -95,7 +95,7 @@ export default function TestimonialePage() {
       <div className="container-main"><div className="divider-gold" /></div>
 
       {/* ── TESTIMONIALS ── */}
-      <section className="section-py" style={{ background: '#0A0A0A' }}>
+      <section className="section-py" style={{ background: '#070D1A' }}>
         <div className="container-main">
           <div className="text-center mb-14">
             <p className="section-label justify-center mb-5 reveal">✦ Povești de succes ✦</p>

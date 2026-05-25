@@ -9,9 +9,11 @@
     --gold-dim: rgba(212, 175, 55, 0.12);
     --gold-border: rgba(212, 175, 55, 0.25);
     --green: #16C47F;
-    --bg: #0A0A0A;
-    --surface: #111111;
-    --surface-2: #161616;
+    --green-dim: rgba(22, 196, 127, 0.12);
+    --green-border: rgba(22, 196, 127, 0.25);
+    --bg: #070D1A;
+    --surface: #0D1525;
+    --surface-2: #111D2E;
     --text-muted: rgba(255, 255, 255, 0.55);
   }
 
@@ -20,7 +22,7 @@
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
   body {
-    background-color: #0A0A0A;
+    background-color: #070D1A;
     color: #FFFFFF;
     font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -249,9 +251,28 @@
   background-size: 28px 28px;
 }
 
+/* Tech circuit grid — AI agency background */
+.tech-bg {
+  background-color: #070D1A;
+  background-image:
+    linear-gradient(rgba(22,196,127,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22,196,127,0.04) 1px, transparent 1px),
+    linear-gradient(rgba(212,175,55,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212,175,55,0.025) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+}
+
+/* Dark section with blue-navy tint */
+.section-dark {
+  background-color: #0D1525;
+}
+.section-darker {
+  background-color: #070D1A;
+}
+
 /* Navbar scrolled */
 .navbar-scrolled {
-  background-color: rgba(10, 10, 10, 0.85) !important;
+  background-color: rgba(7, 13, 26, 0.92) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(212, 175, 55, 0.15);

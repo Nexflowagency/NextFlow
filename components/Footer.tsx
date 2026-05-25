@@ -14,7 +14,7 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer style={{ background: '#0A0A0A', borderTop: '1px solid rgba(212,175,55,0.15)' }}>
+    <footer style={{ background: '#070D1A', borderTop: '1px solid rgba(212,175,55,0.15)' }}>
       <div className="container-main py-10 md:py-14">
         <div className="flex flex-col md:flex-row items-start md:items-start justify-between gap-10 md:gap-8">
 
