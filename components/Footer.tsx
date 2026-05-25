@@ -14,22 +14,22 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer style={{ background: '#0B0B0B', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+    <footer style={{ background: '#0A0A0A', borderTop: '1px solid rgba(212,175,55,0.15)' }}>
       <div className="container-main py-10 md:py-14">
         <div className="flex flex-col md:flex-row items-start md:items-start justify-between gap-10 md:gap-8">
 
           {/* Brand */}
           <div className="flex flex-col gap-4 max-w-xs">
             <Link href="/" className="flex items-center gap-2.5 group w-fit">
-              <span className="flex items-center justify-center w-9 h-9 rounded-xl transition-all duration-300"
-                style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)' }}>
+              <span className="flex items-center justify-center w-9 h-9 rounded-xl transition-all duration-300 group-hover:scale-110"
+                style={{ background: 'rgba(212,175,55,0.12)', border: '1px solid rgba(212,175,55,0.3)' }}>
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <path d="M2 9L6.5 4.5L11 9L15.5 4.5" stroke="#10B981" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M2 13.5L6.5 9L11 13.5L15.5 9" stroke="#F5C518" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" opacity="0.8"/>
+                  <path d="M2 9L6.5 4.5L11 9L15.5 4.5" stroke="#D4AF37" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2 13.5L6.5 9L11 13.5L15.5 9" stroke="#F0D060" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" opacity="0.85"/>
                 </svg>
               </span>
-              <span className="font-black text-white text-xl" style={{ letterSpacing: '-0.03em' }}>
-                NextFlow<span style={{ color: '#10B981' }}>.ro</span>
+              <span className="font-bold text-white text-xl" style={{ letterSpacing: '-0.02em' }}>
+                NextFlow<span style={{ color: '#D4AF37' }}>.ro</span>
               </span>
             </Link>
             <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.35)' }}>
@@ -46,7 +46,7 @@ export default function Footer() {
               <Link key={link.label} href={link.href}
                 className="text-sm transition-colors w-fit"
                 style={{ color: 'rgba(255,255,255,0.4)' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#10B981')}
+                onMouseEnter={e => (e.currentTarget.style.color = '#D4AF37')}
                 onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}>
                 {link.label}
               </Link>
@@ -61,7 +61,7 @@ export default function Footer() {
             <a href="tel:+40767422497"
               className="text-sm flex items-center gap-2 transition-colors w-fit"
               style={{ color: 'rgba(255,255,255,0.4)' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#10B981')}
+              onMouseEnter={e => (e.currentTarget.style.color = '#D4AF37')}
               onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
@@ -71,7 +71,7 @@ export default function Footer() {
             <a href="mailto:hello@nextflow.ro"
               className="text-sm flex items-center gap-2 transition-colors w-fit"
               style={{ color: 'rgba(255,255,255,0.4)' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#10B981')}
+              onMouseEnter={e => (e.currentTarget.style.color = '#D4AF37')}
               onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <rect x="1" y="3" width="12" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.2"/>
@@ -105,8 +105,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 md:mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="divider-gold mt-8 md:mt-10" />
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>
             © {year} NextFlow Agency — Toate drepturile rezervate.
           </p>
