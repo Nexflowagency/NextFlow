@@ -10,45 +10,46 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nextflow-agency.netlify.app'),
-  title: 'Nextflow.ai — Automatizare AI pentru afaceri din România',
+  metadataBase: new URL('https://nextflow.ro'),
+  title: 'NextFlow Agency — Automatizare AI pentru Afaceri | România',
   description:
-    'Construim sisteme AI care gestionează lead-urile, follow-up-ul și operațiunile tale — automat. Câștigă timp, clienți și control. Consultație gratuită.',
+    'Transformăm afacerile românești prin agenți vocali AI, automatizări CRM și chatboți inteligenți. 50+ clienți, 200+ automatizări livrate.',
   keywords: [
     'automatizare AI România',
-    'sisteme AI afaceri',
-    'automatizare lead-uri',
-    'CRM automat',
-    'follow-up automat',
-    'agentie automatizare',
-    'nextflow ai',
-    'automatizare vanzari',
-    'software automatizare Romania',
+    'agent vocal AI',
+    'CRM automatizat',
+    'chatbot website',
+    'automatizare afaceri',
+    'nextflow agency',
+    'automatizare vanzari Romania',
+    'calendar smart',
+    'email marketing automatizat',
+    'social media AI',
   ],
-  authors: [{ name: 'Nextflow.ai' }],
-  creator: 'Nextflow.ai',
+  authors: [{ name: 'NextFlow Agency' }],
+  creator: 'NextFlow Agency',
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true },
   },
   alternates: {
-    canonical: 'https://nextflow-agency.netlify.app',
+    canonical: 'https://nextflow.ro',
   },
   openGraph: {
-    title: 'Nextflow.ai — Automatizare AI pentru afaceri din România',
+    title: 'NextFlow Agency — Automatizare AI pentru Afaceri | România',
     description:
-      'Sisteme AI care lucrează în locul tău: lead-uri, follow-up, CRM — automat. Consultație gratuită.',
+      'Transformăm afacerile românești prin agenți vocali AI, automatizări CRM și chatboți inteligenți.',
     type: 'website',
     locale: 'ro_RO',
-    url: 'https://nextflow-agency.netlify.app',
-    siteName: 'Nextflow.ai',
+    url: 'https://nextflow.ro',
+    siteName: 'NextFlow Agency',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nextflow.ai — Automatizare AI pentru afaceri din România',
+    title: 'NextFlow Agency — Automatizare AI pentru Afaceri | România',
     description:
-      'Sisteme AI care lucrează în locul tău: lead-uri, follow-up, CRM — automat.',
+      'Transformăm afacerile românești prin agenți vocali AI, automatizări CRM și chatboți inteligenți.',
   },
 }
 
@@ -61,13 +62,19 @@ export const viewport: Viewport = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  name: 'Nextflow.ai',
-  description: 'Agenție de automatizare AI pentru afaceri din România.',
-  url: 'https://nextflow-agency.netlify.app',
-  sameAs: ['https://www.instagram.com/nextflow_agency.ai/'],
+  name: 'NextFlow Agency',
+  description:
+    'Agenție de automatizare AI pentru afaceri din România. Agenți vocali, CRM automatizat, chatboți inteligenți.',
+  url: 'https://nextflow.ro',
+  sameAs: [
+    'https://www.instagram.com/nextflow_agency.ai/',
+    'https://wa.me/40767422497',
+  ],
+  telephone: '+40767422497',
+  email: 'hello@nextflow.ro',
   areaServed: 'RO',
   inLanguage: 'ro',
-  serviceType: 'Automatizare AI, CRM, Lead Management',
+  serviceType: 'Automatizare AI, Agent Vocal, CRM, Chatbot, Social Media AI',
 }
 
 export default function RootLayout({
