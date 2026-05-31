@@ -51,12 +51,14 @@ export const metadata: Metadata = {
     locale: 'ro_RO',
     url: 'https://nextflow.ro',
     siteName: 'NextFlow Agency',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'NextFlow Agency' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'NextFlow Agency — Automatizare AI pentru Afaceri | România',
     description:
       'Transformăm afacerile românești prin agenți vocali AI, automatizări CRM și chatboți inteligenți.',
+    images: ['/opengraph-image'],
   },
 }
 
