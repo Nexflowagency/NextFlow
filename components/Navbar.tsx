@@ -82,12 +82,12 @@ export default function Navbar() {
                 onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}>
                 +40 767 422 497
               </a>
-              <Link href="/contact" className="btn-primary text-sm" style={{ padding: '0.6rem 1.4rem' }}>
+              <a href="https://calendly.com/mafteiustin" target="_blank" rel="noopener noreferrer" className="btn-primary text-sm" style={{ padding: '0.6rem 1.4rem' }}>
                 Programează Acum
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M2.5 7H11.5M8 3.5L11.5 7L8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-              </Link>
+              </a>
             </div>
 
             {/* Hamburger */}
@@ -147,12 +147,12 @@ export default function Navbar() {
           </a>
 
           <div className="mt-8">
-            <Link href="/contact" className="btn-primary w-full justify-center text-base">
+            <a href="https://calendly.com/mafteiustin" target="_blank" rel="noopener noreferrer" className="btn-primary w-full justify-center text-base">
               Programează Acum
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

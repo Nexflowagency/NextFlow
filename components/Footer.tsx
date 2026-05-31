@@ -96,12 +96,12 @@ export default function Footer() {
             <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.2)' }}>
               Începe acum
             </p>
-            <Link href="/contact" className="btn-primary text-sm px-5 py-2.5 w-fit">
+            <a href="https://calendly.com/mafteiustin" target="_blank" rel="noopener noreferrer" className="btn-primary text-sm px-5 py-2.5 w-fit">
               Programează Acum
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M2.5 7H11.5M8 3.5L11.5 7L8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-            </Link>
+            </a>
           </div>
         </div>
 
