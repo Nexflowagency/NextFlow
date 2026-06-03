@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Background -->
+  <rect width="32" height="32" rx="7" fill="#0B0B0B"/>
+  <!-- Top wave — white -->
+  <path d="M5 14 L10.5 8.5 L16 14 L21.5 8.5 L27 14"
+        stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Bottom wave — green -->
+  <path d="M5 21 L10.5 15.5 L16 21 L21.5 15.5 L27 21"
+        stroke="#10B981" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>
