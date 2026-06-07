@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Cormorant_Garamond } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({
@@ -9,81 +9,95 @@ const inter = Inter({
   weight: ['400', '500', '600', '700', '800', '900'],
 })
 
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-cormorant',
-  weight: ['400', '500', '600', '700'],
-})
-
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nextflow.ro'),
-  title: 'NextFlow Agency — Automatizare AI pentru Afaceri | România',
+  title: 'NextFlow — Agenție Automatizare AI România | Agenți Vocali, CRM, Chatboți',
   description:
-    'Transformăm afacerile românești prin agenți vocali AI, automatizări CRM și chatboți inteligenți. 50+ clienți, 200+ automatizări livrate.',
-  keywords: [
-    'automatizare AI România',
-    'agent vocal AI',
-    'CRM automatizat',
-    'chatbot website',
-    'automatizare afaceri',
-    'nextflow agency',
-    'automatizare vanzari Romania',
-    'calendar smart',
-    'email marketing automatizat',
-    'social media AI',
-  ],
-  authors: [{ name: 'NextFlow Agency' }],
-  creator: 'NextFlow Agency',
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
-  },
+    'NextFlow este agenția de automatizare AI din România. Construim agenți vocali AI, chatboți inteligenți și automatizări CRM care funcționează 24/7. Consultație gratuită.',
+  keywords: 'automatizare AI Romania, agentie AI Romania, agent vocal AI, chatbot website, CRM automatizat, automatizare afaceri Romania, inteligenta artificiala Romania',
   alternates: {
     canonical: 'https://nextflow.ro',
   },
   openGraph: {
-    title: 'NextFlow Agency — Automatizare AI pentru Afaceri | România',
+    title: 'NextFlow — Agenție Automatizare AI România',
     description:
-      'Transformăm afacerile românești prin agenți vocali AI, automatizări CRM și chatboți inteligenți.',
+      'Construim agenți vocali AI, chatboți inteligenți și automatizări CRM pentru afaceri din România. Funcționare 24/7.',
     type: 'website',
     locale: 'ro_RO',
     url: 'https://nextflow.ro',
-    siteName: 'NextFlow Agency',
-    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'NextFlow Agency' }],
+    siteName: 'NextFlow',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NextFlow Agency — Automatizare AI pentru Afaceri | România',
+    title: 'NextFlow — Agenție Automatizare AI România',
     description:
-      'Transformăm afacerile românești prin agenți vocali AI, automatizări CRM și chatboți inteligenți.',
-    images: ['/opengraph-image'],
+      'Construim agenți vocali AI, chatboți inteligenți și automatizări CRM pentru afaceri din România.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
   },
 }
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0A0A0A',
+  themeColor: '#FFFFFF',
 }
 
-const jsonLd = {
+const schemaOrg = {
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: 'NextFlow Agency',
-  description:
-    'Agenție de automatizare AI pentru afaceri din România. Agenți vocali, CRM automatizat, chatboți inteligenți.',
-  url: 'https://nextflow.ro',
-  sameAs: [
-    'https://www.instagram.com/nextflow_agency.ai/',
-    'https://wa.me/40767422497',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://nextflow.ro/#organization',
+      name: 'NextFlow',
+      url: 'https://nextflow.ro',
+      logo: 'https://nextflow.ro/logo.png',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+40-767-422-497',
+        contactType: 'customer service',
+        availableLanguage: 'Romanian',
+      },
+      sameAs: [
+        'https://www.instagram.com/nextflow_agency.ai/',
+      ],
+    },
+    {
+      '@type': 'LocalBusiness',
+      '@id': 'https://nextflow.ro/#business',
+      name: 'NextFlow — Agenție Automatizare AI',
+      description: 'Agenție de automatizare AI din România. Construim agenți vocali AI, chatboți, și automatizări CRM.',
+      url: 'https://nextflow.ro',
+      telephone: '+40-767-422-497',
+      email: 'hello@nextflow.ro',
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'RO',
+      },
+      priceRange: '$$',
+      openingHours: 'Mo-Fr 09:00-18:00',
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Servicii Automatizare AI',
+        itemListElement: [
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Agent Vocal AI' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Chatbot Website' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'CRM Automatizat' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Social Media AI' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Email & WhatsApp Marketing' } },
+        ],
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://nextflow.ro/#website',
+      url: 'https://nextflow.ro',
+      name: 'NextFlow',
+      publisher: { '@id': 'https://nextflow.ro/#organization' },
+    },
   ],
-  telephone: '+40767422497',
-  email: 'hello@nextflow.ro',
-  areaServed: 'RO',
-  inLanguage: 'ro',
-  serviceType: 'Automatizare AI, Agent Vocal, CRM, Chatbot, Social Media AI',
 }
 
 export default function RootLayout({
@@ -92,14 +106,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ro" className={`${inter.variable} ${cormorant.variable}`}>
-      <body className="antialiased">
-        {children}
+    <html lang="ro" className={inter.variable}>
+      <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
         />
-      </body>
+      </head>
+      <body className="antialiased">{children}</body>
     </html>
   )
 }
