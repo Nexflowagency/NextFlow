@@ -17,9 +17,7 @@ export default function PoliticaDeConfidentialitate() {
       <div className="container-main" style={{ paddingTop: '120px', paddingBottom: '80px', maxWidth: '780px' }}>
 
         <Link href="/" className="inline-flex items-center gap-2 text-sm mb-10 transition-colors"
-          style={{ color: 'rgba(212,175,55,0.7)' }}
-          onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = '#D4AF37')}
-          onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = 'rgba(212,175,55,0.7)')}>
+          style={{ color: 'rgba(212,175,55,0.7)' }}>
           ← Înapoi la pagina principală
         </Link>
 
