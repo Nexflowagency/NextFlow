@@ -125,8 +125,8 @@ export default function Footer() {
               </svg>
               Instagram
             </a>
-            <a href="#" className="text-xs hover:text-white transition-colors" style={{ color: 'rgba(255,255,255,0.2)' }}>Politică de Confidențialitate</a>
-            <a href="#" className="text-xs hover:text-white transition-colors" style={{ color: 'rgba(255,255,255,0.2)' }}>Termeni și Condiții</a>
+            <a href="/politica-de-confidentialitate" className="text-xs hover:text-white transition-colors" style={{ color: 'rgba(255,255,255,0.2)' }}>Politică de Confidențialitate</a>
+            <a href="/termeni-si-conditii" className="text-xs hover:text-white transition-colors" style={{ color: 'rgba(255,255,255,0.2)' }}>Termeni și Condiții</a>
           </div>
         </div>
       </div>
