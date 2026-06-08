@@ -78,7 +78,7 @@ export default function TestimonialePage() {
         label="Testimoniale"
         title="Clienții noștri"
         titleHighlight="vorbesc"
-        subtitle="Peste 50 de afaceri din România au ales NextFlow pentru a automatiza și scala. Iată ce spun ei."
+        subtitle="Peste 20 de afaceri din România au ales NextFlow pentru a automatiza și scala. Iată ce spun ei."
       />
 
       {/* ── STATS ── */}

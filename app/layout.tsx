@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://nextflow.ro'),
   title: 'NextFlow Agency — Automatizare AI pentru Afaceri | România',
   description:
-    'Transformăm afacerile românești prin agenți vocali AI, automatizări CRM și chatboți inteligenți. 50+ clienți, 200+ automatizări livrate.',
+    'Transformăm afacerile românești prin agenți vocali AI, automatizări CRM și chatboți inteligenți. 20+ clienți, 30+ automatizări livrate.',
   keywords: [
     'automatizare AI România',
     'agent vocal AI',

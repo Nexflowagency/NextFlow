@@ -171,8 +171,8 @@ export default function Home() {
 
             {/* Rotating service names */}
             <div className="hr mb-7 h-8 flex items-center justify-center" style={{ opacity: 0, transform: 'translateY(28px)', transition: 'opacity 0.8s ease, transform 0.8s ease' }}>
-              <span className="text-sm" style={{ color: 'rgba(255,255,255,0.4)' }}>Construim&nbsp;</span>
-              <span key={rotIndex} className="font-serif" style={{ fontSize: '1.35rem', fontWeight: 600, color: '#F0D060', animation: 'fadeInUp 0.5s cubic-bezier(0.16,1,0.3,1)' }}>
+              <span className="text-base" style={{ color: 'rgba(255,255,255,0.5)' }}>Construim&nbsp;</span>
+              <span key={rotIndex} className="font-serif" style={{ fontSize: '1.6rem', fontWeight: 600, color: '#F0D060', animation: 'fadeInUp 0.5s cubic-bezier(0.16,1,0.3,1)' }}>
                 {rotatingServices[rotIndex]}
               </span>
             </div>

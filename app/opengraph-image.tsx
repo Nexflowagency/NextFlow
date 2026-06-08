@@ -86,7 +86,7 @@ export default function OGImage() {
 
         {/* Stats row */}
         <div style={{ display: 'flex', gap: '48px' }}>
-          {[['50+', 'Clienți'], ['200+', 'Automatizări'], ['98%', 'Satisfacție']].map(([num, label]) => (
+          {[['20+', 'Clienți'], ['30+', 'Automatizări'], ['98%', 'Satisfacție']].map(([num, label]) => (
             <div key={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
               <span style={{ color: '#D4AF37', fontSize: '32px', fontWeight: '800' }}>{num}</span>
               <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '16px' }}>{label}</span>

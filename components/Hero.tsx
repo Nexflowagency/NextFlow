@@ -92,7 +92,7 @@ export default function Hero() {
                   <path d="M7 1L8.545 5.11H13L9.545 7.61L10.9 12L7 9.35L3.1 12L4.455 7.61L1 5.11H5.455L7 1Z"/>
                 </svg>
               ))}
-              <span className="font-semibold text-white ml-1">50+ afaceri</span>
+              <span className="font-semibold text-white ml-1">20+ afaceri</span>
               <span>automatizate</span>
             </div>
           </div>
