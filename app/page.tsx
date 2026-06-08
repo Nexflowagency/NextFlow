@@ -200,8 +200,8 @@ export default function Home() {
 
             {/* Stats with counter animation */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-10 w-full max-w-2xl pt-8" style={{ borderTop: '1px solid rgba(212,175,55,0.12)' }}>
-              <StatCounter target={50} suffix="+" label="Clienți activi" delay={100} />
-              <StatCounter target={200} suffix="+" label="Automatizări livrate" delay={200} />
+              <StatCounter target={20} suffix="+" label="Clienți activi" delay={100} />
+              <StatCounter target={30} suffix="+" label="Automatizări livrate" delay={200} />
               <StatCounter target={40} suffix="h" label="Economisite/săpt." delay={300} />
               <div className="hr flex flex-col items-center gap-1" style={{ transitionDelay: '400ms' }}>
                 <span className="font-serif" style={{ fontSize: 'clamp(1.8rem, 4.5vw, 2.8rem)', fontWeight: 700, color: '#D4AF37', lineHeight: 1 }}>24/7</span>
