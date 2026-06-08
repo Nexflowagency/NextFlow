@@ -30,6 +30,7 @@ export default function Navbar() {
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
+  // Close mobile menu on route change
   useEffect(() => {
     setMenuOpen(false)
   }, [pathname])
@@ -120,6 +121,7 @@ export default function Navbar() {
             )
           })}
 
+          {/* WhatsApp in mobile menu */}
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
             className="font-serif text-3xl text-white py-4 border-b flex items-center gap-3 transition-colors"
             style={{ borderColor: 'rgba(212,175,55,0.1)' }}

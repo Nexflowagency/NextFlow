@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Profile Picture — Nextflow.ai</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #F3F4F6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      padding: 40px 20px;
+      font-family: -apple-system, 'Inter', sans-serif;
+    }
+    h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0B0B0B;
+      letter-spacing: -0.02em;
+    }
+    .preview-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    /* Square preview (simulates Instagram profile) */
+    .preview-square {
+      width: 300px;
+      height: 300px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    }
+    /* Circle preview (simulates Instagram avatar) */
+    .preview-circle {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+      border: 4px solid white;
+    }
+    img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .labels {
+      display: flex;
+      gap: 40px;
+      text-align: center;
+    }
+    .label { font-size: 0.8rem; color: #6B7280; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #0B0B0B;
+      color: white;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      padding: 0.8rem 1.8rem;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    .btn:hover { background: #10B981; }
+    .btn-svg {
+      background: white;
+      color: #0B0B0B;
+      border: 1.5px solid #E5E7EB;
+      box-shadow: none;
+    }
+    .btn-svg:hover { background: #F9FAFB; }
+    .buttons { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    canvas { display: none; }
+    p.note { font-size: 0.8rem; color: #9CA3AF; max-width: 320px; text-align: center; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <h1>Nextflow.ai — Instagram Profile Picture</h1>
+
+  <div class="preview-wrap">
+    <div class="labels">
+      <div class="label">Pătrat</div>
+      <div style="width:40px"></div>
+      <div class="label">Cerc (Instagram)</div>
+    </div>
+    <div style="display:flex; align-items:center; gap:40px; flex-wrap:wrap; justify-content:center;">
+      <div class="preview-square">
+        <img id="svgImg" src="/profile-instagram.svg" alt="Profile square"/>
+      </div>
+      <div class="preview-circle">
+        <img src="/profile-instagram.svg" alt="Profile circle"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <!-- PNG download via canvas -->
+    <button class="btn" onclick="downloadPNG()" style="cursor:pointer;border:none;">
+      ⬇ Download PNG (1080×1080)
+    </button>
+    <!-- SVG download -->
+    <a class="btn btn-svg" href="/profile-instagram.svg" download="nextflow-profile.svg">
+      ⬇ Download SVG
+    </a>
+  </div>
+
+  <p class="note">PNG = pentru Instagram. SVG = dacă vrei să modifici culorile sau textul.</p>
+
+  <canvas id="canvas" width="1080" height="1080"></canvas>
+
+  <script>
+    function downloadPNG() {
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.onload = function() {
+        ctx.drawImage(img, 0, 0, 1080, 1080);
+        const link = document.createElement('a');
+        link.download = 'nextflow-profile-instagram.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      };
+      // Use inline SVG to avoid CORS
+      fetch('/profile-instagram.svg')
+        .then(r => r.text())
+        .then(svgText => {
+          const blob = new Blob([svgText], {type: 'image/svg+xml'});
+          img.src = URL.createObjectURL(blob);
+        });
+    }
+  </script>
+</body>
+</html>

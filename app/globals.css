@@ -49,10 +49,12 @@
     padding-bottom: clamp(5rem, 10vw, 7.5rem);
   }
 
+  /* ── Serif heading font ── */
   .font-serif {
     font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
   }
 
+  /* ── GOLD primary button ── */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 cursor-pointer select-none;
     background: linear-gradient(135deg, #D4AF37, #F0D060);
@@ -70,6 +72,7 @@
   }
   .btn-primary:active { transform: scale(1.0); }
 
+  /* ── Ghost gold button ── */
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 bg-transparent cursor-pointer select-none;
     border: 1px solid rgba(212, 175, 55, 0.4);
@@ -87,6 +90,7 @@
   }
   .btn-secondary:active { transform: translateY(0); }
 
+  /* ── Ghost dark (on gold bg) ── */
   .btn-ghost-dark {
     @apply inline-flex items-center justify-center gap-2 bg-transparent cursor-pointer select-none;
     border: 1.5px solid rgba(0, 0, 0, 0.35);
@@ -103,6 +107,7 @@
     transform: translateY(-2px);
   }
 
+  /* ── WhatsApp green button ── */
   .btn-whatsapp {
     @apply inline-flex items-center justify-center gap-2 cursor-pointer select-none;
     background: #16C47F;
@@ -118,6 +123,7 @@
     box-shadow: 0 6px 28px rgba(22, 196, 127, 0.4);
   }
 
+  /* ── Section label ✦ Text ✦ ── */
   .section-label {
     @apply inline-flex items-center gap-2 uppercase;
     color: #D4AF37;
@@ -126,6 +132,7 @@
     font-weight: 600;
   }
 
+  /* ── Premium card ── */
   .card {
     @apply p-8;
     background: rgba(255, 255, 255, 0.03);
@@ -140,6 +147,7 @@
       0 0 40px rgba(212, 175, 55, 0.08);
   }
 
+  /* ── Gold gradient text ── */
   .text-gold-gradient {
     background: linear-gradient(135deg, #D4AF37 0%, #F0D060 50%, #D4AF37 100%);
     -webkit-background-clip: text;
@@ -147,6 +155,7 @@
     background-clip: text;
   }
 
+  /* ── Shimmer gold text ── */
   .text-shimmer {
     background: linear-gradient(90deg, #D4AF37 0%, #F0D060 25%, #FFFFFF 50%, #F0D060 75%, #D4AF37 100%);
     background-size: 200% auto;
@@ -156,97 +165,23 @@
     animation: shimmer 5s linear infinite;
   }
 
+  /* ── Gold dot ── */
   .gold-dot {
     @apply inline-block w-1.5 h-1.5 rounded-full;
     background: #D4AF37;
     box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
   }
 
+  /* ── Section divider ── */
   .divider-gold {
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
   }
-
-  .text-gradient-yellow {
-    background: linear-gradient(135deg, #D4AF37 0%, #F0D060 50%, #D4AF37 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .text-gradient-green {
-    background: linear-gradient(135deg, #10B981 0%, #34D399 50%, #10B981 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .green-dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #10B981;
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
-    animation: pulse-green 2.5s ease-in-out infinite;
-  }
-
-  .gold-dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #D4AF37;
-    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
-    animation: pulse-gold 2.5s ease-in-out infinite;
-  }
-
-  .avatar-stack { display: flex; }
-  .avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: white;
-    border: 2px solid #0B0B0B;
-    margin-left: -8px;
-    letter-spacing: -0.01em;
-  }
-  .avatar:first-child { margin-left: 0; }
-
-  .badge-shimmer {
-    background: rgba(16, 185, 129, 0.08);
-    border: 1px solid rgba(16, 185, 129, 0.2);
-    color: #10B981;
-    animation: badge-glow 3s ease-in-out infinite;
-  }
-
-  .scroll-indicator {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    opacity: 0.25;
-  }
-  .scroll-indicator-line {
-    width: 1px;
-    height: 32px;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
-  }
-  .scroll-indicator-dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.4);
-  }
 }
 
-@keyframes pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); } 50% { box-shadow: 0 0 0 8px rgba(16,185,129,0); } }
-@keyframes badge-glow { 0%, 100% { border-color: rgba(16,185,129,0.2); } 50% { border-color: rgba(16,185,129,0.5); } }
+/* ─────────────────────────────────────────────
+   KEYFRAME ANIMATIONS
+   ───────────────────────────────────────────── */
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: translateX(0); } }
 @keyframes fadeInRight { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
@@ -262,6 +197,9 @@
 .animate-spin-slow { animation: spin-slow 14s linear infinite; }
 .animate-spin { animation: spin 0.8s linear infinite; }
 
+/* ─────────────────────────────────────────────
+   SCROLL REVEAL
+   ───────────────────────────────────────────── */
 .reveal {
   opacity: 0;
   transform: translateY(32px);
@@ -290,6 +228,7 @@
 }
 .reveal-scale.visible { opacity: 1; transform: scale(1); }
 
+/* Stagger delays */
 .delay-1 { transition-delay: 100ms; }
 .delay-2 { transition-delay: 200ms; }
 .delay-3 { transition-delay: 300ms; }
@@ -297,17 +236,22 @@
 .delay-5 { transition-delay: 500ms; }
 .delay-6 { transition-delay: 600ms; }
 
+/* ─────────────────────────────────────────────
+   HERO INTRO (staggered, JS-driven)
+   ───────────────────────────────────────────── */
 .hr {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Dot grid — gold-tinted */
 .dot-grid-bg {
   background-image: radial-gradient(circle, rgba(212, 175, 55, 0.08) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
+/* Tech circuit grid — AI agency background */
 .tech-bg {
   background-color: #070D1A;
   background-image:
@@ -318,9 +262,15 @@
   background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
 }
 
-.section-dark { background-color: #0D1525; }
-.section-darker { background-color: #070D1A; }
+/* Dark section with blue-navy tint */
+.section-dark {
+  background-color: #0D1525;
+}
+.section-darker {
+  background-color: #070D1A;
+}
 
+/* Navbar scrolled */
 .navbar-scrolled {
   background-color: rgba(7, 13, 26, 0.92) !important;
   backdrop-filter: blur(16px);
@@ -328,13 +278,16 @@
   border-bottom: 1px solid rgba(212, 175, 55, 0.15);
 }
 
+/* Input placeholder */
 ::placeholder { color: rgba(255, 255, 255, 0.25); }
 
+/* Headings overflow safety */
 h1, h2, h3, h4 {
   overflow-wrap: break-word;
   word-break: break-word;
 }
 
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .reveal, .reveal-left, .reveal-right, .reveal-scale, .hr {
     opacity: 1 !important;
@@ -344,6 +297,7 @@ h1, h2, h3, h4 {
   .animate-float, .animate-pulse-gold, .text-shimmer { animation: none !important; }
 }
 
+/* Mobile */
 @media (max-width: 640px) {
   .btn-primary, .btn-secondary, .btn-ghost-dark, .btn-whatsapp { min-height: 48px; }
   .section-py {
