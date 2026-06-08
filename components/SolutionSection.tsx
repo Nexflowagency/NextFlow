@@ -5,31 +5,31 @@ import { useScrollReveal } from '@/hooks/useScrollReveal'
 const solutions = [
   {
     number: '01',
-    title: 'AI Lead Capture & Response',
+    title: 'Agent Vocal AI',
     description:
-      'Every lead is captured, qualified, and responded to instantly — 24/7, no human needed. Never let a prospect go cold again.',
-    highlight: 'Instant response. Every time.',
+      'Un agent vocal AI care preia apeluri, califică lead-uri și programează întâlniri — 24/7, fără intervenție umană. Niciun prospect nu se mai pierde.',
+    highlight: 'Răspuns instant. Oricând.',
   },
   {
     number: '02',
-    title: 'Automated Follow-Up Sequences',
+    title: 'Automatizare Follow-Up',
     description:
-      'Smart follow-up sequences trigger automatically based on behavior. The right message reaches the right lead at exactly the right time.',
-    highlight: 'More deals closed. Zero manual effort.',
+      'Secvențe inteligente de urmărire care se declanșează automat în funcție de comportamentul clientului. Mesajul potrivit, la momentul potrivit.',
+    highlight: 'Mai multe vânzări. Zero efort manual.',
   },
   {
     number: '03',
-    title: 'CRM Optimization',
+    title: 'CRM Automatizat',
     description:
-      "Your CRM stops being a graveyard of forgotten contacts. Every lead is tracked, scored, and moved through your pipeline automatically.",
-    highlight: 'Full pipeline visibility.',
+      'CRM-ul tău nu mai este un cimitir de contacte uitate. Fiecare lead este urmărit, punctat și mutat automat prin pipeline.',
+    highlight: 'Vizibilitate completă asupra pipeline-ului.',
   },
   {
     number: '04',
-    title: 'Operations Automation',
+    title: 'Automatizare Operațiuni',
     description:
-      'Eliminate repetitive tasks: data entry, scheduling, reporting, notifications. Your team focuses on work that actually drives revenue.',
-    highlight: 'Hours saved every week.',
+      'Eliminăm sarcinile repetitive: introducere date, programări, raportări, notificări. Echipa ta se concentrează pe ce aduce cu adevărat venituri.',
+    highlight: 'Ore economisite în fiecare săptămână.',
   },
 ]
 
@@ -37,55 +37,47 @@ export default function SolutionSection() {
   const ref = useScrollReveal<HTMLDivElement>()
 
   return (
-    <section className="bg-white section-py" id="solution">
-      <div className="container-main" ref={ref}>
-        {/* Header */}
+    <section className="section-py relative overflow-hidden" id="servicii"
+      style={{ background: '#0D1525' }}>
+      <div className="absolute inset-0 dot-grid-bg pointer-events-none opacity-30" />
+
+      <div className="container-main relative z-10" ref={ref}>
         <div className="max-w-2xl mb-16">
           <p className="section-label mb-4 reveal">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] inline-block" />
-            The Solution
+            <span className="gold-dot" />
+            Serviciile Noastre
           </p>
-          <h2
-            className="reveal reveal-delay-1 font-bold text-[#0B0B0B]"
-            style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: '1.1', letterSpacing: '-0.025em' }}
-          >
-            We build systems that
+          <h2 className="reveal font-bold text-white"
+            style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: '1.1', letterSpacing: '-0.025em' }}>
+            Sisteme care lucrează
             <br />
-            work while you sleep.
+            <span className="text-gradient-yellow">în timp ce tu dormi.</span>
           </h2>
-          <p className="reveal reveal-delay-2 text-[#6B7280] mt-4 text-lg leading-relaxed">
-            Custom AI automation built around your business. Not templates — systems that fit exactly how you operate.
+          <p className="reveal text-white/40 mt-4 text-lg leading-relaxed">
+            Automatizare AI personalizată pentru afacerea ta. Nu șabloane — sisteme care se potrivesc exact cu modul în care operezi.
           </p>
         </div>
 
-        {/* Solution cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {solutions.map((item, i) => (
-            <div key={i} className={`card reveal reveal-delay-${(i % 4) + 1} group`}>
+            <div key={i} className="card reveal group">
               <div className="flex items-start gap-4 mb-5">
-                <span
-                  className="text-xs font-bold tracking-widest text-[#10B981] bg-[#D1FAE5] rounded-lg px-2.5 py-1.5 shrink-0"
-                >
+                <span className="text-xs font-bold tracking-widest rounded-lg px-2.5 py-1.5 shrink-0"
+                  style={{ background: 'rgba(212,175,55,0.12)', border: '1px solid rgba(212,175,55,0.25)', color: '#D4AF37' }}>
                   {item.number}
                 </span>
               </div>
-
-              <h3
-                className="font-bold text-[#0B0B0B] mb-3"
-                style={{ fontSize: '1.25rem', letterSpacing: '-0.02em' }}
-              >
+              <h3 className="font-bold text-white mb-3"
+                style={{ fontSize: '1.25rem', letterSpacing: '-0.02em' }}>
                 {item.title}
               </h3>
-              <p className="text-[#6B7280] text-sm leading-relaxed mb-5">
-                {item.description}
-              </p>
-
-              {/* Highlight */}
-              <div className="flex items-center gap-2 pt-5 border-t border-[#F3F4F6]">
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" className="text-[#10B981] shrink-0">
-                  <path d="M3 7.5L6 10.5L12 4.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <p className="text-white/40 text-sm leading-relaxed mb-5">{item.description}</p>
+              <div className="flex items-center gap-2 pt-5"
+                style={{ borderTop: '1px solid rgba(212,175,55,0.12)' }}>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" className="shrink-0">
+                  <path d="M3 7.5L6 10.5L12 4.5" stroke="#D4AF37" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                <span className="text-sm font-semibold text-[#0B0B0B]">{item.highlight}</span>
+                <span className="text-sm font-semibold" style={{ color: '#D4AF37' }}>{item.highlight}</span>
               </div>
             </div>
           ))}

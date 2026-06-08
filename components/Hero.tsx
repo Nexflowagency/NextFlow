@@ -23,15 +23,15 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-16"
-      style={{ background: '#0B0B0B' }}>
+      style={{ background: '#070D1A' }}>
 
-      <div className="absolute inset-0 dot-grid-bg pointer-events-none opacity-70" />
+      <div className="absolute inset-0 dot-grid-bg pointer-events-none opacity-40" />
       <div className="absolute -top-40 -left-40 w-[700px] h-[700px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top left, rgba(16,185,129,0.1) 0%, transparent 60%)' }}/>
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top right, rgba(245,197,24,0.07) 0%, transparent 60%)' }}/>
+        style={{ background: 'radial-gradient(ellipse at top left, rgba(212,175,55,0.08) 0%, transparent 60%)' }}/>
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at top right, rgba(212,175,55,0.05) 0%, transparent 60%)' }}/>
       <div className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, transparent, #0B0B0B)' }}/>
+        style={{ background: 'linear-gradient(to bottom, transparent, #070D1A)' }}/>
 
       <div className="container-main relative z-10" ref={heroRef}>
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
@@ -39,39 +39,36 @@ export default function Hero() {
           {/* Badge */}
           <div className="hr mb-10" style={anim}>
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold tracking-widest uppercase"
-              style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)', color: '#10B981' }}>
-              <span className="green-dot" />
+              style={{ background: 'rgba(212,175,55,0.08)', border: '1px solid rgba(212,175,55,0.2)', color: '#D4AF37' }}>
+              <span className="gold-dot" />
               Automatizare AI · România
             </span>
           </div>
 
           {/* H1 */}
           <h1 className="hr font-black text-white mb-5 md:mb-7"
-            style={{ ...anim, fontSize: 'clamp(1.875rem, 7.5vw, 6rem)', lineHeight: '1.05', letterSpacing: '-0.04em', overflowWrap: 'break-word', wordBreak: 'break-word' }}>
-            Nu muncești
+            style={{ ...anim, fontSize: 'clamp(1.875rem, 7.5vw, 5.5rem)', lineHeight: '1.05', letterSpacing: '-0.04em', overflowWrap: 'break-word', wordBreak: 'break-word' }}>
+            Afacerea ta merită
             <br />
-            <span className="text-gradient-yellow">prea puțin.</span>
-            <br />
-            Muncești fără sistem.
+            <span className="text-gradient-yellow">tehnologie de excepție.</span>
           </h1>
 
           {/* Sub */}
-          <p className="hr mb-8 md:mb-12 max-w-[480px]"
+          <p className="hr mb-8 md:mb-12 max-w-[520px]"
             style={{ ...anim, fontSize: 'clamp(0.9375rem, 1.8vw, 1.15rem)', lineHeight: '1.7', color: 'rgba(255,255,255,0.45)' }}>
-            Construim sisteme AI care lucrează în locul tău.
-            <br />
-            Tu câștigi timp, bani și control.
+            Construim sisteme AI care automatizează procesele repetitive,
+            câștigă clienți și îți eliberează timpul.
           </p>
 
           {/* CTAs */}
           <div className="hr flex flex-col sm:flex-row gap-3 mb-10 md:mb-16 w-full sm:w-auto" style={anim}>
-            <a href="#cta" className="btn-primary text-base px-7 py-3.5 sm:px-9 sm:py-4 w-full sm:w-auto justify-center">
+            <a href="/contact" className="btn-primary text-base px-7 py-3.5 sm:px-9 sm:py-4 w-full sm:w-auto justify-center">
               Vreau un Demo Gratuit
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </a>
-            <a href="#how-it-works" className="btn-secondary text-base px-7 py-3.5 sm:px-9 sm:py-4 w-full sm:w-auto justify-center">
+            <a href="/cum-functioneaza" className="btn-secondary text-base px-7 py-3.5 sm:px-9 sm:py-4 w-full sm:w-auto justify-center">
               Cum funcționează
             </a>
           </div>

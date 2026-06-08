@@ -5,23 +5,23 @@ import { useScrollReveal } from '@/hooks/useScrollReveal'
 const metrics = [
   {
     value: '3×',
-    label: 'Revenue growth',
-    sub: 'Average increase in converted leads within 90 days.',
+    label: 'Creștere venituri',
+    sub: 'Creștere medie a lead-urilor convertite în primele 90 de zile.',
   },
   {
     value: '90%',
-    label: 'Less manual work',
-    sub: 'Hours freed from repetitive tasks every single week.',
+    label: 'Mai puțin efort manual',
+    sub: 'Ore eliberate din sarcini repetitive în fiecare săptămână.',
   },
   {
     value: '0',
-    label: 'Leads lost',
-    sub: 'Every enquiry is captured, qualified, and followed up automatically.',
+    label: 'Lead-uri pierdute',
+    sub: 'Fiecare interogare este captată, calificată și urmărită automat.',
   },
   {
     value: '24/7',
-    label: 'Always on',
-    sub: 'Your system runs around the clock — even while you sleep.',
+    label: 'Mereu activ',
+    sub: 'Sistemul tău funcționează non-stop — chiar și în timp ce dormi.',
   },
 ]
 
@@ -29,47 +29,39 @@ export default function MetricsSection() {
   const ref = useScrollReveal<HTMLDivElement>()
 
   return (
-    <section className="bg-[#F9FAFB] section-py" id="results">
-      <div className="container-main" ref={ref}>
-        {/* Header */}
+    <section className="section-py relative overflow-hidden" style={{ background: '#070D1A' }}>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(212,175,55,0.06) 0%, transparent 70%)' }}/>
+
+      <div className="container-main relative z-10" ref={ref}>
         <div className="text-center mb-14">
           <p className="section-label mb-4 reveal justify-center">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] inline-block" />
-            Real Results
+            <span className="gold-dot" />
+            Rezultate Reale
           </p>
-          <h2
-            className="reveal reveal-delay-1 font-bold text-[#0B0B0B]"
-            style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: '1.1', letterSpacing: '-0.025em' }}
-          >
-            The numbers speak
+          <h2 className="reveal font-bold text-white"
+            style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: '1.1', letterSpacing: '-0.025em' }}>
+            Cifrele vorbesc
             <br />
-            for themselves.
+            <span className="text-gradient-yellow">de la sine.</span>
           </h2>
         </div>
 
-        {/* Metrics grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {metrics.map((metric, i) => (
-            <div
-              key={i}
-              className={`reveal reveal-delay-${i + 1} bg-white rounded-2xl border border-[#E5E7EB] p-8 text-center`}
-              style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.05)' }}
-            >
-              <div
-                className="font-black text-[#0B0B0B] mb-2 text-gradient-green"
-                style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', lineHeight: '1', letterSpacing: '-0.04em' }}
-              >
+            <div key={i} className="reveal text-center rounded-2xl p-8"
+              style={{
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(212,175,55,0.15)',
+              }}>
+              <div className="font-black mb-2 text-gradient-yellow"
+                style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', lineHeight: '1', letterSpacing: '-0.04em' }}>
                 {metric.value}
               </div>
-              <div
-                className="font-bold text-[#0B0B0B] mb-2"
-                style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}
-              >
+              <div className="font-bold text-white mb-2" style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}>
                 {metric.label}
               </div>
-              <p className="text-[#9CA3AF] text-xs leading-relaxed">
-                {metric.sub}
-              </p>
+              <p className="text-white/30 text-xs leading-relaxed">{metric.sub}</p>
             </div>
           ))}
         </div>
