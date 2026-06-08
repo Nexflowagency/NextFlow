@@ -164,9 +164,9 @@ export default function Home() {
 
             {/* H1 */}
             <h1 className="hr font-serif text-white mb-6" style={{ opacity: 0, transform: 'translateY(28px)', transition: 'opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1)', fontSize: 'clamp(2.4rem, 7.5vw, 5.5rem)', lineHeight: '1.04', fontWeight: 600 }}>
-              Afacerea ta merită
+              Agenție Automatizare AI
               <br />
-              <span className="text-gold-gradient">tehnologie de excepție</span>
+              <span className="text-gold-gradient">România — 24/7</span>
             </h1>
 
             {/* Rotating service names */}
