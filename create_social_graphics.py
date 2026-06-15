@@ -1,8 +1,13 @@
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
 import textwrap
 
 FONT_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 FONT_REG  = "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf"
+
+# Brand green
+GREEN      = (0, 180, 80)
+GREEN_DARK = (0, 120, 50)
+GREEN_LIGHT = (180, 255, 200)
 
 def draw_text_with_shadow(draw, text, pos, font, fill=(255,255,255), shadow=(0,0,0), shadow_offset=4):
     x, y = pos
@@ -60,6 +65,7 @@ def wrap_and_draw(draw, text, font, max_width, x, y, fill=(255,255,255), shadow=
 
 def create_graphic(input_path, output_path, top_label, headline, subline, tag):
     img = Image.open(input_path)
+    img = ImageOps.exif_transpose(img)  # respect EXIF rotation
     w, h = img.size
 
     img = add_gradient_overlay(img, top_alpha=210, bottom_alpha=230)
@@ -79,7 +85,7 @@ def create_graphic(input_path, output_path, top_label, headline, subline, tag):
     pill_pad = 14
     draw.rounded_rectangle(
         [lx - pill_pad, ly - pill_pad//2, lx + label_w + pill_pad, ly + label_h + pill_pad//2],
-        radius=20, fill=(30, 80, 255, 200)
+        radius=20, fill=GREEN + (220,)
     )
     draw.text((lx, ly), top_label, font=font_tag, fill=(255, 255, 255))
 
@@ -125,7 +131,7 @@ def create_graphic(input_path, output_path, top_label, headline, subline, tag):
     # Subline
     sub_bbox = draw.textbbox((0,0), subline, font=font_sub)
     sub_w = sub_bbox[2] - sub_bbox[0]
-    draw_text_with_shadow(draw, subline, ((w - sub_w)//2, cy), font_sub, fill=(200, 220, 255), shadow=(0,0,0))
+    draw_text_with_shadow(draw, subline, ((w - sub_w)//2, cy), font_sub, fill=GREEN_LIGHT, shadow=(0,0,0))
     cy += sub_h + int(h * 0.018)
 
     # Separator line
@@ -135,7 +141,7 @@ def create_graphic(input_path, output_path, top_label, headline, subline, tag):
     # Brand tag
     brand_bbox = draw.textbbox((0,0), tag, font=font_brand)
     brand_w = brand_bbox[2] - brand_bbox[0]
-    draw.text(((w - brand_w)//2, cy), tag, font=font_brand, fill=(150, 190, 255))
+    draw.text(((w - brand_w)//2, cy), tag, font=font_brand, fill=GREEN_LIGHT)
 
     img.save(output_path, quality=95)
     print(f"Saved: {output_path}")
