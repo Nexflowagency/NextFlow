@@ -1,170 +1,211 @@
-from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
-import textwrap
+from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageFilter
+import numpy as np
 
-FONT_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-FONT_REG  = "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf"
+FONTS = "/home/user/NextFlow/fonts"
+F_EXTRABOLD = f"{FONTS}/Montserrat-ExtraBold.ttf"
+F_SEMIBOLD  = f"{FONTS}/Montserrat-SemiBold.ttf"
+F_REGULAR   = f"{FONTS}/Montserrat-Regular.ttf"
+F_LIGHT     = f"{FONTS}/Montserrat-Light.ttf"
 
-# Brand green
-GREEN      = (0, 180, 80)
-GREEN_DARK = (0, 120, 50)
-GREEN_LIGHT = (180, 255, 200)
+GREEN       = (0, 200, 90)
+WHITE       = (255, 255, 255)
+OFF_WHITE   = (230, 235, 230)
+DARK        = (10, 10, 10)
 
-def draw_text_with_shadow(draw, text, pos, font, fill=(255,255,255), shadow=(0,0,0), shadow_offset=4):
-    x, y = pos
-    draw.text((x + shadow_offset, y + shadow_offset), text, font=font, fill=shadow + (180,))
-    draw.text((x, y), text, font=font, fill=fill)
 
-def add_gradient_overlay(img, top_alpha=200, bottom_alpha=220):
-    """Add dark gradient at top and bottom for text readability."""
-    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
-    draw = ImageDraw.Draw(overlay)
-    w, h = img.size
+def add_vignette(img):
+    """Smooth radial dark vignette around edges."""
+    arr = np.array(img).astype(np.float32)
+    h, w = arr.shape[:2]
+    cx, cy = w / 2, h / 2
+    Y, X = np.ogrid[:h, :w]
+    dist = np.sqrt(((X - cx) / (w * 0.55))**2 + ((Y - cy) / (h * 0.55))**2)
+    mask = np.clip(dist - 0.3, 0, 1)
+    mask = (mask ** 1.6) * 0.75
+    for c in range(3):
+        arr[:, :, c] *= (1 - mask)
+    return Image.fromarray(np.clip(arr, 0, 255).astype(np.uint8))
 
-    # Top gradient
-    for i in range(int(h * 0.35)):
-        alpha = int(top_alpha * (1 - i / (h * 0.35)))
-        draw.line([(0, i), (w, i)], fill=(0, 0, 0, alpha))
 
-    # Bottom gradient
-    for i in range(int(h * 0.45)):
+def add_bottom_gradient(img, strength=0.88, height_ratio=0.62):
+    """Deep cinematic gradient at bottom."""
+    arr = np.array(img).astype(np.float32)
+    h, w = arr.shape[:2]
+    zone = int(h * height_ratio)
+    for i in range(zone):
         y = h - 1 - i
-        alpha = int(bottom_alpha * (1 - i / (h * 0.45)))
-        draw.line([(0, y), (w, y)], fill=(0, 0, 0, alpha))
+        t = i / zone
+        factor = 1 - (1 - t ** 1.8) * strength
+        arr[y, :, :3] *= factor
+    return Image.fromarray(np.clip(arr, 0, 255).astype(np.uint8))
 
-    img = img.convert("RGBA")
-    img = Image.alpha_composite(img, overlay)
-    return img.convert("RGB")
 
-def wrap_and_draw(draw, text, font, max_width, x, y, fill=(255,255,255), shadow=(0,0,0), center=True):
-    """Wrap text and draw centered or left-aligned."""
+def add_top_gradient(img, strength=0.55, height_ratio=0.22):
+    """Subtle dark gradient at top for label readability."""
+    arr = np.array(img).astype(np.float32)
+    h, w = arr.shape[:2]
+    zone = int(h * height_ratio)
+    for i in range(zone):
+        t = i / zone
+        factor = 1 - (1 - t ** 1.4) * strength
+        arr[i, :, :3] *= factor
+    return Image.fromarray(np.clip(arr, 0, 255).astype(np.uint8))
+
+
+def add_noise(img, amount=6):
+    """Subtle film grain for premium texture."""
+    arr = np.array(img).astype(np.int16)
+    noise = np.random.randint(-amount, amount + 1, arr.shape, dtype=np.int16)
+    arr = np.clip(arr + noise, 0, 255).astype(np.uint8)
+    return Image.fromarray(arr)
+
+
+def text_lines(draw, text, font, max_width):
+    """Word-wrap text into lines fitting max_width."""
     words = text.split()
-    lines = []
-    current = ""
+    lines, cur = [], ""
     for word in words:
-        test = (current + " " + word).strip()
-        bbox = draw.textbbox((0,0), test, font=font)
-        if bbox[2] - bbox[0] <= max_width:
-            current = test
+        test = (cur + " " + word).strip()
+        if draw.textbbox((0, 0), test, font=font)[2] <= max_width:
+            cur = test
         else:
-            if current:
-                lines.append(current)
-            current = word
-    if current:
-        lines.append(current)
+            if cur:
+                lines.append(cur)
+            cur = word
+    if cur:
+        lines.append(cur)
+    return lines
 
-    total_h = sum(draw.textbbox((0,0), l, font=font)[3] - draw.textbbox((0,0), l, font=font)[1] + 8 for l in lines)
-    cy = y
-    for line in lines:
-        bbox = draw.textbbox((0,0), line, font=font)
-        lw = bbox[2] - bbox[0]
-        lh = bbox[3] - bbox[1]
-        dx = (max_width - lw) // 2 if center else 0
-        draw_text_with_shadow(draw, line, (x + dx, cy), font, fill=fill, shadow=shadow)
-        cy += lh + 8
-    return cy
 
-def create_graphic(input_path, output_path, top_label, headline, subline, tag):
+def draw_text_shadow(draw, text, pos, font, color=WHITE, shadow_color=(0,0,0), blur_r=0, offset=3, shadow_alpha=160):
+    """Draw text with drop shadow."""
+    x, y = pos
+    # Shadow
+    tmp = Image.new("RGBA", draw._image.size, (0, 0, 0, 0))
+    td = ImageDraw.Draw(tmp)
+    td.text((x + offset, y + offset), text, font=font, fill=shadow_color + (shadow_alpha,))
+    draw._image.paste(Image.alpha_composite(draw._image.convert("RGBA"), tmp).convert("RGB"))
+    # Main text
+    draw.text((x, y), text, font=font, fill=color)
+
+
+def create_graphic(input_path, output_path, tag, headline, subline, brand):
     img = Image.open(input_path)
-    img = ImageOps.exif_transpose(img)  # respect EXIF rotation
+    img = ImageOps.exif_transpose(img)
     w, h = img.size
 
-    img = add_gradient_overlay(img, top_alpha=210, bottom_alpha=230)
+    # --- Color grading pipeline ---
+    img = add_top_gradient(img, strength=0.50, height_ratio=0.20)
+    img = add_bottom_gradient(img, strength=0.92, height_ratio=0.65)
+    img = add_vignette(img)
+    img = add_noise(img, amount=5)
+
     draw = ImageDraw.Draw(img)
+    pad = int(w * 0.07)
+    text_w = w - 2 * pad
 
-    padding = int(w * 0.06)
-    text_w = w - 2 * padding
+    # ── SIZES (relative to image height) ──
+    sz_tag      = int(h * 0.028)
+    sz_headline = int(h * 0.066)
+    sz_subline  = int(h * 0.033)
+    sz_brand    = int(h * 0.025)
 
-    # --- TOP LABEL ---
-    font_tag = ImageFont.truetype(FONT_BOLD, int(h * 0.038))
-    label_bbox = draw.textbbox((0,0), top_label, font=font_tag)
-    label_w = label_bbox[2] - label_bbox[0]
-    label_h = label_bbox[3] - label_bbox[1]
-    lx = (w - label_w) // 2
-    ly = int(h * 0.05)
-    # Pill background for label
-    pill_pad = 14
-    draw.rounded_rectangle(
-        [lx - pill_pad, ly - pill_pad//2, lx + label_w + pill_pad, ly + label_h + pill_pad//2],
-        radius=20, fill=GREEN + (220,)
-    )
-    draw.text((lx, ly), top_label, font=font_tag, fill=(255, 255, 255))
+    font_tag      = ImageFont.truetype(F_SEMIBOLD,  sz_tag)
+    font_headline = ImageFont.truetype(F_EXTRABOLD, sz_headline)
+    font_subline  = ImageFont.truetype(F_LIGHT,     sz_subline)
+    font_brand    = ImageFont.truetype(F_SEMIBOLD,  sz_brand)
 
-    # --- BOTTOM BLOCK ---
-    font_headline = ImageFont.truetype(FONT_BOLD, int(h * 0.075))
-    font_sub      = ImageFont.truetype(FONT_REG,  int(h * 0.042))
-    font_brand    = ImageFont.truetype(FONT_BOLD, int(h * 0.032))
+    # ── TOP TAG ──
+    tag_text = tag.upper()
+    dot_font = ImageFont.truetype(F_SEMIBOLD, sz_tag)
 
-    # Measure headline block height
-    words = headline.split()
-    lines = []
-    current = ""
-    for word in words:
-        test = (current + " " + word).strip()
-        bbox = draw.textbbox((0,0), test, font=font_headline)
-        if bbox[2] - bbox[0] <= text_w:
-            current = test
-        else:
-            if current:
-                lines.append(current)
-            current = word
-    if current:
-        lines.append(current)
+    # Green dot accent
+    dot_r = int(sz_tag * 0.38)
+    dot_x = pad
+    dot_y = int(h * 0.055) + dot_r
+    draw.ellipse([dot_x, dot_y - dot_r, dot_x + dot_r*2, dot_y + dot_r], fill=GREEN)
 
-    line_h = draw.textbbox((0,0), "A", font=font_headline)[3] + 10
-    sub_h  = draw.textbbox((0,0), "A", font=font_sub)[3] + 10
-    brand_h = draw.textbbox((0,0), "A", font=font_brand)[3] + 10
-    total_block = len(lines) * line_h + sub_h + brand_h + int(h * 0.04)
+    # Tag text
+    tag_x = dot_x + dot_r * 2 + int(w * 0.022)
+    tag_y = int(h * 0.055)
+    draw.text((tag_x, tag_y), tag_text, font=font_tag, fill=WHITE)
 
-    start_y = h - total_block - int(h * 0.06)
+    # Thin green underline under tag
+    tag_bbox = draw.textbbox((tag_x, tag_y), tag_text, font=font_tag)
+    line_y = tag_bbox[3] + int(h * 0.007)
+    draw.line([(pad, line_y), (pad + int(w * 0.18), line_y)], fill=GREEN, width=2)
 
-    # Draw headline lines
+    # ── BOTTOM TEXT BLOCK ──
+    lines = text_lines(draw, headline, font_headline, text_w)
+    line_h = int(sz_headline * 1.18)
+    sub_h  = int(sz_subline  * 1.5)
+    brand_h = int(sz_brand   * 1.5)
+    spacer  = int(h * 0.022)
+    accent_h = int(h * 0.004)
+
+    sub_lines_est = text_lines(draw, subline, font_subline, text_w)
+    sub_line_h_est = int(sz_subline * 1.45)
+    total = len(lines) * line_h + spacer + len(sub_lines_est) * sub_line_h_est + spacer * 2 + accent_h + spacer + brand_h
+    start_y = h - total - int(h * 0.065)
+
+    # Headline
     cy = start_y
     for line in lines:
-        bbox = draw.textbbox((0,0), line, font=font_headline)
-        lw = bbox[2] - bbox[0]
-        dx = (w - lw) // 2
-        draw_text_with_shadow(draw, line, (dx, cy), font_headline, fill=(255,255,255), shadow=(0,0,0), shadow_offset=3)
+        lw = draw.textbbox((0, 0), line, font=font_headline)[2]
+        x = pad  # left-aligned — more editorial
+        # Shadow layer
+        shadow_img = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        sd = ImageDraw.Draw(shadow_img)
+        sd.text((x + 3, cy + 3), line, font=font_headline, fill=(0, 0, 0, 140))
+        img = Image.alpha_composite(img.convert("RGBA"), shadow_img).convert("RGB")
+        draw = ImageDraw.Draw(img)
+        draw.text((x, cy), line, font=font_headline, fill=WHITE)
         cy += line_h
 
-    cy += int(h * 0.015)
+    cy += spacer
 
-    # Subline
-    sub_bbox = draw.textbbox((0,0), subline, font=font_sub)
-    sub_w = sub_bbox[2] - sub_bbox[0]
-    draw_text_with_shadow(draw, subline, ((w - sub_w)//2, cy), font_sub, fill=GREEN_LIGHT, shadow=(0,0,0))
-    cy += sub_h + int(h * 0.018)
+    # Subline (wrapped)
+    sub_lines = text_lines(draw, subline, font_subline, text_w)
+    sub_line_h = int(sz_subline * 1.45)
+    for sl in sub_lines:
+        shadow_img2 = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        sd2 = ImageDraw.Draw(shadow_img2)
+        sd2.text((pad + 2, cy + 2), sl, font=font_subline, fill=(0, 0, 0, 120))
+        img = Image.alpha_composite(img.convert("RGBA"), shadow_img2).convert("RGB")
+        draw = ImageDraw.Draw(img)
+        draw.text((pad, cy), sl, font=font_subline, fill=OFF_WHITE)
+        cy += sub_line_h
+    cy += spacer
 
-    # Separator line
-    draw.line([(padding*2, cy), (w - padding*2, cy)], fill=(255,255,255,100), width=1)
-    cy += int(h * 0.015)
+    # Thin green accent line
+    draw.rectangle([pad, cy, pad + int(w * 0.12), cy + accent_h], fill=GREEN)
+    cy += accent_h + spacer
 
-    # Brand tag
-    brand_bbox = draw.textbbox((0,0), tag, font=font_brand)
-    brand_w = brand_bbox[2] - brand_bbox[0]
-    draw.text(((w - brand_w)//2, cy), tag, font=font_brand, fill=GREEN_LIGHT)
+    # Brand
+    draw.text((pad, cy), brand.upper(), font=font_brand, fill=GREEN)
 
-    img.save(output_path, quality=95)
-    print(f"Saved: {output_path}")
+    img.save(output_path, quality=97)
+    print(f"Saved: {output_path}  ({w}x{h})")
 
 
-# ---- IMAGE 1: Google Ads ----
+# ── GRAPHIC 1 — Google Ads ──
 create_graphic(
     input_path  = "/root/.claude/uploads/59c2a275-b5ba-562a-930b-176d1b5856a2/071d7600-IMG_5843.jpeg",
     output_path = "/home/user/NextFlow/social_graphic_1_google_ads.jpg",
-    top_label   = "🤖  AI MARKETING AGENCY",
-    headline    = "CONCURENȚA TA RULEAZĂ RECLAME AI.",
-    subline     = "Tu mai aștepți?  Schimbarea e acum.",
-    tag         = "NextFlow Agency  •  nextflow.ro"
+    tag      = "AI Marketing Agency",
+    headline = "Vizibilitatea ta online începe cu o decizie.",
+    subline  = "Brandurile care adoptă AI cresc de 3× mai rapid.",
+    brand    = "NextFlow Agency  ·  nextflow.ro",
 )
 
-# ---- IMAGE 2: Analytics ----
+# ── GRAPHIC 2 — Analytics ──
 create_graphic(
     input_path  = "/root/.claude/uploads/59c2a275-b5ba-562a-930b-176d1b5856a2/0c062db4-IMG_5842.jpeg",
     output_path = "/home/user/NextFlow/social_graphic_2_analytics.jpg",
-    top_label   = "📊  REZULTATE REALE",
-    headline    = "DATELE NU MINT. TU TE MAI ASCUNZI?",
-    subline     = "Ia decizia care îți schimbă afacerea.",
-    tag         = "NextFlow Agency  •  nextflow.ro"
+    tag      = "Data-Driven Growth",
+    headline = "Rezultatele nu mint. Strategia ta o face.",
+    subline  = "Transformăm datele tale în decizii care generează profit.",
+    brand    = "NextFlow Agency  ·  nextflow.ro",
 )
 
-print("Done! Both graphics created.")
+print("Done.")
