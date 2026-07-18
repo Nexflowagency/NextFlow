@@ -1,0 +1,122 @@
+====================================================================
+ BETA STUDIO — GHID DE EDITARE A SITE-ULUI
+ Frizerie & Barber Shop · Suceava
+ Site static (HTML + CSS + JS) — fără build, se editează direct.
+====================================================================
+
+--------------------------------------------------------------------
+1. STRUCTURA FIȘIERELOR
+--------------------------------------------------------------------
+  index.html ................ Pagina Acasă (hero cinematic + scroll)
+  servicii.html ............. Servicii & prețuri
+  recenzii.html ............. Recenzii clienți
+  contact.html .............. Contact + program + hartă
+  termeni.html .............. Termeni & Condiții
+  confidentialitate.html .... Politică de confidențialitate (GDPR)
+  robots.txt / sitemap.xml .. SEO
+  site.webmanifest .......... Icon-uri / PWA
+  netlify.toml .............. Setări Netlify (cache)
+  assets/css/styles.css ..... TOT designul (culori, fonturi, layout)
+  assets/js/main.js ......... Animațiile la scroll (Lenis)
+  assets/js/lenis.min.js .... Librăria de scroll (nu o modifica)
+  assets/img/ ............... Toate imaginile
+
+--------------------------------------------------------------------
+2. CUM RULEZI SITE-UL LOCAL (pe calculatorul tău)
+--------------------------------------------------------------------
+  Ai nevoie de Node.js instalat. Apoi, în folderul site-ului:
+      npx serve . -l 8787
+  Deschide în browser:  http://localhost:8787
+
+--------------------------------------------------------------------
+3. CUM PUBLICI PE NETLIFY (gratuit)
+--------------------------------------------------------------------
+  Varianta simplă (drag & drop):
+    1. Intră pe  https://app.netlify.com/drop
+    2. Trage fișierul  beta-studio-netlify.zip  în pagină
+       (SAU trage direct folderul întreg)
+    3. Gata — primești un link public în câteva secunde.
+  Nu dezarhiva zip-ul înainte; Netlify îl desface singur.
+
+--------------------------------------------------------------------
+4. CUM SCHIMBI TEXTE ȘI PREȚURI
+--------------------------------------------------------------------
+  Deschide fișierul .html potrivit cu un editor (Notepad++, VS Code)
+  și modifică textul dintre etichete. Exemple:
+
+  • Prețuri  ->  servicii.html, caută "price-row__price" sau numele
+                 serviciului (ex. "Tuns fade").
+  • Recenzii ->  recenzii.html, blocurile "review".
+  • Program  ->  index.html și contact.html, secțiunea "hours".
+  • Telefon  ->  caută  0755 615 358  și  tel:+40755615358
+                 (înlocuiește ambele forme peste tot).
+
+  IMPORTANT (cache): la ORICE modificare în styles.css sau main.js,
+  crește numărul din  ?v=1  ->  ?v=2  în TOATE fișierele .html
+  (caută  styles.css?v=  și  main.js?v= ). Altfel browserul
+  poate afișa versiunea veche.
+
+--------------------------------------------------------------------
+5. IMAGINILE  (citește cu atenție)
+--------------------------------------------------------------------
+  Imaginile actuale (hero + interior + lucru + barbă + scule + scaun)
+  au fost GENERATE cinematic cu AI (Higgsfield, calitate 2K), pentru
+  că folderul tău de poze de pe Desktop nu a putut fi accesat din
+  mediul online în care a fost construit site-ul.
+
+  Ca să pui POZELE TALE REALE (recomandat pentru autenticitate):
+    1. Redenumește pozele tale exact ca fișierele existente:
+         hero.webp     -> poza principală cu salonul (fundal hero)
+         interior.webp -> interior / atmosferă
+         work.webp     -> frizer la lucru
+         beard.webp    -> barbă / detaliu
+         tools.webp    -> scule / produse
+         chair.webp    -> scaun / colț din salon
+         og-cover.jpg  -> poza care apare când dai link pe WhatsApp/FB
+       ... și copiază-le peste cele din  assets/img/
+    2. SAU păstrează numele tale și schimbă căile în .html
+       (caută  assets/img/hero.webp  etc.).
+    3. Ideal, optimizează pozele (max ~2000px lățime, format .webp
+       sau .jpg sub ~300 KB) ca site-ul să rămână rapid.
+    4. LOGO: momentan logo-ul este scris tipografic ("BETA·STUDIO"
+       cu monograma B). Dacă vrei logo-ul tău ca imagine, spune-ne.
+
+--------------------------------------------------------------------
+6. GOOGLE MAPS (pin exact)
+--------------------------------------------------------------------
+  Harta arată acum "Strada Narciselor 29, Suceava". Pentru pin exact:
+    1. Caută BETA STUDIO pe Google Maps -> Distribuie -> Încorporează
+       o hartă -> copiază link-ul din src="...".
+    2. În index.html și contact.html, înlocuiește adresa din
+       <iframe ... src="https://maps.google.com/maps?q=..."> cu al tău.
+
+--------------------------------------------------------------------
+7. DE COMPLETAT ÎNAINTE DE LANSARE (verifică)
+--------------------------------------------------------------------
+  [ ] PROGRAM SÂMBĂTĂ: am pus  08:00 – 22:45  (dedus din brief).
+      Verifică și corectează dacă e greșit (index.html + contact.html
+      + JSON-LD din <head>).
+  [ ] DATE FIRMĂ: în termeni.html și confidentialitate.html am lăsat
+      note unde trebuie trecute denumirea legală (SRL/PFA) și CUI-ul.
+  [ ] DOMENIU: peste tot apare  https://betastudio.ro  ca adresă de
+      referință (SEO/canonical/sitemap). Când ai domeniul real, fă
+      "Find & Replace" pentru  betastudio.ro  cu domeniul tău în
+      TOATE fișierele (.html, sitemap.xml, robots.txt).
+  [ ] COORDONATE HARTĂ (JSON-LD): lat 47.6541 / lng 26.2458 sunt
+      aproximative pentru zona Zamca. Pune coordonatele exacte din
+      Google Maps (click dreapta pe pin -> copiază lat, lng).
+  [ ] EMAIL: nu a fost furnizat; dacă vrei, îl adăugăm la Contact.
+
+--------------------------------------------------------------------
+8. CULORI (dacă vrei să ajustezi)
+--------------------------------------------------------------------
+  În  assets/css/styles.css , la început, secțiunea ":root":
+     --green:  #34e27f   (verde vibrant)
+     --purple: #9d6bff   (mov)
+     --bg:     #0a0b0d   (negru)
+     --ink:    #f5f6f8   (text alb)
+  Schimbă codul de culoare și se actualizează în tot site-ul.
+
+--------------------------------------------------------------------
+  Creat de NextFlow.ro
+====================================================================

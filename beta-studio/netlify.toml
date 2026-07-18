@@ -1,0 +1,16 @@
+# Netlify configuration — BETA STUDIO
+[build]
+  publish = "."
+
+# Long-term caching for static assets (fingerprint via ?v= in HTML)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
