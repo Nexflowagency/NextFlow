@@ -38,8 +38,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/img/hero.webp">
-<link rel="stylesheet" href="assets/css/styles.css?v=1">
+<link rel="preload" as="image" href="assets/img/hero.webp" imagesrcset="assets/img/hero-1280.webp 1280w, assets/img/hero.webp 2560w" imagesizes="100vw">
+<link rel="stylesheet" href="assets/css/styles.css?v=2">
 
 <script type="application/ld+json">
 {
@@ -79,8 +79,7 @@
 <header class="header">
   <div class="container">
     <a class="brand" href="index.html" aria-label="BETA STUDIO — acasă">
-      <span class="brand__mark"><span>B</span></span>
-      <span class="brand__name">BETA<b>·</b>STUDIO</span>
+      <img src="assets/img/logo.png" alt="B3TA STUDIO" class="brand__logo" width="180" height="86">
     </a>
     <nav class="nav" aria-label="Navigare principală">
       <a href="index.html" aria-current="page">Acasă</a>
@@ -113,7 +112,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero__media">
-      <img src="assets/img/hero.webp" alt="Interiorul cinematic al frizeriei BETA STUDIO din Suceava, scaune de barber din piele și oglinzi retroiluminate" fetchpriority="high" width="2000" height="1116">
+      <img src="assets/img/hero.webp" srcset="assets/img/hero-1280.webp 1280w, assets/img/hero.webp 2560w" sizes="100vw" alt="Interiorul frizeriei B3TA STUDIO din Suceava — scaune de barber, oglinzi și tavan cu bandă LED" fetchpriority="high" width="2560" height="1429">
     </div>
     <div class="hero__scrim"></div>
     <div class="hero__glow"></div>
@@ -201,6 +200,26 @@
             <li data-reveal data-reveal-delay="3">Pachete tuns + barbă + vopsit, la un preț mai bun.</li>
           </ul>
           <div class="mt-l" data-reveal data-reveal-delay="3"><a class="btn btn--ghost" href="servicii.html">Vezi prețurile</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER / CEO -->
+  <section class="section" id="echipa">
+    <div class="container">
+      <div class="founder">
+        <div class="founder__media" data-reveal>
+          <img src="assets/img/ceo.webp" alt="Fondatorul B3TA STUDIO, Suceava" width="880" height="1100" loading="lazy">
+          <div class="founder__badge">
+            <span class="n">B3TA STUDIO</span>
+            <span class="r">Fondator &amp; Master Barber</span>
+          </div>
+        </div>
+        <div>
+          <span class="eyebrow" data-reveal>Omul din spatele foarfecelui</span>
+          <blockquote class="mt-l" data-reveal data-reveal-delay="1">„Un tuns bun nu se vede doar în oglindă — se vede în felul în care pleci pe ușă. <span>De aceea pun suflet în fiecare client care intră pe ușa B3TA STUDIO.”</span></blockquote>
+          <div class="sign" data-reveal data-reveal-delay="2">Fondator · B3TA STUDIO, Suceava</div>
         </div>
       </div>
     </div>
@@ -351,7 +370,7 @@
   <div class="container">
     <div class="footer__top">
       <div>
-        <a class="brand" href="index.html"><span class="brand__mark"><span>B</span></span><span class="brand__name">BETA<b>·</b>STUDIO</span></a>
+        <a class="brand" href="index.html"><img src="assets/img/logo.png" alt="B3TA STUDIO" class="brand__logo" width="180" height="86"></a>
         <p class="footer__about">Frizerie &amp; barber shop în Cartier Zamca, Suceava. Tuns, fade, barbă — lucrate cu grijă pentru fiecare client.</p>
         <div class="footer__social">
           <a href="https://www.instagram.com/b3ta_studio/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
@@ -393,6 +412,6 @@
 </footer>
 
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/js/main.js?v=1"></script>
+<script src="assets/js/main.js?v=2"></script>
 </body>
 </html>

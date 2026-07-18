@@ -59,27 +59,32 @@
 --------------------------------------------------------------------
 5. IMAGINILE  (citește cu atenție)
 --------------------------------------------------------------------
-  Imaginile actuale (hero + interior + lucru + barbă + scule + scaun)
-  au fost GENERATE cinematic cu AI (Higgsfield, calitate 2K), pentru
-  că folderul tău de poze de pe Desktop nu a putut fi accesat din
-  mediul online în care a fost construit site-ul.
+  POZE REALE folosite pe site:
+    hero.webp / hero-1280.webp -> poza REALĂ a salonului tău, lărgită
+        la format 16:9 și mărită la calitate 4K (master 4K separat).
+    logo.png       -> logo-ul REAL B3TA STUDIO, în variantă albă
+                      (ca să iasă bine pe fundalul negru al site-ului).
+    ceo.webp       -> poza REALĂ a fondatorului (secțiunea „Echipa").
+    og-cover.jpg   -> poza care apare când dai link pe WhatsApp/FB.
 
-  Ca să pui POZELE TALE REALE (recomandat pentru autenticitate):
-    1. Redenumește pozele tale exact ca fișierele existente:
-         hero.webp     -> poza principală cu salonul (fundal hero)
-         interior.webp -> interior / atmosferă
-         work.webp     -> frizer la lucru
-         beard.webp    -> barbă / detaliu
-         tools.webp    -> scule / produse
-         chair.webp    -> scaun / colț din salon
-         og-cover.jpg  -> poza care apare când dai link pe WhatsApp/FB
-       ... și copiază-le peste cele din  assets/img/
-    2. SAU păstrează numele tale și schimbă căile în .html
-       (caută  assets/img/hero.webp  etc.).
-    3. Ideal, optimizează pozele (max ~2000px lățime, format .webp
-       sau .jpg sub ~300 KB) ca site-ul să rămână rapid.
-    4. LOGO: momentan logo-ul este scris tipografic ("BETA·STUDIO"
-       cu monograma B). Dacă vrei logo-ul tău ca imagine, spune-ne.
+  POZE „de atmosferă" generate cu AI (le poți înlocui cu poze reale):
+    interior.webp, work.webp, beard.webp, tools.webp, chair.webp
+    -> apar în galerie și în fundalurile secțiunilor. Dacă vrei, îți
+       pot pune în locul lor poze reale (tunsori, echipă, produse) —
+       trimite-le și le integrez.
+
+  Ca să înlocuiești orice poză:
+    1. Redenumește poza ta exact ca fișierul existent (ex. work.webp)
+       și copiaz-o peste cea din  assets/img/ .
+    2. Ideal, optimizează (max ~1600–2000px lățime, .webp/.jpg sub
+       ~300 KB) ca site-ul să rămână rapid.
+
+  MASTER 4K: poza hero la rezoluție 4K (4096px) ți-a fost livrată
+  separat ca  BETA-hero-4K.jpg  (pentru print/alte folosințe).
+
+  NUMELE FONDATORULUI: în secțiunea „Echipa" (index.html) am pus
+  „Fondator & Master Barber" fără nume. Spune-mi numele și îl adaug
+  (caută „Fondator" în index.html ca să-l completezi singur).
 
 --------------------------------------------------------------------
 6. GOOGLE MAPS (pin exact)
