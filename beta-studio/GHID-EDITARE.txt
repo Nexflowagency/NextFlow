@@ -82,6 +82,12 @@
     2. Ideal, optimizează (max ~1600–2000px lățime, .webp/.jpg sub
        ~300 KB) ca site-ul să rămână rapid.
 
+  VITEZĂ (responsive): pozele reale au 2 mărimi — una mare (ex.
+  cut1.webp, ~1000px) și una mică pentru telefon (ex. cut1-600.webp).
+  Telefonul/tableta încarcă automat varianta mică, desktopul pe cea
+  mare. Dacă schimbi o poză, înlocuiește ambele variante cu aceleași
+  nume. Pozele reale au fost mărite la 2K pentru claritate.
+
   MASTER 4K: poza hero la rezoluție 4K (4096px) ți-a fost livrată
   separat ca  BETA-hero-4K.jpg  (pentru print/alte folosințe).
 

@@ -74,12 +74,14 @@
   var lazyEls = Array.prototype.slice.call(document.querySelectorAll("img[data-src]"));
   if (lazyEls.length) {
     if (!("IntersectionObserver" in window)) {
-      lazyEls.forEach(function (img) { img.src = img.getAttribute("data-src"); });
+      lazyEls.forEach(function (img) { var ss = img.getAttribute("data-srcset"); if (ss) img.srcset = ss; img.src = img.getAttribute("data-src"); });
     } else {
       var lio = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
           if (e.isIntersecting) {
             var img = e.target;
+            var ss = img.getAttribute("data-srcset");
+            if (ss) { img.srcset = ss; img.removeAttribute("data-srcset"); }
             img.src = img.getAttribute("data-src");
             img.removeAttribute("data-src");
             lio.unobserve(img);

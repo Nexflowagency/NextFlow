@@ -488,6 +488,69 @@ h1, h2, h3, h4 { color: var(--ink); font-weight: 800; line-height: 1.04; }
 }
 .note b { color: var(--purple); }
 
+/* ---------- Subtle animations: CTA ---------- */
+/* gentle periodic sheen sweeping across primary buttons */
+.btn--primary::after {
+  content: ""; position: absolute; top: 0; left: -130%; width: 55%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.5), transparent);
+  transform: skewX(-20deg); pointer-events: none;
+  animation: btnSheen 6s ease-in-out infinite;
+}
+@keyframes btnSheen { 0%, 26% { left: -130%; } 60%, 100% { left: 150%; } }
+
+/* drifting green/purple aurora over CTA bands */
+.cta-band::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    radial-gradient(38% 55% at 28% 22%, rgba(23,230,176,.20), transparent 70%),
+    radial-gradient(40% 55% at 76% 80%, rgba(157,107,255,.16), transparent 72%);
+  mix-blend-mode: screen;
+  animation: ctaAura 11s ease-in-out infinite alternate;
+}
+@keyframes ctaAura {
+  from { transform: translate(-3%, -2%) scale(1); }
+  to   { transform: translate(3%, 2.5%) scale(1.14); }
+}
+.cta-band h2 { position: relative; z-index: 2; }
+/* pulse-ring on the primary CTA inside CTA bands */
+.cta-band .btn--primary { position: relative; }
+.cta-band .btn--primary::before {
+  content: ""; position: absolute; inset: 0; border-radius: 999px; z-index: -1;
+  box-shadow: 0 0 0 0 rgba(23,230,176,.55);
+  animation: ctaPulse 3.2s ease-out infinite;
+}
+@keyframes ctaPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(23,230,176,.5); }
+  70%  { box-shadow: 0 0 0 18px rgba(23,230,176,0); }
+  100% { box-shadow: 0 0 0 0 rgba(23,230,176,0); }
+}
+
+/* ---------- Subtle animations: reviews ---------- */
+/* auto-scrolling testimonial strip (home) */
+.review-marquee {
+  overflow: hidden; margin-top: clamp(30px, 4vw, 48px);
+  -webkit-mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+          mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+.review-track { display: flex; gap: 16px; width: max-content; animation: reviewScroll 44s linear infinite; }
+.review-marquee:hover .review-track,
+.review-track:focus-within { animation-play-state: paused; }
+.review-track .review { width: 330px; flex: none; margin: 0; }
+@keyframes reviewScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* gentle shimmer on the star rows */
+.review__stars, .rating-stars {
+  background: linear-gradient(100deg, var(--green) 20%, #eafff7 50%, var(--green) 80%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  animation: starShimmer 6s ease-in-out infinite;
+}
+@keyframes starShimmer { 0%, 100% { background-position: 120% 0; } 50% { background-position: -20% 0; } }
+
+/* refined review entrance (scale + fade) */
+.review[data-reveal] { transform: translateY(26px) scale(.985); }
+.review[data-reveal].in { transform: none; }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1024px) {
   .nav { display: none; }
@@ -523,6 +586,9 @@ h1, h2, h3, h4 { color: var(--ink); font-weight: 800; line-height: 1.04; }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; }
   [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .marquee__track { animation: none; }
+  .marquee__track, .review-track,
+  .btn--primary::after, .cta-band::after, .cta-band .btn--primary::before,
+  .review__stars, .rating-stars { animation: none !important; }
+  .review__stars, .rating-stars { -webkit-text-fill-color: var(--green); color: var(--green); }
   .hero__media img { transform: scale(1.02); }
 }
