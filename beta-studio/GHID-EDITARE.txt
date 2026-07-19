@@ -67,11 +67,14 @@
     ceo.webp       -> poza REALĂ a fondatorului (secțiunea „Echipa").
     og-cover.jpg   -> poza care apare când dai link pe WhatsApp/FB.
 
-  POZE „de atmosferă" generate cu AI (le poți înlocui cu poze reale):
-    interior.webp, work.webp, beard.webp, tools.webp, chair.webp
-    -> apar în galerie și în fundalurile secțiunilor. Dacă vrei, îți
-       pot pune în locul lor poze reale (tunsori, echipă, produse) —
-       trimite-le și le integrez.
+  POZE REALE cu lucrări (tunsori/fade + barber la lucru):
+    cut1..cut4.webp  -> galeria „Lucrările noastre".
+    work-real.webp   -> secțiunea „Meseria făcută cu cap".
+
+  POZE „de atmosferă" generate cu AI (mai rămân doar pe fundaluri
+  discrete, la 25–35% opacitate, în spatele titlurilor):
+    interior.webp, beard.webp, tools.webp, chair.webp
+    -> le poți înlocui oricând cu poze reale (același nume de fișier).
 
   Ca să înlocuiești orice poză:
     1. Redenumește poza ta exact ca fișierul existent (ex. work.webp)
