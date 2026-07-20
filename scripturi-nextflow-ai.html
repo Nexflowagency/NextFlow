@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>15 Scripturi — Agenție Automatizare AI</title>
+<style>
+  :root{
+    --bg:#eef1f0; --surface:#ffffff; --surface-2:#e3e8e6; --border:#cfd6d3;
+    --text:#15181a; --text-dim:#4a5251; --text-faint:#6d7573;
+    --tofu:#1f6f96; --mofu:#966d0f; --bofu:#b23a2a; --accent:#b23a2a;
+    --tofu-tint:#dfeef5; --mofu-tint:#f2e9d4; --bofu-tint:#f7e0dc;
+    --shadow:0 1px 2px rgba(20,30,28,.06), 0 8px 24px -12px rgba(20,30,28,.12);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#14171b; --surface:#1b1f24; --surface-2:#232830; --border:#333a42;
+      --text:#eae7df; --text-dim:#b8b3a7; --text-faint:#847e73;
+      --tofu:#5ab3e8; --mofu:#f0b23e; --bofu:#ff5c3f; --accent:#ff5c3f;
+      --tofu-tint:#152a35; --mofu-tint:#302510; --bofu-tint:#331e18;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 28px -12px rgba(0,0,0,.5);
+    }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  .page{
+    background:var(--bg); color:var(--text);
+    font-family:Georgia,"Iowan Old Style","Palatino Linotype",serif;
+    line-height:1.55;
+    padding:2.5rem 1.25rem 5rem;
+  }
+  .wrap{max-width:840px; margin:0 auto;}
+  h1,h2,h3,.eyebrow,.script-num,.stage-tag,.label,.card-meta,.beat-time,th,.legend-name{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  .script-block,.timecode{
+    font-family:ui-monospace,"SF Mono","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+  }
+  h1,h2,h3{text-wrap:balance; margin:0;}
+
+  /* Header */
+  .masthead{margin-bottom:2rem;}
+  .eyebrow{
+    font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 .6rem;
+  }
+  h1{font-size:2.1rem; font-weight:800; letter-spacing:-.01em; color:var(--text);}
+  .lede{font-size:1.02rem; color:var(--text-dim); max-width:62ch; margin:.9rem 0 0;}
+
+  /* Legend */
+  .legend{display:flex; gap:.6rem; flex-wrap:wrap; margin:1.6rem 0 0; padding:0; list-style:none;}
+  .legend li{
+    display:flex; align-items:center; gap:.5rem;
+    background:var(--surface); border:1px solid var(--border);
+    padding:.5rem .8rem; border-radius:3px; box-shadow:var(--shadow);
+  }
+  .dot{width:.6rem; height:.6rem; border-radius:50%; flex:none;}
+  .dot.tofu{background:var(--tofu);} .dot.mofu{background:var(--mofu);} .dot.bofu{background:var(--bofu);}
+  .legend-name{font-size:.78rem; font-weight:700; letter-spacing:.03em;}
+  .legend-sub{font-size:.78rem; color:var(--text-faint);}
+
+  /* Panels */
+  .panel{
+    background:var(--surface); border:1px solid var(--border); border-radius:4px;
+    padding:1.4rem 1.5rem; margin:1.6rem 0; box-shadow:var(--shadow);
+  }
+  .panel h2{font-size:1.05rem; font-weight:800; margin-bottom:.7rem;}
+  .panel ul{margin:.4rem 0 0; padding-left:1.1rem;}
+  .panel li{margin:.45rem 0; color:var(--text-dim); font-size:.95rem;}
+  .panel li strong{color:var(--text);}
+  .panel p{font-size:.95rem; color:var(--text-dim); margin:.5rem 0 0;}
+
+  table{border-collapse:collapse; width:100%; font-size:.86rem;}
+  .table-scroll{overflow-x:auto;}
+  th{
+    text-align:left; text-transform:uppercase; font-size:.68rem; letter-spacing:.08em;
+    color:var(--text-faint); padding:.5rem .6rem; border-bottom:1px solid var(--border); white-space:nowrap;
+  }
+  td{padding:.55rem .6rem; border-bottom:1px solid var(--border); color:var(--text-dim); font-variant-numeric:tabular-nums;}
+  tr:last-child td{border-bottom:none;}
+  td.strong{color:var(--text); font-weight:700;}
+  .stagepill{display:inline-flex; align-items:center; gap:.4rem; font-weight:700; font-size:.78rem;}
+  .kw{
+    font-family:ui-monospace,"SF Mono","Cascadia Code",monospace; font-weight:700;
+    background:var(--surface-2); padding:.1rem .4rem; border-radius:3px; font-size:.78rem;
+  }
+  a{color:inherit;}
+
+  /* Funnel headers */
+  .funnel-section{margin-top:3rem;}
+  .funnel-head{
+    display:flex; align-items:baseline; gap:.8rem; flex-wrap:wrap;
+    border-bottom:2px solid var(--stage); padding-bottom:.6rem; margin-bottom:.4rem;
+  }
+  .funnel-head h2{font-size:1.5rem; font-weight:800; color:var(--stage);}
+  .funnel-head .tag{
+    font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint);
+  }
+  .funnel-intro{color:var(--text-dim); font-size:.95rem; max-width:66ch; margin:.7rem 0 1.6rem;}
+
+  /* Script cards */
+  .script-card{
+    background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--stage);
+    border-radius:4px; padding:1.5rem 1.6rem 1.4rem; margin:1.4rem 0; box-shadow:var(--shadow); scroll-margin-top:1.5rem;
+  }
+  .card-head{display:flex; align-items:flex-start; gap:.9rem; margin-bottom:1rem;}
+  .script-num{
+    font-size:1rem; font-weight:800; color:var(--stage); background:var(--stage-tint);
+    width:2.1rem; height:2.1rem; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none;
+  }
+  .card-head h3{font-size:1.2rem; font-weight:800; color:var(--text);}
+  .card-meta{font-size:.82rem; color:var(--text-faint); margin:.3rem 0 0;}
+  .card-head .stage-tag{
+    margin-left:auto; font-size:.68rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--stage); background:var(--stage-tint); padding:.25rem .55rem; border-radius:3px; white-space:nowrap;
+  }
+  .hook{
+    font-style:italic; font-size:1.05rem; color:var(--text);
+    border-left:3px solid var(--stage); padding:.3rem 0 .3rem .9rem; margin:0 0 .8rem;
+  }
+  .hook .label,.overlay .label{
+    display:block; font-style:normal; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint); margin-bottom:.25rem;
+  }
+  .overlay{font-size:.88rem; color:var(--text-dim); margin:0 0 1rem;}
+  .script-block{background:var(--surface-2); border-radius:3px; padding:.9rem 1rem; margin:0 0 1rem;}
+  .beat{display:grid; grid-template-columns:minmax(52px,58px) 1fr; gap:.7rem; padding:.4rem 0; border-bottom:1px dashed var(--border);}
+  .beat:last-child{border-bottom:none;}
+  .beat-time{color:var(--stage); font-size:.76rem; font-weight:700; font-variant-numeric:tabular-nums; padding-top:.05rem;}
+  .beat p{margin:0; font-size:.86rem; color:var(--text); line-height:1.5;}
+  .notes-grid{display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin:0 0 1rem;}
+  @media (max-width:640px){.notes-grid{grid-template-columns:1fr;}}
+  .notes-grid .label{
+    display:block; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint); margin-bottom:.3rem;
+  }
+  .notes-grid p{margin:0; font-size:.85rem; color:var(--text-dim);}
+  .card-foot{border-top:1px solid var(--border); padding-top:.9rem; display:flex; flex-direction:column; gap:.4rem;}
+  .caption{font-size:.88rem; color:var(--text); margin:0;}
+  .caption::before{content:"\201C";} .caption::after{content:"\201D";}
+  .hashtags{font-size:.8rem; color:var(--stage); margin:0; font-family:ui-monospace,monospace;}
+  .cta-row{display:flex; align-items:center; gap:.5rem; margin-top:.2rem;}
+  .cta-pill{background:var(--stage); color:#fff; font-weight:800; font-size:.78rem; padding:.35rem .7rem; border-radius:3px; letter-spacing:.02em;}
+  .cta-note{font-size:.78rem; color:var(--text-faint);}
+  .funnel-section.tofu{--stage:var(--tofu); --stage-tint:var(--tofu-tint);}
+  .funnel-section.mofu{--stage:var(--mofu); --stage-tint:var(--mofu-tint);}
+  .funnel-section.bofu{--stage:var(--bofu); --stage-tint:var(--bofu-tint);}
+  .note-callout{color:var(--text-faint); font-size:.86rem; border-left:3px solid var(--border); padding-left:.9rem; margin:1.2rem 0;}
+  hr{border:none; border-top:1px solid var(--border); margin:2.4rem 0;}
+  .fine{font-size:.8rem; color:var(--text-faint);}
+</style>
+</head>
+<body>
+<div class="page"><div class="wrap">
+
+<div class="masthead">
+  <p class="eyebrow">Kit de producție · 60 secunde per clip</p>
+  <h1>15 Scripturi TikTok &amp; Instagram — Agenție de Automatizare AI</h1>
+  <p class="lede">Organizate pe funnel de marketing, de la audiență rece la audiență gata de conversie. Fiecare script are hook, cronometraj pe beat-uri, indicații de filmare, mecanismul de polarizare/comentarii și caption + hashtag-uri.</p>
+  <ul class="legend">
+    <li><span class="dot tofu"></span><span class="legend-name">TOFU</span><span class="legend-sub">— rece, reach maxim</span></li>
+    <li><span class="dot mofu"></span><span class="legend-name">MOFU</span><span class="legend-sub">— caldă, proprietari de afaceri</span></li>
+    <li><span class="dot bofu"></span><span class="legend-name">BOFU</span><span class="legend-sub">— fierbinte, CTA explicit</span></li>
+  </ul>
+</div>
+
+<div class="panel">
+  <h2>Cum funcționează cronometrajul</h2>
+  <p>Fiecare script urmează același schelet de beat-uri, de la 0 la 60 de secunde — păstrează ritmul ăsta la filmare, e ce ține oamenii pe clip până la capăt:</p>
+  <ul>
+    <li><strong>0–4s Hook</strong> — fără logo, fără intro, direct în cameră.</li>
+    <li><strong>4–16s Setup</strong> — contextul problemei.</li>
+    <li><strong>16–34s Dezvoltare/Dovadă</strong> — exemplul concret.</li>
+    <li><strong>34–48s Twist/Miză</strong> — de ce contează acum.</li>
+    <li><strong>48–56s Concluzie</strong> — ideea centrală, condensată.</li>
+    <li><strong>56–60s CTA</strong> — întrebare binară sau "spune o cifră" în comentarii.</li>
+  </ul>
+</div>
+
+<div class="panel">
+  <h2>Strategie de comentarii (aplică la toate cele 15)</h2>
+  <p>Polarizarea nu înseamnă ofensator — înseamnă o poziție clară pe care jumătate din oameni o susțin tare și jumătate o contrazic tare.</p>
+  <ul>
+    <li><strong>Întrebare binară sau "spune o cifră" la final</strong> — mult mai ușor de comentat decât o propoziție întreagă. Toate cele 15 se termină așa.</li>
+    <li><strong>Răspunde la primele 10–15 comentarii în prima oră</strong> — algoritmul împinge suplimentar clipurile cu conversație activă.</li>
+    <li><strong>Nu șterge comentariile care te contrazic</strong> — răspunde cu un argument scurt și ferm. O ceartă civilizată = reach organic gratuit.</li>
+    <li><strong>Fixează (pin)</strong> un comentariu al tău, și mai tranșant decât clipul — deschide al doilea val de reply-uri.</li>
+    <li><strong>Linia roșie:</strong> polarizezi o idee (adaptare vs. comoditate), nu ataci un grup de oameni. Rămâi pe zona business/economie/productivitate.</li>
+  </ul>
+</div>
+
+<div class="panel">
+  <h2>Index rapid</h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>#</th><th>Titlu</th><th>Etapă</th><th>Temă</th><th>CTA</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">1</td><td><a href="#script-1">Cele Două Tabere</a></td><td><span class="stagepill" style="color:var(--tofu)"><span class="dot tofu"></span>TOFU</span></td><td>AI și viitorul muncii</td><td>—</td></tr>
+      <tr><td class="strong">2</td><td><a href="#script-2">Părinții vs. Realitatea</a></td><td><span class="stagepill" style="color:var(--tofu)"><span class="dot tofu"></span>TOFU</span></td><td>Conflict generațional</td><td>—</td></tr>
+      <tr><td class="strong">3</td><td><a href="#script-3">Frica Greșită</a></td><td><span class="stagepill" style="color:var(--tofu)"><span class="dot tofu"></span>TOFU</span></td><td>Frica de AI vs. frica reală</td><td>—</td></tr>
+      <tr><td class="strong">4</td><td><a href="#script-4">Economia Ascunsă</a></td><td><span class="stagepill" style="color:var(--tofu)"><span class="dot tofu"></span>TOFU</span></td><td>AI și economia locală</td><td>—</td></tr>
+      <tr><td class="strong">5</td><td><a href="#script-5">Nu AI-ul e Vinovatul</a></td><td><span class="stagepill" style="color:var(--tofu)"><span class="dot tofu"></span>TOFU</span></td><td>Mindset / adaptare</td><td>—</td></tr>
+      <tr><td class="strong">6</td><td><a href="#script-6">Angajatul vs. Automatizarea</a></td><td><span class="stagepill" style="color:var(--mofu)"><span class="dot mofu"></span>MOFU</span></td><td>Automatizare vs. angajare</td><td>—</td></tr>
+      <tr><td class="strong">7</td><td><a href="#script-7">De ce Mor Afacerile Mici</a></td><td><span class="stagepill" style="color:var(--mofu)"><span class="dot mofu"></span>MOFU</span></td><td>Viteză de răspuns = clienți</td><td>—</td></tr>
+      <tr><td class="strong">8</td><td><a href="#script-8">Ai Angajat Greșit</a></td><td><span class="stagepill" style="color:var(--mofu)"><span class="dot mofu"></span>MOFU</span></td><td>Task repetitive vs. oameni</td><td>—</td></tr>
+      <tr><td class="strong">9</td><td><a href="#script-9">Recesia care Vine</a></td><td><span class="stagepill" style="color:var(--mofu)"><span class="dot mofu"></span>MOFU</span></td><td>Costuri fixe vs. automatizate</td><td>—</td></tr>
+      <tr><td class="strong">10</td><td><a href="#script-10">Nu Oamenii, Afacerile</a></td><td><span class="stagepill" style="color:var(--mofu)"><span class="dot mofu"></span>MOFU</span></td><td>Small business vs. corporații</td><td>—</td></tr>
+      <tr><td class="strong">11</td><td><a href="#script-11">Chatbot-ul care nu Doarme</a></td><td><span class="stagepill" style="color:var(--bofu)"><span class="dot bofu"></span>BOFU</span></td><td>Chatbot AI</td><td><span class="kw">CHATBOT</span></td></tr>
+      <tr><td class="strong">12</td><td><a href="#script-12">Recepționera care nu Iese în Concediu</a></td><td><span class="stagepill" style="color:var(--bofu)"><span class="dot bofu"></span>BOFU</span></td><td>Agent vocal AI</td><td><span class="kw">AGENT</span></td></tr>
+      <tr><td class="strong">13</td><td><a href="#script-13">Lead-urile pe care le-ai Uitat</a></td><td><span class="stagepill" style="color:var(--bofu)"><span class="dot bofu"></span>BOFU</span></td><td>Calificare lead-uri / CRM</td><td><span class="kw">LEAD</span></td></tr>
+      <tr><td class="strong">14</td><td><a href="#script-14">Programările care se Fac Singure</a></td><td><span class="stagepill" style="color:var(--bofu)"><span class="dot bofu"></span>BOFU</span></td><td>Automatizare booking</td><td><span class="kw">PROGRAMARI</span></td></tr>
+      <tr><td class="strong">15</td><td><a href="#script-15">Orele Pierdute cu Hârtii</a></td><td><span class="stagepill" style="color:var(--bofu)"><span class="dot bofu"></span>BOFU</span></td><td>Automatizare internă</td><td><span class="kw">RAPOARTE</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<hr/>
+
+<!-- TOFU -->
+<section class="funnel-section tofu">
+  <div class="funnel-head"><h2>TOFU — Vârf de Funnel</h2><span class="tag">Audiență rece · reach maxim</span></div>
+  <p class="funnel-intro">Nu vinzi nimic aici. Plantezi o idee suficient de tranșantă încât oamenii să ia poziție în comentarii. Brandul agenției nu apare — construiești autoritate și reach.</p>
+
+  <article class="script-card" id="script-1">
+    <div class="card-head"><span class="script-num">1</span><div><h3>Cele Două Tabere</h3><p class="card-meta">Public: general, 22–45 ani · Obiectiv: reach maxim, poziționare de insider pe AI</p></div><span class="stage-tag">TOFU</span></div>
+    <p class="hook"><span class="label">Hook (0–3s)</span>„Peste 5 ani vor exista doar două categorii de oameni.”</p>
+    <p class="overlay"><span class="label">Text pe ecran</span>„2 TABERE” → „10 MINUTE = 1 SĂPTĂMÂNĂ” → „TU ÎN CARE TABĂRĂ EȘTI?”</p>
+    <div class="script-block">
+      <div class="beat"><span class="beat-time">0–3s</span><p>Peste 5 ani vor exista doar două categorii de oameni.</p></div>
+      <div class="beat"><span class="beat-time">3–10s</span><p>Cei care dau ordine unui AI. Și cei cărora un AI le dă ordine.</p></div>
+      <div class="beat"><span class="beat-time">10–25s</span><p>Acum 20 de ani, cine știa Excel avea un avantaj. Acum 10 ani, cine știa Facebook Ads avea un avantaj. Acum, cine știe să folosească AI-ul are un avantaj de 10 ani în fața restului pieței.</p></div>
+      <div class="beat"><span class="beat-time">25–40s</span><p>Nu pentru că AI-ul e magic. Ci pentru că face în 10 minute ce altcuiva îi ia o săptămână întreagă. Și dacă competitorul tău face asta, iar tu nu, nu mai concurezi cu el. Doar supraviețuiești lângă el.</p></div>
+      <div class="beat"><span class="beat-time">40–52s</span><p>Nimeni nu-ți spune asta la școală. Nimeni nu-ți spune asta la job. Dar economia deja s-a împărțit în două tabere.</p></div>
+      <div class="beat"><span class="beat-time">52–60s</span><p>Tu în care tabără ești? Scrie în comentarii — sunt curios câți încă neagă ce se întâmplă chiar acum sub ochii lor.</p></div>
+    </div>
+    <div class="notes-grid">
+      <div><span class="label">Filmare</span><p>Talking-head, privire fixă în cameră, ton calm-serios. Jump cut la fiecare propoziție.</p></div>
+      <div><span class="label">De ce polarizează</span><p>Forțează o auto-identificare binară publică — unii se apără, alții neagă agresiv relevanța AI. Ambele tabere comentează.</p></div>
+    </div>
+    <div class="card-foot">
+      <p class="caption">Sincer, cred că majoritatea încă nu au înțeles ce se întâmplă. Tu ești pregătit?</p>
+      <p class="hashtags">#AI #InteligentaArtificiala #Antreprenoriat #Automatizare #Business #Viitor</p>
+    </div>
+  </article>
+
+  <article class="script-card" id="script-2">
+    <div class="card-head"><span class="script-num">2</span><div><h3>Părinții vs. Realitatea</h3><p class="card-meta">Public: 18–30 ani, studenți, început de carieră · Obiectiv: conflict generațional</p></div><span class="stage-tag">TOFU</span></div>
+    <p class="hook"><span class="label">Hook (0–3s)</span>„Părinții tăi îți spun să înveți o meserie sigură. Eu îți spun altceva.”</p>
+    <p class="overlay"><span class="label">Text pe ecran</span>„MESERIE SIGURĂ” (tăiat) → „CINE CONDUCE AI-UL”</p>
+    <div class="script-block">
+      <div class="beat"><span class="beat-time">0–3s</span><p>Părinții tăi îți spun să înveți o meserie „sigură”. Contabil. Avocat. Inginer.</p></div>
+      <div class="beat"><span class="beat-time">3–12s</span><p>Eu îți spun să înveți să controlezi AI-ul care, în 3 ani, face treaba unui contabil, a unui avocat junior și a unui inginer junior. Toate trei. Simultan. Fără pauză de masă.</p></div>
+      <div class="beat"><span class="beat-time">12–28s</span><p>Nu spun că meseriile alea dispar mâine. Spun că cine învață azi să „conducă” un AI, peste 5 ani va fi șeful. Iar cine învață doar meseria clasică, riscă să fie condus de cineva mai tânăr care știe să folosească uneltele astea.</p></div>
+      <div class="beat"><span class="beat-time">28–42s</span><p>Știu că sună dur pentru părinții voștri, care și-au construit toată cariera pe ce știau ei. Dar lumea nu mai așteaptă pe nimeni să se obișnuiască.</p></div>
+      <div class="beat"><span class="beat-time">42–52s</span><p>Nu e vina lor. Pur și simplu jocul s-a schimbat cât au clipit ei.</p></div>
+      <div class="beat"><span class="beat-time">52–60s</span><p>Părinții tăi au dreptate sau am eu dreptate? Spune-mi în comentarii — hai să vedem cine câștigă cearta asta diseară la cină.</p></div>
+    </div>
+    <div class="notes-grid">
+      <div><span class="label">Filmare</span><p>Talking-head direct; overlay „meserie sigură” tăiat cu o linie roșie când o menționezi.</p></div>
+      <div><span class="label">De ce polarizează</span><p>Clasicul „generația nouă vs. sfaturile părinților” — tinerii validează, generația mai în vârstă contrazice.</p></div>
+    </div>
+    <div class="card-foot">
+      <p class="caption">Nu e ură pe părinții noștri, dar cineva trebuia să spună asta cu voce tare.</p>
+      <p class="hashtags">#AI #CarieraViitorului #GenZ #Antreprenoriat #InteligentaArtificiala</p>
+    </div>
+  </article>
+
+  <article class="script-card" id="script-3">
+    <div class="card-head"><span class="script-num">3</span><div><h3>Frica Greșită</h3><p class="card-meta">Public: angajați, general workforce · Obiectiv: reframe frica de AI</p></div><span class="stage-tag">TOFU</span></div>
+    <p class="hook"><span class="label">Hook (0–4s)</span>„Toată lumea se teme de robotul care îi ia locul de muncă. Nimeni nu se teme de...”</p>
+    <p class="overlay"><span class="label">Text pe ecran</span>„FRICA GREȘITĂ” → „4 ORE vs 20 MINUTE”</p>
+    <div class="script-block">
+      <div class="beat"><span class="beat-time">0–4s</span><p>Toată lumea se teme că robotul îi ia locul de muncă. Nimeni nu se teme de colegul care a învățat să folosească AI-ul înaintea lor.</p></div>
+      <div class="beat"><span class="beat-time">4–14s</span><p>Asta e frica greșită. AI-ul, singur, nu-ți ia nimic. Dar omul care știe să-l folosească ca să facă treaba ta de 3 ori mai repede, ăla îți ia locul.</p></div>
+      <div class="beat"><span class="beat-time">14–30s</span><p>Am văzut asta la propriu: doi angajați, aceeași poziție, același salariu. Unul scria rapoarte 4 ore. Celălalt le făcea cu AI în 20 de minute și folosea restul timpului să aducă rezultate reale. Ghici pe cine a păstrat compania când a venit reducerea de costuri.</p></div>
+      <div class="beat"><span class="beat-time">30–45s</span><p>Nu AI-ul e amenințarea ta. Comoditatea ta e amenințarea ta. Cât timp tu „nu ai timp să înveți AI-ul ăla”, altcineva chiar își face timp.</p></div>
+      <div class="beat"><span class="beat-time">45–53s</span><p>Nu-ți spun să panichezi. Îți spun să nu mai amâni.</p></div>
+      <div class="beat"><span class="beat-time">53–60s</span><p>Câți dintre voi ați zis „o să învăț și eu AI-ul ăsta cândva”? Recunoașteți în comentarii, hai să vedem câți suntem.</p></div>
+    </div>
+    <div class="notes-grid">
+      <div><span class="label">Filmare</span><p>B-roll de birou sau screen recording rapid al unui raport generat instant cu AI.</p></div>
+      <div><span class="label">De ce polarizează</span><p>Atinge frica de securitate a jobului. Auto-identificarea („recunoașteți”) generează valuri de comentarii tip confesiune.</p></div>
+    </div>
+    <div class="card-foot">
+      <p class="caption">Aceasta nu e o amenințare, e un semnal de alarmă prietenos.</p>
+      <p class="hashtags">#AI #Joburi #Productivitate #Automatizare #ViitorulMuncii</p>
+    </div>
+  </article>
+
+  <article class="script-card" id="script-4">
+    <div class="card-head"><span class="script-num">4</span><div><h3>Economia Ascunsă</h3><p class="card-meta">Public: general, curioși de economie/business · Obiectiv: poziționare de insider</p></div><span class="stage-tag">TOFU</span></div>
+    <p class="hook"><span class="label">Hook (0–4s)</span>„S-a format o economie nouă în ultimii 2 ani și aproape nimeni nu vorbește despre ea.”</p>
+    <p class="overlay"><span class="label">Text pe ecran</span>„ECONOMIA ASCUNSĂ” → „SALON. CABINET. MAGAZIN ONLINE.”</p>
+    <div class="script-block">
+      <div class="beat"><span class="beat-time">0–4s</span><p>S-a format o economie nouă în ultimii 2 ani și aproape nimeni nu vorbește despre ea la televizor.</p></div>
+      <div class="beat"><span class="beat-time">4–15s</span><p>În timp ce știrile discută despre inflație și crize, există oameni și companii mici care facturează mai mult ca niciodată, doar pentru că au automatizat părțile plictisitoare ale afacerii cu AI.</p></div>
+      <div class="beat"><span class="beat-time">15–32s</span><p>Nu vorbesc de corporații cu bugete de milioane. Vorbesc de un salon de înfrumusețare, un cabinet stomatologic, un mic magazin online. Afaceri normale, care acum răspund la clienți, califică lead-uri și fac programări automat, non-stop, fără să angajeze încă 2 oameni.</p></div>
+      <div class="beat"><span class="beat-time">32–46s</span><p>În timp ce restul așteaptă să „vadă ce se întâmplă cu AI-ul ăsta”, ei deja au un avantaj de cost pe care concurența nu îl poate recupera peste noapte.</p></div>
+      <div class="beat"><span class="beat-time">46–54s</span><p>Asta nu e viitor îndepărtat. Se întâmplă acum, în orașul tău, lângă afacerea ta.</p></div>
+      <div class="beat"><span class="beat-time">54–60s</span><p>Voi ați simțit deja asta în domeniul vostru sau vi se pare exagerat? Spuneți sincer în comentarii.</p></div>
+    </div>
+    <div class="notes-grid">
+      <div><span class="label">Filmare</span><p>B-roll afaceri mici reale (salon, cabinet, magazin), ecran simplu de dashboard/chat automat ca fundal.</p></div>
+      <div><span class="label">De ce polarizează</span><p>„Exagerat sau nu” invită scepticii să conteste direct, în timp ce proprietarii de afaceri mici simt FOMO.</p></div>
+    </div>
+    <div class="card-foot">
+      <p class="caption">Nu e hype, e ce văd zi de zi lucrând cu afaceri mici.</p>
+      <p class="hashtags">#Economie #AI #AfaceriMici #Automatizare #Antreprenoriat</p>
+    </div>
+  </article>
+
+  <article class="script-card" id="script-5">
+    <div class="card-head"><span class="script-num">5</span><div><h3>Nu AI-ul e Vinovatul</h3><p class="card-meta">Public: general, mindset/self-improvement + business · Obiectiv: hot-take contrarian</p></div><span class="stage-tag">TOFU</span></div>
+    <p class="hook"><span class="label">Hook (0–3s)</span>„Toată lumea dă vina pe AI. Greșit.”</p>
+    <p class="overlay"><span class="label">Text pe ecran</span>„NU E VINA AI-ULUI” → „EȘTI SINCER CU TINE?”</p>
+    <div class="script-block">
+      <div class="beat"><span class="beat-time">0–3s</span><p>Toată lumea dă vina pe AI. Eu cred că e greșit.</p></div>
+      <div class="beat"><span class="beat-time">3–13s</span><p>AI-ul nu a inventat lenea, nu a inventat inegalitatea, nu a inventat faptul că unii oameni învață lucruri noi și alții refuză. El doar a făcut diferența asta vizibilă mult mai repede.</p></div>
+      <div class="beat"><span class="beat-time">13–30s</span><p>Acum 15 ani, ca să rămâi în urmă îți trebuiau ani de zile de comoditate. Acum, îți ia 6 luni de „o să văd eu mai târziu” ca să ajungi cu 2 ani în urmă față de cineva de aceeași vârstă cu tine, care a decis să învețe.</p></div>
+      <div class="beat"><span class="beat-time">30–45s</span><p>AI-ul e doar o oglindă. Arată mult mai repede cine se adaptează și cine speră că lucrurile rămân la fel. Și e ok să fii în oricare tabără. Dar măcar fii sincer cu tine despre în care ești.</p></div>
+      <div class="beat"><span class="beat-time">45–53s</span><p>Eu unul am ales să fiu de partea cealaltă a oglinzii.</p></div>
+      <div class="beat"><span class="beat-time">53–60s</span><p>Voi? Sinceri acum, în comentarii: vă adaptați sau sperați că AI-ul e doar un hype care trece?</p></div>
+    </div>
+    <div class="notes-grid">
+      <div><span class="label">Filmare</span><p>Ton calm, aproape confesional. Motiv vizual de oglindă, dacă se poate filma.</p></div>
+      <div><span class="label">De ce polarizează</span><p>Obligă la auto-reflecție publică — răspuns defensiv SAU acord total, ambele generând comentarii lungi.</p></div>
+    </div>
+    <div class="card-foot">
+      <p class="caption">Nu arunc cu vina, doar spun ce văd.</p>
+      <p class="hashtags">#AI #Mindset #Antreprenoriat #Adaptare #InteligentaArtificiala</p>
+    </div>
+  </article>
+</section>
+
+<!-- MOFU -->
+<section class="funnel-section mofu">
+  <div class="funnel-head"><h2>MOFU — Mijloc de Funnel</h2><span class="tag">Audiență caldă · antreprenori</span></div>
+  <p class="funnel-intro">Educi categoria „automatizare AI pentru afaceri” — ROI, costuri, competiție. Încă nu împingi un produs anume, dar ideea e clar plantată în capul unui proprietar de afacere.</p>
+
+  <article class="script-card" id="script-6">
+    <div class="card-head"><span class="script-num">6</span><div><h3>Angajatul vs. Automatizarea</h3><p class="card-meta">Public: proprietari de afaceri mici · Obiectiv: automatizare ca alternativă la task-uri, nu la oameni</p></div><span class="stage-tag">MOFU</span></div>
+    <p class="hook"><span class="label">Hook (0–4s)</span>„Angajatul tău lucrează 8 ore. Automatizarea mea lucrează 24.”</p>
+    <p class="overlay"><span class="label">Text pe ecran</span>„8 ORE vs 24/7” → „NU OAMENII. TASK-URILE.”</p>
+    <div class="script-block">
+      <div class="beat"><span class="beat-time">0–4s</span><p>Angajatul tău lucrează 8 ore pe zi, 5 zile pe săptămână, și ia pauză de masă.</p></div>
+      <div class="beat"><span class="beat-time">4–14s</span><p>O automatizare cu AI lucrează 24 de ore, 7 zile pe săptămână, nu cere mărire de salariu, nu-și dă demisia după 3 luni și nu are zile proaste.</p></div>
+      <div class="beat"><span class="beat-time">14–30s</span><p>Nu spun să-ți concediezi oamenii. Spun că cei mai buni proprietari de afaceri pe care îi văd nu pun automatizarea în locul oamenilor, o pun în locul task-urilor plictisitoare: răspuns la mesaje, calificat lead-uri, programări, follow-up-uri.</p></div>
+      <div class="beat"><span class="beat-time">30–45s</span><p>Rezultatul? Oamenii tăi fac treaba care chiar aduce bani și relații, iar partea repetitivă rulează singură, în fundal, non-stop.</p></div>
+      <div class="beat"><span class="beat-time">45–53s</span><p>Mulți antreprenori încă văd asta ca pe un moft de corporații mari. Nu mai e așa.</p></div>
+      <div class="beat"><span class="beat-time">53–60s</span><p>Tu ai automatizat vreo parte din afacere sau încă faci totul manual? Spune-mi în comentarii ce parte din zi ți-ar plăcea să dispară.</p></div>
+    </div>
+    <div class="notes-grid">
+      <div><span class="label">Filmare</span><p>Split-screen conceptual (angajat obosit vs. flow simplu de automatizare) sau screen recording real.</p></div>
+      <div><span class="label">De ce polarizează</span><p>Unii simt că „înlocuiești oameni” e imoral, alții apără eficiența — dezbatere etică autentică.</p></div>
+    </div>
+    <div class="card-foot">
+      <p class="caption">Nu e despre înlocuit oameni, e despre ce faci cu timpul eliberat.</p>
+      <p class="hashtags">#Antreprenoriat #Automatizare #AfaceriMici #AI #Productivitate</p>
+    </div>
+  </article>
+
+  <article class="script-card" id="script-7">
+    <div class="card-head"><span class="script-num">7</span><div><h3>De ce Mor Afacerile Mici</h3><p class="card-meta">Public: afaceri locale cu volum de clienți · Obiectiv: viteza de răspuns ca avantaj competitiv</p></div><span class="stage-tag">MOFU</span></div>
+    <p class="hook"><span class="label">Hook (0–4s)</span>„Multe afaceri mici nu mor din cauza recesiunii.”</p>
+    <p class="overlay"><span class="label">Text pe ecran</span>„10 SECUNDE vs 2 ZILE” → „CINE RĂSPUNDE PRIMUL CÂȘTIGĂ”</p>
+    <div class="script-block">
+      <div class="beat"><span class="beat-time">0–4s</span><p>Multe afaceri mici nu mor din cauza recesiunii sau a taxelor. Mor din cauza vecinului care a automatizat înaintea lor.</p></div>
+      <div class="beat"><span class="beat-time">4–15s</span><p>Două saloane pe aceeași stradă. Unul răspunde la mesaje când are timp, poate mâine, poate peste 2 zile. Celălalt are un sistem care răspunde în 10 secunde, oricând, și face programarea automat.</p></div>
+      <div class="beat"><span class="beat-time">15–32s</span><p>Clientul nu așteaptă. Sună sau scrie la primul care răspunde. Nu contează cine are servicii mai bune, contează cine e disponibil primul. Și asta se întâmplă acum, în fiecare oraș, în fiecare domeniu.</p></div>
+      <div class="beat"><span class="beat-time">32–46s</span><p>Nu e vorba că cel care pierde ar avea o afacere proastă. E vorba că joacă același joc cu o mână legată la spate, fără să știe.</p></div>
+      <div class="beat"><span class="beat-time">46–54s</span><p>Peste 2–3 ani, diferența asta se vede direct în încasări, nu doar în „senzația” că lucrurile merg mai greu.</p></div>
+      <div class="beat"><span class="beat-time">54–60s</span><p>Tu știi câte lead-uri pierzi pentru că nu răspunzi suficient de repede? Spune o cifră estimativă în comentarii, sunt curios.</p></div>
+    </div>
+    <div class="notes-grid">
+      <div><span class="label">Filmare</span><p>Phone-mockup side-by-side: notificare „văzut, fără răspuns” vs. răspuns automat instant.</p></div>
+      <div><span class="label">De ce polarizează</span><p>Proprietarii se simt vizați direct; unii vor contesta ("clienții mei sunt loiali") — dezbatere directă.</p></div>
+    </div>
+    <div class="card-foot">
+      <p class="caption">Nu e alarmism, e ce vedem în datele clienților noștri.</p>
+      <p class="hashtags">#AfaceriLocale #Automatizare #AI #Antreprenoriat #CustomerExperience</p>
+    </div>
+  </article>
+
+  <article class="script-card" id="script-8">
+    <div class="card-head"><span class="script-num">8</span><div><h3>Ai Angajat Greșit</h3><p class="card-meta">Public: proprietari cu angajat dedicat mesajelor · Obiectiv: provoacă direct o decizie de angajare comună</p></div><span class="stage-tag">MOFU</span></div>
+    <p class="hook"><span class="label">Hook (0–4s)</span>„Ai angajat un om să răspundă la mesaje pe Instagram. Ai greșit.”</p>
+    <p class="overlay"><span class="label">Text pe ecran</span>„ACEEAȘI 20 DE ÎNTREBĂRI” → „OAMENII TĂI AR TREBUI SĂ VÂNDĂ”</p>
+    <div class="script-block">
+      <div class="beat"><span class="beat-time">0–4s</span><p>Ai angajat pe cineva să răspundă la mesaje pe Instagram și WhatsApp. Înțeleg de ce, dar cred că ai greșit.</p></div>
+      <div class="beat"><span class="beat-time">4–16s</span><p>Nu pentru că persoana aia nu-și face treaba bine. Ci pentru că îi ceri unui om să facă o treabă de robot: să răspundă la aceleași 20 de întrebări, în fiecare zi, la aceeași oră, fără să greșească niciodată și fără să fie plictisit.</p></div>
+      <div class="beat"><span class="beat-time">16–32s</span><p>Rezultatul? Fie persoana obosește și începe să răspundă mai rar, fie te costă un salariu întreg pentru o muncă pe care un chatbot bine construit o face la fel, doar că non-stop și instant.</p></div>
+      <div class="beat"><span class="beat-time">32–46s</span><p>Oamenii tăi ar trebui să facă vânzare, relație, decizii. Nu să copieze același răspuns pentru a suta oară într-o zi.</p></div>
+      <div class="beat"><span class="beat-time">46–54s</span><p>Nu spun să renunți la oameni. Spun să-i pui să facă ce știu ei mai bine să facă, iar restul să ruleze automat.</p></div>
+      <div class="beat"><span class="beat-time">54–60s</span><p>Câte mesaje repetitive primești pe zi în afacerea ta? Scrie o cifră în comentarii, hai să vedem câți bani ai putea economisi.</p></div>
+    </div>
+    <div class="notes-grid">
+      <div><span class="label">Filmare</span><p>Screen recording de DM-uri repetitive pe telefon, apoi tăietură rapidă spre un flow de chatbot.</p></div>
+      <div><span class="label">De ce polarizează</span><p>„Ai greșit” atacă o decizie deja luată de mulți spectatori — reacție defensivă sau recunoaștere/ușurare.</p></div>
+    </div>
+    <div class="card-foot">
+      <p class="caption">Nu e critică personală, e ce vedem constant la clienți.</p>
+      <p class="hashtags">#Chatbot #Automatizare #AfaceriMici #AI #CustomerService</p>
+    </div>
+  </article>
+
+  <article class="script-card" id="script-9">
+    <div class="card-head"><span class="script-num">9</span><div><h3>Recesia care Vine</h3><p class="card-meta">Public: antreprenori preocupați de context economic · Obiectiv: automatizarea ca strategie de rezistență</p></div><span class="stage-tag">MOFU</span></div>
+    <p class="hook"><span class="label">Hook (0–4s)</span>„Nu următoarea recesie o să afecteze pe toată lumea la fel.”</p>
+    <p class="overlay"><span class="label">Text pe ecran</span>„COSTURI FIXE vs COSTURI AUTOMATIZATE”</p>
+    <div class="script-block">
+      <div class="beat"><span class="beat-time">0–4s</span><p>Nu următoarea recesie o să lovească pe toată lumea la fel.</p></div>
+      <div class="beat"><span class="beat-time">4–15s</span><p>O să lovească tare afacerile care au costuri fixe mari, oameni mulți pe task-uri repetitive și niciun sistem care să funcționeze fără supraveghere constantă.</p></div>
+      <div class="beat"><span class="beat-time">15–32s</span><p>Și o să lovească mult mai ușor afacerile care deja au automatizat partea operațională: răspunsuri, programări, follow-up, rapoarte. Pentru că ele pot reduce costurile fără să reducă serviciul către client.</p></div>
+      <div class="beat"><span class="beat-time">32–46s</span><p>Nu e o teorie. E logică simplă: cine are cheltuieli mai mici la același rezultat, rezistă mai mult când piața se contractă.</p></div>
+      <div class="beat"><span class="beat-time">46–54s</span><p>Cei mai mulți antreprenori se pregătesc de recesie tăind bugetul de marketing. Cei deștepți taie timpul pierdut pe task-uri pe care le poate face un sistem.</p></div>
+      <div class="beat"><span class="beat-time">54–60s</span><p>Tu unde ai tăia primul, dacă ar trebui să reduci costuri mâine? Spune în comentarii, sunt curios ce cred oamenii din diverse domenii.</p></div>
+    </div>
+    <div class="notes-grid">
+      <div><span class="label">Filmare</span><p>Overlay conceptual „costuri fixe” vs „costuri automatizate” (fără cifre inventate), ton serios de analiză.</p></div>
+      <div><span class="label">De ce polarizează</span><p>Anxietatea economică generează mereu dezacord aprins despre „care e mișcarea inteligentă”.</p></div>
+    </div>
+    <div class="card-foot">
+      <p class="caption">Pregătirea nu înseamnă panică, înseamnă strategie.</p>
+      <p class="hashtags">#Recesie #Antreprenoriat #Automatizare #AI #Business</p>
+    </div>
+  </article>
+
+  <article class="script-card" id="script-10">
+    <div class="card-head"><span class="script-num">10</span><div><h3>Nu Oamenii, Afacerile</h3><p class="card-meta">Public: antreprenori deja curioși de AI · Obiectiv: reframe aspirațional, seed pentru BOFU</p></div><span class="stage-tag">MOFU</span></div>
+    <p class="hook"><span class="label">Hook (0–4s)</span>„AI-ul nu înlocuiește oamenii. Înlocuiește afacerile care refuză să se adapteze.”</p>
+    <p class="overlay"><span class="label">Text pe ecran</span>„DAVID vs GOLIATH” → „CINE RĂSPUNDE PRIMUL, CEL MAI CONSTANT”</p>
+    <div class="script-block">
+      <div class="beat"><span class="beat-time">0–4s</span><p>AI-ul nu înlocuiește oamenii. Înlocuiește afacerile care refuză să se adapteze.</p></div>
+      <div class="beat"><span class="beat-time">4–16s</span><p>Am văzut companii mari care au dispărut nu pentru că produsul lor era prost, ci pentru că au fost prea lente să schimbe ceva. AI-ul doar accelerează viteza cu care se întâmplă asta acum, la firme de orice mărime.</p></div>
+      <div class="beat"><span class="beat-time">16–32s</span><p>O afacere mică, cu 3 angajați, care folosește automatizare inteligentă pe partea de clienți, poate părea, din exterior, la fel de rapidă și organizată ca o companie de 30 de oameni.</p></div>
+      <div class="beat"><span class="beat-time">32–46s</span><p>Asta schimbă complet regulile jocului. Nu mai câștigă neapărat cel cu bugetul mai mare, câștigă cel care răspunde primul, cel mai bine, cel mai constant.</p></div>
+      <div class="beat"><span class="beat-time">46–54s</span><p>E cea mai mare oportunitate pentru afacerile mici din ultimii 20 de ani, dacă știu să o folosească.</p></div>
+      <div class="beat"><span class="beat-time">54–60s</span><p>Crezi că afacerea ta ar putea concura cu una de 10 ori mai mare, dacă ai automatiza corect părțile potrivite? Spune părerea ta în comentarii.</p></div>
+    </div>
+    <div class="notes-grid">
+      <div><span class="label">Filmare</span><p>Metaforă vizuală David vs. Goliath, ton încrezător.</p></div>
+      <div><span class="label">De ce polarizează</span><p>Claim aspirațional care împarte publicul între cei care cred și scepticii care contestă.</p></div>
+    </div>
+    <div class="card-foot">
+      <p class="caption">Cea mai subestimată oportunitate a deceniului ăsta.</p>
+      <p class="hashtags">#AfaceriMici #AI #Automatizare #Antreprenoriat #Strategie</p>
+    </div>
+  </article>
+</section>
+
+<!-- BOFU -->
+<section class="funnel-section bofu">
+  <div class="funnel-head"><h2>BOFU — Bază de Funnel</h2><span class="tag">Audiență fierbinte · CTA explicit</span></div>
+  <p class="funnel-intro">Fiecare script vinde o singură automatizare specifică, cu o durere concretă, o soluție clară și un CTA explicit. Aici brandul agenției intră direct în discuție.</p>
+  <p class="note-callout">Nișele folosite mai jos (salon, clinică, service auto) sunt exemple — înlocuiește-le cu nișa exactă a clienților tăi țintă pentru impact mai mare.</p>
+
+  <article class="script-card" id="script-11">
+    <div class="card-head"><span class="script-num">11</span><div><h3>Chatbot-ul care nu Doarme</h3><p class="card-meta">Automatizare: chatbot AI · Public: afaceri cu volum mare de mesaje</p></div><span class="stage-tag">BOFU</span></div>
+    <p class="hook"><span class="label">Hook (0–4s)</span>„Pierzi clienți în fiecare noapte și nici nu știi.”</p>
+    <p class="overlay"><span class="label">Text pe ecran</span>„22:00–08:00 = ZONA MOARTĂ” → „SCRIE CHATBOT”</p>
+    <div class="script-block">
+      <div class="beat"><span class="beat-time">0–4s</span><p>Pierzi clienți în fiecare noapte, între orele 22 și 8 dimineața, și nici nu știi că se întâmplă.</p></div>
+      <div class="beat"><span class="beat-time">4–16s</span><p>Cineva îți scrie pe Instagram la 23:30 întrebând de preț sau disponibilitate. Tu dormi. Răspunzi a doua zi la 10. Până atunci, persoana a scris deja la 3 competitori și a ales pe cel care a răspuns primul.</p></div>
+      <div class="beat"><span class="beat-time">16–34s</span><p>Asta nu e o presupunere, e ce vedem constant când analizăm mesajele clienților noștri: cele mai multe întrebări sunt aceleași 10–15 lucruri, repetate la nesfârșit, și jumătate ajung fără răspuns la timp.</p></div>
+      <div class="beat"><span class="beat-time">34–48s</span><p>Un chatbot AI bine construit răspunde instant, oricând, califică lead-ul, dă prețuri, programează, și te anunță pe tine doar când chiar trebuie să intervii personal.</p></div>
+      <div class="beat"><span class="beat-time">48–56s</span><p>Nu e un robot enervant cu meniu de butoane. Vorbește natural, ca un om care chiar știe afacerea ta.</p></div>
+      <div class="beat"><span class="beat-time">56–60s</span><p>Dacă vrei să vezi cum arată pentru afacerea ta, scrie „CHATBOT” în comentarii sau la DM și îți trimit un exemplu.</p></div>
+    </div>
+    <div class="notes-grid">
+      <div><span class="label">Filmare</span><p>Screen recording real — DM nocturn fără răspuns, apoi chatbot-ul răspunzând instant.</p></div>
+      <div><span class="label">De ce polarizează</span><p>Creează anxietate directă; unii vor contesta ("eu răspund personal, e mai uman") — dezbatere automatizare vs. personal touch.</p></div>
+    </div>
+    <div class="card-foot">
+      <p class="caption">Câte mesaje ai lăsat fără răspuns săptămâna asta? Scrie CHATBOT și îți arăt cum rezolvi asta.</p>
+      <p class="hashtags">#Chatbot #AI #Automatizare #CustomerService #AfaceriMici</p>
+      <div class="cta-row"><span class="cta-pill">Scrie CHATBOT</span><span class="cta-note">comentariu + DM</span></div>
+    </div>
+  </article>
+
+  <article class="script-card" id="script-12">
+    <div class="card-head"><span class="script-num">12</span><div><h3>Recepționera care nu Iese în Concediu</h3><p class="card-meta">Automatizare: agent vocal AI · Public: clinici, saloane, service-uri auto</p></div><span class="stage-tag">BOFU</span></div>
+    <p class="hook"><span class="label">Hook (0–4s)</span>„Ai pierdut vreodată un client pentru că erai la telefon cu altcineva?”</p>
+    <p class="overlay"><span class="label">Text pe ecran</span>„APEL PIERDUT = CLIENT PIERDUT” → „SCRIE AGENT PENTRU DEMO AUDIO”</p>
+    <div class="script-block">
+      <div class="beat"><span class="beat-time">0–4s</span><p>Ai pierdut vreodată un client pentru că erai deja la telefon cu altcineva, sau pur și simplu nu ai auzit telefonul?</p></div>
+      <div class="beat"><span class="beat-time">4–16s</span><p>Pentru multe afaceri, clinici, saloane, service-uri auto, apelul telefonic e încă principalul canal prin care vine un client nou. Și totuși, sunt lăsate să sune în gol, sau ajung la o recepționeră care, oricât de bună ar fi, nu poate răspunde la 3 telefoane simultan.</p></div>
+      <div class="beat"><span class="beat-time">16–34s</span><p>Un agent vocal AI răspunde la fiecare apel, în orice moment, cu o voce naturală, nu robotică enervantă. Preia informațiile, face programarea direct în calendar și trimite confirmarea automat.</p></div>
+      <div class="beat"><span class="beat-time">34–48s</span><p>Nu înlocuiește recepționera, o scutește de apelurile repetitive ca să se ocupe de clienții care sunt deja în fața ei.</p></div>
+      <div class="beat"><span class="beat-time">48–56s</span><p>Diferența se vede în primele 2 săptămâni, în numărul de apeluri pierdute care ajung, în sfârșit, la zero.</p></div>
+      <div class="beat"><span class="beat-time">56–60s</span><p>Dacă vrei să auzi cum sună un agent vocal AI în acțiune, scrie „AGENT” în comentarii și îți trimit un exemplu audio.</p></div>
+    </div>
+    <div class="notes-grid">
+      <div><span class="label">Filmare</span><p>Split screen: notificare „apel pierdut” vs. waveform al agentului vocal „vorbind”.</p></div>
+      <div><span class="label">De ce polarizează</span><p>Ideea de „a vorbi cu un AI la telefon” declanșează reacții tari în ambele direcții.</p></div>
+    </div>
+    <div class="card-foot">
+      <p class="caption">Sună ca un om? Las-o pe seama ta să judeci — scrie AGENT.</p>
+      <p class="hashtags">#AgentVocal #VoiceAI #Automatizare #AI #CustomerExperience</p>
+      <div class="cta-row"><span class="cta-pill">Scrie AGENT</span><span class="cta-note">demo audio</span></div>
+    </div>
+  </article>
+
+  <article class="script-card" id="script-13">
+    <div class="card-head"><span class="script-num">13</span><div><h3>Lead-urile pe care le-ai Uitat</h3><p class="card-meta">Automatizare: calificare lead-uri + CRM · Public: imobiliare, servicii B2B, cursuri, clinici</p></div><span class="stage-tag">BOFU</span></div>
+    <p class="hook"><span class="label">Hook (0–4s)</span>„Ai vreodată liste de lead-uri pe care ai uitat să-i mai suni?”</p>
+    <p class="overlay"><span class="label">Text pe ecran</span>„LEAD-URI VECHI = BANI PIERDUȚI” → „SCRIE LEAD”</p>
+    <div class="script-block">
+      <div class="beat"><span class="beat-time">0–4s</span><p>Ai vreodată un Excel sau un CRM plin de lead-uri vechi, pe care știai că trebuie să-i mai suni, dar n-ai mai apucat?</p></div>
+      <div class="beat"><span class="beat-time">4–16s</span><p>Aproape orice afacere are asta: lead-uri care au arătat interes acum 2 săptămâni, o lună, 3 luni, și care pur și simplu s-au pierdut pentru că nimeni n-a avut timp de follow-up constant.</p></div>
+      <div class="beat"><span class="beat-time">16–34s</span><p>O automatizare de calificare lead-uri rezolvă exact asta: ia fiecare persoană care completează un formular sau scrie un mesaj, îi pune întrebări relevante automat, îl „scorează” după cât de cald e, și îl trece direct în calendarul de vânzări dacă e pregătit, sau îl ține în follow-up automat dacă nu e încă.</p></div>
+      <div class="beat"><span class="beat-time">34–48s</span><p>Practic, echipa ta de vânzări vorbește doar cu oamenii care chiar sunt pregătiți să cumpere, nu își mai pierde timpul filtrând manual.</p></div>
+      <div class="beat"><span class="beat-time">48–56s</span><p>Diferența se vede direct în numărul de întâlniri programate din aceleași lead-uri pe care oricum îi aveai.</p></div>
+      <div class="beat"><span class="beat-time">56–60s</span><p>Dacă vrei să vezi cum arată un flux de calificare automat, scrie „LEAD” în comentarii.</p></div>
+    </div>
+    <div class="notes-grid">
+      <div><span class="label">Filmare</span><p>Screen recording CRM/spreadsheet cu lead-uri vechi evidențiate, apoi diagramă de flow care se „aprinde”.</p></div>
+      <div><span class="label">De ce polarizează</span><p>Provoacă o vină ușoară ("câte lead-uri ai uitat") — oamenii recunosc cifra sau își apără procesul.</p></div>
+    </div>
+    <div class="card-foot">
+      <p class="caption">Câte lead-uri vechi ai chiar acum, netratate? Scrie LEAD și îți arăt cum îi recuperezi automat.</p>
+      <p class="hashtags">#CRM #LeadGeneration #Automatizare #AI #Vanzari</p>
+      <div class="cta-row"><span class="cta-pill">Scrie LEAD</span><span class="cta-note">exemplu de flux</span></div>
+    </div>
+  </article>
+
+  <article class="script-card" id="script-14">
+    <div class="card-head"><span class="script-num">14</span><div><h3>Programările care se Fac Singure</h3><p class="card-meta">Automatizare: booking + reminder-uri · Public: clinici, saloane, cabinete</p></div><span class="stage-tag">BOFU</span></div>
+    <p class="hook"><span class="label">Hook (0–4s)</span>„Câte ore pe săptămână pierzi doar coordonând programări la telefon?”</p>
+    <p class="overlay"><span class="label">Text pe ecran</span>„NO-SHOW = LOC GOL = BANI PIERDUȚI” → „SCRIE PROGRAMARI”</p>
+    <div class="script-block">
+      <div class="beat"><span class="beat-time">0–4s</span><p>Câte ore pe săptămână pierzi doar coordonând programări la telefon sau pe WhatsApp?</p></div>
+      <div class="beat"><span class="beat-time">4–16s</span><p>„La ce oră aveți liber?”, „Pot muta programarea?”, „Îmi mai confirmați vă rog?” — aceleași întrebări, în fiecare zi, care iau timp real din programul tău sau al echipei.</p></div>
+      <div class="beat"><span class="beat-time">16–34s</span><p>O automatizare de programări lasă clientul să vadă disponibilitatea reală și să-și facă singur programarea, direct din mesaj sau site, primește confirmare automat, și primește un reminder cu o zi înainte, ca să nu mai vii cu un loc gol în calendar din cauza unui no-show.</p></div>
+      <div class="beat"><span class="beat-time">34–48s</span><p>Nu doar economisești timp administrativ, reduci direct pierderile din locurile rămase goale în ultimul moment, care în multe afaceri înseamnă bani serios pierduți lunar.</p></div>
+      <div class="beat"><span class="beat-time">48–56s</span><p>Ai văzut vreodată cât costă, într-o lună, doar locurile pierdute din no-show-uri? De obicei e mai mult decât cred oamenii.</p></div>
+      <div class="beat"><span class="beat-time">56–60s</span><p>Dacă vrei să vezi cum arată un sistem de programări automat pentru afacerea ta, scrie „PROGRAMARI” în comentarii.</p></div>
+    </div>
+    <div class="notes-grid">
+      <div><span class="label">Filmare</span><p>Mockup de calendar care se completează singur, notificare „reminder trimis automat”, slot gol tăiat (no-show).</p></div>
+      <div><span class="label">De ce polarizează</span><p>Invită oamenii să admită/conteste cât timp și bani pierd din no-show-uri.</p></div>
+    </div>
+    <div class="card-foot">
+      <p class="caption">Câte locuri goale ai avut luna asta din no-show? Scrie PROGRAMARI, hai să rezolvăm asta.</p>
+      <p class="hashtags">#Programari #Automatizare #AI #AfaceriMici #Booking</p>
+      <div class="cta-row"><span class="cta-pill">Scrie PROGRAMARI</span><span class="cta-note">sistem de booking</span></div>
+    </div>
+  </article>
+
+  <article class="script-card" id="script-15">
+    <div class="card-head"><span class="script-num">15</span><div><h3>Orele Pierdute cu Hârtii</h3><p class="card-meta">Automatizare: rapoarte, facturare, sincronizare date · Public: proprietari/manageri cu muncă administrativă</p></div><span class="stage-tag">BOFU</span></div>
+    <p class="hook"><span class="label">Hook (0–4s)</span>„Câte ore pe săptămână pierzi cu rapoarte, facturi și e-mailuri identice de fiecare dată?”</p>
+    <p class="overlay"><span class="label">Text pe ecran</span>„MUNCĂ CARE NU ADUCE NICIUN CLIENT NOU” → „SCRIE RAPOARTE”</p>
+    <div class="script-block">
+      <div class="beat"><span class="beat-time">0–4s</span><p>Câte ore pe săptămână pierzi cu rapoarte, facturi și e-mailuri pe care le faci exact la fel, în fiecare săptămână?</p></div>
+      <div class="beat"><span class="beat-time">4–16s</span><p>Mulți antreprenori nu observă asta pentru că s-au obișnuit: vineri seara stau și adună cifrele din 3 locuri diferite într-un raport, sau trimit manual aceleași facturi, aceleași actualizări către aceiași oameni.</p></div>
+      <div class="beat"><span class="beat-time">16–34s</span><p>Genul ăsta de muncă nu aduce niciun client nou și niciun leu în plus, doar ține afacerea în picioare din spate. Și exact genul ăsta de task e cel mai ușor de automatizat complet cu AI.</p></div>
+      <div class="beat"><span class="beat-time">34–48s</span><p>O automatizare internă adună datele automat, generează raportul, trimite factura la data corectă, și îți trimite ție doar un rezumat scurt, gata făcut, în fiecare luni dimineața.</p></div>
+      <div class="beat"><span class="beat-time">48–56s</span><p>Ore întregi pe săptămână, recuperate, fără să schimbi nimic în modul în care lucrezi cu clienții.</p></div>
+      <div class="beat"><span class="beat-time">56–60s</span><p>Câte ore crezi că pierzi tu, sincer, cu genul ăsta de muncă administrativă? Spune o cifră în comentarii — sau scrie „RAPOARTE” dacă vrei să vezi un exemplu real.</p></div>
+    </div>
+    <div class="notes-grid">
+      <div><span class="label">Filmare</span><p>Montaj rapid — persoană lucrând seara târziu la calcule/facturi, apoi notificare curată de „raport generat automat”.</p></div>
+      <div><span class="label">De ce polarizează</span><p>Invită oamenii să admită timp ascuns pierdut ("sincer") — comparație competitivă naturală între antreprenori.</p></div>
+    </div>
+    <div class="card-foot">
+      <p class="caption">Câte ore administrative îți fură afacerea săptămânal? Scrie RAPOARTE pentru un exemplu.</p>
+      <p class="hashtags">#Automatizare #AI #Antreprenoriat #Productivitate #AfaceriMici</p>
+      <div class="cta-row"><span class="cta-pill">Scrie RAPOARTE</span><span class="cta-note">exemplu real</span></div>
+    </div>
+  </article>
+</section>
+
+<hr/>
+
+<div class="panel">
+  <h2>Sugestie de calendar de postare</h2>
+  <p>Nu posta BOFU primul — fără reach organic, CTA-ul de vânzare nu ajunge la nimeni. Ritm recomandat: ~2 TOFU : ~2 MOFU : ~1 BOFU pe săptămână, apoi crește procentul de BOFU pe măsură ce cresc urmăritorii și DM-urile.</p>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Săptămâna</th><th>Zi 1</th><th>Zi 2</th><th>Zi 3</th><th>Zi 4</th><th>Zi 5</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">1</td><td>TOFU 1</td><td>TOFU 2</td><td>MOFU 6</td><td>TOFU 3</td><td>MOFU 7</td></tr>
+      <tr><td class="strong">2</td><td>TOFU 4</td><td>BOFU 11</td><td>TOFU 5</td><td>MOFU 8</td><td>BOFU 12</td></tr>
+      <tr><td class="strong">3</td><td>MOFU 9</td><td>BOFU 13</td><td>MOFU 10</td><td>BOFU 14</td><td>BOFU 15</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="fine">Repostează TOFU/MOFU cu performanță bună, adăugând un CTA de BOFU la final, odată ce au strâns reach.</p>
+</div>
+
+</div></div>
+</body>
+</html>
