@@ -105,17 +105,24 @@
     var y = onScrollY();
 
     // Hero: image scales & drifts up, text drifts up + fades (cinematic push).
+    // Desktop only — on phone/tablet the hero is stacked and the image shows full.
     if (heroMediaImg) {
-      var p = Math.min(y / (vh * 0.9), 1);
-      var scale = 1.08 + p * 0.14;
-      heroMediaImg.style.transform = "scale(" + scale.toFixed(4) + ") translateY(" + (p * 26).toFixed(2) + "px)";
-      if (heroTitle) {
-        heroTitle.style.transform = "translateY(" + (y * -0.16).toFixed(2) + "px)";
-        heroTitle.style.opacity = (1 - p * 0.85).toFixed(3);
-      }
-      if (heroSub) {
-        heroSub.style.transform = "translateY(" + (y * -0.1).toFixed(2) + "px)";
-        heroSub.style.opacity = (1 - p * 1.1).toFixed(3);
+      if (window.innerWidth > 1024) {
+        var p = Math.min(y / (vh * 0.9), 1);
+        var scale = 1.08 + p * 0.14;
+        heroMediaImg.style.transform = "scale(" + scale.toFixed(4) + ") translateY(" + (p * 26).toFixed(2) + "px)";
+        if (heroTitle) {
+          heroTitle.style.transform = "translateY(" + (y * -0.16).toFixed(2) + "px)";
+          heroTitle.style.opacity = (1 - p * 0.85).toFixed(3);
+        }
+        if (heroSub) {
+          heroSub.style.transform = "translateY(" + (y * -0.1).toFixed(2) + "px)";
+          heroSub.style.opacity = (1 - p * 1.1).toFixed(3);
+        }
+      } else {
+        heroMediaImg.style.transform = "";
+        if (heroTitle) { heroTitle.style.transform = ""; heroTitle.style.opacity = ""; }
+        if (heroSub) { heroSub.style.transform = ""; heroSub.style.opacity = ""; }
       }
     }
 
