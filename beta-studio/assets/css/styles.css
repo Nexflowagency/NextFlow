@@ -582,6 +582,82 @@ h1, h2, h3, h4 { color: var(--ink); font-weight: 800; line-height: 1.04; }
   .header__cta .btn span.hide-xs { display: none; }
 }
 
+/* ---------- Minimalist type scale: tablet ---------- */
+@media (max-width: 1024px) {
+  body { font-size: 15.5px; }
+  .hero__title { font-size: clamp(2.4rem, 6.5vw, 3.6rem); }
+  .page-hero h1 { font-size: clamp(2.1rem, 6vw, 3.2rem); }
+  .sec-head h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+  .cta-band h2 { font-size: clamp(2rem, 5.6vw, 3rem); }
+  .band h3 { font-size: clamp(1.7rem, 4.4vw, 2.4rem); }
+  .manifesto p { font-size: clamp(1.25rem, 3.4vw, 1.8rem); }
+  .legal h1 { font-size: clamp(2rem, 5.4vw, 2.9rem); }
+}
+
+/* ---------- Minimalist type scale: phone ---------- */
+@media (max-width: 760px) {
+  body { font-size: 14px; line-height: 1.6; }
+  .eyebrow { font-size: .62rem; letter-spacing: .18em; gap: .5em; }
+  .eyebrow::before { width: 20px; }
+
+  .hero__title { font-size: clamp(2rem, 10.5vw, 2.7rem); line-height: .94; }
+  .hero__sub { font-size: .9rem; margin-top: 16px; max-width: 40ch; }
+  .hero__actions { margin-top: 24px; gap: 10px; }
+  .hero__meta { font-size: .7rem; }
+
+  .sec-head { margin-bottom: 28px; }
+  .sec-head h2 { font-size: clamp(1.7rem, 8vw, 2.25rem); }
+  .sec-head p { font-size: .92rem; margin-top: 10px; }
+
+  .page-hero h1 { font-size: clamp(1.85rem, 9.5vw, 2.55rem); }
+  .page-hero p { font-size: .94rem; margin-top: 10px; }
+  .breadcrumb { font-size: .72rem; }
+
+  .manifesto p { font-size: clamp(1.1rem, 5.2vw, 1.5rem); line-height: 1.34; }
+  .band h3 { font-size: clamp(1.45rem, 7vw, 2rem); }
+  .band ul.checks li { font-size: .92rem; }
+
+  .cta-band h2 { font-size: clamp(1.7rem, 8.5vw, 2.35rem); }
+  .cta-band p { font-size: .92rem; margin: 14px auto 24px; }
+
+  .marquee { padding: 16px 0; }
+  .marquee span { font-size: clamp(1.2rem, 6vw, 1.7rem); gap: 30px; }
+  .marquee__track { gap: 30px; }
+
+  .stat__n { font-size: clamp(2rem, 9vw, 2.7rem); }
+  .stat__l { font-size: .72rem; }
+
+  .svc__name { font-size: 1.05rem; }
+  .svc__price { font-size: 1.4rem; }
+  .price-row__name { font-size: 1rem; }
+  .price-row__price { font-size: 1.4rem; }
+
+  .rating-big { font-size: clamp(3rem, 16vw, 4.2rem); }
+  .rating-stars { font-size: 1.2rem; }
+  .review__text { font-size: .95rem; }
+  .review-track .review { width: 82vw; max-width: 320px; }
+
+  .founder blockquote { font-size: clamp(1.15rem, 5.6vw, 1.55rem); line-height: 1.34; }
+  .founder__badge .n { font-size: 1.25rem; }
+
+  .info-card h3 { font-size: 1.5rem; }
+  .contact-line .val { font-size: 1rem; }
+  .legal h1 { font-size: clamp(1.9rem, 9vw, 2.6rem); }
+  .legal h2 { font-size: 1.15rem; }
+
+  .btn { --pad-y: 13px; --pad-x: 24px; font-size: .86rem; }
+  .footer h4 { font-size: .72rem; }
+}
+
+/* ---------- Small phones ---------- */
+@media (max-width: 420px) {
+  .hero__title { font-size: clamp(1.8rem, 10vw, 2.35rem); }
+  .sec-head h2 { font-size: clamp(1.55rem, 8vw, 2.05rem); }
+  .page-hero h1 { font-size: clamp(1.7rem, 9vw, 2.25rem); }
+  .cta-band h2 { font-size: clamp(1.55rem, 8.5vw, 2.1rem); }
+  .eyebrow { font-size: .6rem; }
+}
+
 /* ---------- Motion preferences ---------- */
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; }
