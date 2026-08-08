@@ -71,6 +71,11 @@
     cut1..cut4.webp  -> galeria „Lucrările noastre".
     work-real.webp   -> secțiunea „Meseria făcută cu cap".
 
+  POZE REALE cu salonul (interior — secțiunea „Salonul nostru"):
+    salon1..salon5.webp  -> pozele reale ale salonului tău, curățate
+        (luminozitate ridicată + claritate mărită la 2K). Fiecare are
+        și o variantă mică pentru telefon: salon1-700.webp ... salon5-700.webp.
+
   POZE „de atmosferă" generate cu AI (mai rămân doar pe fundaluri
   discrete, la 25–35% opacitate, în spatele titlurilor):
     interior.webp, beard.webp, tools.webp, chair.webp
