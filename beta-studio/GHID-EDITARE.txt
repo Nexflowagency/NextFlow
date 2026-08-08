@@ -142,7 +142,8 @@
     fără sunet, pornește singur și se repetă și umple TOT ecranul
     (full-screen), fără dungi negre, pe desktop / telefon / tabletă.
     Clipul original era filmat cu un „steag" de rotație greșit; a fost
-    corectat la orientarea reală (landscape 16:9) și mărit la 1080p.
+    corectat la orientarea reală (landscape 16:9) și mărit la 2K
+    (2560×1440) cu un upscaler AI, pentru claritate maximă.
 
   BUTON MERO: butoanele „Programează pe Mero" duc la
     https://mero.ro/p/mens-cut . Ca să schimbi link-ul, caută
