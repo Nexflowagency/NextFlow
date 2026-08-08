@@ -93,7 +93,7 @@
   }
 
   /* ---------- Parallax / cinematic scrub ---------- */
-  var heroMediaImg = document.querySelector(".hero__media img");
+  var heroMediaImg = document.querySelector(".hero__media video, .hero__media img");
   var heroTitle = document.querySelector(".hero__title");
   var heroSub = document.querySelector(".hero__sub");
   var parallaxEls = Array.prototype.slice.call(document.querySelectorAll("[data-parallax]"));

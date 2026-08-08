@@ -132,5 +132,36 @@
   Schimbă codul de culoare și se actualizează în tot site-ul.
 
 --------------------------------------------------------------------
+9. ACTUALIZĂRI (video hero, Mero, echipă, program)
+--------------------------------------------------------------------
+  VIDEO HERO: hero-ul de pe prima pagină este acum VIDEO cu salonul.
+    Fișiere:  assets/video/hero.webm  +  assets/video/hero.mp4
+    Poster (imaginea până pornește filmul):  assets/img/hero-poster.webp
+    Ca să schimbi clipul: înlocuiește cele 2 fișiere din assets/video/
+    (același nume) și regenerează poster-ul dintr-un cadru. Videoul e
+    fără sunet, pornește singur și se repetă, încadrat 16:9 fără dungi
+    negre pe desktop/telefon/tabletă. (Sursa a fost mărită la 1080p.)
+
+  BUTON MERO: butoanele „Programează pe Mero" duc la
+    https://mero.ro/p/mens-cut . Ca să schimbi link-ul, caută
+    „mero.ro/p/mens-cut" în toate fișierele .html și înlocuiește-l.
+
+  ECHIPA (frizerii): secțiunea „Frizerii B3TA STUDIO" de pe prima
+    pagină. Momentan fiecare frizer are un placeholder cu inițialele
+    („FOTO ÎN CURÂND"). Ca să pui poza reală, în index.html caută
+    numele frizerului (ex. „Justin Simeniuc") și, în blocul lui
+    <div class="barber__photo">, înlocuiește
+       <span class="barber__mono">JS</span>
+       <span class="barber__soon">Foto în curând</span>
+    cu:
+       <img src="assets/img/barber-justin.webp" alt="Justin Simeniuc">
+    (pune poza în assets/img/, format portret 3:4). Sau trimite-mi
+    pozele și le adaug eu.
+
+  PROGRAM: actualizat la Luni–Sâmbătă 09:00–19:00, Duminică închis.
+
+  RECENZII: acum de pe Mero (peste 4666 evaluări, rating 5.0).
+
+--------------------------------------------------------------------
   Creat de NextFlow.ro
 ====================================================================

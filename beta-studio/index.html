@@ -39,8 +39,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/img/hero.webp" imagesrcset="assets/img/hero-1280.webp 1280w, assets/img/hero.webp 2560w" imagesizes="100vw">
-<link rel="stylesheet" href="assets/css/styles.css?v=8">
+<link rel="preload" as="image" href="assets/img/hero-poster.webp">
+<link rel="preload" as="video" href="assets/video/hero.webm" type="video/webm">
+<link rel="stylesheet" href="assets/css/styles.css?v=9">
 
 <script type="application/ld+json">
 {
@@ -67,11 +68,9 @@
   "sameAs": ["https://www.instagram.com/b3ta_studio/"],
   "founder": { "@type": "Person", "name": "Valentin Bertea" },
   "openingHoursSpecification": [
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "06:00", "closes": "22:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "22:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "22:45" }
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "09:00", "closes": "19:00" }
   ],
-  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "17", "bestRating": "5" }
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "4666", "bestRating": "5" }
 }
 </script>
 </head>
@@ -104,7 +103,8 @@
   <a href="recenzii.html">Recenzii</a>
   <a href="contact.html">Contact</a>
   <div class="drawer__foot">
-    <a class="btn btn--primary" href="tel:+40755615358">Sună — 0755 615 358</a>
+    <a class="btn btn--primary" href="https://mero.ro/p/mens-cut" target="_blank" rel="noopener">Programează pe Mero</a>
+    <a class="btn btn--ghost" href="tel:+40755615358">Sună — 0755 615 358</a>
     <a class="btn btn--ghost" href="https://www.instagram.com/b3ta_studio/" target="_blank" rel="noopener">@b3ta_studio</a>
   </div>
 </div>
@@ -114,7 +114,10 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero__media">
-      <img src="assets/img/hero.webp" srcset="assets/img/hero-1280.webp 1280w, assets/img/hero.webp 2560w" sizes="100vw" alt="Interiorul frizeriei B3TA STUDIO din Suceava — scaune de barber, oglinzi și tavan cu bandă LED" fetchpriority="high" decoding="async" width="2560" height="1429">
+      <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="assets/img/hero-poster.webp" width="1600" height="900" aria-label="Interiorul frizeriei B3TA STUDIO din Suceava — tur video">
+        <source src="assets/video/hero.webm" type="video/webm">
+        <source src="assets/video/hero.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="hero__scrim"></div>
     <div class="hero__glow"></div>
@@ -123,13 +126,13 @@
       <h1 class="hero__title">Stilul tău,<br><em>redefinit.</em></h1>
       <p class="hero__sub">Tuns de precizie, fade curat și barbă lucrată la detaliu — într-un studio unde fiecare programare e o experiență, nu o grabă.</p>
       <div class="hero__actions">
-        <a class="btn btn--primary" href="tel:+40755615358">Programează-te acum</a>
-        <a class="btn btn--ghost" href="servicii.html">Vezi serviciile &amp; prețurile</a>
+        <a class="btn btn--primary" href="https://mero.ro/p/mens-cut" target="_blank" rel="noopener">Programează pe Mero</a>
+        <a class="btn btn--ghost" href="tel:+40755615358">Sună — 0755 615 358</a>
       </div>
     </div>
     <div class="scroll-cue">Scroll</div>
     <div class="container"><div class="hero__meta">
-      <span><b class="rate">5.0★</b> · 17 recenzii Google</span>
+      <span><b class="rate">5.0★</b> · 4666 recenzii Mero</span>
       <span><b>Zamca</b> · Strada Narciselor 29</span>
       <span><b>Program</b> · Luni–Sâmbătă</span>
     </div></div>
@@ -227,6 +230,92 @@
     </div>
   </section>
 
+  <!-- TEAM -->
+  <section class="section--tight">
+    <div class="container">
+      <div class="sec-head" data-reveal>
+        <span class="eyebrow">Echipa</span>
+        <h2>Frizerii B3TA STUDIO</h2>
+        <p>Specialiști cu mii de programări și rating aproape perfect pe Mero. Alege-ți frizerul preferat și rezervă direct.</p>
+      </div>
+      <div class="team-grid">
+        <article class="barber" data-reveal>
+          <div class="barber__photo"><span class="barber__fnd">Fondator</span>
+            <span class="barber__mono">VB</span>
+            <span class="barber__soon">Foto în curând</span>
+          </div>
+          <div class="barber__body">
+            <div class="barber__name">Valentin Bertea</div>
+            <div class="barber__role">Specialist</div>
+            <div class="barber__rating">★ 4.99 <span>· 1730 evaluări</span></div>
+            <a class="barber__book" href="https://mero.ro/p/mens-cut" target="_blank" rel="noopener">Programează →</a>
+          </div>
+        </article>
+        <article class="barber" data-reveal>
+          <div class="barber__photo">
+            <span class="barber__mono">JS</span>
+            <span class="barber__soon">Foto în curând</span>
+          </div>
+          <div class="barber__body">
+            <div class="barber__name">Justin Simeniuc</div>
+            <div class="barber__role">Specialist</div>
+            <div class="barber__rating">★ 5.00 <span>· 725 evaluări</span></div>
+            <a class="barber__book" href="https://mero.ro/p/mens-cut" target="_blank" rel="noopener">Programează →</a>
+          </div>
+        </article>
+        <article class="barber" data-reveal>
+          <div class="barber__photo">
+            <span class="barber__mono">LB</span>
+            <span class="barber__soon">Foto în curând</span>
+          </div>
+          <div class="barber__body">
+            <div class="barber__name">Lucian Bardan</div>
+            <div class="barber__role">Specialist</div>
+            <div class="barber__rating">★ 5.00 <span>· 251 evaluări</span></div>
+            <a class="barber__book" href="https://mero.ro/p/mens-cut" target="_blank" rel="noopener">Programează →</a>
+          </div>
+        </article>
+        <article class="barber" data-reveal>
+          <div class="barber__photo">
+            <span class="barber__mono">NZ</span>
+            <span class="barber__soon">Foto în curând</span>
+          </div>
+          <div class="barber__body">
+            <div class="barber__name">Nicu Zamari</div>
+            <div class="barber__role">Specialist</div>
+            <div class="barber__rating">★ 5.00 <span>· 128 evaluări</span></div>
+            <a class="barber__book" href="https://mero.ro/p/mens-cut" target="_blank" rel="noopener">Programează →</a>
+          </div>
+        </article>
+        <article class="barber" data-reveal>
+          <div class="barber__photo">
+            <span class="barber__mono">LR</span>
+            <span class="barber__soon">Foto în curând</span>
+          </div>
+          <div class="barber__body">
+            <div class="barber__name">Lucas Romanet</div>
+            <div class="barber__role">Specialist</div>
+            <div class="barber__rating">★ 5.00 <span>· 139 evaluări</span></div>
+            <a class="barber__book" href="https://mero.ro/p/mens-cut" target="_blank" rel="noopener">Programează →</a>
+          </div>
+        </article>
+        <article class="barber" data-reveal>
+          <div class="barber__photo">
+            <span class="barber__mono">AK</span>
+            <span class="barber__soon">Foto în curând</span>
+          </div>
+          <div class="barber__body">
+            <div class="barber__name">Alex Kudryk</div>
+            <div class="barber__role">Specialist</div>
+            <div class="barber__rating">★ 5.00 <span>· 49 evaluări</span></div>
+            <a class="barber__book" href="https://mero.ro/p/mens-cut" target="_blank" rel="noopener">Programează →</a>
+          </div>
+        </article>
+      </div>
+      <p class="note" data-reveal style="margin-top:26px">Pozele frizerilor se adaugă în curând.</p>
+    </div>
+  </section>
+
   <!-- SERVICES PREVIEW -->
   <section class="section" id="servicii">
     <div class="container">
@@ -291,24 +380,24 @@
         </div>
         <div style="max-width:34ch">
           <span class="eyebrow">Ce spun clienții</span>
-          <p class="lead" style="margin-top:14px">Peste 17 recenzii de 5 stele pe Google. Oameni care revin și recomandă mai departe.</p>
+          <p class="lead" style="margin-top:14px">Peste 4666 de evaluări de 5 stele pe Mero. Oameni care revin și recomandă mai departe.</p>
           <div class="mt-l"><a class="btn btn--ghost" href="recenzii.html">Toate recenziile</a></div>
         </div>
       </div>
       <div class="review-marquee mt-l" data-reveal="fade">
         <div class="review-track">
-          <div class="review"><div class="review__stars">★★★★★</div><p class="review__text">Frizer de nota 10, cuvintele nu prea pot descrie felul său așa că neapărat de încercat.</p><div class="review__who"><div class="review__ava">D</div><div><div class="review__name">David Z.</div><div class="review__src">Google</div></div></div></div>
-          <div class="review"><div class="review__stars">★★★★★</div><p class="review__text">Talent numărul 1, sefu la toți ❤️❤️❤️👑</p><div class="review__who"><div class="review__ava">V</div><div><div class="review__name">Vito C.</div><div class="review__src">Google</div></div></div></div>
-          <div class="review"><div class="review__stars">★★★★★</div><p class="review__text">Super. Bună experiență. Nicu e profesionist 🤝🤝</p><div class="review__who"><div class="review__ava">C</div><div><div class="review__name">Curelet S.</div><div class="review__src">Google</div></div></div></div>
-          <div class="review"><div class="review__stars">★★★★★</div><p class="review__text">Cel mai bun din Suceava.</p><div class="review__who"><div class="review__ava">E</div><div><div class="review__name">Emilia S.</div><div class="review__src">Google</div></div></div></div>
-          <div class="review"><div class="review__stars">★★★★★</div><p class="review__text">Profesionist și atent la detalii, excelent!</p><div class="review__who"><div class="review__ava">P</div><div><div class="review__name">Prisacariu N.</div><div class="review__src">Google</div></div></div></div>
-          <div class="review"><div class="review__stars">★★★★★</div><p class="review__text">Foarte bun și profesionist 🙌👍👏</p><div class="review__who"><div class="review__ava">I</div><div><div class="review__name">Ionuț B.</div><div class="review__src">Google</div></div></div></div>
-          <div class="review" aria-hidden="true"><div class="review__stars">★★★★★</div><p class="review__text">Frizer de nota 10, cuvintele nu prea pot descrie felul său așa că neapărat de încercat.</p><div class="review__who"><div class="review__ava">D</div><div><div class="review__name">David Z.</div><div class="review__src">Google</div></div></div></div>
-          <div class="review" aria-hidden="true"><div class="review__stars">★★★★★</div><p class="review__text">Talent numărul 1, sefu la toți ❤️❤️❤️👑</p><div class="review__who"><div class="review__ava">V</div><div><div class="review__name">Vito C.</div><div class="review__src">Google</div></div></div></div>
-          <div class="review" aria-hidden="true"><div class="review__stars">★★★★★</div><p class="review__text">Super. Bună experiență. Nicu e profesionist 🤝🤝</p><div class="review__who"><div class="review__ava">C</div><div><div class="review__name">Curelet S.</div><div class="review__src">Google</div></div></div></div>
-          <div class="review" aria-hidden="true"><div class="review__stars">★★★★★</div><p class="review__text">Cel mai bun din Suceava.</p><div class="review__who"><div class="review__ava">E</div><div><div class="review__name">Emilia S.</div><div class="review__src">Google</div></div></div></div>
-          <div class="review" aria-hidden="true"><div class="review__stars">★★★★★</div><p class="review__text">Profesionist și atent la detalii, excelent!</p><div class="review__who"><div class="review__ava">P</div><div><div class="review__name">Prisacariu N.</div><div class="review__src">Google</div></div></div></div>
-          <div class="review" aria-hidden="true"><div class="review__stars">★★★★★</div><p class="review__text">Foarte bun și profesionist 🙌👍👏</p><div class="review__who"><div class="review__ava">I</div><div><div class="review__name">Ionuț B.</div><div class="review__src">Google</div></div></div></div>
+          <div class="review"><div class="review__stars">★★★★★</div><p class="review__text">Foarte bun, foarte atent la detalii, recomand 100%!!</p><div class="review__who"><div class="review__ava">I</div><div><div class="review__name">Iustin R.</div><div class="review__src">Mero</div></div></div></div>
+          <div class="review"><div class="review__stars">★★★★★</div><p class="review__text">Frizer de nota 10, cuvintele nu prea pot descrie felul său așa că neapărat de încercat.</p><div class="review__who"><div class="review__ava">D</div><div><div class="review__name">David Z.</div><div class="review__src">Mero</div></div></div></div>
+          <div class="review"><div class="review__stars">★★★★★</div><p class="review__text">Talent numărul 1, sefu la toți ❤️👑</p><div class="review__who"><div class="review__ava">V</div><div><div class="review__name">Vito C.</div><div class="review__src">Mero</div></div></div></div>
+          <div class="review"><div class="review__stars">★★★★★</div><p class="review__text">Mereu plec mulțumit de la el! Mereu cu idei fresh. Recomand 🌟</p><div class="review__who"><div class="review__ava">M</div><div><div class="review__name">Mîndrescu C.</div><div class="review__src">Mero</div></div></div></div>
+          <div class="review"><div class="review__stars">★★★★★</div><p class="review__text">Super. Bună experiență. Nicu e profesionist 🤝</p><div class="review__who"><div class="review__ava">C</div><div><div class="review__name">Curelet S.</div><div class="review__src">Mero</div></div></div></div>
+          <div class="review"><div class="review__stars">★★★★★</div><p class="review__text">Profesionist și atent la detalii, excelent!</p><div class="review__who"><div class="review__ava">P</div><div><div class="review__name">Prisacariu N.</div><div class="review__src">Mero</div></div></div></div>
+          <div class="review" aria-hidden="true"><div class="review__stars">★★★★★</div><p class="review__text">Foarte bun, foarte atent la detalii, recomand 100%!!</p><div class="review__who"><div class="review__ava">I</div><div><div class="review__name">Iustin R.</div><div class="review__src">Mero</div></div></div></div>
+          <div class="review" aria-hidden="true"><div class="review__stars">★★★★★</div><p class="review__text">Frizer de nota 10, cuvintele nu prea pot descrie felul său așa că neapărat de încercat.</p><div class="review__who"><div class="review__ava">D</div><div><div class="review__name">David Z.</div><div class="review__src">Mero</div></div></div></div>
+          <div class="review" aria-hidden="true"><div class="review__stars">★★★★★</div><p class="review__text">Talent numărul 1, sefu la toți ❤️👑</p><div class="review__who"><div class="review__ava">V</div><div><div class="review__name">Vito C.</div><div class="review__src">Mero</div></div></div></div>
+          <div class="review" aria-hidden="true"><div class="review__stars">★★★★★</div><p class="review__text">Mereu plec mulțumit de la el! Mereu cu idei fresh. Recomand 🌟</p><div class="review__who"><div class="review__ava">M</div><div><div class="review__name">Mîndrescu C.</div><div class="review__src">Mero</div></div></div></div>
+          <div class="review" aria-hidden="true"><div class="review__stars">★★★★★</div><p class="review__text">Super. Bună experiență. Nicu e profesionist 🤝</p><div class="review__who"><div class="review__ava">C</div><div><div class="review__name">Curelet S.</div><div class="review__src">Mero</div></div></div></div>
+          <div class="review" aria-hidden="true"><div class="review__stars">★★★★★</div><p class="review__text">Profesionist și atent la detalii, excelent!</p><div class="review__who"><div class="review__ava">P</div><div><div class="review__name">Prisacariu N.</div><div class="review__src">Mero</div></div></div></div>
         </div>
       </div>
     </div>
@@ -325,12 +414,12 @@
         <div class="info-card" data-reveal>
           <h3>Program</h3>
           <div class="hours">
-            <div class="hours__row" data-day="1"><span class="hours__d">Luni</span><span class="hours__t">06:00 – 22:00</span></div>
-            <div class="hours__row" data-day="2"><span class="hours__d">Marți</span><span class="hours__t">08:00 – 22:00</span></div>
-            <div class="hours__row" data-day="3"><span class="hours__d">Miercuri</span><span class="hours__t">08:00 – 22:00</span></div>
-            <div class="hours__row" data-day="4"><span class="hours__d">Joi</span><span class="hours__t">08:00 – 22:00</span></div>
-            <div class="hours__row" data-day="5"><span class="hours__d">Vineri</span><span class="hours__t">08:00 – 22:00</span></div>
-            <div class="hours__row" data-day="6"><span class="hours__d">Sâmbătă</span><span class="hours__t">08:00 – 22:45</span></div>
+            <div class="hours__row" data-day="1"><span class="hours__d">Luni</span><span class="hours__t">09:00 – 19:00</span></div>
+            <div class="hours__row" data-day="2"><span class="hours__d">Marți</span><span class="hours__t">09:00 – 19:00</span></div>
+            <div class="hours__row" data-day="3"><span class="hours__d">Miercuri</span><span class="hours__t">09:00 – 19:00</span></div>
+            <div class="hours__row" data-day="4"><span class="hours__d">Joi</span><span class="hours__t">09:00 – 19:00</span></div>
+            <div class="hours__row" data-day="5"><span class="hours__d">Vineri</span><span class="hours__t">09:00 – 19:00</span></div>
+            <div class="hours__row" data-day="6"><span class="hours__d">Sâmbătă</span><span class="hours__t">09:00 – 19:00</span></div>
             <div class="hours__row" data-day="0"><span class="hours__d">Duminică</span><span class="hours__t closed">Închis</span></div>
           </div>
         </div>
@@ -350,7 +439,7 @@
               <div><div class="lbl">Instagram</div><a class="val" href="https://www.instagram.com/b3ta_studio/" target="_blank" rel="noopener">@b3ta_studio</a></div>
             </div>
           </div>
-          <div class="mt-l"><a class="btn btn--primary" href="tel:+40755615358">Programează-te</a></div>
+          <div class="mt-l"><a class="btn btn--primary" href="https://mero.ro/p/mens-cut" target="_blank" rel="noopener">Programează pe Mero</a></div>
         </div>
       </div>
       <div class="map-wrap mt-l" data-reveal>
@@ -368,8 +457,8 @@
         <h2>Rezervă-ți locul<br>la BETA STUDIO</h2>
         <p>Sună-ne sau scrie-ne pe Instagram. Îți găsim ora potrivită și restul îl lăsăm pe mâna noastră.</p>
         <div class="hero__actions">
-          <a class="btn btn--primary" href="tel:+40755615358">Sună — 0755 615 358</a>
-          <a class="btn btn--ghost" href="https://www.instagram.com/b3ta_studio/" target="_blank" rel="noopener">Scrie pe Instagram</a>
+          <a class="btn btn--primary" href="https://mero.ro/p/mens-cut" target="_blank" rel="noopener">Programează pe Mero</a>
+          <a class="btn btn--ghost" href="tel:+40755615358">Sună — 0755 615 358</a>
         </div>
       </div>
     </div>
@@ -412,7 +501,7 @@
         <div class="footer__links">
           <a href="tel:+40755615358">0755 615 358</a>
           <a href="contact.html">Strada Narciselor 29, Zamca, Suceava</a>
-          <span style="color:var(--muted);font-size:.92rem">Luni 06–22 · Marți–Vineri 08–22<br>Sâmbătă 08–22:45 · Duminică închis</span>
+          <span style="color:var(--muted);font-size:.92rem">Luni–Sâmbătă 09:00–19:00<br>Duminică închis</span>
         </div>
       </div>
     </div>
@@ -424,6 +513,6 @@
 </footer>
 
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/js/main.js?v=3"></script>
+<script src="assets/js/main.js?v=4"></script>
 </body>
 </html>
