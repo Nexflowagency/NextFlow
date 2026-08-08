@@ -139,8 +139,10 @@
     Poster (imaginea până pornește filmul):  assets/img/hero-poster.webp
     Ca să schimbi clipul: înlocuiește cele 2 fișiere din assets/video/
     (același nume) și regenerează poster-ul dintr-un cadru. Videoul e
-    fără sunet, pornește singur și se repetă, încadrat 16:9 fără dungi
-    negre pe desktop/telefon/tabletă. (Sursa a fost mărită la 1080p.)
+    fără sunet, pornește singur și se repetă și umple TOT ecranul
+    (full-screen), fără dungi negre, pe desktop / telefon / tabletă.
+    Clipul original era filmat cu un „steag" de rotație greșit; a fost
+    corectat la orientarea reală (landscape 16:9) și mărit la 1080p.
 
   BUTON MERO: butoanele „Programează pe Mero" duc la
     https://mero.ro/p/mens-cut . Ca să schimbi link-ul, caută

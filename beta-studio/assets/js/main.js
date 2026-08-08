@@ -105,7 +105,7 @@
     var y = onScrollY();
 
     // Hero: image scales & drifts up, text drifts up + fades (cinematic push).
-    // Desktop only — on phone/tablet the hero is stacked and the image shows full.
+    // Desktop only — on phone/tablet the video is full-screen cover (static, no parallax).
     if (heroMediaImg) {
       if (window.innerWidth > 1024) {
         var p = Math.min(y / (vh * 0.9), 1);
