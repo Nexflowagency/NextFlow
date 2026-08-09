@@ -141,18 +141,19 @@
   Schimbă codul de culoare și se actualizează în tot site-ul.
 
 --------------------------------------------------------------------
-9. ACTUALIZĂRI (video hero, Mero, echipă, program)
+9. ACTUALIZĂRI (imagine hero, Mero, echipă, program)
 --------------------------------------------------------------------
-  VIDEO HERO: hero-ul de pe prima pagină este acum VIDEO cu salonul.
-    Fișiere:  assets/video/hero.webm  +  assets/video/hero.mp4
-    Poster (imaginea până pornește filmul):  assets/img/hero-poster.webp
-    Ca să schimbi clipul: înlocuiește cele 2 fișiere din assets/video/
-    (același nume) și regenerează poster-ul dintr-un cadru. Videoul e
-    fără sunet, pornește singur și se repetă și umple TOT ecranul
-    (full-screen), fără dungi negre, pe desktop / telefon / tabletă.
-    Clipul original era filmat cu un „steag" de rotație greșit; a fost
-    corectat la orientarea reală (landscape 16:9) și mărit la 2K
-    (2560×1440) cu un upscaler AI, pentru claritate maximă.
+  IMAGINE HERO: hero-ul de pe prima pagină este acum o POZĂ cu salonul
+    (un cadru extras din videoul salonului, mărit la 4K cu un upscaler
+    AI pentru claritate maximă).
+    Fișiere:  assets/img/hero.webp (mare, 2400px)
+              assets/img/hero-1600.webp  +  assets/img/hero-1280.webp
+              (variante mai mici, pentru încărcare rapidă pe telefon).
+    Ca să schimbi imaginea: înlocuiește aceste 3 fișiere (același nume,
+    format peisaj 16:9) și crește numărul din „?v=3" în index.html
+    (caută „hero.webp?v=") ca browserul să încarce varianta nouă.
+    Pe telefon/tabletă imaginea se vede COMPLETĂ (întreg cadrul 16:9,
+    fără să se taie nimic, fără dungi negre); pe desktop e pe tot ecranul.
 
   BUTON MERO: butoanele „Programează pe Mero" duc la
     https://mero.ro/p/mens-cut . Ca să schimbi link-ul, caută
