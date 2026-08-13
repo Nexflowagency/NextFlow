@@ -1,0 +1,1055 @@
+{
+  "name": "Automatizare Google Maps — NextFlow (al meu)",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "# Login BOT Telegram\n## **Primul pas** \nIntrii pe [BotFather](https://t.me/BotFather), tastezi /newbot, completezi datele care le cere botul pentru a iti creea botul. \n## **Al doilea pas** \nIei Token-ul de logare de la bot (ex: 1234567890:QWERTYUIOASDFGHJKZXCVBNM)\n## **Al treilea pas** \nIn node-ul \"connect bot\", iar la sectiunea \"Credential to connect with\" apesi pe \"Create new credential\" si introduci Token-ul de logare al botului.",
+        "height": 320,
+        "width": 504,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2304,
+        96
+      ],
+      "id": "77934c00-1397-4866-9afe-c302c812a15d",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# Apify (Search Maps)\n## **Primul Pas**\nIntrii pe [Apify - Google Maps Scraper](https://apify.com/compass/crawler-google-places) apesi pe \"Try for free\".\nIti faci cont pe Apify.\n## **Al doilea pas** \nMergi in partea dreapta sus si apesi pe \"API\", selectezi \"API Clients\", iar pe noul tab apesi pe \"Manage Tokens\".\nLa sectiunea \"Personal API tokens\" copiezi tokenul\n## **Al treilea pas**\nMergi pe Node-ul apiKEYs si pui API Key-ul la apiKEY_apify.",
+        "height": 324,
+        "width": 504,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2304,
+        432
+      ],
+      "id": "48a31bb4-32ac-47b2-a497-3b1cfaab3da0",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "# Login Google Sheets\n\n## Primul pas\n\n1. Intri pe [Baza de date - Download](https://docs.google.com/spreadsheets/d/1WPNq8v1g8HOoFyFzOTzMnGTSYzNiSRsTk7NGdyA_5hg), mergi la File si selectezi \"Make a copy\".\n2. Te conectezi cu contul Google pe care ai incarcat baza de date.\n3. Deschizi fiecare node de tip Google Sheets din workflow (update1, update2) si selectezi:\n• Document: From List : {numeleBazeiDeDate}. \n• Sheet: From list: Foaie1.\n• Refresh Column List",
+        "height": 320,
+        "width": 504,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2304,
+        768
+      ],
+      "id": "6b2bc6ae-ffe9-46c6-90e7-674a9be50bc4",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "# OPENAI\n\n## Primul pas\n1. Intrii pe [OpenAI](https://platform.openai.com/login)\n2. Intrii pe [OpenAI - Billing](https://platform.openai.com/settings/organization/billing/overview)\n3. Alimentezi contul cu minim $5.\n4. Intrii pe [OpenAI - Organization](https://platform.openai.com/settings/organization/general)\n5. Faci verificarea cu buletinul si cu fata, trebuie sa fii major.\n6. Dupa ce ai facut verificarea, mergi in partea din stanga jos apesi pe “API Keys”\n7. Dai click pe “Create new secret key”. Name: orice nume; Dai click pe “Create secret key”.\n8. Copiezi key-ul generat (ex: sk-proj-qwerty1234….)\n\n## Al doilea pas\n1. Mergi la node-ul “OPENAI\" \n2. Selectezi acelasi cont pe care l-ai creeat pentru node-ul \"transcribeAudio\"",
+        "height": 464,
+        "width": 500
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2304,
+        1104
+      ],
+      "id": "36576f3a-7b02-4414-b3f2-68bbc80bc211",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "content": "# ChatGPT Voice Transcribe\n\n## Primul pas\n1. Intrii pe [OpenAI](https://platform.openai.com/login)\n2. Intrii pe [OpenAI - Billing](https://platform.openai.com/settings/organization/billing/overview)\n3. Alimentezi contul cu minim $5.\n4. Intrii pe [OpenAI - Organization](https://platform.openai.com/settings/organization/general)\n5. Faci verificarea cu buletinul si cu fata, trebuie sa fii major.\n6. Dupa ce ai facut verificarea, mergi in partea din stanga jos apesi pe “API Keys”\n7. Dai click pe “Create new secret key”. Name: orice nume; Dai click pe “Create secret key”.\n8. Copiezi key-ul generat (ex: sk-proj-qwerty1234….)\n\n## Al doilea pas\n1. Mergi in node-ul “transcribeAudio”\n2. La sectiunea “Credential to connect with” dai click pe “+ Create new credential”\n3. Adaugi sus contul de OpenAI, apesi pe \"+ Create new credential\" si dai paste la Key-ul copiat.",
+        "height": 696,
+        "width": 276,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1792,
+        96
+      ],
+      "id": "8d70b0bd-7fea-4925-8434-1c4112455f13",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Telegram Trigger1').item.json.message.text ?? $('transcribeAudio1').item.json.text }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=SYSTEM PROMPT — EXTRACTOR LEAD GEN STRICT (NUMAI businessType, location, numberOfPlaces)\nRol:\nEști un AI specializat în parsing-ul și extragerea automată a datelor pentru lead generation din mesaje text sau vocale. Primești un text (scris sau transcris) și trebuie să identifici și să extragi precis:\n\nbusinessType: tipul de afacere/loc menționat (ex: restaurant, club, clinica medicala, cabinet stomatologic, hotel, sală de fitness etc). Normalizezi termenii populari sau vagi la standardul domeniului.\n\nDacă este din afara României, traduci în limba locală uzuală pentru businessType (ex: „cabinet stomatologic” ⇒ „dental office” pentru UK/US/English, „cabinet dentaire” pentru Franța, etc).\n\nlocation: orașul sau zona (normalizezi la forma locală, ex: “Londra” ⇒ “London”).\n\nnumberOfPlaces: numărul maxim de rezultate cerut. Dacă lipsește, pui automat “20”.\n\nNu returna niciodată explicații, titluri, context, alt text sau câmpuri suplimentare. Outputul tău este EXCLUSIV un obiect JSON, cu acele 3 câmpuri, nimic altceva.\n\nEXEMPLU INPUT/OUTPUT:\n\ninput:\nda-mi o clinica medicala din bucuresti\noutput:\n{\n  \"businessType\": \"clinica medicala\",\n  \"location\": \"bucuresti\",\n  \"numberOfPlaces\": \"1\"\n}\n\ninput:\nda-mi 25 de cluburi din brasov\noutput:\n{\n  \"businessType\": \"club\",\n  \"location\": \"brasov\",\n  \"numberOfPlaces\": \"25\"\n}\n\ninput:\nda-mi 25 de cabinete de stomatologie din londra\noutput:\n{\n  \"businessType\": \"dental office\",\n  \"location\": \"London\",\n  \"numberOfPlaces\": \"25\"\n}\n\ninput:\nvreau 8 restaurante din barcelona\noutput:\n{\n  \"businessType\": \"restaurant\",\n  \"location\": \"Barcelona\",\n  \"numberOfPlaces\": \"8\"\n}\n\ninput:\nvreau clinici din Iași\noutput:\n{\n  \"businessType\": \"clinica medicala\",\n  \"location\": \"Iași\",\n  \"numberOfPlaces\": \"20\"\n}\n\ninput:\nda-mi 10 dental offices in Berlin\noutput:\n{\n  \"businessType\": \"dental office\",\n  \"location\": \"Berlin\",\n  \"numberOfPlaces\": \"10\"\n}\n\ninput:\nda-mi un hotel in Viena\noutput:\n{\n  \"businessType\": \"hotel\",\n  \"location\": \"Viena\",\n  \"numberOfPlaces\": \"1\"\n}\nNU returna niciodată altceva decât obiectul JSON cu exact aceste câmpuri și format, completat corect.\n\nEND OF SYSTEM PROMPT"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -336,
+        208
+      ],
+      "id": "8f281290-7e15-46e7-aaf6-722cff695955",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"businessType\": \"...\",\n  \"location\": \"...\",\n  \"numberOfPlaces\": \"...\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -176,
+        400
+      ],
+      "id": "3134221c-75cd-4b28-9b01-318e71e82d55",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.voice.file_id }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notExists",
+                      "singleValue": true
+                    },
+                    "id": "5f6bad42-3e45-476e-a5eb-5c847aaf03d7"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "text"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "23ecd4ba-0b0b-427f-8c93-a0919ea9ab06",
+                    "leftValue": "={{ $json.message.voice.file_id }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "voice"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -880,
+        224
+      ],
+      "id": "5f38ae2b-2087-42a4-aa44-677b86936d0a",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  let url = item.json.website || \"\";\n  let m = url.match(/^(https?:\\/\\/[^\\/?#]+)/i);\n  let root = m ? m[1] : \"\";\n  return { json: { ...item.json, rootUrl: root } };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        208
+      ],
+      "id": "c661abd4-fc1c-47c4-b392-0875231a6f6c",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1376,
+        208
+      ],
+      "id": "f1f01b20-5215-4a65-af8f-af37b0e7d757",
+      "name": "Telegram Trigger1",
+      "webhookId": "a75cd766-52ba-4458-ad76-a30c510f5c39",
+      "credentials": {
+        "telegramApi": {
+          "id": "NNJ9vIiqtvojXiG3",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.apify.com/v2/acts/compass~google-maps-extractor/run-sync-get-dataset-items?token={{ $('apiKEYs1').item.json.apiKEY_apify }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"includeWebResults\": false,\n  \"locationQuery\": \"{{ $json.output.location }}\",\n  \"maxCrawledPlacesPerSearch\": {{ $json.output.numberOfPlaces }},\n  \"maxQuestions\": 0,\n  \"scrapeDirectories\": false,\n  \"scrapePlaceDetailPage\": false,\n  \"scrapeTableReservationProvider\": false,\n  \"searchMatching\": \"all\",\n  \"searchStringsArray\": [\n    \"{{ $json.output.businessType }}\"\n  ],\n  \"skipClosedPlaces\": true,\n  \"website\": \"withWebsite\",\n  \"language\": \"en\",\n  \"placeMinimumStars\": \"\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        192,
+        48
+      ],
+      "id": "ec402e08-d762-45fe-b98e-1a8a48a5ae88",
+      "name": "GOOGLE MAPS SEARCH2",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 2000,
+      "alwaysOutputData": false,
+      "executeOnce": false,
+      "onError": "stopWorkflow"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.message.from.id }}",
+        "text": "Imediat iti voi trimite lead-urile cerute.",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -704,
+        64
+      ],
+      "id": "7cea126e-f8e9-4110-8131-5d3940184029",
+      "name": "feedback",
+      "webhookId": "bf88785d-8394-4688-a9dc-a62e7ace0f5e",
+      "credentials": {
+        "telegramApi": {
+          "id": "NNJ9vIiqtvojXiG3",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a8881574-db1b-4387-85cd-a6268bb557d9",
+              "name": "apiKEY_apify",
+              "value": "={{ $env.APIFY_API_TOKEN }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1216,
+        400
+      ],
+      "id": "4a518db7-1b95-4cc0-a7c1-069d870d448d",
+      "name": "apiKEYs1"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -1088,
+        224
+      ],
+      "id": "fb804faa-fe3a-4986-afc5-2014fa79ff09",
+      "name": "merge"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $('Telegram Trigger1').item.json.message.voice.file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -704,
+        384
+      ],
+      "id": "5c2bf631-94a2-4af3-9424-88a1bc056a33",
+      "name": "downloadAudio1",
+      "webhookId": "47d48b6e-235b-4583-8106-bc619861f059",
+      "credentials": {
+        "telegramApi": {
+          "id": "NNJ9vIiqtvojXiG3",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -544,
+        384
+      ],
+      "id": "13352f5a-8928-4819-8d53-afa2ce6d5190",
+      "name": "transcribeAudio1",
+      "credentials": {
+        "openAiApi": {
+          "id": "Vy4ssJTmeRtkhscD",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger1').item.json.message.from.id }}",
+        "text": "Nu am inteles ce ai vrut sa spui!",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        176,
+        288
+      ],
+      "id": "dd999dba-7ee3-46a0-b995-b1d1c1099dc6",
+      "name": "feedback4",
+      "webhookId": "c9e5f5b0-495f-47de-9b5b-434e545b7ccb",
+      "credentials": {
+        "telegramApi": {
+          "id": "NNJ9vIiqtvojXiG3",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        560,
+        208
+      ],
+      "id": "ed7ad5c4-d2b1-48e4-b01e-91a28d40b8e7",
+      "name": "merge3"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5cc0eab7-b695-4689-879f-d04f0a4c8218",
+              "leftValue": "={{ $json.output.businessType }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "8ed28fd3-1551-4247-928b-94aed370aa30",
+              "leftValue": "={{ $json.output.location }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "a1cad207-14a4-4307-a718-bd4fe8e44a19",
+              "leftValue": "={{ $json.output.numberOfPlaces }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        208
+      ],
+      "id": "3d0e05c3-1fed-4891-9a1e-ba4fd548f7a0",
+      "name": "ifMessageOk1"
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n\n# API KEYS",
+        "height": 220,
+        "width": 200,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1264,
+        384
+      ],
+      "id": "55c4362a-afae-4a9e-8086-a0db0702de0d",
+      "name": "Sticky Note17"
+    },
+    {
+      "parameters": {
+        "content": "# GOOGLE SHEETS\n",
+        "height": 280,
+        "width": 180,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        688,
+        112
+      ],
+      "id": "6b97f5e0-a230-4d23-8fb7-56a90bfa2adb",
+      "name": "Sticky Note18"
+    },
+    {
+      "parameters": {
+        "content": "# Cauta\n# locatiile\n# cerute\n",
+        "height": 180,
+        "width": 340,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "2d26bb50-de9f-4e4d-9783-a8278180a66c",
+      "name": "Sticky Note19"
+    },
+    {
+      "parameters": {
+        "content": "# Traduce vocalul",
+        "height": 180,
+        "width": 320,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        144
+      ],
+      "id": "da56b574-9c7e-4d69-95bd-97b701afddb5",
+      "name": "Sticky Note20"
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n# OPENAI",
+        "height": 200,
+        "width": 340,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        384
+      ],
+      "id": "2e75ee52-5d3a-4898-b11b-1897ebedff55",
+      "name": "Sticky Note23"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.360messenger.com/v2/sendMessage",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.MESSENGER_360_TOKEN }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "phonenumber",
+              "value": "={{ $json.NUMAR }}"
+            },
+            {
+              "name": "text",
+              "value": "=Bună ziua,\n\nMulte clinici stomatologice pierd programări din cauza lipsei confirmărilor și reminderelor automate.\n\nAm implementat un sistem care reduce neprezentările și menține programul complet, fără efort suplimentar pentru recepție.\n\nDacă este de interes, pot explica pe scurt cum funcționează."
+            }
+          ]
+        },
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1408,
+        240
+      ],
+      "id": "cd4b2b10-bb51-4f4f-a44d-00dcabef5045",
+      "name": "sendConf2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1168,
+        224
+      ],
+      "id": "968a3bf3-c4a1-42fc-8d47-6f7fbe6a0c03",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "amount": 60,
+        "unit": "seconds"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1616,
+        240
+      ],
+      "id": "d3aedae8-5486-4eda-b6a0-3c5c45b39a58",
+      "name": "Wait",
+      "webhookId": "cb5cbd53-0575-487b-967c-47eeca1c5ac3"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger1').item.json.message.from.id }}",
+        "text": "Mesajele au fost trimise!",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1408,
+        64
+      ],
+      "id": "763ba1fe-311d-4151-8a90-90f5045840a9",
+      "name": "feedback5",
+      "webhookId": "c9e5f5b0-495f-47de-9b5b-434e545b7ccb",
+      "executeOnce": true,
+      "credentials": {
+        "telegramApi": {
+          "id": "NNJ9vIiqtvojXiG3",
+          "name": "Telegram account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "feacac4b-0447-45c4-90a6-6e960fb91ff0",
+              "leftValue": "={{ $json.NUMAR }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        928,
+        208
+      ],
+      "id": "566cdaca-370d-4f7a-af02-35596bc5f669",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "content": "# 360Messenger (WhatsApp API)\n## **Primul Pas**\nIntrii pe [360Messenger](https://360messenger.com/en/), apesi pe \"Register\" si iti faci cont cu numarul tau de WhatsApp.\n## **Al doilea pas**\nDupa ce ti-ai facut contul, activezi un abonament din meniul \"Buy Service\" (poti incepe cu Trial-ul gratuit de 7 zile).\n## **Al treilea pas**\nMergi la meniul \"Management of Services\" si apesi pe \"Connect to WhatsApp\". Conectezi numarul tau de WhatsApp la serviciu.\n## **Al patrulea pas**\nMergi la \"Web Service Information\" si copiezi API Key-ul.\n## **Al cincilea pas**\nMergi pe Node-ul de 360Messenger din workflow, la sectiunea \"Credential to connect with\" apesi pe \"Create new credential\" si introduci API Key-ul copiat.",
+        "height": 768,
+        "width": 280,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1792,
+        800
+      ],
+      "id": "85ca0bfe-7f1c-439c-be8b-1e067eb6e815",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1pnc9Zx2FDmOOk--KYHH35-Mh3trDWk-JK5KjbTYypi8",
+          "mode": "list",
+          "cachedResultName": "Leads NextFlow — Google Maps",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pnc9Zx2FDmOOk--KYHH35-Mh3trDWk-JK5KjbTYypi8/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Untitled",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "NUME": "={{ $json.title }}",
+            "TIP BUSINESS": "={{ $('AI Agent').item.json.output.businessType }}",
+            "ADRESA": "={{ $json.address }}",
+            "NUMAR": "={{ $json.phoneUnformatted }}",
+            "ORAS": "={{ $json.city }}",
+            "WEBSITE": "={{ $json.rootUrl }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "NUME",
+              "displayName": "NUME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TIP BUSINESS",
+              "displayName": "TIP BUSINESS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ADRESA",
+              "displayName": "ADRESA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "NUMAR",
+              "displayName": "NUMAR",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ORAS",
+              "displayName": "ORAS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "WEBSITE",
+              "displayName": "WEBSITE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        736,
+        208
+      ],
+      "id": "2580d9e0-56e7-4aeb-90c6-7730e3fc85bb",
+      "name": "update1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EeDfi5zTegAZnHEs",
+          "name": "Google Sheets account"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -352,
+        432
+      ],
+      "id": "e23e92ae-20b4-425b-8fa4-0aedc6068a6d",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "Vy4ssJTmeRtkhscD",
+          "name": "OpenAI account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "ifMessageOk1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "feedback",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "downloadAudio1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "feedback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "merge3",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger1": {
+      "main": [
+        [
+          {
+            "node": "merge",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "apiKEYs1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GOOGLE MAPS SEARCH2": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "merge3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "apiKEYs1": {
+      "main": [
+        [
+          {
+            "node": "merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "merge": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "downloadAudio1": {
+      "main": [
+        [
+          {
+            "node": "transcribeAudio1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transcribeAudio1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "merge3": {
+      "main": [
+        [
+          {
+            "node": "update1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ifMessageOk1": {
+      "main": [
+        [
+          {
+            "node": "GOOGLE MAPS SEARCH2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "feedback4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "feedback5",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "sendConf2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "sendConf2": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "pinData": {}
+}
