@@ -24,7 +24,9 @@ Rezultatul se salvează lângă sursă, ca `cadru-coperta.jpg`.
 | `--ghost` | Cuvânt repetat estompat în fundal, ex. `--ghost AI` |
 | `--eyebrow` | Etichetă mică verde deasupra titlului, ex. `--eyebrow "automatizare"` |
 | `--focus` | Decupajul pe verticală: `0` = păstrează sus, `1` = păstrează jos (implicit `0.35`) |
-| `--tone` | Cât de tare intră duotone-ul: `0` = poza originală, `1` = complet (implicit `0.76`) |
+| `--tone` | Cât de tare intră gradarea: `0` = poza originală, `1` = complet (implicit `0.76`) |
+| `--stil` | `viu` (implicit) sau `duotone` — vezi mai jos |
+| `--glow` | Lumina verde din colț: `0` = deloc, `1` = puternic (implicit `0.6`, doar pe stilul `viu`) |
 | `--layout` | `jos` (implicit) sau `sus` — pe ce margine stă titlul |
 | `--scale` | Multiplică formatul peste 1080×1920. `--scale 2` dă 2160×3840, cu aceeași așezare |
 
@@ -34,6 +36,22 @@ rămâi pe `jos`.
 
 Mărimea titlului se calculează singură cât să încapă pe lățime, deci un text
 lung iese pur și simplu mai mic. Diacriticele merg.
+
+### Cele două stiluri de culoare
+
+**`viu`** (implicit) — gradare de film. Culorile reale ale cadrului rămân:
+pielea rămâne piele, lemnul rămâne lemn. Verdele brandului intră doar în umbre
+și ca lumină difuză într-un colț, iar saturația și contrastul cresc. Ăsta e
+stilul de folosit implicit, mai ales pe testimoniale, unde un om colorat
+nenatural taie din credibilitate.
+
+**`duotone`** — stil grafic, plat: toată imaginea se mapează pe o rampă
+negru → verde → alb. Arată decis și foarte „de brand", dar stinge culorile și
+poate ieși trist pe cadre luminoase. Merită doar când vrei un contrast puternic
+cu restul feed-ului.
+
+Dacă o copertă iese ștearsă, urcă `--tone` (mai multă saturație și contrast)
+sau `--glow`. Dacă iese prea verde, coboară-le.
 
 ### Ce cadru să-i dai
 

@@ -3,8 +3,8 @@
 Generator de coperte pentru reel-urile Nextflow.ai.
 
 Ia un cadru din clip și scoate o copertă 1080×1920 gata de urcat pe Instagram:
-gradare duotone pe culorile agenției, întunecare graduală în jos și câteva
-cuvinte mari peste. Fără AI — doar editare pe imaginea reală.
+gradare pe culorile agenției, întunecare graduală în jos și câteva cuvinte mari
+peste. Fără AI — doar editare pe imaginea reală.
 
 Exemple
 -------
@@ -24,7 +24,8 @@ import sys
 from pathlib import Path
 
 try:
-    from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont, ImageOps
+    from PIL import (Image, ImageChops, ImageDraw, ImageEnhance, ImageFilter,
+                     ImageFont, ImageOps)
 except ImportError:
     sys.exit('Lipsește Pillow. Instalează-l cu:  pip install pillow')
 
@@ -87,7 +88,8 @@ def vertical_gradient(w: int, h: int, stops: list[tuple[float, int]]) -> Image.I
 
 
 def duotone(photo, shadow, mid, highlight, strength: float):
-    """Mapează luminanța pe o rampă de trei culori, apoi amestecă cu originalul."""
+    """Mapează luminanța pe o rampă de trei culori, apoi amestecă cu originalul.
+    Stil grafic, plat — culorile reale se pierd aproape complet."""
     gray = ImageOps.autocontrast(photo.convert('L'), cutoff=1)
 
     channels = []
@@ -104,8 +106,48 @@ def duotone(photo, shadow, mid, highlight, strength: float):
     return Image.blend(photo, Image.merge('RGB', channels), strength)
 
 
+def split_tone(photo, strength: float, glow: float = 0.6):
+    """Gradare de film: culorile reale rămân, verdele intră doar în umbre,
+    luminile se încălzesc ușor. Pielea rămâne piele, imaginea rămâne vie."""
+    # Saturație și contrast în plus — antidotul pentru „palid".
+    photo = ImageEnhance.Color(photo).enhance(1 + 0.30 * strength)
+    photo = ImageEnhance.Contrast(photo).enhance(1 + 0.20 * strength)
+
+    lum = photo.convert('L')
+
+    # Umbrele primesc verdele brandului, prin screen — le colorează fără să
+    # le închidă. Masca e luminanța inversată, deci luminile rămân neatinse.
+    tint = Image.new('RGB', photo.size, (int(6 * strength), int(58 * strength), int(44 * strength)))
+    lifted = ImageChops.screen(photo, tint)
+    shadow_mask = ImageOps.invert(lum).point(lambda v: int(v * 0.85))
+    photo = Image.composite(lifted, photo, shadow_mask)
+
+    # Luminile primesc un strop de căldură, ca pielea să nu vireze spre verde.
+    warm = ImageChops.multiply(photo, Image.new('RGB', photo.size, (255, 250, 242)))
+    photo = Image.composite(warm, photo, lum.point(lambda v: int(v * 0.6)))
+
+    # Negrurile coborâte, ca titlul alb să aibă pe ce sta.
+    black_point = int(14 * strength)
+    photo = photo.point(lambda v: max(0, int((v - black_point) * 255 / (255 - black_point))))
+
+    # Lumină verde difuză dintr-un colț — de aici vine identitatea de brand,
+    # fără să atingă culorile din restul cadrului.
+    if glow > 0:
+        w, h = photo.size
+        halo = Image.new('RGB', (w, h), (0, 0, 0))
+        ImageDraw.Draw(halo).ellipse(
+            (-w * 0.43, -h * 0.16, w * 0.57, h * 0.36),
+            fill=(round(10 * glow), round(120 * glow), round(88 * glow)),
+        )
+        halo = halo.filter(ImageFilter.GaussianBlur(w * 0.21))
+        photo = ImageChops.screen(photo, halo)
+
+    return ImageEnhance.Brightness(photo).enhance(1.02)
+
+
 def build_cover(src, out, headline, ghost=None, eyebrow=None, focus=0.35,
-                tone=0.76, layout='jos', scale=1.0, font_dir=FONT_DIR):
+                tone=0.76, layout='jos', scale=1.0, stil='viu', glow=0.6,
+                font_dir=FONT_DIR):
     # Toată geometria e definită pe 1080×1920 și se înmulțește cu `scale`,
     # ca o copertă mai mare să arate identic, doar cu mai mulți pixeli.
     w, h = round(WIDTH * scale), round(HEIGHT * scale)
@@ -115,10 +157,13 @@ def build_cover(src, out, headline, ghost=None, eyebrow=None, focus=0.35,
 
     photo = fill_crop(Image.open(src).convert('RGB'), w, h, focus)
 
-    # ── 1. Gradare: negru → verde brand → alb răcoros ──
-    photo = duotone(photo, (4, 12, 10), (13, 78, 60), (236, 252, 246), tone)
-    photo = ImageEnhance.Contrast(photo).enhance(1.16)
-    photo = ImageEnhance.Brightness(photo).enhance(0.94)
+    # ── 1. Gradare ──
+    if stil == 'duotone':
+        photo = duotone(photo, (4, 12, 10), (13, 78, 60), (236, 252, 246), tone)
+        photo = ImageEnhance.Contrast(photo).enhance(1.16)
+        photo = ImageEnhance.Brightness(photo).enhance(0.94)
+    else:
+        photo = split_tone(photo, tone, glow)
     base = photo.convert('RGBA')
 
     # ── 2. Cuvânt repetat, estompat, în fundal ──
@@ -209,6 +254,11 @@ def main():
                    help='unde stă titlul: jos (implicit) sau sus')
     p.add_argument('--scale', type=float, default=1.0,
                    help='multiplică formatul peste 1080×1920, ex: 2 dă 2160×3840 (implicit 1)')
+    p.add_argument('--stil', choices=('viu', 'duotone'), default='viu',
+                   help='viu = gradare de film, culorile rămân (implicit); '
+                        'duotone = stil grafic plat, verde peste tot')
+    p.add_argument('--glow', type=float, default=0.6,
+                   help='lumina verde din colț, 0=deloc … 1=puternic (implicit 0.6, doar pe stilul viu)')
     p.add_argument('--font-dir', type=Path, default=FONT_DIR, help='folderul cu fonturile Inter')
     args = p.parse_args()
 
@@ -221,11 +271,13 @@ def main():
         sys.exit('--tone trebuie să fie între 0 și 1')
     if not 0.5 <= args.scale <= 4.0:
         sys.exit('--scale trebuie să fie între 0.5 și 4')
+    if not 0.0 <= args.glow <= 1.0:
+        sys.exit('--glow trebuie să fie între 0 și 1')
 
     out = Path(args.out) if args.out else src.with_name(f'{src.stem}-coperta.jpg')
     w, h, size = build_cover(src, out, args.text, args.ghost, args.eyebrow,
                              args.focus, args.tone, args.layout, args.scale,
-                             args.font_dir)
+                             args.stil, args.glow, args.font_dir)
     print(f'{out}  —  {w}×{h}, titlu {size}px')
 
 
