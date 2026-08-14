@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { trackEvent, upgradeClaritySession } from '@/lib/analytics'
 
 // ─────────────────────────────────────────────
 // ÎNLOCUIEȘTE ACEST LINK CU AL TĂU DIN CALENDLY
@@ -40,6 +41,15 @@ export default function CalendlyButton() {
 
       if (isBooking) {
         e.preventDefault()
+
+        // Micro-conversie: a deschis calendarul. Raportul dintre
+        // booking_click și booking_scheduled arată câți abandonează
+        // în widget-ul Calendly.
+        trackEvent('booking_click', {
+          cta_text: anchor.textContent?.trim().slice(0, 60) || 'unknown',
+          page_path: window.location.pathname,
+        })
+
         // @ts-ignore — Calendly e injectat global
         if (window.Calendly) {
           // @ts-ignore
@@ -48,10 +58,22 @@ export default function CalendlyButton() {
       }
     }
 
+    // Conversia propriu-zisă: Calendly notifică prin postMessage când
+    // programarea e confirmată.
+    const handleCalendlyMessage = (e: MessageEvent) => {
+      if (e.origin !== 'https://calendly.com') return
+      if (e.data?.event !== 'calendly.event_scheduled') return
+
+      trackEvent('booking_scheduled', { page_path: window.location.pathname })
+      upgradeClaritySession('booking_scheduled')
+    }
+
     document.addEventListener('click', handleClick)
+    window.addEventListener('message', handleCalendlyMessage)
 
     return () => {
       document.removeEventListener('click', handleClick)
+      window.removeEventListener('message', handleCalendlyMessage)
     }
   }, [])
 

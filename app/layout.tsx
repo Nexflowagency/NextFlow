@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import Analytics from '@/components/Analytics'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -88,7 +89,10 @@ const inter = Inter({
                                                                                                                                                                                                                                                   dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
                                                                                                                                                                                                                                                           />
                                                                                                                                                                                                                                                                 </head>
-                                                                                                                                                                                                                                                                      <body className="antialiased">{children}</body>
+                                                                                                                                                                                                                                                                      <body className="antialiased">
+        {children}
+        <Analytics />
+      </body>
                                                                                                                                                                                                                                                                           </html>
                                                                                                                                                                                                                                                                             )
                                                                                                                                                                                                                                                                             }
