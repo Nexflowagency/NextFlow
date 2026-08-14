@@ -105,8 +105,15 @@ def duotone(photo, shadow, mid, highlight, strength: float):
 
 
 def build_cover(src, out, headline, ghost=None, eyebrow=None, focus=0.35,
-                tone=0.76, layout='jos', font_dir=FONT_DIR):
-    photo = fill_crop(Image.open(src).convert('RGB'), WIDTH, HEIGHT, focus)
+                tone=0.76, layout='jos', scale=1.0, font_dir=FONT_DIR):
+    # Toată geometria e definită pe 1080×1920 și se înmulțește cu `scale`,
+    # ca o copertă mai mare să arate identic, doar cu mai mulți pixeli.
+    w, h = round(WIDTH * scale), round(HEIGHT * scale)
+    margin = round(MARGIN * scale)
+    baseline = round(TEXT_BASELINE * scale)
+    text_top = round(TEXT_TOP * scale)
+
+    photo = fill_crop(Image.open(src).convert('RGB'), w, h, focus)
 
     # ── 1. Gradare: negru → verde brand → alb răcoros ──
     photo = duotone(photo, (4, 12, 10), (13, 78, 60), (236, 252, 246), tone)
@@ -116,16 +123,16 @@ def build_cover(src, out, headline, ghost=None, eyebrow=None, focus=0.35,
 
     # ── 2. Cuvânt repetat, estompat, în fundal ──
     if ghost:
-        layer = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
+        layer = Image.new('RGBA', (w, h), (0, 0, 0, 0))
         draw = ImageDraw.Draw(layer)
-        font = load_font(FONT_HEADLINE, 150, font_dir)
+        font = load_font(FONT_HEADLINE, round(150 * scale), font_dir)
         word = ghost.upper()
-        step = draw.textlength(word, font=font) + 40
+        step = draw.textlength(word, font=font) + 40 * scale
         rows = (210, 370, 530) if layout == 'jos' else (1130, 1290, 1450)
         for row, y in enumerate(rows):
-            x = -60 if row % 2 else 20
-            while x < WIDTH:
-                draw.text((x, y), word, font=font, fill=(255, 255, 255, 26))
+            x = -60 * scale if row % 2 else 20 * scale
+            while x < w:
+                draw.text((x, round(y * scale)), word, font=font, fill=(255, 255, 255, 26))
                 x += step
         base = Image.alpha_composite(base, layer)
 
@@ -134,17 +141,17 @@ def build_cover(src, out, headline, ghost=None, eyebrow=None, focus=0.35,
         stops = [(0.0, 55), (0.26, 20), (0.50, 110), (0.70, 226), (1.0, 250)]
     else:
         stops = [(0.0, 248), (0.24, 216), (0.44, 96), (0.68, 24), (1.0, 96)]
-    shade = Image.new('RGBA', (WIDTH, HEIGHT), BLACK + (255,))
-    shade.putalpha(vertical_gradient(WIDTH, HEIGHT, stops))
+    shade = Image.new('RGBA', (w, h), BLACK + (255,))
+    shade.putalpha(vertical_gradient(w, h, stops))
     base = Image.alpha_composite(base, shade)
 
     # ── 4. Vignetă laterală discretă ──
-    vig = Image.new('L', (WIDTH, HEIGHT), 0)
+    vig = Image.new('L', (w, h), 0)
     ImageDraw.Draw(vig).ellipse(
-        (-WIDTH * 0.35, -HEIGHT * 0.12, WIDTH * 1.35, HEIGHT * 1.12), fill=255
+        (-w * 0.35, -h * 0.12, w * 1.35, h * 1.12), fill=255
     )
-    vig = vig.filter(ImageFilter.GaussianBlur(150))
-    dark = Image.new('RGBA', (WIDTH, HEIGHT), BLACK + (110,))
+    vig = vig.filter(ImageFilter.GaussianBlur(150 * scale))
+    dark = Image.new('RGBA', (w, h), BLACK + (110,))
     dark.putalpha(Image.eval(vig, lambda v: int((255 - v) * 0.43)))
     base = Image.alpha_composite(base, dark)
 
@@ -152,31 +159,35 @@ def build_cover(src, out, headline, ghost=None, eyebrow=None, focus=0.35,
     lines = headline.split('|')
 
     # ── 5. Titlul, micșorat până încape pe lățime ──
-    size = 118
+    size = round(118 * scale)
+    min_size = round(46 * scale)
     font = load_font(FONT_HEADLINE, size, font_dir)
-    while max(draw.textlength(l, font=font) for l in lines) > WIDTH - MARGIN * 2 and size > 46:
-        size -= 2
+    while max(draw.textlength(l, font=font) for l in lines) > w - margin * 2 and size > min_size:
+        size -= max(1, round(2 * scale))
         font = load_font(FONT_HEADLINE, size, font_dir)
 
     line_h = int(size * 1.03)
-    top = TEXT_TOP if layout == 'sus' else TEXT_BASELINE - line_h * len(lines)
+    top = text_top if layout == 'sus' else baseline - line_h * len(lines)
 
     y = top
     for line in lines:
-        draw.text((MARGIN, y), line, font=font, fill=(255, 255, 255, 255))
+        draw.text((margin, y), line, font=font, fill=(255, 255, 255, 255))
         y += line_h
 
     # ── 6. Accent verde deasupra titlului ──
     if eyebrow:
-        tag_font = load_font(FONT_EYEBROW, 30, font_dir)
-        ty = top - 54
-        draw.ellipse((MARGIN, ty + 9, MARGIN + 13, ty + 22), fill=GREEN + (255,))
-        draw.text((MARGIN + 28, ty), eyebrow.upper(), font=tag_font, fill=GREEN + (255,))
+        tag_font = load_font(FONT_EYEBROW, round(30 * scale), font_dir)
+        ty = top - round(54 * scale)
+        draw.ellipse((margin, ty + 9 * scale, margin + 13 * scale, ty + 22 * scale),
+                     fill=GREEN + (255,))
+        draw.text((margin + 28 * scale, ty), eyebrow.upper(), font=tag_font,
+                  fill=GREEN + (255,))
     else:
-        draw.rectangle((MARGIN, top - 40, MARGIN + 92, top - 33), fill=GREEN + (255,))
+        draw.rectangle((margin, top - 40 * scale, margin + 92 * scale, top - 33 * scale),
+                       fill=GREEN + (255,))
 
-    base.convert('RGB').save(out, quality=95, subsampling=0)
-    return size
+    base.convert('RGB').save(out, quality=96, subsampling=0)
+    return w, h, size
 
 
 def main():
@@ -196,6 +207,8 @@ def main():
                    help='intensitatea duotone-ului, 0=poza originală … 1=complet (implicit 0.76)')
     p.add_argument('--layout', choices=('jos', 'sus'), default='jos',
                    help='unde stă titlul: jos (implicit) sau sus')
+    p.add_argument('--scale', type=float, default=1.0,
+                   help='multiplică formatul peste 1080×1920, ex: 2 dă 2160×3840 (implicit 1)')
     p.add_argument('--font-dir', type=Path, default=FONT_DIR, help='folderul cu fonturile Inter')
     args = p.parse_args()
 
@@ -206,11 +219,14 @@ def main():
         sys.exit('--focus trebuie să fie între 0 și 1')
     if not 0.0 <= args.tone <= 1.0:
         sys.exit('--tone trebuie să fie între 0 și 1')
+    if not 0.5 <= args.scale <= 4.0:
+        sys.exit('--scale trebuie să fie între 0.5 și 4')
 
     out = Path(args.out) if args.out else src.with_name(f'{src.stem}-coperta.jpg')
-    size = build_cover(src, out, args.text, args.ghost, args.eyebrow,
-                       args.focus, args.tone, args.layout, args.font_dir)
-    print(f'{out}  —  {WIDTH}×{HEIGHT}, titlu {size}px')
+    w, h, size = build_cover(src, out, args.text, args.ghost, args.eyebrow,
+                             args.focus, args.tone, args.layout, args.scale,
+                             args.font_dir)
+    print(f'{out}  —  {w}×{h}, titlu {size}px')
 
 
 if __name__ == '__main__':

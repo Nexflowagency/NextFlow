@@ -26,6 +26,7 @@ Rezultatul se salvează lângă sursă, ca `cadru-coperta.jpg`.
 | `--focus` | Decupajul pe verticală: `0` = păstrează sus, `1` = păstrează jos (implicit `0.35`) |
 | `--tone` | Cât de tare intră duotone-ul: `0` = poza originală, `1` = complet (implicit `0.76`) |
 | `--layout` | `jos` (implicit) sau `sus` — pe ce margine stă titlul |
+| `--scale` | Multiplică formatul peste 1080×1920. `--scale 2` dă 2160×3840, cu aceeași așezare |
 
 `--layout sus` merge doar dacă subiectul stă în jumătatea de jos a cadrului;
 altfel titlul cade peste față. Pe cadrele obișnuite, filmate din față la masă,
@@ -40,6 +41,15 @@ Fă un **screenshot direct din clip, de pe telefon**, dintr-un moment fără tex
 pe ecran și fără butonul de play. Cu cât rezoluția e mai mare, cu atât mai bine
 — scriptul doar decupează și gradează, nu inventează detaliu. Cadrele luate din
 pagina publică de Instagram au doar 361×640 px și nu sunt suficiente.
+
+Dă-i un cadru mai mare decât formatul final, nu exact cât trebuie. O sursă de
+2000–4000 px pe înălțime, micșorată la 1920, iese vizibil mai curată decât una
+de fix 1920 — de asta merită screenshot-ul de pe telefon și nu unul redimensionat
+dinainte.
+
+Pentru Instagram încarcă varianta implicită, **1080×1920**. `--scale` e util
+când vrei fișierul și pentru altceva (miniatură YouTube, prezentare, print);
+pentru Reels nu aduce nimic în plus, fiindcă Instagram oricum reduce la 1080.
 
 ### De ce stă textul mai sus
 
