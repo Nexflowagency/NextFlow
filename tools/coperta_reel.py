@@ -33,9 +33,10 @@ WIDTH, HEIGHT = 1080, 1920          # formatul de copertă pentru reel
 BLACK = (11, 11, 11)                # --black din globals.css
 GREEN = (16, 185, 129)              # --green din globals.css
 
-# Titlul stă mai sus decât marginea de jos, ca să rămână vizibil și în
-# decupajul pătrat pe care Instagram îl folosește în grila de profil.
-TEXT_BASELINE = 1448
+# Instagram decupează pătratul din centru (y 420…1500) pentru grila de
+# profil, așa că textul stă în interiorul lui la ambele layout-uri.
+TEXT_BASELINE = 1448   # layout „jos" — titlul se termină aici
+TEXT_TOP = 520         # layout „sus" — titlul începe aici
 MARGIN = 74
 
 FONT_DIR = Path(__file__).parent / 'fonts'
@@ -104,7 +105,7 @@ def duotone(photo, shadow, mid, highlight, strength: float):
 
 
 def build_cover(src, out, headline, ghost=None, eyebrow=None, focus=0.35,
-                tone=0.76, font_dir=FONT_DIR):
+                tone=0.76, layout='jos', font_dir=FONT_DIR):
     photo = fill_crop(Image.open(src).convert('RGB'), WIDTH, HEIGHT, focus)
 
     # ── 1. Gradare: negru → verde brand → alb răcoros ──
@@ -120,19 +121,21 @@ def build_cover(src, out, headline, ghost=None, eyebrow=None, focus=0.35,
         font = load_font(FONT_HEADLINE, 150, font_dir)
         word = ghost.upper()
         step = draw.textlength(word, font=font) + 40
-        for row, y in enumerate((210, 370, 530)):
+        rows = (210, 370, 530) if layout == 'jos' else (1130, 1290, 1450)
+        for row, y in enumerate(rows):
             x = -60 if row % 2 else 20
             while x < WIDTH:
                 draw.text((x, y), word, font=font, fill=(255, 255, 255, 26))
                 x += step
         base = Image.alpha_composite(base, layer)
 
-    # ── 3. Întunecare graduală spre bază, ca textul să respire ──
+    # ── 3. Întunecare graduală dinspre marginea pe care stă titlul ──
+    if layout == 'jos':
+        stops = [(0.0, 55), (0.26, 20), (0.50, 110), (0.70, 226), (1.0, 250)]
+    else:
+        stops = [(0.0, 248), (0.24, 216), (0.44, 96), (0.68, 24), (1.0, 96)]
     shade = Image.new('RGBA', (WIDTH, HEIGHT), BLACK + (255,))
-    shade.putalpha(vertical_gradient(
-        WIDTH, HEIGHT,
-        [(0.0, 55), (0.26, 20), (0.50, 110), (0.70, 226), (1.0, 250)],
-    ))
+    shade.putalpha(vertical_gradient(WIDTH, HEIGHT, stops))
     base = Image.alpha_composite(base, shade)
 
     # ── 4. Vignetă laterală discretă ──
@@ -156,7 +159,7 @@ def build_cover(src, out, headline, ghost=None, eyebrow=None, focus=0.35,
         font = load_font(FONT_HEADLINE, size, font_dir)
 
     line_h = int(size * 1.03)
-    top = TEXT_BASELINE - line_h * len(lines)
+    top = TEXT_TOP if layout == 'sus' else TEXT_BASELINE - line_h * len(lines)
 
     y = top
     for line in lines:
@@ -191,6 +194,8 @@ def main():
                    help='decupajul pe verticală, 0=sus … 1=jos (implicit 0.35)')
     p.add_argument('--tone', type=float, default=0.76,
                    help='intensitatea duotone-ului, 0=poza originală … 1=complet (implicit 0.76)')
+    p.add_argument('--layout', choices=('jos', 'sus'), default='jos',
+                   help='unde stă titlul: jos (implicit) sau sus')
     p.add_argument('--font-dir', type=Path, default=FONT_DIR, help='folderul cu fonturile Inter')
     args = p.parse_args()
 
@@ -204,7 +209,7 @@ def main():
 
     out = Path(args.out) if args.out else src.with_name(f'{src.stem}-coperta.jpg')
     size = build_cover(src, out, args.text, args.ghost, args.eyebrow,
-                       args.focus, args.tone, args.font_dir)
+                       args.focus, args.tone, args.layout, args.font_dir)
     print(f'{out}  —  {WIDTH}×{HEIGHT}, titlu {size}px')
 
 

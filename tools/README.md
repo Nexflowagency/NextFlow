@@ -25,6 +25,11 @@ Rezultatul se salvează lângă sursă, ca `cadru-coperta.jpg`.
 | `--eyebrow` | Etichetă mică verde deasupra titlului, ex. `--eyebrow "automatizare"` |
 | `--focus` | Decupajul pe verticală: `0` = păstrează sus, `1` = păstrează jos (implicit `0.35`) |
 | `--tone` | Cât de tare intră duotone-ul: `0` = poza originală, `1` = complet (implicit `0.76`) |
+| `--layout` | `jos` (implicit) sau `sus` — pe ce margine stă titlul |
+
+`--layout sus` merge doar dacă subiectul stă în jumătatea de jos a cadrului;
+altfel titlul cade peste față. Pe cadrele obișnuite, filmate din față la masă,
+rămâi pe `jos`.
 
 Mărimea titlului se calculează singură cât să încapă pe lățime, deci un text
 lung iese pur și simplu mai mic. Diacriticele merg.
