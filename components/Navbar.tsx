@@ -8,6 +8,7 @@ const navLinks = [
   { index: '02', label: 'Sistemul', href: '#sistem' },
   { index: '03', label: 'Proces', href: '#proces' },
   { index: '04', label: 'Rezultate', href: '#rezultate' },
+  { index: '05', label: 'Proiecte', href: '#proiecte' },
 ]
 
 export default function Navbar() {
@@ -48,7 +49,7 @@ export default function Navbar() {
             </a>
 
             {/* Navigație desktop — etichete mono cu index */}
-            <ul className="hidden items-center gap-9 lg:flex">
+            <ul className="hidden items-center gap-6 lg:flex xl:gap-9">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a

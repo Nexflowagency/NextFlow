@@ -5,48 +5,38 @@ import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 /* ──────────────────────────────────────────────────────────────
    TESTIMONIALE VIDEO (reel-uri Instagram)
-   Completează `name` și `business` cu datele reale ale clientelor.
    `id` este codul din URL: instagram.com/reel/<id>/
    ────────────────────────────────────────────────────────────── */
 const reels = [
   {
     id: 'DakcErKtLo-',
-    name: 'Clientă Nextflow',
-    business: 'Testimonial video',
-    result: 'Vezi rezultatul',
+    name: 'Diana',
+    business: 'Dermiq · Salon facial',
   },
   {
     id: 'DasNmxQN5AB',
-    name: 'Clientă Nextflow',
-    business: 'Testimonial video',
-    result: 'Vezi rezultatul',
+    name: 'Doina',
+    business: 'Esthea · Salon facial',
   },
 ]
 
+/* Mesaje primite de la cliente pe WhatsApp */
 const quotes = [
   {
     quote:
-      'Pierdeam 40% din lead-uri. Acum primesc răspuns în 2 minute, automat. Rezultatul s-a văzut în prima lună.',
-    name: 'Marco R.',
-    role: 'Agenție imobiliară',
-    initials: 'MR',
-    result: '+60% venit',
+      'Sunt foarte încântată și mulțumită de Maftei Iustin — e un băiat serios, isteț și de încredere. Vi-l recomand cu drag.',
+    name: 'Larisa',
+    initials: 'L',
   },
   {
-    quote:
-      'Am scăpat de 3 ore de administrativ pe zi. CRM-ul se actualizează singur. Nu credeam că e posibil.',
-    name: 'Dr. Sara K.',
-    role: 'Clinică estetică',
-    initials: 'SK',
-    result: '−3h / zi',
+    quote: 'Mulțumesc pentru site și automatizări! Eficiență maximă!',
+    name: 'Elena',
+    initials: 'E',
   },
   {
-    quote:
-      'De la 3 clienți pe lună la 9 — cu exact aceeași echipă. Sistemul face munca în locul nostru.',
-    name: 'James H.',
-    role: 'Agenție digitală',
-    initials: 'JH',
-    result: '3× clienți',
+    quote: 'Sunteți cei mai buni! Site-ul arată perfect și funcționează impecabil.',
+    name: 'Maria',
+    initials: 'M',
   },
 ]
 
@@ -132,8 +122,8 @@ export default function Testimonials() {
               className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
               style={{ color: 'var(--bone-46)', borderColor: 'var(--line-mid)' }}
             >
-              Fără promisiuni vagi. Oameni reali, afaceri reale, cifre pe care le
-              poți verifica.
+              Fără promisiuni vagi. Mesaje și filmări primite de la cliente
+              reale, exact așa cum au venit.
             </p>
           </div>
         </div>
@@ -167,7 +157,7 @@ export default function Testimonials() {
                   {reel.name}
                 </span>
                 <span className="mono-sm mt-2 block" style={{ color: 'var(--acid)' }}>
-                  {reel.result} →
+                  {reel.business} →
                 </span>
               </span>
             </button>
@@ -186,19 +176,19 @@ export default function Testimonials() {
               <span className="tick tick-tl" aria-hidden="true" />
               <span className="tick tick-br" aria-hidden="true" />
 
-              <span
-                className="display mb-2 leading-none"
-                style={{ fontSize: '3rem', color: 'var(--acid)', opacity: 0.28 }}
-                aria-hidden="true"
-              >
-                &ldquo;
+              {/* Sursa mesajului — mesajele sunt reale, primite pe WhatsApp */}
+              <span className="mono-sm mb-5 flex items-center gap-2" style={{ color: 'var(--bone-30)' }}>
+                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                  <path d="M8 0a8 8 0 0 0-6.9 12l-1.1 4 4.1-1.1A8 8 0 1 0 8 0Zm0 14.6a6.6 6.6 0 0 1-3.4-.9l-.2-.2-2.4.6.7-2.4-.2-.3A6.6 6.6 0 1 1 8 14.6Zm3.6-4.9c-.2-.1-1.2-.6-1.3-.6-.2-.1-.3-.1-.4.1l-.6.7c-.1.1-.2.2-.4 0a5.4 5.4 0 0 1-2.6-2.3c-.2-.3.2-.3.5-1 0-.1 0-.3-.1-.4l-.5-1.3c-.2-.3-.3-.3-.4-.3h-.4a.8.8 0 0 0-.6.3 2.4 2.4 0 0 0-.7 1.8 4.2 4.2 0 0 0 .9 2.2 9.5 9.5 0 0 0 3.6 3.2c1.3.5 1.8.6 2.5.5a2.1 2.1 0 0 0 1.4-1 1.7 1.7 0 0 0 .1-1c0-.1-.2-.1-.4-.2Z" />
+                </svg>
+                Mesaj WhatsApp
               </span>
 
               <blockquote
                 className="mb-8 flex-1 text-[1.0625rem] leading-relaxed"
                 style={{ color: 'var(--bone-72)' }}
               >
-                {t.quote}
+                &ldquo;{t.quote}&rdquo;
               </blockquote>
 
               <figcaption
@@ -206,21 +196,13 @@ export default function Testimonials() {
                 style={{ borderColor: 'var(--line)' }}
               >
                 <span
-                  className="num flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[0.625rem] font-semibold"
+                  className="num flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[0.6875rem] font-semibold"
                   style={{ background: 'var(--ink-3)', color: 'var(--bone-72)' }}
                 >
                   {t.initials}
                 </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block text-[0.875rem] font-semibold" style={{ color: 'var(--bone)' }}>
-                    {t.name}
-                  </span>
-                  <span className="mono-sm block" style={{ color: 'var(--bone-30)' }}>
-                    {t.role}
-                  </span>
-                </span>
-                <span className="mono-sm shrink-0" style={{ color: 'var(--acid)' }}>
-                  {t.result}
+                <span className="text-[0.9375rem] font-semibold" style={{ color: 'var(--bone)' }}>
+                  {t.name}
                 </span>
               </figcaption>
             </figure>

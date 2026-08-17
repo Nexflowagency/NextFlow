@@ -69,7 +69,10 @@ export default function FinalCTA() {
             </p>
 
             <div className="reveal d3 flex flex-col gap-3 sm:flex-row">
-              <a href="#cta" className="btn btn-ink px-8 py-[1.15rem]">
+              <a
+                href="mailto:hello@nextflow.ai?subject=Vreau%20o%20analiz%C4%83%20gratuit%C4%83"
+                className="btn btn-ink px-8 py-[1.15rem]"
+              >
                 Vreau demo gratuit
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path

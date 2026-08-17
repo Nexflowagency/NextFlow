@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/#sistem', priority: 0.9 },
     { path: '/#proces', priority: 0.8 },
     { path: '/#rezultate', priority: 0.8 },
+    { path: '/#proiecte', priority: 0.8 },
     { path: '/#cta', priority: 0.9 },
   ]
 

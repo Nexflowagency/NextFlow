@@ -8,9 +8,9 @@ import SolutionSection from '@/components/SolutionSection'
 import HowItWorks from '@/components/HowItWorks'
 import MetricsSection from '@/components/MetricsSection'
 import Testimonials from '@/components/Testimonials'
+import Portfolio from '@/components/Portfolio'
 import FinalCTA from '@/components/FinalCTA'
 import Footer from '@/components/Footer'
-import CalendlyButton from '@/components/CalendlyButton'
 import { useGlobalScrollReveal } from '@/hooks/useScrollReveal'
 
 export default function Home() {
@@ -22,17 +22,15 @@ export default function Home() {
       <Hero />
       <Marquee />
 
-      {/* Problemă → soluție → proces (bloc deschis) → dovezi → decizie */}
+      {/* Problemă → soluție → proces → dovezi → proiecte → decizie */}
       <ProblemSection />
       <SolutionSection />
       <HowItWorks />
       <MetricsSection />
       <Testimonials />
+      <Portfolio />
       <FinalCTA />
       <Footer />
-
-      {/* Widget Calendly, injectat global */}
-      <CalendlyButton />
     </main>
   )
 }

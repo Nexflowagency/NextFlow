@@ -8,6 +8,7 @@ const columns = [
       { label: 'Sistemul', href: '#sistem' },
       { label: 'Proces', href: '#proces' },
       { label: 'Rezultate', href: '#rezultate' },
+      { label: 'Proiecte', href: '#proiecte' },
     ],
   },
   {
