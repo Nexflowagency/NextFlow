@@ -1,81 +1,234 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
-const testimonials = [
+/* ──────────────────────────────────────────────────────────────
+   TESTIMONIALE VIDEO (reel-uri Instagram)
+   Completează `name` și `business` cu datele reale ale clientelor.
+   `id` este codul din URL: instagram.com/reel/<id>/
+   ────────────────────────────────────────────────────────────── */
+const reels = [
   {
-    quote: 'Pierdeam 40% din lead-uri. Acum răspund în 2 minute automat. +60% venituri în 3 luni.',
-    name: 'Marco R.', role: 'Agenție imobiliară', avatar: 'MR', color: '#10B981', text: '#fff',
+    id: 'DakcErKtLo-',
+    name: 'Clientă Nextflow',
+    business: 'Testimonial video',
+    result: 'Vezi rezultatul',
   },
   {
-    quote: 'Am scăpat de 3 ore de admin zilnic. CRM-ul se actualizează singur. Nu mi-aș fi imaginat că e posibil.',
-    name: 'Dr. Sara K.', role: 'Clinică estetică', avatar: 'SK', color: '#F5C518', text: '#0B0B0B',
-  },
-  {
-    quote: 'De la 3 clienți pe lună la 9 — cu aceeași echipă. Sistemul face munca în locul nostru.',
-    name: 'James H.', role: 'Agenție digitală', avatar: 'JH', color: '#10B981', text: '#fff',
+    id: 'DasNmxQN5AB',
+    name: 'Clientă Nextflow',
+    business: 'Testimonial video',
+    result: 'Vezi rezultatul',
   },
 ]
 
-export default function Testimonials() {
-  const ref = useScrollReveal<HTMLDivElement>()
+const quotes = [
+  {
+    quote:
+      'Pierdeam 40% din lead-uri. Acum primesc răspuns în 2 minute, automat. Rezultatul s-a văzut în prima lună.',
+    name: 'Marco R.',
+    role: 'Agenție imobiliară',
+    initials: 'MR',
+    result: '+60% venit',
+  },
+  {
+    quote:
+      'Am scăpat de 3 ore de administrativ pe zi. CRM-ul se actualizează singur. Nu credeam că e posibil.',
+    name: 'Dr. Sara K.',
+    role: 'Clinică estetică',
+    initials: 'SK',
+    result: '−3h / zi',
+  },
+  {
+    quote:
+      'De la 3 clienți pe lună la 9 — cu exact aceeași echipă. Sistemul face munca în locul nostru.',
+    name: 'James H.',
+    role: 'Agenție digitală',
+    initials: 'JH',
+    result: '3× clienți',
+  },
+]
+
+/* ── Modal cu reel-ul; Instagram se încarcă abia la deschidere ── */
+function ReelModal({ id, onClose }: { id: string; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+    window.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [onClose])
 
   return (
-    <section className="section-py relative overflow-hidden" style={{ background: '#111111' }} id="testimonials">
-      <div className="absolute top-0 left-0 w-[400px] h-[400px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top left, rgba(16,185,129,0.06) 0%, transparent 65%)' }}/>
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      style={{ background: 'rgba(10,9,8,0.88)', backdropFilter: 'blur(10px)' }}
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Testimonial video"
+    >
+      <button
+        onClick={onClose}
+        className="mono-sm absolute right-5 top-5 flex items-center gap-2 px-3 py-2"
+        style={{ color: 'var(--bone-46)' }}
+        aria-label="Închide"
+      >
+        Închide
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+        </svg>
+      </button>
 
-      <div className="container-main relative z-10" ref={ref}>
-        <div className="text-center mb-14">
-          <p className="section-label mb-5 reveal justify-center">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] inline-block"/>
-            Rezultate reale
-          </p>
-          <h2 className="reveal reveal-delay-1 font-black text-white"
-            style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', lineHeight: '1.05', letterSpacing: '-0.035em' }}>
-            Ei au oprit
-            <br />
-            <span className="text-gradient-yellow">haosul.</span>
-          </h2>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="overflow-hidden rounded-lg"
+        style={{
+          width: 'min(400px, 92vw)',
+          height: 'min(720px, 84vh)',
+          border: '1px solid var(--line-mid)',
+          background: '#fff',
+        }}
+      >
+        <iframe
+          src={`https://www.instagram.com/reel/${id}/embed`}
+          title="Testimonial video Instagram"
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          scrolling="no"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+          allowFullScreen
+        />
+      </div>
+    </div>
+  )
+}
+
+export default function Testimonials() {
+  const ref = useScrollReveal<HTMLDivElement>()
+  const [openReel, setOpenReel] = useState<string | null>(null)
+
+  return (
+    <section className="section relative overflow-hidden" style={{ background: 'var(--ink-1)' }}>
+      <div className="mesh" style={{ opacity: 0.5 }} aria-hidden="true" />
+
+      <div className="shell relative" ref={ref}>
+        {/* ── Antet ── */}
+        <div className="g12 mb-14 items-end gap-y-8">
+          <div className="col-span-12 lg:col-span-7">
+            <p className="mono eyebrow reveal mb-7">Rezultate reale</p>
+            <h2 className="display d-lg reveal d1">
+              Ei au oprit
+              <br />
+              <span style={{ color: 'var(--acid)' }}>haosul.</span>
+            </h2>
+          </div>
+          <div className="col-span-12 lg:col-span-4 lg:col-start-9">
+            <p
+              className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
+              style={{ color: 'var(--bone-46)', borderColor: 'var(--line-mid)' }}
+            >
+              Fără promisiuni vagi. Oameni reali, afaceri reale, cifre pe care le
+              poți verifica.
+            </p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {testimonials.map((t, i) => (
-            <div key={i}
-              className={`reveal reveal-delay-${i + 1} rounded-2xl p-8 flex flex-col gap-6`}
-              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
+        {/* ── Testimoniale video ── */}
+        <div className="mb-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {reels.map((reel, i) => (
+            <button
+              key={reel.id}
+              onClick={() => setOpenReel(reel.id)}
+              className={`panel reveal d${i + 1} group flex items-center gap-6 p-6 text-left sm:p-8`}
+            >
+              <span className="tick tick-tl" aria-hidden="true" />
+              <span className="tick tick-br" aria-hidden="true" />
 
-              {/* Stars */}
-              <div className="flex gap-1">
-                {[...Array(5)].map((_, j) => (
-                  <svg key={j} width="13" height="13" viewBox="0 0 14 14" fill="#F5C518">
-                    <path d="M7 1L8.545 5.11H13L9.545 7.61L10.9 12L7 9.35L3.1 12L4.455 7.61L1 5.11H5.455L7 1Z"/>
-                  </svg>
-                ))}
-              </div>
+              {/* Buton de redare */}
+              <span
+                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full transition-all duration-500 group-hover:scale-110"
+                style={{ background: 'var(--acid)', color: 'var(--ink)' }}
+              >
+                <svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor" aria-hidden="true">
+                  <path d="M14 7.27a1 1 0 0 1 0 1.73L1.5 16.23A1 1 0 0 1 0 15.37V.9A1 1 0 0 1 1.5.04L14 7.27Z" />
+                </svg>
+              </span>
 
-              {/* Quote — short */}
-              <p className="font-semibold text-white leading-relaxed flex-1"
-                style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}>
-                &ldquo;{t.quote}&rdquo;
-              </p>
+              <span className="min-w-0 flex-1">
+                <span className="mono-sm mb-2 block" style={{ color: 'var(--bone-30)' }}>
+                  Reel · Instagram
+                </span>
+                <span className="display d-sm block" style={{ color: 'var(--bone)' }}>
+                  {reel.name}
+                </span>
+                <span className="mono-sm mt-2 block" style={{ color: 'var(--acid)' }}>
+                  {reel.result} →
+                </span>
+              </span>
+            </button>
+          ))}
+        </div>
 
-              {/* Author */}
-              <div className="flex items-center gap-3 pt-5"
-                style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-                <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
-                  style={{ backgroundColor: t.color, color: t.text }}>
-                  {t.avatar}
-                </div>
-                <div>
-                  <div className="font-bold text-white text-sm">{t.name}</div>
-                  <div className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>{t.role}</div>
-                </div>
-              </div>
-            </div>
+        {/* ── Testimoniale scrise, decalate pe verticală ── */}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+          {quotes.map((t, i) => (
+            <figure
+              key={t.name}
+              className={`panel reveal d${i + 2} flex flex-col p-8 ${
+                i === 1 ? 'md:mt-10' : i === 2 ? 'md:mt-20' : ''
+              }`}
+            >
+              <span className="tick tick-tl" aria-hidden="true" />
+              <span className="tick tick-br" aria-hidden="true" />
+
+              <span
+                className="display mb-2 leading-none"
+                style={{ fontSize: '3rem', color: 'var(--acid)', opacity: 0.28 }}
+                aria-hidden="true"
+              >
+                &ldquo;
+              </span>
+
+              <blockquote
+                className="mb-8 flex-1 text-[1.0625rem] leading-relaxed"
+                style={{ color: 'var(--bone-72)' }}
+              >
+                {t.quote}
+              </blockquote>
+
+              <figcaption
+                className="flex items-center gap-3 border-t pt-6"
+                style={{ borderColor: 'var(--line)' }}
+              >
+                <span
+                  className="num flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[0.625rem] font-semibold"
+                  style={{ background: 'var(--ink-3)', color: 'var(--bone-72)' }}
+                >
+                  {t.initials}
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block text-[0.875rem] font-semibold" style={{ color: 'var(--bone)' }}>
+                    {t.name}
+                  </span>
+                  <span className="mono-sm block" style={{ color: 'var(--bone-30)' }}>
+                    {t.role}
+                  </span>
+                </span>
+                <span className="mono-sm shrink-0" style={{ color: 'var(--acid)' }}>
+                  {t.result}
+                </span>
+              </figcaption>
+            </figure>
           ))}
         </div>
       </div>
+
+      {openReel && <ReelModal id={openReel} onClose={() => setOpenReel(null)} />}
     </section>
   )
 }

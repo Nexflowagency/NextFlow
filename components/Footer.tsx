@@ -1,75 +1,131 @@
+import Logo from './Logo'
+
+const columns = [
+  {
+    title: 'Navigare',
+    links: [
+      { label: 'Problema', href: '#problema' },
+      { label: 'Sistemul', href: '#sistem' },
+      { label: 'Proces', href: '#proces' },
+      { label: 'Rezultate', href: '#rezultate' },
+    ],
+  },
+  {
+    title: 'Contact',
+    links: [
+      { label: 'hello@nextflow.ai', href: 'mailto:hello@nextflow.ai' },
+      { label: 'Instagram', href: 'https://www.instagram.com/nextflow_agency.ai' },
+      { label: 'Programează un call', href: '#cta' },
+    ],
+  },
+]
+
 export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer style={{ background: '#0B0B0B', borderTop: '1px solid rgba(255,255,255,0.07)' }} id="contact">
-      <div className="container-main py-14">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
-
-          {/* Brand */}
-          <div className="flex flex-col gap-4">
-            <a href="#" className="flex items-center gap-2.5 group w-fit">
-              <span className="flex items-center justify-center w-9 h-9 rounded-xl transition-all duration-300"
-                style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)' }}>
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <path d="M2 9L6.5 4.5L11 9L15.5 4.5" stroke="#10B981" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M2 13.5L6.5 9L11 13.5L15.5 9" stroke="#F5C518" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" opacity="0.8"/>
-                </svg>
-              </span>
-              <span className="font-black text-white text-xl" style={{ letterSpacing: '-0.03em' }}>
-                Nextflow<span style={{ color: '#10B981' }}>.ai</span>
-              </span>
+    <footer
+      id="contact"
+      className="relative overflow-hidden border-t"
+      style={{ background: 'var(--ink)', borderColor: 'var(--line)' }}
+    >
+      <div className="shell relative pt-20">
+        <div className="g12 gap-y-12 pb-16">
+          {/* ── Brand ── */}
+          <div className="col-span-12 lg:col-span-5">
+            <a href="#" aria-label="Nextflow.ai — acasă" className="inline-block">
+              <Logo />
             </a>
-            <p className="text-sm leading-relaxed max-w-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>
-              Sisteme AI de automatizare pentru afaceri care vor să crească fără să angajeze mai mult personal.
+            <p
+              className="mt-6 max-w-[32ch] text-[0.9375rem] leading-relaxed"
+              style={{ color: 'var(--bone-46)' }}
+            >
+              Sisteme AI de automatizare pentru afaceri care vor să crească fără
+              să angajeze mai mult personal.
             </p>
+            <div className="mono-sm mt-7 flex items-center gap-2.5" style={{ color: 'var(--bone-30)' }}>
+              <span className="live" aria-hidden="true" />
+              Acceptăm proiecte noi
+            </div>
           </div>
 
-          {/* Nav */}
-          <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm" style={{ color: 'rgba(255,255,255,0.35)' }}>
-            {[
-              { label: 'Servicii', href: '#solution' },
-              { label: 'Cum Funcționează', href: '#how-it-works' },
-              { label: 'Testimoniale', href: '#testimonials' },
-              { label: 'Contact', href: 'mailto:hello@nextflow.ai' },
-            ].map(link => (
-              <a key={link.label} href={link.href}
-                className="transition-colors"
-                onMouseEnter={e => (e.currentTarget.style.color = '#10B981')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}>
-                {link.label}
-              </a>
-            ))}
-          </div>
+          {/* ── Coloane de linkuri ── */}
+          {columns.map((col) => (
+            <nav key={col.title} className="col-span-6 lg:col-span-2 lg:col-start-auto">
+              <p className="mono-sm mb-5" style={{ color: 'var(--bone-30)' }}>
+                {col.title}
+              </p>
+              <ul className="flex flex-col gap-3.5">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="underline-draw text-[0.9375rem] transition-colors duration-300"
+                      style={{ color: 'var(--bone-72)' }}
+                      {...(link.href.startsWith('http')
+                        ? { target: '_blank', rel: 'noopener noreferrer' }
+                        : {})}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
 
-          {/* CTA */}
-          <div className="flex flex-col gap-3">
-            <a href="mailto:hello@nextflow.ai"
-              className="text-sm flex items-center gap-2 transition-colors"
-              style={{ color: 'rgba(255,255,255,0.35)' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#10B981')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}>
+          {/* ── CTA ── */}
+          <div className="col-span-12 lg:col-span-3">
+            <p className="mono-sm mb-5" style={{ color: 'var(--bone-30)' }}>
+              Începe
+            </p>
+            <a href="#cta" className="btn btn-acid w-full">
+              Programează un call
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <rect x="1" y="3" width="12" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.2"/>
-                <path d="M1 5L7 8.5L13 5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+                <path
+                  d="M2.5 7H11.5M8 3.5L11.5 7L8 10.5"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
-              hello@nextflow.ai
-            </a>
-            <a href="#cta" className="btn-primary text-sm px-5 py-2.5 w-fit">
-              Programează un Call
             </a>
           </div>
         </div>
 
-        <div className="mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <p className="text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>
-            © {year} Nextflow.ai — Toate drepturile rezervate.
+        {/* ── Bara legală ── */}
+        <div
+          className="flex flex-col-reverse items-start justify-between gap-4 border-t py-7 sm:flex-row sm:items-center"
+          style={{ borderColor: 'var(--line)' }}
+        >
+          <p className="mono-sm" style={{ color: 'var(--bone-16)' }}>
+            © {year} Nextflow.ai — Toate drepturile rezervate
           </p>
-          <div className="flex gap-5 text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>
-            <a href="#" className="hover:text-white transition-colors">Politică de Confidențialitate</a>
-            <a href="#" className="hover:text-white transition-colors">Termeni și Condiții</a>
+          <div className="mono-sm flex flex-wrap gap-6" style={{ color: 'var(--bone-16)' }}>
+            <a href="#" className="underline-draw">
+              Confidențialitate
+            </a>
+            <a href="#" className="underline-draw">
+              Termeni
+            </a>
           </div>
+        </div>
+      </div>
+
+      {/* ── Wordmark uriaș, tăiat de marginea de jos ── */}
+      <div className="pointer-events-none select-none overflow-hidden" aria-hidden="true">
+        <div
+          className="display shell whitespace-nowrap leading-[0.75]"
+          style={{
+            fontSize: 'clamp(3.5rem, 15.5vw, 14rem)',
+            letterSpacing: '-0.055em',
+            color: 'var(--bone)',
+            opacity: 0.055,
+            marginBottom: '-0.16em',
+          }}
+        >
+          Nextflow.ai
         </div>
       </div>
     </footer>

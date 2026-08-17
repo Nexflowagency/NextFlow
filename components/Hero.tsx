@@ -1,107 +1,194 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-const avatarColors = ['#10B981', '#F5C518', '#3B82F6', '#8B5CF6', '#EF4444']
-const avatarInitials = ['AR', 'MC', 'DP', 'IL', 'SB']
+const specs = [
+  { k: 'Status', v: 'Sisteme active', live: true },
+  { k: 'Timp răspuns', v: '< 2 min' },
+  { k: 'Implementare', v: '2–4 săptămâni' },
+  { k: 'Afaceri', v: '50+' },
+]
+
+const proof = [
+  { initials: 'AR', accent: false },
+  { initials: 'MC', accent: false },
+  { initials: 'DP', accent: true },
+  { initials: 'IL', accent: false },
+  { initials: 'SB', accent: false },
+]
 
 export default function Hero() {
-  const heroRef = useRef<HTMLDivElement>(null)
+  const [loaded, setLoaded] = useState(false)
+  const meshRef = useRef<HTMLDivElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const el = heroRef.current
-    if (!el) return
-    el.querySelectorAll<HTMLElement>('.hr').forEach((item, i) => {
-      setTimeout(() => {
-        item.style.opacity = '1'
-        item.style.transform = 'translateY(0)'
-      }, 60 + i * 120)
-    })
+    const t = requestAnimationFrame(() => setLoaded(true))
+    return () => cancelAnimationFrame(t)
   }, [])
 
-  const anim = { opacity: 0, transform: 'translateY(28px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }
+  // Parallax discret pe straturile de fundal
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    let raf = 0
+    const onScroll = () => {
+      if (raf) return
+      raf = requestAnimationFrame(() => {
+        const y = window.scrollY
+        if (y < 1400) {
+          if (meshRef.current) meshRef.current.style.transform = `translate3d(0, ${y * 0.22}px, 0)`
+          if (gridRef.current) gridRef.current.style.transform = `translate3d(0, ${y * 0.08}px, 0)`
+        }
+        raf = 0
+      })
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [])
+
+  const line = (delay: number) => ({ transitionDelay: `${delay}ms` })
+  const fade = (delay: number) => ({
+    opacity: loaded ? 1 : 0,
+    transform: loaded ? 'none' : 'translateY(18px)',
+    transition: 'opacity 0.9s var(--ease), transform 0.9s var(--ease)',
+    transitionDelay: `${delay}ms`,
+  })
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-16"
-      style={{ background: '#0B0B0B' }}>
+    <section
+      className={`relative flex min-h-[100svh] flex-col justify-end overflow-hidden pt-28 ${
+        loaded ? 'visible' : ''
+      }`}
+    >
+      {/* Straturi de atmosferă */}
+      <div ref={gridRef} className="blueprint" aria-hidden="true" />
+      <div ref={meshRef} className="mesh" aria-hidden="true" />
+      <div className="fade-b" aria-hidden="true" />
 
-      <div className="absolute inset-0 dot-grid-bg pointer-events-none opacity-70" />
-      <div className="absolute -top-40 -left-40 w-[700px] h-[700px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top left, rgba(16,185,129,0.1) 0%, transparent 60%)' }}/>
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top right, rgba(245,197,24,0.07) 0%, transparent 60%)' }}/>
-      <div className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, transparent, #0B0B0B)' }}/>
-
-      <div className="container-main relative z-10" ref={heroRef}>
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-
-          {/* Badge */}
-          <div className="hr mb-10" style={anim}>
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold tracking-widest uppercase"
-              style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)', color: '#10B981' }}>
-              <span className="green-dot" />
+      <div className="shell relative z-10 flex flex-1 flex-col justify-center pb-10">
+        <div className="g12 items-end gap-y-14">
+          {/* ── Coloana principală ── */}
+          <div className="col-span-12 lg:col-span-8">
+            <div className="mono eyebrow mb-9" style={fade(60)}>
+              <span className="live" aria-hidden="true" />
               Automatizare AI · România
-            </span>
+            </div>
+
+            <h1 className="display mb-9" style={{ fontSize: 'clamp(2.7rem, 6.6vw, 6rem)' }}>
+              <span className="line-mask">
+                <span style={line(120)}>Nu muncești</span>
+              </span>
+              <span className="line-mask">
+                <span style={{ ...line(200), color: 'var(--bone-30)' }}>prea puțin.</span>
+              </span>
+              <span className="line-mask">
+                <span style={line(300)}>Muncești</span>
+              </span>
+              <span className="line-mask">
+                <span style={line(380)}>
+                  fără <span style={{ color: 'var(--acid)' }}>sistem</span>.
+                </span>
+              </span>
+            </h1>
+
+            <p className="lede mb-11 max-w-[38ch]" style={fade(560)}>
+              Construim sisteme AI care lucrează în locul tău. Tu câștigi timp, bani
+              și control asupra afacerii.
+            </p>
+
+            <div className="flex flex-col gap-3 sm:flex-row" style={fade(660)}>
+              <a href="#cta" className="btn btn-acid px-8 py-[1.15rem]">
+                Vreau un demo gratuit
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M3 8H13M9 4L13 8L9 12"
+                    stroke="currentColor"
+                    strokeWidth="1.7"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
+              <a href="#proces" className="btn btn-line px-8 py-[1.15rem]">
+                Cum funcționează
+              </a>
+            </div>
           </div>
 
-          {/* H1 */}
-          <h1 className="hr font-black text-white mb-7"
-            style={{ ...anim, fontSize: 'clamp(3rem, 7.5vw, 6rem)', lineHeight: '1.0', letterSpacing: '-0.045em' }}>
-            Nu muncești
-            <br />
-            <span className="text-gradient-yellow">prea puțin.</span>
-            <br />
-            Muncești fără sistem.
-          </h1>
-
-          {/* Sub — very short */}
-          <p className="hr mb-12 max-w-[480px]"
-            style={{ ...anim, fontSize: 'clamp(1rem, 1.8vw, 1.15rem)', lineHeight: '1.7', color: 'rgba(255,255,255,0.45)' }}>
-            Construim sisteme AI care lucrează în locul tău.
-            <br />
-            Tu câștigi timp, bani și control.
-          </p>
-
-          {/* CTAs */}
-          <div className="hr flex flex-col sm:flex-row gap-3 mb-16" style={anim}>
-            <a href="#cta" className="btn-primary text-base px-9 py-4">
-              Vreau un Demo Gratuit
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
-            <a href="#how-it-works" className="btn-secondary text-base px-9 py-4">
-              Cum funcționează
-            </a>
-          </div>
-
-          {/* Social proof */}
-          <div className="hr flex flex-col sm:flex-row items-center gap-4 text-sm"
-            style={{ ...anim, color: 'rgba(255,255,255,0.35)' }}>
-            <div className="avatar-stack flex">
-              {avatarColors.map((color, i) => (
-                <div key={i} className="avatar" style={{ backgroundColor: color, zIndex: avatarColors.length - i }}>
-                  {avatarInitials[i]}
+          {/* ── Coloana tehnică ── */}
+          <div className="col-span-12 lg:col-span-4" style={fade(780)}>
+            <div className="mono-sm mb-4" style={{ color: 'var(--bone-30)' }}>
+              Nextflow / stare curentă
+            </div>
+            <dl className="border-t" style={{ borderColor: 'var(--line-mid)' }}>
+              {specs.map((s) => (
+                <div
+                  key={s.k}
+                  className="flex items-center justify-between gap-4 border-b py-3.5"
+                  style={{ borderColor: 'var(--line)' }}
+                >
+                  <dt className="mono-sm" style={{ color: 'var(--bone-30)' }}>
+                    {s.k}
+                  </dt>
+                  <dd
+                    className="num flex items-center gap-2 text-[0.8125rem] font-medium"
+                    style={{ color: s.live ? 'var(--acid)' : 'var(--bone-72)' }}
+                  >
+                    {s.live && <span className="live" aria-hidden="true" />}
+                    {s.v}
+                  </dd>
                 </div>
               ))}
-            </div>
-            <div className="flex items-center gap-2.5">
-              {[...Array(5)].map((_, i) => (
-                <svg key={i} width="13" height="13" viewBox="0 0 14 14" fill="#F5C518">
-                  <path d="M7 1L8.545 5.11H13L9.545 7.61L10.9 12L7 9.35L3.1 12L4.455 7.61L1 5.11H5.455L7 1Z"/>
-                </svg>
-              ))}
-              <span className="font-semibold text-white ml-1">50+ afaceri</span>
-              <span>automatizate</span>
-            </div>
+            </dl>
           </div>
-
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-20">
-        <div className="w-px h-10" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.5), transparent)' }}/>
+      {/* ── Bara de jos: dovadă socială + indiciu de scroll ── */}
+      <div
+        className="relative z-10 border-t"
+        style={{ borderColor: 'var(--line)', ...fade(900) }}
+      >
+        <div className="shell flex flex-wrap items-center justify-between gap-6 py-6">
+          <div className="flex items-center gap-4">
+            <div className="flex">
+              {proof.map((p, i) => (
+                <span
+                  key={p.initials}
+                  className="num -ml-1.5 flex h-8 w-8 items-center justify-center rounded-full text-[0.625rem] font-semibold first:ml-0"
+                  style={{
+                    background: p.accent ? 'var(--acid)' : 'var(--ink-3)',
+                    color: p.accent ? 'var(--ink)' : 'var(--bone-72)',
+                    border: '1px solid var(--ink)',
+                    zIndex: proof.length - i,
+                  }}
+                >
+                  {p.initials}
+                </span>
+              ))}
+            </div>
+            <p className="mono-sm" style={{ color: 'var(--bone-46)' }}>
+              <span style={{ color: 'var(--bone)' }}>50+ afaceri</span> automatizate
+            </p>
+          </div>
+
+          <div className="mono-sm flex items-center gap-3" style={{ color: 'var(--bone-30)' }}>
+            Derulează
+            <svg width="10" height="24" viewBox="0 0 10 24" fill="none" aria-hidden="true">
+              <path
+                d="M5 0V20M5 20L1 16M5 20L9 16"
+                stroke="currentColor"
+                strokeWidth="1"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
     </section>
   )

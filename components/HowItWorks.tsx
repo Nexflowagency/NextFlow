@@ -4,22 +4,25 @@ import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const steps = [
   {
-    step: '01',
+    n: '01',
     title: 'Analizăm',
-    description: 'Call de 30 min. Îți mapăm tot fluxul, găsim unde pierzi bani și proiectăm soluția.',
-    accent: '#10B981',
+    duration: '30 min',
+    description:
+      'Un call scurt. Îți mapăm fluxul actual, găsim exact unde pierzi bani și îți arătăm soluția înainte să plătești ceva.',
   },
   {
-    step: '02',
+    n: '02',
     title: 'Construim',
-    description: 'Facem totul noi. Captare lead-uri, follow-up, CRM, integrări — livrate în câteva săptămâni.',
-    accent: '#F5C518',
+    duration: '2–4 săptămâni',
+    description:
+      'Facem totul noi. Captare lead-uri, follow-up, CRM, integrări cu uneltele tale — livrate testate și funcționale.',
   },
   {
-    step: '03',
+    n: '03',
     title: 'Tu scalezi',
-    description: 'Sistemul rulează singur. Tu te concentrezi pe ceea ce contează: să crești.',
-    accent: '#10B981',
+    duration: 'Continuu',
+    description:
+      'Sistemul rulează singur, cu monitorizare din partea noastră. Tu te concentrezi pe ce contează: să crești.',
   },
 ]
 
@@ -27,55 +30,91 @@ export default function HowItWorks() {
   const ref = useScrollReveal<HTMLDivElement>()
 
   return (
-    <section className="section-py" style={{ background: '#FFFFFF' }} id="how-it-works">
-      <div className="container-main" ref={ref}>
-
-        <div className="text-center mb-16">
-          <p className="section-label mb-5 reveal justify-center">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] inline-block"/>
-            Cum funcționează
-          </p>
-          <h2 className="reveal reveal-delay-1 font-black text-[#0B0B0B]"
-            style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', lineHeight: '1.05', letterSpacing: '-0.035em' }}>
-            3 pași.
-            <br />
-            <span style={{ color: '#10B981' }}>Fără bătăi de cap.</span>
-          </h2>
+    <section
+      id="proces"
+      className="section relative overflow-hidden"
+      style={{ background: 'var(--paper-2)', color: 'var(--on-paper)' }}
+    >
+      <div className="shell relative" ref={ref}>
+        {/* ── Antet ── */}
+        <div className="g12 mb-16 items-end gap-y-8 lg:mb-24">
+          <div className="col-span-12 lg:col-span-8">
+            <p className="mono eyebrow eyebrow-paper reveal mb-7">Cum funcționează</p>
+            {/* Dimensiune proprie: „Fără bătăi de cap." trebuie să încapă pe un rând */}
+            <h2
+              className="display reveal d1"
+              style={{ fontSize: 'clamp(2.2rem, 5vw, 4.4rem)' }}
+            >
+              Trei pași.
+              <br />
+              <span style={{ color: 'var(--on-paper-40)' }}>Fără bătăi de cap.</span>
+            </h2>
+          </div>
+          <div className="col-span-12 lg:col-span-3 lg:col-start-10">
+            <p
+              className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
+              style={{ color: 'var(--on-paper-64)', borderColor: 'var(--line-paper)' }}
+            >
+              Nu ai nevoie de cunoștințe tehnice și nu trebuie să schimbi nimic
+              din ce folosești deja.
+            </p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-          {/* Connector */}
-          <div className="hidden md:block absolute"
-            style={{ top: '28px', left: 'calc(16.67% + 28px)', right: 'calc(16.67% + 28px)', height: '1px',
-              background: 'linear-gradient(90deg, rgba(16,185,129,0.3) 0%, rgba(245,197,24,0.5) 50%, rgba(16,185,129,0.3) 100%)' }}/>
+        {/* ── Linia de proces, se umple la scroll ── */}
+        <div className="fill-line reveal mb-12 hidden h-px md:block" />
 
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
           {steps.map((step, i) => (
-            <div key={i} className={`reveal reveal-delay-${i + 1} flex flex-col items-center md:items-start text-center md:text-left`}>
-              <div className="relative mb-7">
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center font-black text-xl"
-                  style={{ background: `${step.accent}12`, border: `1px solid ${step.accent}28`, color: step.accent, letterSpacing: '-0.03em' }}>
-                  {i + 1}
-                </div>
+            <div key={step.n} className={`reveal d${i + 1}`}>
+              <div className="mb-7 flex items-baseline justify-between gap-4">
+                <span
+                  className="display leading-none"
+                  style={{ fontSize: 'clamp(3.5rem, 7vw, 5rem)', letterSpacing: '-0.05em' }}
+                >
+                  {step.n}
+                </span>
+                <span
+                  className="mono-sm rounded-[3px] border px-2.5 py-1.5"
+                  style={{
+                    color: 'var(--clay)',
+                    borderColor: 'rgba(217,85,46,0.3)',
+                    background: 'rgba(217,85,46,0.07)',
+                  }}
+                >
+                  {step.duration}
+                </span>
               </div>
-              <div className="text-xs font-black tracking-widest uppercase mb-3" style={{ color: step.accent }}>
-                Pasul {step.step}
-              </div>
-              <h3 className="font-black text-[#0B0B0B] mb-3"
-                style={{ fontSize: '1.5rem', letterSpacing: '-0.03em' }}>
-                {step.title}
-              </h3>
-              <p className="text-[#9CA3AF] text-sm leading-relaxed">
+
+              <h3 className="display d-sm mb-3">{step.title}</h3>
+              <p
+                className="text-[0.9375rem] leading-relaxed"
+                style={{ color: 'var(--on-paper-64)' }}
+              >
                 {step.description}
               </p>
             </div>
           ))}
         </div>
 
-        <div className="text-center mt-16 reveal">
-          <a href="#cta" className="btn-primary text-base px-9 py-4">
-            Vreau să văd cum arată la mine
+        {/* ── CTA de mijloc ── */}
+        <div
+          className="reveal d4 mt-16 flex flex-wrap items-center justify-between gap-6 border-t pt-10"
+          style={{ borderColor: 'var(--line-paper)' }}
+        >
+          <p className="display d-sm max-w-[24ch]">
+            Vrei să vezi exact cum ar arăta la tine în afacere?
+          </p>
+          <a href="#cta" className="btn btn-ink px-8 py-[1.15rem]">
+            Programează analiza gratuită
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path
+                d="M3 8H13M9 4L13 8L9 12"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </a>
         </div>

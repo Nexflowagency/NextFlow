@@ -4,28 +4,32 @@ import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const solutions = [
   {
-    number: '01',
+    n: '01',
     title: 'Răspuns instant la orice lead',
     outcome: 'Zero lead-uri pierdute',
-    description: 'Fiecare mesaj primit — răspuns automat, calificare automată, 24/7.',
+    description:
+      'Fiecare mesaj primit primește răspuns automat și calificare automată, 24/7 — pe WhatsApp, Instagram, formular sau telefon.',
   },
   {
-    number: '02',
+    n: '02',
     title: 'Follow-up fără efort',
     outcome: 'Mai multe contracte',
-    description: 'Sistemul urmărește fiecare prospect automat până devine client.',
+    description:
+      'Sistemul urmărește fiecare prospect automat, cu mesaje care par scrise de tine, până devine client sau spune clar „nu".',
   },
   {
-    number: '03',
+    n: '03',
     title: 'CRM care lucrează singur',
     outcome: 'Control complet',
-    description: 'Pipeline actualizat, scoruri, notificări — totul automat.',
+    description:
+      'Pipeline actualizat în timp real, scoruri pe lead-uri, notificări când ceva are nevoie de tine. Nimic introdus manual.',
   },
   {
-    number: '04',
+    n: '04',
     title: 'Operațiuni fără tine',
     outcome: 'Timp liber real',
-    description: 'Programări, rapoarte, notificări — eliminate din rutina ta.',
+    description:
+      'Programări, facturi, rapoarte, notificări interne — scoase complet din rutina ta zilnică și din capul tău.',
   },
 ]
 
@@ -33,48 +37,76 @@ export default function SolutionSection() {
   const ref = useScrollReveal<HTMLDivElement>()
 
   return (
-    <section className="section-py" style={{ background: '#FFFFFF' }} id="solution">
-      <div className="container-main" ref={ref}>
+    <section
+      id="sistem"
+      className="section relative overflow-hidden"
+      style={{ background: 'var(--paper)', color: 'var(--on-paper)' }}
+    >
+      <div
+        className="blueprint blueprint-paper"
+        style={{
+          maskImage: 'radial-gradient(ellipse 70% 55% at 50% 0%, #000 10%, transparent 75%)',
+          WebkitMaskImage:
+            'radial-gradient(ellipse 70% 55% at 50% 0%, #000 10%, transparent 75%)',
+        }}
+        aria-hidden="true"
+      />
 
-        {/* Header */}
-        <div className="text-center mb-16">
-          <p className="section-label mb-5 reveal justify-center">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] inline-block"/>
-            Ce construim
-          </p>
-          <h2 className="reveal reveal-delay-1 font-black text-[#0B0B0B]"
-            style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', lineHeight: '1.05', letterSpacing: '-0.035em' }}>
-            Noi facem tot.
-            <br />
-            <span style={{ color: '#10B981' }}>Tu controlezi.</span>
-          </h2>
+      <div className="shell relative" ref={ref}>
+        {/* ── Antet asimetric ── */}
+        <div className="g12 mb-16 items-end gap-y-8 lg:mb-24">
+          <div className="col-span-12 lg:col-span-7">
+            <p className="mono eyebrow eyebrow-paper reveal mb-7">Ce construim</p>
+            <h2 className="display d-lg reveal d1">
+              Noi facem tot.
+              <br />
+              <span style={{ color: 'var(--on-paper-40)' }}>Tu controlezi.</span>
+            </h2>
+          </div>
+          <div className="col-span-12 lg:col-span-4 lg:col-start-9">
+            <p
+              className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
+              style={{ color: 'var(--on-paper-64)', borderColor: 'var(--line-paper)' }}
+            >
+              Patru sisteme care se leagă între ele. Le construim, le conectăm la
+              uneltele pe care le folosești deja și ți le predăm funcționale.
+            </p>
+          </div>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* ── Grilă decalată pe verticală ── */}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-x-6">
           {solutions.map((item, i) => (
-            <div key={i} className={`card-light reveal reveal-delay-${(i % 4) + 1} group`}>
-
-              {/* Number + outcome */}
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-xs font-black tracking-widest uppercase px-3 py-1.5 rounded-lg"
-                  style={{ background: 'rgba(16,185,129,0.08)', color: '#10B981', border: '1px solid rgba(16,185,129,0.15)' }}>
-                  {item.number}
+            <article
+              key={item.n}
+              className={`panel-paper reveal d${(i % 4) + 1} flex flex-col p-8 sm:p-10 ${
+                i % 2 === 1 ? 'md:mt-14' : ''
+              }`}
+            >
+              <div className="mb-8 flex items-start justify-between gap-4">
+                <span
+                  className="display leading-none"
+                  style={{ fontSize: '2.75rem', color: 'rgba(19,17,16,0.14)' }}
+                >
+                  {item.n}
                 </span>
-                <span className="text-xs font-bold px-3 py-1.5 rounded-lg"
-                  style={{ background: 'rgba(245,197,24,0.1)', color: '#D4A800', border: '1px solid rgba(245,197,24,0.2)' }}>
-                  ✓ {item.outcome}
+                {/* Marcaj tip textmarker — singurul loc unde acidul apare pe hârtie */}
+                <span
+                  className="mono-sm rounded-[3px] px-2.5 py-1.5"
+                  style={{ background: 'var(--acid)', color: 'var(--ink)' }}
+                >
+                  {item.outcome}
                 </span>
               </div>
 
-              <h3 className="font-black text-[#0B0B0B] mb-3"
-                style={{ fontSize: '1.3rem', letterSpacing: '-0.025em', lineHeight: '1.2' }}>
-                {item.title}
-              </h3>
-              <p className="text-[#9CA3AF] text-sm leading-relaxed">
+              <h3 className="display d-sm mb-4">{item.title}</h3>
+              <p
+                className="text-[0.9375rem] leading-relaxed"
+                style={{ color: 'var(--on-paper-64)' }}
+              >
                 {item.description}
               </p>
-            </div>
+            </article>
           ))}
         </div>
       </div>
