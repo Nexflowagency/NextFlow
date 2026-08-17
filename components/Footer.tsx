@@ -1,22 +1,22 @@
 import Logo from './Logo'
+import { WHATSAPP_URL, PHONE_DISPLAY, INSTAGRAM_URL } from '@/lib/contact'
 
 const columns = [
   {
     title: 'Navigare',
     links: [
-      { label: 'Problema', href: '#problema' },
-      { label: 'Sistemul', href: '#sistem' },
+      { label: 'Ce facem', href: '#servicii' },
       { label: 'Proces', href: '#proces' },
-      { label: 'Rezultate', href: '#rezultate' },
+      { label: 'Cât câștigi', href: '#impact' },
+      { label: 'Păreri', href: '#pareri' },
       { label: 'Proiecte', href: '#proiecte' },
     ],
   },
   {
     title: 'Contact',
     links: [
-      { label: 'hello@nextflow.ai', href: 'mailto:hello@nextflow.ai' },
-      { label: 'Instagram', href: 'https://www.instagram.com/nextflow_agency.ai' },
-      { label: 'Programează un call', href: '#cta' },
+      { label: `WhatsApp · ${PHONE_DISPLAY}`, href: WHATSAPP_URL },
+      { label: 'Instagram', href: INSTAGRAM_URL },
     ],
   },
 ]
@@ -35,24 +35,25 @@ export default function Footer() {
           {/* ── Brand ── */}
           <div className="col-span-12 lg:col-span-5">
             <a href="#" aria-label="Nextflow.ai — acasă" className="inline-block">
-              <Logo />
+              <Logo uid="nf-foot" />
             </a>
             <p
-              className="mt-6 max-w-[32ch] text-[0.9375rem] leading-relaxed"
+              className="mt-6 max-w-[34ch] text-[0.9375rem] leading-relaxed"
               style={{ color: 'var(--bone-46)' }}
             >
-              Sisteme AI de automatizare pentru afaceri care vor să crească fără
-              să angajeze mai mult personal.
+              Construim site-uri și roboți care răspund clienților, îi
+              programează și țin totul organizat — non-stop, pentru afaceri
+              locale din România.
             </p>
             <div className="mono-sm mt-7 flex items-center gap-2.5" style={{ color: 'var(--bone-30)' }}>
               <span className="live" aria-hidden="true" />
-              Acceptăm proiecte noi
+              Accept proiecte noi
             </div>
           </div>
 
           {/* ── Coloane de linkuri ── */}
           {columns.map((col) => (
-            <nav key={col.title} className="col-span-6 lg:col-span-2 lg:col-start-auto">
+            <nav key={col.title} className="col-span-6 lg:col-span-2">
               <p className="mono-sm mb-5" style={{ color: 'var(--bone-30)' }}>
                 {col.title}
               </p>
@@ -80,17 +81,16 @@ export default function Footer() {
             <p className="mono-sm mb-5" style={{ color: 'var(--bone-30)' }}>
               Începe
             </p>
-            <a href="#cta" className="btn btn-acid w-full">
-              Programează un call
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path
-                  d="M2.5 7H11.5M8 3.5L11.5 7L8 10.5"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-green w-full"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.1c-.24.68-1.42 1.3-1.96 1.35-.5.05-.98.23-3.35-.7-2.82-1.11-4.6-3.99-4.74-4.18-.14-.19-1.13-1.5-1.13-2.87 0-1.36.72-2.03.97-2.31.25-.28.55-.35.73-.35h.53c.17 0 .4-.06.63.48.24.58.8 2 .87 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.47-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.28.74 1.22 1.59 1.98 1.09.97 2.01 1.27 2.3 1.41.28.14.45.12.61-.07.17-.19.7-.82.89-1.1.19-.28.38-.23.63-.14.25.09 1.6.76 1.87.9.28.14.46.21.53.33.07.11.07.65-.17 1.33Z" />
               </svg>
+              Scrie-mi pe WhatsApp
             </a>
           </div>
         </div>
@@ -101,7 +101,7 @@ export default function Footer() {
           style={{ borderColor: 'var(--line)' }}
         >
           <p className="mono-sm" style={{ color: 'var(--bone-16)' }}>
-            © {year} Nextflow.ai — Toate drepturile rezervate
+            © {year} Nextflow Agency — Toate drepturile rezervate
           </p>
           <div className="mono-sm flex flex-wrap gap-6" style={{ color: 'var(--bone-16)' }}>
             <a href="#" className="underline-draw">
@@ -120,10 +120,10 @@ export default function Footer() {
           className="display shell whitespace-nowrap leading-[0.75]"
           style={{
             fontSize: 'clamp(3.5rem, 15.5vw, 14rem)',
-            letterSpacing: '-0.055em',
+            letterSpacing: '-0.035em',
             color: 'var(--bone)',
             opacity: 0.055,
-            marginBottom: '-0.16em',
+            marginBottom: '-0.14em',
           }}
         >
           Nextflow.ai

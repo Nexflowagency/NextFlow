@@ -1,13 +1,12 @@
+/* Ordinea începe cu domeniile în care avem deja proiecte livrate. */
 const industries = [
-  'Imobiliare',
+  'Saloane de înfrumusețare',
+  'Cabinete de cosmetică',
   'Clinici estetice',
-  'Agenții digitale',
-  'E-commerce',
+  'Coafor & frizerie',
+  'Fitness & wellness',
   'Servicii locale',
-  'Consultanță',
-  'Fitness',
-  'Auto',
-  'Construcții',
+  'Imobiliare',
   'HoReCa',
 ]
 
@@ -27,7 +26,7 @@ export default function Marquee() {
             <span style={{ color: 'var(--bone-46)' }}>{item}</span>
             <span
               className="mx-7 h-1 w-1 rounded-full"
-              style={{ background: 'var(--acid)', opacity: 0.55 }}
+              style={{ background: 'var(--green)', opacity: 0.55 }}
             />
           </span>
         ))}

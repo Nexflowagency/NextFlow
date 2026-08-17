@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { WHATSAPP_URL } from '@/lib/contact'
 
 const specs = [
   { k: 'Status', v: 'Sisteme active', live: true },
@@ -91,31 +92,30 @@ export default function Hero() {
               </span>
               <span className="line-mask">
                 <span style={line(380)}>
-                  fără <span style={{ color: 'var(--acid)' }}>sistem</span>.
+                  fără <span style={{ color: 'var(--green)' }}>sistem</span>.
                 </span>
               </span>
             </h1>
 
-            <p className="lede mb-11 max-w-[38ch]" style={fade(560)}>
-              Construim sisteme AI care lucrează în locul tău. Tu câștigi timp, bani
-              și control asupra afacerii.
+            <p className="lede mb-11 max-w-[40ch]" style={fade(560)}>
+              Îți construim site-ul și punem roboți să răspundă clienților, să-i
+              programeze și să-ți țină totul organizat. Non-stop.
             </p>
 
             <div className="flex flex-col gap-3 sm:flex-row" style={fade(660)}>
-              <a href="#cta" className="btn btn-acid px-8 py-[1.15rem]">
-                Vreau un demo gratuit
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path
-                    d="M3 8H13M9 4L13 8L9 12"
-                    stroke="currentColor"
-                    strokeWidth="1.7"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-green px-8 py-[1.15rem]"
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.1c-.24.68-1.42 1.3-1.96 1.35-.5.05-.98.23-3.35-.7-2.82-1.11-4.6-3.99-4.74-4.18-.14-.19-1.13-1.5-1.13-2.87 0-1.36.72-2.03.97-2.31.25-.28.55-.35.73-.35h.53c.17 0 .4-.06.63.48.24.58.8 2 .87 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.47-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.28.74 1.22 1.59 1.98 1.09.97 2.01 1.27 2.3 1.41.28.14.45.12.61-.07.17-.19.7-.82.89-1.1.19-.28.38-.23.63-.14.25.09 1.6.76 1.87.9.28.14.46.21.53.33.07.11.07.65-.17 1.33Z" />
                 </svg>
+                Scrie-mi pe WhatsApp
               </a>
-              <a href="#proces" className="btn btn-line px-8 py-[1.15rem]">
-                Cum funcționează
+              <a href="#impact" className="btn btn-line px-8 py-[1.15rem]">
+                Vezi cât pierzi acum
               </a>
             </div>
           </div>
@@ -137,7 +137,7 @@ export default function Hero() {
                   </dt>
                   <dd
                     className="num flex items-center gap-2 text-[0.8125rem] font-medium"
-                    style={{ color: s.live ? 'var(--acid)' : 'var(--bone-72)' }}
+                    style={{ color: s.live ? 'var(--green)' : 'var(--bone-72)' }}
                   >
                     {s.live && <span className="live" aria-hidden="true" />}
                     {s.v}
@@ -162,7 +162,7 @@ export default function Hero() {
                   key={p.initials}
                   className="num -ml-1.5 flex h-8 w-8 items-center justify-center rounded-full text-[0.625rem] font-semibold first:ml-0"
                   style={{
-                    background: p.accent ? 'var(--acid)' : 'var(--ink-3)',
+                    background: p.accent ? 'var(--green)' : 'var(--ink-3)',
                     color: p.accent ? 'var(--ink)' : 'var(--bone-72)',
                     border: '1px solid var(--ink)',
                     zIndex: proof.length - i,

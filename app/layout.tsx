@@ -1,15 +1,15 @@
 import type { Metadata, Viewport } from 'next'
-import { Bricolage_Grotesque, Archivo, JetBrains_Mono } from 'next/font/google'
+import { Fraunces, Schibsted_Grotesk, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
-const display = Bricolage_Grotesque({
+const display = Fraunces({
   subsets: ['latin', 'latin-ext'],
   display: 'swap',
   variable: '--font-display',
-  axes: ['opsz'],
+  axes: ['SOFT', 'WONK', 'opsz'],
 })
 
-const sans = Archivo({
+const sans = Schibsted_Grotesk({
   subsets: ['latin', 'latin-ext'],
   display: 'swap',
   variable: '--font-sans',
@@ -23,11 +23,11 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://nextflow.ro'),
-  title: 'Nextflow.ai — Automatizează-ți afacerea. Crește fără haos.',
+  title: 'Nextflow.ai — Site-uri și roboți care îți aduc clienți',
   description:
-    'Construim sisteme AI care gestionează lead-urile, follow-up-urile și operațiunile tale automat. Oprește-te din a pierde clienți din cauza proceselor manuale.',
+    'Îți construim site-ul și punem roboți să răspundă clienților, să-i programeze și să-ți țină totul organizat, non-stop. Pentru saloane, clinici și afaceri locale din România.',
   keywords:
-    'automatizare AI, automatizare afaceri, automatizare lead-uri, CRM automat, follow-up automat, agenti AI Romania',
+    'creare site salon, automatizare AI Romania, chatbot programari, agent vocal AI, CRM automat, site cabinet estetic, web design Romania',
   alternates: {
     canonical: 'https://nextflow.ro',
   },
@@ -43,9 +43,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Nextflow.ai — Automatizează-ți afacerea. Crește fără haos.',
+    title: 'Nextflow.ai — Site-uri și roboți care îți aduc clienți',
     description:
-      'Construim sisteme AI care gestionează lead-urile, follow-up-urile și operațiunile tale automat.',
+      'Îți construim site-ul și punem roboți să răspundă clienților, să-i programeze și să-ți țină totul organizat, non-stop.',
     url: 'https://nextflow.ro',
     siteName: 'Nextflow.ai',
     type: 'website',
@@ -53,9 +53,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nextflow.ai — Automatizează-ți afacerea. Crește fără haos.',
+    title: 'Nextflow.ai — Site-uri și roboți care îți aduc clienți',
     description:
-      'Construim sisteme AI care gestionează lead-urile, follow-up-urile și operațiunile tale automat.',
+      'Îți construim site-ul și punem roboți să răspundă clienților, să-i programeze și să-ți țină totul organizat, non-stop.',
   },
 }
 
@@ -71,14 +71,13 @@ const organizationSchema = {
   name: 'Nextflow.ai',
   url: 'https://nextflow.ro',
   description:
-    'Construim sisteme AI care automatizează lead-urile, follow-up-urile și operațiunile afacerii tale.',
+    'Site-uri premium și automatizări AI pentru saloane, clinici și afaceri locale din România.',
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: '+40-767-422-497',
     contactType: 'customer service',
     areaServed: 'RO',
     availableLanguage: 'Romanian',
-    email: 'hello@nextflow.ai',
   },
   address: {
     '@type': 'PostalAddress',

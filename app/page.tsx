@@ -4,9 +4,9 @@ import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import Marquee from '@/components/Marquee'
 import ProblemSection from '@/components/ProblemSection'
-import SolutionSection from '@/components/SolutionSection'
+import Services from '@/components/Services'
 import HowItWorks from '@/components/HowItWorks'
-import MetricsSection from '@/components/MetricsSection'
+import ImpactSection from '@/components/ImpactSection'
 import Testimonials from '@/components/Testimonials'
 import Portfolio from '@/components/Portfolio'
 import FinalCTA from '@/components/FinalCTA'
@@ -22,11 +22,11 @@ export default function Home() {
       <Hero />
       <Marquee />
 
-      {/* Problemă → soluție → proces → dovezi → proiecte → decizie */}
+      {/* Problema → ce facem → cum → cât câștigi → dovezi → decizie */}
       <ProblemSection />
-      <SolutionSection />
+      <Services />
       <HowItWorks />
-      <MetricsSection />
+      <ImpactSection />
       <Testimonials />
       <Portfolio />
       <FinalCTA />

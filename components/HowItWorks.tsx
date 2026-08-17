@@ -1,6 +1,7 @@
 'use client'
 
 import { useScrollReveal } from '@/hooks/useScrollReveal'
+import { WHATSAPP_URL } from '@/lib/contact'
 
 const steps = [
   {
@@ -40,11 +41,7 @@ export default function HowItWorks() {
         <div className="g12 mb-16 items-end gap-y-8 lg:mb-24">
           <div className="col-span-12 lg:col-span-8">
             <p className="mono eyebrow eyebrow-paper reveal mb-7">Cum funcționează</p>
-            {/* Dimensiune proprie: „Fără bătăi de cap." trebuie să încapă pe un rând */}
-            <h2
-              className="display reveal d1"
-              style={{ fontSize: 'clamp(2.2rem, 5vw, 4.4rem)' }}
-            >
+            <h2 className="display d-lg reveal d1">
               Trei pași.
               <br />
               <span style={{ color: 'var(--on-paper-40)' }}>Fără bătăi de cap.</span>
@@ -105,17 +102,16 @@ export default function HowItWorks() {
           <p className="display d-sm max-w-[24ch]">
             Vrei să vezi exact cum ar arăta la tine în afacere?
           </p>
-          <a href="#cta" className="btn btn-ink px-8 py-[1.15rem]">
-            Programează analiza gratuită
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path
-                d="M3 8H13M9 4L13 8L9 12"
-                stroke="currentColor"
-                strokeWidth="1.7"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-ink px-8 py-[1.15rem]"
+          >
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.1c-.24.68-1.42 1.3-1.96 1.35-.5.05-.98.23-3.35-.7-2.82-1.11-4.6-3.99-4.74-4.18-.14-.19-1.13-1.5-1.13-2.87 0-1.36.72-2.03.97-2.31.25-.28.55-.35.73-.35h.53c.17 0 .4-.06.63.48.24.58.8 2 .87 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.47-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.28.74 1.22 1.59 1.98 1.09.97 2.01 1.27 2.3 1.41.28.14.45.12.61-.07.17-.19.7-.82.89-1.1.19-.28.38-.23.63-.14.25.09 1.6.76 1.87.9.28.14.46.21.53.33.07.11.07.65-.17 1.33Z" />
             </svg>
+            Scrie-mi pe WhatsApp
           </a>
         </div>
       </div>

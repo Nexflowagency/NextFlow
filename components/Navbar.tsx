@@ -3,11 +3,13 @@
 import { useEffect, useState } from 'react'
 import Logo from './Logo'
 
+import { WHATSAPP_URL, PHONE_DISPLAY, PHONE_E164 } from '@/lib/contact'
+
 const navLinks = [
-  { index: '01', label: 'Problema', href: '#problema' },
-  { index: '02', label: 'Sistemul', href: '#sistem' },
-  { index: '03', label: 'Proces', href: '#proces' },
-  { index: '04', label: 'Rezultate', href: '#rezultate' },
+  { index: '01', label: 'Ce facem', href: '#servicii' },
+  { index: '02', label: 'Proces', href: '#proces' },
+  { index: '03', label: 'Cât câștigi', href: '#impact' },
+  { index: '04', label: 'Păreri', href: '#pareri' },
   { index: '05', label: 'Proiecte', href: '#proiecte' },
 ]
 
@@ -44,8 +46,9 @@ export default function Navbar() {
       >
         <div className="shell">
           <nav className="flex h-16 items-center justify-between md:h-[76px]">
+            {/* Doar marca, fără wordmark */}
             <a href="#" aria-label="Nextflow.ai — acasă" className="relative z-10">
-              <Logo />
+              <Logo showWordmark={false} size={36} uid="nf-nav" />
             </a>
 
             {/* Navigație desktop — etichete mono cu index */}
@@ -73,7 +76,7 @@ export default function Navbar() {
 
             <div className="hidden items-center gap-6 lg:flex">
               <a
-                href="mailto:hello@nextflow.ai"
+                href="#cta"
                 className="mono underline-draw transition-colors duration-300"
                 style={{ color: 'var(--bone-46)' }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--bone)')}
@@ -81,17 +84,16 @@ export default function Navbar() {
               >
                 Contact
               </a>
-              <a href="#cta" className="btn btn-acid px-5 py-3 text-[0.875rem]">
-                Programează un call
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path
-                    d="M2.5 7H11.5M8 3.5L11.5 7L8 10.5"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-green px-5 py-3 text-[0.875rem]"
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.1c-.24.68-1.42 1.3-1.96 1.35-.5.05-.98.23-3.35-.7-2.82-1.11-4.6-3.99-4.74-4.18-.14-.19-1.13-1.5-1.13-2.87 0-1.36.72-2.03.97-2.31.25-.28.55-.35.73-.35h.53c.17 0 .4-.06.63.48.24.58.8 2 .87 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.47-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.28.74 1.22 1.59 1.98 1.09.97 2.01 1.27 2.3 1.41.28.14.45.12.61-.07.17-.19.7-.82.89-1.1.19-.28.38-.23.63-.14.25.09 1.6.76 1.87.9.28.14.46.21.53.33.07.11.07.65-.17 1.33Z" />
                 </svg>
+                Scrie-mi pe WhatsApp
               </a>
             </div>
 
@@ -147,7 +149,7 @@ export default function Navbar() {
                 transitionDelay: menuOpen ? `${120 + i * 70}ms` : '0ms',
               }}
             >
-              <span className="mono-sm" style={{ color: 'var(--acid)' }}>
+              <span className="mono-sm" style={{ color: 'var(--green)' }}>
                 {link.index}
               </span>
               <span className="display d-sm" style={{ color: 'var(--bone)' }}>
@@ -164,28 +166,24 @@ export default function Navbar() {
             }}
           >
             <a
-              href="#cta"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMenuOpen(false)}
-              className="btn btn-acid w-full"
+              className="btn btn-green w-full"
             >
-              Programează un call
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path
-                  d="M3 8H13M9 4L13 8L9 12"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.1c-.24.68-1.42 1.3-1.96 1.35-.5.05-.98.23-3.35-.7-2.82-1.11-4.6-3.99-4.74-4.18-.14-.19-1.13-1.5-1.13-2.87 0-1.36.72-2.03.97-2.31.25-.28.55-.35.73-.35h.53c.17 0 .4-.06.63.48.24.58.8 2 .87 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.47-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.28.74 1.22 1.59 1.98 1.09.97 2.01 1.27 2.3 1.41.28.14.45.12.61-.07.17-.19.7-.82.89-1.1.19-.28.38-.23.63-.14.25.09 1.6.76 1.87.9.28.14.46.21.53.33.07.11.07.65-.17 1.33Z" />
               </svg>
+              Scrie-mi pe WhatsApp
             </a>
             <a
-              href="mailto:hello@nextflow.ai"
+              href={`tel:${PHONE_E164}`}
               onClick={() => setMenuOpen(false)}
               className="mono py-3 text-center"
               style={{ color: 'var(--bone-46)' }}
             >
-              hello@nextflow.ai
+              {PHONE_DISPLAY}
             </a>
           </div>
         </div>

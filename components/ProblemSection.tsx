@@ -46,14 +46,14 @@ export default function ProblemSection() {
                 style={{ borderColor: 'var(--line)' }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.paddingLeft = '0.75rem'
-                  e.currentTarget.style.borderColor = 'var(--acid-24)'
+                  e.currentTarget.style.borderColor = 'var(--green-24)'
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.paddingLeft = '0'
                   e.currentTarget.style.borderColor = 'var(--line)'
                 }}
               >
-                <span className="num shrink-0 text-[0.75rem] font-medium text-bone-16 transition-colors duration-500 group-hover:text-acid">
+                <span className="num shrink-0 text-[0.75rem] font-medium text-bone-16 transition-colors duration-500 group-hover:text-green">
                   {p.n}
                 </span>
 

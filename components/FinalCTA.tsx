@@ -1,12 +1,13 @@
 'use client'
 
 import { useScrollReveal } from '@/hooks/useScrollReveal'
+import { WHATSAPP_URL, PHONE_DISPLAY, PHONE_E164 } from '@/lib/contact'
 
 const included = [
-  'Harta fluxului tău actual',
-  'Unde pierzi bani, cu cifre',
-  'Planul de automatizare',
-  'Estimare de cost și timp',
+  'Îți spun ce pierzi acum, cu cifre',
+  'Îți arăt cum ar arăta la tine',
+  'Îți zic cât costă și cât durează',
+  'Decizi tu. Fără insistențe.',
 ]
 
 export default function FinalCTA() {
@@ -16,7 +17,7 @@ export default function FinalCTA() {
     <section
       id="cta"
       className="section relative overflow-hidden"
-      style={{ background: 'var(--acid)', color: 'var(--ink)' }}
+      style={{ background: 'var(--green)', color: 'var(--ink)' }}
     >
       {/* Grilă în cerneală peste acid — sparge planeitatea blocului de culoare */}
       <div
@@ -64,28 +65,24 @@ export default function FinalCTA() {
               className="reveal d2 mb-10 max-w-[42ch] text-[1.0625rem] leading-relaxed"
               style={{ color: 'rgba(10,9,8,0.62)' }}
             >
-              Îți arătăm exact cum ar arăta sistemul la tine în afacere. Gratuit,
-              fără angajament, fără prezentare de vânzare.
+              Scrie-mi pe WhatsApp ce afacere ai. Îți răspund personal și îți
+              spun sincer dacă te pot ajuta sau nu.
             </p>
 
             <div className="reveal d3 flex flex-col gap-3 sm:flex-row">
               <a
-                href="mailto:hello@nextflow.ai?subject=Vreau%20o%20analiz%C4%83%20gratuit%C4%83"
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn-ink px-8 py-[1.15rem]"
               >
-                Vreau demo gratuit
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path
-                    d="M3 8H13M9 4L13 8L9 12"
-                    stroke="currentColor"
-                    strokeWidth="1.7"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.1c-.24.68-1.42 1.3-1.96 1.35-.5.05-.98.23-3.35-.7-2.82-1.11-4.6-3.99-4.74-4.18-.14-.19-1.13-1.5-1.13-2.87 0-1.36.72-2.03.97-2.31.25-.28.55-.35.73-.35h.53c.17 0 .4-.06.63.48.24.58.8 2 .87 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.47-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.28.74 1.22 1.59 1.98 1.09.97 2.01 1.27 2.3 1.41.28.14.45.12.61-.07.17-.19.7-.82.89-1.1.19-.28.38-.23.63-.14.25.09 1.6.76 1.87.9.28.14.46.21.53.33.07.11.07.65-.17 1.33Z" />
                 </svg>
+                Scrie-mi pe WhatsApp
               </a>
-              <a href="mailto:hello@nextflow.ai" className="btn btn-ink-line px-8 py-[1.15rem]">
-                Scrie-ne pe email
+              <a href={`tel:${PHONE_E164}`} className="btn btn-ink-line px-8 py-[1.15rem]">
+                {PHONE_DISPLAY}
               </a>
             </div>
 
@@ -93,7 +90,7 @@ export default function FinalCTA() {
               className="mono-sm reveal d4 mt-8"
               style={{ color: 'rgba(10,9,8,0.45)' }}
             >
-              Fără angajament · 30 de minute · Rezultate în săptămâni
+              Răspund personal · Fără angajament · Fără prezentare de vânzare
             </p>
           </div>
 
@@ -103,7 +100,7 @@ export default function FinalCTA() {
               className="mono-sm reveal d2 mb-4"
               style={{ color: 'rgba(10,9,8,0.5)' }}
             >
-              Ce primești în call
+              Ce se întâmplă mai departe
             </p>
             <ul
               className="reveal d3 border-t"

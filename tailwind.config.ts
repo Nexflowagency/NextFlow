@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-sans)', 'Archivo', 'system-ui', 'sans-serif'],
-        display: ['var(--font-display)', 'Bricolage Grotesque', 'sans-serif'],
+        sans: ['var(--font-sans)', 'Schibsted Grotesk', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'Fraunces', 'Georgia', 'serif'],
         mono: ['var(--font-mono)', 'JetBrains Mono', 'ui-monospace', 'monospace'],
       },
       colors: {
@@ -27,9 +27,10 @@ const config: Config = {
           30: 'rgba(237,231,220,0.30)',
           16: 'rgba(237,231,220,0.16)',
         },
-        acid: {
-          DEFAULT: '#CCFF3D',
-          deep: '#A6D91C',
+        green: {
+          DEFAULT: '#17D98B',
+          soft: '#2EE79B',
+          deep: '#0FAE70',
         },
         clay: '#D9552E',
         paper: {
@@ -50,6 +51,7 @@ const config: Config = {
       },
       transitionTimingFunction: {
         ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        spring: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
       },
     },
   },
