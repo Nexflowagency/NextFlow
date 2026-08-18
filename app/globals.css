@@ -61,10 +61,15 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   html {
-    scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     background: var(--ink);
   }
+
+  /* Cerute de Lenis */
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+  .lenis.lenis-stopped { overflow: hidden; }
 
   body {
     background: var(--ink);
@@ -468,6 +473,152 @@ footer[id] { scroll-margin-top: 6rem; }
 }
 
 /* ══════════════════════════════════════════════════════════════
+   SECVENȚA DE INTRARE
+   ══════════════════════════════════════════════════════════════ */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ink);
+  transition: transform 0.85s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.intro-leaving { transform: translateY(-101%); }
+
+.intro-mark { overflow: visible; }
+
+.intro-line {
+  /* traseul se desenează: linia e „ascunsă" în propria lungime.
+     54 ≈ lungimea reală a traseului (16,3 + 14,9 + 21,3), ca desenarea
+     să înceapă imediat, nu după o pauză moartă. */
+  stroke-dasharray: 54;
+  stroke-dashoffset: 54;
+  animation: draw 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  filter: drop-shadow(0 0 14px rgba(23, 217, 139, 0.35));
+}
+.intro-line-1 { animation-delay: 0.12s; }
+.intro-line-2 { animation-delay: 0.34s; }
+
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+
+.intro-mark {
+  animation: introLift 0.7s var(--ease) 1.15s forwards;
+}
+@keyframes introLift {
+  to { transform: translateY(-8px); opacity: 0.85; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TITLURI CUVÂNT CU CUVÂNT
+   ══════════════════════════════════════════════════════════════ */
+
+.words { display: block; }
+
+.word {
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: 0.24em;
+  /* fereastra trebuie să lase loc coborâtoarelor (ț, ș, p, g) */
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.word:last-child { margin-right: 0; }
+
+.word > span {
+  display: inline-block;
+  transform: translateY(112%);
+  transition: transform 1s var(--ease);
+}
+.words.visible .word > span { transform: none; }
+
+/* ══════════════════════════════════════════════════════════════
+   CURSOR PROPRIU
+   ══════════════════════════════════════════════════════════════ */
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--green);
+  transition: opacity 0.3s var(--ease), width 0.3s var(--ease), height 0.3s var(--ease);
+}
+
+.cursor-ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 99px;
+  border: 1px solid var(--line-hi);
+  background: transparent;
+  transition: opacity 0.3s var(--ease), width 0.45s var(--spring),
+              height 0.45s var(--spring), background 0.35s var(--ease),
+              border-color 0.35s var(--ease);
+}
+
+.cursor-ring[data-state='active'] {
+  width: 52px;
+  height: 52px;
+  border-color: var(--green-24);
+  background: var(--green-06);
+}
+
+/* Pe elementele cu text contextual inelul devine o pastilă verde */
+.cursor-ring[data-state='label'] {
+  width: 104px;
+  height: 104px;
+  border-color: var(--green);
+  background: var(--green);
+}
+
+.cursor-label {
+  color: var(--ink);
+  text-align: center;
+  line-height: 1.3;
+  max-width: 92px;
+  /* fără rupere la cratimă: „site-ul" nu trebuie tăiat în două */
+  letter-spacing: 0.12em;
+  hyphens: none;
+  overflow-wrap: normal;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.3s var(--ease), transform 0.35s var(--spring);
+}
+.cursor-ring[data-state='label'] .cursor-label { opacity: 1; transform: none; }
+
+/* Punctul dispare când inelul poartă text — altfel stă peste literă */
+.cursor-ring[data-state='label'] ~ .cursor-dot,
+.has-cursor .cursor-ring[data-state='label'] + .cursor-dot { opacity: 0; }
+
+/* Cursorul sistemului dispare abia după ce al nostru a pornit */
+html.has-cursor,
+html.has-cursor a,
+html.has-cursor button,
+html.has-cursor [role='button'] { cursor: none; }
+
+/* Butoanele magnetice au nevoie de o revenire elastică */
+[data-magnetic] { transition: transform 0.55s var(--spring); }
+[data-magnetic]:active { transition: transform 0.1s ease; }
+
+/* ══════════════════════════════════════════════════════════════
    MIȘCARE
    ══════════════════════════════════════════════════════════════ */
 
@@ -500,8 +651,14 @@ footer[id] { scroll-margin-top: 6rem; }
 .line-mask.visible > span,
 .visible .line-mask > span { transform: translateY(0); }
 
-.marquee { display: flex; width: max-content; animation: slide 42s linear infinite; }
-.marquee-track:hover .marquee { animation-play-state: paused; }
+/* Banda e mișcată din JS, ca să poată reacționa la viteza de scroll.
+   Fără script rămâne pe animația CSS de rezervă. */
+.marquee-track-js {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  transform-origin: center;
+}
 @keyframes slide {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
@@ -622,6 +779,10 @@ footer[id] { scroll-margin-top: 6rem; }
   .line-mask > span { transform: none; }
   .fill-line::after { transform: scaleX(1); }
   .quote-card::before { transform: scaleY(1); }
+  .word > span { transform: none; }
+  .cursor-dot, .cursor-ring { display: none; }
+  [data-magnetic] { transform: none !important; }
+  [data-speed] { transform: none !important; }
   .mesh { animation: none; }
   .btn::before { display: none; }
 }

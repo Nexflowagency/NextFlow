@@ -11,26 +11,38 @@ import Testimonials from '@/components/Testimonials'
 import Portfolio from '@/components/Portfolio'
 import FinalCTA from '@/components/FinalCTA'
 import Footer from '@/components/Footer'
+import SmoothScroll from '@/components/SmoothScroll'
+import Cursor from '@/components/Cursor'
+import Magnetic from '@/components/Magnetic'
+import Intro from '@/components/Intro'
 import { useGlobalScrollReveal } from '@/hooks/useScrollReveal'
 
 export default function Home() {
   useGlobalScrollReveal()
 
   return (
-    <main>
-      <Navbar />
-      <Hero />
-      <Marquee />
+    <>
+      {/* Stratul de mișcare — nu randează nimic vizibil în afară de cursor */}
+      <SmoothScroll />
+      <Cursor />
+      <Magnetic />
+      <Intro />
 
-      {/* Problema → ce facem → cum → cât câștigi → dovezi → decizie */}
-      <ProblemSection />
-      <Services />
-      <HowItWorks />
-      <ImpactSection />
-      <Testimonials />
-      <Portfolio />
-      <FinalCTA />
-      <Footer />
-    </main>
+      <main>
+        <Navbar />
+        <Hero />
+        <Marquee />
+
+        {/* Problema → ce facem → cum → cât câștigi → dovezi → decizie */}
+        <ProblemSection />
+        <Services />
+        <HowItWorks />
+        <ImpactSection />
+        <Testimonials />
+        <Portfolio />
+        <FinalCTA />
+        <Footer />
+      </main>
+    </>
   )
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { useScrollReveal } from '@/hooks/useScrollReveal'
+import Words from './Words'
 
 const pains = [
   { n: '01', line: 'Răspunzi manual la fiecare mesaj.', cost: '3h / zi pierdute' },
@@ -22,10 +23,11 @@ export default function ProblemSection() {
         {/* ── Titlu, lipit la scroll ── */}
         <div className="col-span-12 lg:col-span-5 lg:sticky lg:top-32">
           <p className="mono eyebrow reveal mb-7">Recunoști asta?</p>
-          <h2 className="display d-md reveal d1">
-            Ești ocupat.
-            <br />
-            <span style={{ color: 'var(--bone-30)' }}>Dar nu productiv.</span>
+          <h2 className="display d-md">
+            <Words>Ești ocupat.</Words>
+            <Words delay={90} style={{ color: 'var(--bone-30)' }}>
+              Dar nu productiv.
+            </Words>
           </h2>
           <p
             className="reveal d2 mt-7 max-w-[34ch] text-[0.9375rem] leading-relaxed"

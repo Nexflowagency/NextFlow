@@ -103,6 +103,7 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-col gap-3 sm:flex-row" style={fade(660)}>
+              <span data-magnetic className="inline-flex">
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
@@ -114,6 +115,7 @@ export default function Hero() {
                 </svg>
                 Scrie-mi pe WhatsApp
               </a>
+              </span>
               <a href="#impact" className="btn btn-line px-8 py-[1.15rem]">
                 Vezi cât pierzi acum
               </a>

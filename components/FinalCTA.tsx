@@ -70,6 +70,7 @@ export default function FinalCTA() {
             </p>
 
             <div className="reveal d3 flex flex-col gap-3 sm:flex-row">
+              <span data-magnetic className="inline-flex">
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
@@ -81,6 +82,7 @@ export default function FinalCTA() {
                 </svg>
                 Scrie-mi pe WhatsApp
               </a>
+              </span>
               <a href={`tel:${PHONE_E164}`} className="btn btn-ink-line px-8 py-[1.15rem]">
                 {PHONE_DISPLAY}
               </a>

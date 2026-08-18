@@ -97,6 +97,16 @@ export default function RootLayout({
       className={`${display.variable} ${sans.variable} ${mono.variable}`}
     >
       <head>
+        {/* Fără JavaScript nu are cine revela titlurile și nu are cine
+            derula lin — <noscript> readuce totul la comportamentul nativ,
+            fără să atingă <html>, care e randat de React. */}
+        <noscript>
+          <style>{`
+            .word > span { transform: none !important; }
+            html { scroll-behavior: smooth; }
+            .marquee-track-js { animation: slide 42s linear infinite; }
+          `}</style>
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useScrollReveal } from '@/hooks/useScrollReveal'
+import Words from './Words'
 
 const projects = [
   {
@@ -59,10 +60,11 @@ export default function Portfolio() {
         <div className="g12 mb-14 items-end gap-y-8">
           <div className="col-span-12 lg:col-span-8">
             <p className="mono eyebrow reveal mb-7">Proiecte livrate</p>
-            <h2 className="display d-lg reveal d1">
-              Site-uri pe care
-              <br />
-              <span style={{ color: 'var(--bone-30)' }}>le-am construit.</span>
+            <h2 className="display d-lg">
+              <Words>Site-uri pe care</Words>
+              <Words delay={110} style={{ color: 'var(--bone-30)' }}>
+                le-am construit.
+              </Words>
             </h2>
           </div>
           <div className="col-span-12 lg:col-span-3 lg:col-start-10">
@@ -85,6 +87,7 @@ export default function Portfolio() {
               target="_blank"
               rel="noopener noreferrer"
               className={`panel shot-card reveal d${i + 1} group flex flex-col overflow-hidden`}
+              data-cursor="Vezi live"
             >
               <span className="tick tick-tl" aria-hidden="true" />
               <span className="tick tick-br" aria-hidden="true" />

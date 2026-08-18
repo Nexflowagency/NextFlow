@@ -1,6 +1,7 @@
 'use client'
 
 import { useScrollReveal } from '@/hooks/useScrollReveal'
+import Words from './Words'
 
 /* Explicat pe cât se poate de simplu: o scenă concretă din ziua clientului,
    nu descrieri tehnice. Fără cuvinte precum „workflow" sau „integrare". */
@@ -67,10 +68,11 @@ export default function Services() {
         <div className="g12 mb-14 items-end gap-y-8 lg:mb-20">
           <div className="col-span-12 lg:col-span-8">
             <p className="mono eyebrow eyebrow-paper reveal mb-7">Ce facem, pe scurt</p>
-            <h2 className="display d-lg reveal d1">
-              Punem roboți să facă
-              <br />
-              <span style={{ color: 'var(--on-paper-40)' }}>munca plictisitoare.</span>
+            <h2 className="display d-lg">
+              <Words>Punem roboți să facă</Words>
+              <Words delay={110} style={{ color: 'var(--on-paper-40)' }}>
+                munca plictisitoare.
+              </Words>
             </h2>
           </div>
           <div className="col-span-12 lg:col-span-3 lg:col-start-10">

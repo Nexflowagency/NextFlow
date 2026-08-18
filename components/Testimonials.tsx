@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
+import Words from './Words'
 
 /* ──────────────────────────────────────────────────────────────
    Recenzii video — fișierele sunt găzduite la noi, nu încărcate
@@ -134,10 +135,11 @@ export default function Testimonials() {
         <div className="g12 mb-14 items-end gap-y-8">
           <div className="col-span-12 lg:col-span-8">
             <p className="mono eyebrow reveal mb-7">Păreri de la cliente</p>
-            <h2 className="display d-lg reveal d1">
-              Nu te crede pe mine.
-              <br />
-              <span style={{ color: 'var(--green)' }}>Ascultă-le pe ele.</span>
+            <h2 className="display d-lg">
+              <Words>Nu te crede pe mine.</Words>
+              <Words delay={110} style={{ color: 'var(--green)' }}>
+                Ascultă-le pe ele.
+              </Words>
             </h2>
           </div>
           <div className="col-span-12 lg:col-span-3 lg:col-start-10">
@@ -165,6 +167,7 @@ export default function Testimonials() {
               <button
                 onClick={() => setOpen(reel)}
                 className="absolute inset-0 z-10 rounded-[6px]"
+                data-cursor="Redă"
                 aria-label={`Redă recenzia video a ${reel.name} — ${reel.business}`}
               />
 

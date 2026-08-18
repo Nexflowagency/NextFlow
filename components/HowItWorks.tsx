@@ -1,6 +1,7 @@
 'use client'
 
 import { useScrollReveal } from '@/hooks/useScrollReveal'
+import Words from './Words'
 import { WHATSAPP_URL } from '@/lib/contact'
 
 const steps = [
@@ -41,10 +42,11 @@ export default function HowItWorks() {
         <div className="g12 mb-16 items-end gap-y-8 lg:mb-24">
           <div className="col-span-12 lg:col-span-8">
             <p className="mono eyebrow eyebrow-paper reveal mb-7">Cum funcționează</p>
-            <h2 className="display d-lg reveal d1">
-              Trei pași.
-              <br />
-              <span style={{ color: 'var(--on-paper-40)' }}>Fără bătăi de cap.</span>
+            <h2 className="display d-lg">
+              <Words>Trei pași.</Words>
+              <Words delay={110} style={{ color: 'var(--on-paper-40)' }}>
+                Fără bătăi de cap.
+              </Words>
             </h2>
           </div>
           <div className="col-span-12 lg:col-span-3 lg:col-start-10">

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
+import Words from './Words'
 import { WHATSAPP_URL } from '@/lib/contact'
 
 /* ──────────────────────────────────────────────────────────────
@@ -148,10 +149,11 @@ export default function ImpactSection() {
         <div className="g12 mb-14 items-end gap-y-8">
           <div className="col-span-12 lg:col-span-8">
             <p className="mono eyebrow reveal mb-7">Cât te costă, de fapt</p>
-            <h2 className="display d-lg reveal d1">
-              Mută cursoarele.
-              <br />
-              <span style={{ color: 'var(--green)' }}>Vezi ce pierzi.</span>
+            <h2 className="display d-lg">
+              <Words>Mută cursoarele.</Words>
+              <Words delay={110} style={{ color: 'var(--green)' }}>
+                Vezi ce pierzi.
+              </Words>
             </h2>
           </div>
           <div className="col-span-12 lg:col-span-3 lg:col-start-10">
@@ -231,6 +233,7 @@ export default function ImpactSection() {
             </div>
 
             <div className="reveal d4 mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+              <span data-magnetic className="inline-flex">
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
@@ -242,6 +245,7 @@ export default function ImpactSection() {
                 </svg>
                 Vreau cifrele pentru afacerea mea
               </a>
+              </span>
             </div>
 
             <p

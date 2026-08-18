@@ -1,5 +1,5 @@
 import Logo from './Logo'
-import { WHATSAPP_URL, PHONE_DISPLAY, INSTAGRAM_URL } from '@/lib/contact'
+import { WHATSAPP_URL, PHONE_DISPLAY, PHONE_E164, INSTAGRAM_URL } from '@/lib/contact'
 
 const columns = [
   {
@@ -15,7 +15,8 @@ const columns = [
   {
     title: 'Contact',
     links: [
-      { label: `WhatsApp · ${PHONE_DISPLAY}`, href: WHATSAPP_URL },
+      { label: 'WhatsApp', href: WHATSAPP_URL },
+      { label: PHONE_DISPLAY, href: `tel:${PHONE_E164}` },
       { label: 'Instagram', href: INSTAGRAM_URL },
     ],
   },
@@ -118,6 +119,7 @@ export default function Footer() {
       <div className="pointer-events-none select-none overflow-hidden" aria-hidden="true">
         <div
           className="display shell whitespace-nowrap leading-[0.75]"
+          data-speed="0.055"
           style={{
             fontSize: 'clamp(3.5rem, 15.5vw, 14rem)',
             letterSpacing: '-0.035em',
