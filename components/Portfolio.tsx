@@ -25,6 +25,16 @@ const projects = [
   },
   {
     n: '03',
+    name: 'Prestige Beauty Salon',
+    domain: 'prestigebeautysalon',
+    url: 'https://marvelous-lollipop-4bfd92.netlify.app/',
+    sector: 'Salon de înfrumusețare · Suceava',
+    shot: '/proiecte/prestige.jpg',
+    description:
+      'Coafor, machiaj, cosmetică, laser și unghii sub un singur brand — cu galerie de transformări înainte–după și programare directă.',
+  },
+  {
+    n: '04',
     name: 'Contour Collective',
     domain: 'contourcollective',
     url: 'https://monumental-chaja-082d0c.netlify.app/',
@@ -67,7 +77,7 @@ export default function Portfolio() {
         </div>
 
         {/* ── Cardurile cu capturi ── */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {projects.map((p, i) => (
             <a
               key={p.n}
