@@ -473,6 +473,91 @@ footer[id] { scroll-margin-top: 6rem; }
 }
 
 /* ══════════════════════════════════════════════════════════════
+   PAGINI LEGALE
+   Text lung, deci lățime de citire limitată și contrast mai mare
+   decât la textul de marketing — omul chiar trebuie să-l poată citi.
+   ══════════════════════════════════════════════════════════════ */
+
+.legal-measure { max-width: 46rem; }
+
+.legal-section { scroll-margin-top: 6.5rem; }
+
+.legal-prose {
+  color: var(--bone-46);
+  font-size: 0.9375rem;
+  line-height: 1.8;
+}
+.legal-prose > * + * { margin-top: 0.9rem; }
+.legal-prose strong { color: var(--bone); font-weight: 600; }
+
+.legal-prose a {
+  color: var(--green);
+  border-bottom: 1px solid var(--green-24);
+  transition: border-color 0.3s var(--ease);
+}
+.legal-prose a:hover { border-bottom-color: var(--green); }
+
+.legal-prose ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 1.15rem;
+}
+.legal-prose li { position: relative; list-style: none; }
+/* Liniuță în locul bulinei — se leagă de restul sistemului, care e făcut din linii */
+.legal-prose li::before {
+  content: '';
+  position: absolute;
+  left: -1.15rem;
+  top: 0.85em;
+  width: 5px;
+  height: 1px;
+  background: var(--green);
+  opacity: 0.55;
+}
+
+/* Blocuri evidențiate: temeiuri juridice, categorii de cookie-uri, părți */
+.legal-box {
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--ink-1);
+}
+.legal-box-accent {
+  border-color: var(--green-24);
+  background: var(--green-06);
+}
+.legal-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.legal-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-top: 0.6rem;
+  list-style: none;
+  padding-left: 0;
+}
+.legal-steps li { display: flex; align-items: center; gap: 0.85rem; }
+.legal-step-n {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 99px;
+  border: 1px solid var(--green-24);
+  background: var(--green-06);
+  color: var(--green);
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+/* ══════════════════════════════════════════════════════════════
    LINKURI DE SOLUȚIONARE A LITIGIILOR (ANPC / SOL)
    Obligatorii legal, deci trebuie să rămână lizibile — nu le
    estompăm ca pe un rând de subsol.

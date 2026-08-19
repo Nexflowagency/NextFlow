@@ -25,16 +25,37 @@ export default function SmoothScroll() {
       touchMultiplier: 1.6,
     })
 
-    // Ancorele trebuie să treacă tot prin Lenis, altfel sar brusc
+    // Ancorele trebuie să treacă tot prin Lenis, altfel sar brusc.
+    // Se acceptă și forma absolută („/#servicii"), folosită în footer ca
+    // linkurile să funcționeze și din paginile legale — pe pagina de start
+    // trimit tot către o ancoră locală, deci trebuie tratate la fel.
     const onAnchorClick = (e: MouseEvent) => {
-      const link = (e.target as HTMLElement).closest('a[href^="#"]')
-      if (!link) return
-      const href = link.getAttribute('href')
-      if (!href || href === '#') return
-      const target = document.querySelector(href)
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return
+
+      const link = (e.target as HTMLElement).closest('a')
+      const href = link?.getAttribute('href')
+      if (!href) return
+
+      const url = new URL(href, window.location.href)
+      if (url.origin !== window.location.origin) return
+      if (url.pathname !== window.location.pathname) return
+      if (!url.hash || url.hash === '#') return
+
+      const target = document.querySelector(url.hash)
       if (!target) return
+
       e.preventDefault()
-      lenis.scrollTo(target as HTMLElement, { offset: -96, duration: 1.3 })
+
+      // Lenis respectă singur scroll-margin-top, iar secțiunile noastre îl
+      // declară (ca ancorele să funcționeze și când Lenis e oprit). Un decalaj
+      // suplimentar s-ar aduna peste el și ținta ar ateriza cu încă o înălțime
+      // de navbar mai jos — de aceea îl adăugăm doar când lipsește.
+      const declared = parseFloat(
+        getComputedStyle(target as HTMLElement).scrollMarginTop
+      )
+      const offset = Number.isFinite(declared) && declared > 0 ? 0 : -96
+
+      lenis.scrollTo(target as HTMLElement, { offset, duration: 1.3 })
     }
     document.addEventListener('click', onAnchorClick)
 

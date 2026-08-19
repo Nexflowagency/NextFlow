@@ -26,11 +26,11 @@ const columns = [
   {
     title: 'Navigare',
     links: [
-      { label: 'Ce facem', href: '#servicii' },
-      { label: 'Proces', href: '#proces' },
-      { label: 'Cât câștigi', href: '#impact' },
-      { label: 'Păreri', href: '#pareri' },
-      { label: 'Proiecte', href: '#proiecte' },
+      { label: 'Ce facem', href: '/#servicii' },
+      { label: 'Proces', href: '/#proces' },
+      { label: 'Cât câștigi', href: '/#impact' },
+      { label: 'Păreri', href: '/#pareri' },
+      { label: 'Proiecte', href: '/#proiecte' },
     ],
   },
   {
@@ -56,7 +56,7 @@ export default function Footer() {
         <div className="g12 gap-y-12 pb-16">
           {/* ── Brand ── */}
           <div className="col-span-12 lg:col-span-5">
-            <a href="#" aria-label="Nextflow.ai — acasă" className="inline-block">
+            <a href="/" aria-label="Nextflow.ai — acasă" className="inline-block">
               <Logo uid="nf-foot" />
             </a>
             <p
@@ -174,10 +174,10 @@ export default function Footer() {
             © {year} Nextflow Agency — Toate drepturile rezervate
           </p>
           <div className="mono-sm flex flex-wrap gap-6" style={{ color: 'var(--bone-16)' }}>
-            <a href="#" className="underline-draw">
+            <a href="/politica-de-confidentialitate" className="underline-draw">
               Confidențialitate
             </a>
-            <a href="#" className="underline-draw">
+            <a href="/termeni-si-conditii" className="underline-draw">
               Termeni
             </a>
           </div>

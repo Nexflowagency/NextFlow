@@ -13,6 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/#pareri', priority: 0.7 },
     { path: '/#proiecte', priority: 0.8 },
     { path: '/#cta', priority: 0.9 },
+    { path: '/politica-de-confidentialitate', priority: 0.3 },
+    { path: '/termeni-si-conditii', priority: 0.3 },
   ]
 
   return anchors.map(({ path, priority }) => ({
