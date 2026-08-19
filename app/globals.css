@@ -473,6 +473,29 @@ footer[id] { scroll-margin-top: 6rem; }
 }
 
 /* ══════════════════════════════════════════════════════════════
+   LINKURI DE SOLUȚIONARE A LITIGIILOR (ANPC / SOL)
+   Obligatorii legal, deci trebuie să rămână lizibile — nu le
+   estompăm ca pe un rând de subsol.
+   ══════════════════════════════════════════════════════════════ */
+
+.legal-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--line-mid);
+  border-radius: 4px;
+  background: var(--ink-1);
+  transition: border-color 0.35s var(--ease), background 0.35s var(--ease),
+              transform 0.35s var(--ease);
+}
+.legal-chip:hover {
+  border-color: var(--green-24);
+  background: var(--ink-2);
+  transform: translateY(-2px);
+}
+
+/* ══════════════════════════════════════════════════════════════
    SECVENȚA DE INTRARE
    ══════════════════════════════════════════════════════════════ */
 

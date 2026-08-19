@@ -1,5 +1,26 @@
 import Logo from './Logo'
-import { WHATSAPP_URL, PHONE_DISPLAY, PHONE_E164, INSTAGRAM_URL } from '@/lib/contact'
+import {
+  WHATSAPP_URL,
+  PHONE_DISPLAY,
+  PHONE_E164,
+  INSTAGRAM_URL,
+  ANPC_SAL_URL,
+  EU_SOL_URL,
+} from '@/lib/contact'
+
+/* Platformele de soluționare a litigiilor, obligatoriu accesibile din site */
+const disputeResolution = [
+  {
+    tag: 'ANPC · SAL',
+    name: 'Soluționarea Alternativă a Litigiilor',
+    href: ANPC_SAL_URL,
+  },
+  {
+    tag: 'UE · SOL',
+    name: 'Soluționarea Online a Litigiilor',
+    href: EU_SOL_URL,
+  },
+]
 
 const columns = [
   {
@@ -93,6 +114,54 @@ export default function Footer() {
               </svg>
               Scrie-mi pe WhatsApp
             </a>
+          </div>
+        </div>
+
+        {/* ── Soluționarea litigiilor ── */}
+        <div className="border-t py-7" style={{ borderColor: 'var(--line)' }}>
+          <p className="mono-sm mb-4" style={{ color: 'var(--bone-30)' }}>
+            Soluționarea litigiilor
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {disputeResolution.map((item) => (
+              <a
+                key={item.tag}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="legal-chip group"
+              >
+                <span
+                  className="mono-sm whitespace-nowrap"
+                  style={{ color: 'var(--green)' }}
+                >
+                  {item.tag}
+                </span>
+                <span
+                  className="text-[0.8125rem] leading-snug"
+                  style={{ color: 'var(--bone-72)' }}
+                >
+                  {item.name}
+                </span>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  className="shrink-0 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  style={{ color: 'var(--bone-30)' }}
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 13L13 5M13 5H6M13 5V12"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
+            ))}
           </div>
         </div>
 
