@@ -81,6 +81,7 @@ export default function LegalPage({
       {/* ── Titlu ── */}
       <div className="relative overflow-hidden border-b" style={{ borderColor: 'var(--line)' }}>
         <div className="blueprint" aria-hidden="true" />
+        <div className="mesh" style={{ opacity: 0.75 }} aria-hidden="true" />
         <div className="shell relative pb-14 pt-16 md:pb-20 md:pt-24">
           <div className="legal-measure">
             <p className="mono eyebrow mb-7">{eyebrow}</p>

@@ -8,10 +8,10 @@ const WA_MESSAGE =
 
 export const WHATSAPP_URL = `https://wa.me/40767422497?text=${encodeURIComponent(WA_MESSAGE)}`
 
-/* Adresa din documentele legale de pe main. Vezi nota din raport:
-   trebuie confirmat că e cutia poștală citită efectiv, fiindcă pe ea
-   ajung solicitările GDPR. */
-export const EMAIL = 'hello@nextflow.ro'
+/* Varianta fără mesaj precompletat. Pe paginile legale, un text de tipul
+   „vreau să discutăm despre afacerea mea" ar fi nelalocul lui pentru
+   cineva care vine să-și exercite un drept GDPR. */
+export const WHATSAPP_PLAIN = 'https://wa.me/40767422497'
 
 export const INSTAGRAM_URL = 'https://www.instagram.com/nextflow_agency.ai/'
 export const SITE_URL = 'https://nextflow.ro/'

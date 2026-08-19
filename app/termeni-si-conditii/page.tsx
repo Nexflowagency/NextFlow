@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import LegalPage, { LegalSection } from '@/components/LegalPage'
-import { EMAIL, ANPC_SAL_URL, EU_SOL_URL } from '@/lib/contact'
+import { WHATSAPP_PLAIN, ANPC_SAL_URL, EU_SOL_URL } from '@/lib/contact'
 
 export const metadata: Metadata = {
   title: 'Termeni și Condiții — Nextflow',
@@ -319,8 +319,16 @@ export default function TermeniSiConditii() {
           <p className="mb-7 text-[0.9375rem] leading-relaxed" style={{ color: 'var(--bone-46)' }}>
             Întreabă înainte, nu după. Răspund personal la orice nelămurire legată de termeni.
           </p>
-          <a href={`mailto:${EMAIL}`} className="btn btn-green">
-            {EMAIL}
+          <a
+            href={WHATSAPP_PLAIN}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-green"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.1c-.24.68-1.42 1.3-1.96 1.35-.5.05-.98.23-3.35-.7-2.82-1.11-4.6-3.99-4.74-4.18-.14-.19-1.13-1.5-1.13-2.87 0-1.36.72-2.03.97-2.31.25-.28.55-.35.73-.35h.53c.17 0 .4-.06.63.48.24.58.8 2 .87 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.47-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.28.74 1.22 1.59 1.98 1.09.97 2.01 1.27 2.3 1.41.28.14.45.12.61-.07.17-.19.7-.82.89-1.1.19-.28.38-.23.63-.14.25.09 1.6.76 1.87.9.28.14.46.21.53.33.07.11.07.65-.17 1.33Z" />
+            </svg>
+            Scrie-mi pe WhatsApp
           </a>
         </>
       }
