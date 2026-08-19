@@ -7,24 +7,24 @@ import { WHATSAPP_URL } from '@/lib/contact'
 const steps = [
   {
     n: '01',
-    title: 'Analizăm',
+    title: 'Analizez',
     duration: '30 min',
     description:
-      'Un call scurt. Îți mapăm fluxul actual, găsim exact unde pierzi bani și îți arătăm soluția înainte să plătești ceva.',
+      'Vorbim o jumătate de oră. Îmi spui cum lucrezi acum, îți arăt unde pierzi timp și bani. Până aici nu plătești nimic.',
   },
   {
     n: '02',
-    title: 'Construim',
+    title: 'Construiesc',
     duration: '2–4 săptămâni',
     description:
-      'Facem totul noi. Captare lead-uri, follow-up, CRM, integrări cu uneltele tale — livrate testate și funcționale.',
+      'Fac eu tot. Îmi dai acces la ce folosești deja și primești totul gata pus la punct, nu o grămadă de setări de dus la capăt.',
   },
   {
     n: '03',
     title: 'Tu scalezi',
     duration: 'Continuu',
     description:
-      'Sistemul rulează singur, cu monitorizare din partea noastră. Tu te concentrezi pe ce contează: să crești.',
+      'De aici merge singur. Eu stau cu ochii pe el, tu te vezi de treaba ta.',
   },
 ]
 
@@ -54,16 +54,16 @@ export default function HowItWorks() {
               className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
               style={{ color: 'var(--on-paper-64)', borderColor: 'var(--line-paper)' }}
             >
-              Nu ai nevoie de cunoștințe tehnice și nu trebuie să schimbi nimic
-              din ce folosești deja.
+              Nu-ți trebuie cunoștințe tehnice și nu schimbi nimic din ce
+              folosești deja.
             </p>
           </div>
         </div>
 
         {/* ── Linia de proces, se umple la scroll ── */}
-        <div className="fill-line reveal mb-12 hidden h-px md:block" />
+        <div className="fill-line reveal mb-12 hidden h-px lg:block" />
 
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8">
           {steps.map((step, i) => (
             <div key={step.n} className={`reveal d${i + 1}`}>
               <div className="mb-7 flex items-baseline justify-between gap-4">

@@ -107,7 +107,7 @@ export default function FinalCTA() {
               style={{ color: 'rgba(10,9,8,0.45)' }}
             >
               Răspund personal · Fără angajament ·{' '}
-              <a href={`tel:${PHONE_E164}`} className="underline-draw">
+              <a href={`tel:${PHONE_E164}`} className="underline-draw tap">
                 sau sună la {PHONE_DISPLAY}
               </a>
             </p>

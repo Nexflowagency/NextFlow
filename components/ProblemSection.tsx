@@ -5,7 +5,7 @@ import Words from './Words'
 
 const pains = [
   { n: '01', line: 'Răspunzi manual la fiecare mesaj.', cost: '3h / zi pierdute' },
-  { n: '02', line: 'Pierzi lead-uri în fiecare zi.', cost: '−20% venit' },
+  { n: '02', line: 'Pierzi clienți în fiecare zi.', cost: '−20% venit' },
   { n: '03', line: 'Faci același lucru în fiecare zi.', cost: 'Zero scalare' },
   { n: '04', line: 'Afacerea depinde 100% de tine.', cost: 'Risc maxim' },
 ]
@@ -33,8 +33,8 @@ export default function ProblemSection() {
             className="reveal d2 mt-7 max-w-[34ch] text-[0.9375rem] leading-relaxed"
             style={{ color: 'var(--bone-46)' }}
           >
-            Nu ai o problemă de efort. Ai o problemă de structură — și te costă
-            în fiecare zi în care rămâne nerezolvată.
+            Problema nu e că nu muncești destul. E că totul trece prin tine.
+            Și te costă în fiecare zi.
           </p>
         </div>
 

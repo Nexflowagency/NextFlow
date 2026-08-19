@@ -98,8 +98,8 @@ export default function Hero() {
             </h1>
 
             <p className="lede mb-11 max-w-[40ch]" style={fade(560)}>
-              Îți construim site-ul și punem roboți să răspundă clienților, să-i
-              programeze și să-ți țină totul organizat. Non-stop.
+              Îți fac site-ul și pun roboți să răspundă clienților, să-i programeze
+              și să țină evidența. Non-stop, fără tine.
             </p>
 
             <div className="flex flex-col gap-3 sm:flex-row" style={fade(660)}>

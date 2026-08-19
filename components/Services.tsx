@@ -10,7 +10,7 @@ const services = [
     n: '01',
     title: 'Un site care îți aduce clienți',
     plain:
-      'Îți facem un site care arată bine pe telefon și îi face pe oameni să te contacteze. Nu unul care doar stă frumos și nu aduce nimic.',
+      'Îți fac un site care arată bine pe telefon și îi convinge pe oameni să te caute. Nu unul care stă frumos și atât.',
     win: 'Te găsesc pe Google',
     wide: true,
   },
@@ -69,7 +69,7 @@ export default function Services() {
           <div className="col-span-12 lg:col-span-8">
             <p className="mono eyebrow eyebrow-paper reveal mb-7">Ce facem, pe scurt</p>
             <h2 className="display d-lg">
-              <Words>Punem roboți să facă</Words>
+              <Words>Pun roboți să facă</Words>
               <Words delay={110} style={{ color: 'var(--on-paper-40)' }}>
                 munca plictisitoare.
               </Words>
@@ -80,8 +80,8 @@ export default function Services() {
               className="reveal d2 border-t pt-6 text-[1rem] leading-relaxed"
               style={{ color: 'var(--on-paper-64)', borderColor: 'var(--line-paper)' }}
             >
-              Tu faci ce știi tu mai bine. Restul — mesaje, telefoane,
-              programări, aduceri aminte — le face sistemul.
+              Tu faci ce știi tu să faci. Mesajele, telefoanele, programările și
+              aducerile aminte le ia sistemul.
             </p>
           </div>
         </div>

@@ -12,7 +12,7 @@ const projects = [
     sector: 'Cosmetică & skincare · Bacău',
     shot: '/proiecte/dermiq.jpg',
     description:
-      'Un site calm și curat pentru un cabinet de cosmetică, cu accent pe tratamente și programări simple.',
+      'Curat și liniștit, cu tratamentele în față și programarea la un click.',
   },
   {
     n: '02',
@@ -22,7 +22,7 @@ const projects = [
     sector: 'Cabinet estetic',
     shot: '/proiecte/esthea.jpg',
     description:
-      'O experiență cinematică, cu animații fine la scroll și un aer de lux discret, de la prima secundă.',
+      'Se mișcă lin la scroll și arată scump fără să facă paradă. Se vede din prima secundă că nu e un șablon.',
   },
   {
     n: '03',
@@ -32,7 +32,7 @@ const projects = [
     sector: 'Salon de înfrumusețare · Suceava',
     shot: '/proiecte/prestige.jpg',
     description:
-      'Coafor, machiaj, cosmetică, laser și unghii sub un singur brand — cu galerie de transformări înainte–după și programare directă.',
+      'Tot ce ține de frumusețe într-un singur loc. Galerie cu transformări înainte–după și programare directă.',
   },
   {
     n: '04',
@@ -42,7 +42,7 @@ const projects = [
     sector: 'Coafor & frizerie · Cluj-Napoca',
     shot: '/proiecte/contour.jpg',
     description:
-      'Un brand îndrăzneț pentru un coafor din Cluj — galerie de lucrări, echipă și rezervări directe.',
+      'Coafor din Cluj, cu personalitate. Galerie de lucrări, echipa și rezervare directă.',
   },
 ]
 
@@ -72,8 +72,7 @@ export default function Portfolio() {
               className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
               style={{ color: 'var(--bone-46)', borderColor: 'var(--line-mid)' }}
             >
-              Apasă pe oricare ca să-l vezi live, exact așa cum îl vede clientul
-              tău.
+              Apasă pe oricare și îl vezi live, așa cum îl vede clientul tău.
             </p>
           </div>
         </div>

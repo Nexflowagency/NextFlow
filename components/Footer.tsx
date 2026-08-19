@@ -65,9 +65,8 @@ export default function Footer() {
               className="mt-6 max-w-[34ch] text-[0.9375rem] leading-relaxed"
               style={{ color: 'var(--bone-46)' }}
             >
-              Construim site-uri și roboți care răspund clienților, îi
-              programează și țin totul organizat — non-stop, pentru afaceri
-              locale din România.
+              Fac site-uri și roboți care răspund clienților, îi programează și țin
+              evidența. Non-stop, pentru afaceri locale din România.
             </p>
             <div className="mono-sm mt-7 flex items-center gap-2.5" style={{ color: 'var(--bone-30)' }}>
               <span className="live" aria-hidden="true" />

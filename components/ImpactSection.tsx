@@ -114,7 +114,7 @@ export default function ImpactSection() {
 
   const results = [
     {
-      label: 'Ore pe care le primești înapoi',
+      label: 'Ore pe care le iei înapoi',
       value: `${roFormat.format(hoursShown)} h`,
       unit: 'în fiecare lună',
       how: `${roFormat.format(monthly)} mesaje × ${MIN_PER_MESSAGE} min, din care ${Math.round(
@@ -122,7 +122,7 @@ export default function ImpactSection() {
       )}% le preia sistemul`,
     },
     {
-      label: 'Clienți pe care nu îi mai pierzi',
+      label: 'Clienți pe care nu-i mai pierzi',
       value: roFormat.format(recoveredShown),
       unit: 'în fiecare lună',
       how: `${Math.round(LOST_SHARE * 100)}% din cereri se pierd azi — răspuns întârziat sau după program`,
@@ -161,8 +161,8 @@ export default function ImpactSection() {
               className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
               style={{ color: 'var(--bone-46)', borderColor: 'var(--line-mid)' }}
             >
-              Două întrebări simple despre afacerea ta. Îți arătăm imediat cât
-              timp și cât ban stau blocate în muncă pe care o poate face un robot.
+              Două întrebări despre afacerea ta. Vezi pe loc cât timp și cât ban
+              stau blocate în muncă pe care o poate face un robot.
             </p>
           </div>
         </div>

@@ -136,7 +136,7 @@ export default function Testimonials() {
           <div className="col-span-12 lg:col-span-8">
             <p className="mono eyebrow reveal mb-7">Păreri de la cliente</p>
             <h2 className="display d-lg">
-              <Words>Nu te crede pe mine.</Words>
+              <Words>Nu mă crede pe cuvânt.</Words>
               <Words delay={110} style={{ color: 'var(--green)' }}>
                 Ascultă-le pe ele.
               </Words>
@@ -147,8 +147,8 @@ export default function Testimonials() {
               className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
               style={{ color: 'var(--bone-46)', borderColor: 'var(--line-mid)' }}
             >
-              Filmări și mesaje primite de la cliente reale, exact așa cum au
-              venit. Apasă play și le auzi direct de la ele.
+              Filmări și mesaje de la cliente, exact așa cum le-am primit.
+              Apasă play și le auzi direct.
             </p>
           </div>
         </div>
@@ -214,7 +214,7 @@ export default function Testimonials() {
                   href={reel.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mono-sm underline-draw relative z-20 mt-5 inline-flex items-center gap-2"
+                  className="mono-sm underline-draw tap relative z-20 mt-5 inline-flex items-center gap-2"
                   style={{ color: 'var(--bone-30)' }}
                 >
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -230,12 +230,12 @@ export default function Testimonials() {
         </div>
 
         {/* ── Mesaje WhatsApp, decalate pe verticală ── */}
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
           {quotes.map((t, i) => (
             <figure
               key={t.name}
               className={`panel quote-card reveal d${i + 2} flex flex-col p-8 ${
-                i === 1 ? 'md:mt-10' : i === 2 ? 'md:mt-20' : ''
+                i === 1 ? 'lg:mt-10' : i === 2 ? 'lg:mt-20' : ''
               }`}
             >
               <span className="tick tick-tl" aria-hidden="true" />

@@ -831,18 +831,63 @@ html.has-cursor [role='button'] { cursor: none; }
 }
 
 /* ══════════════════════════════════════════════════════════════
+   ZONE DE ATINGERE
+   Pe ecrane fără mouse, un link de 16–24px înălțime e greu de nimerit.
+   Extindem zona activă la 44px cu un pseudo-element, fără să mișcăm
+   nimic din așezarea vizuală. Butoanele sunt excluse: la ele ::before
+   desenează deja sclipirea de la hover.
+   ══════════════════════════════════════════════════════════════ */
+
+@media (pointer: coarse) {
+  footer a:not(.btn),
+  header a:not(.btn),
+  .legal-prose a,
+  .tap {
+    position: relative;
+  }
+
+  footer a:not(.btn)::before,
+  header a:not(.btn)::before,
+  .legal-prose a::before,
+  .tap::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: max(100%, 44px);
+    transform: translateY(-50%);
+    /* pur zonă de atingere — nu se vede și nu prinde hover-ul vizual */
+    pointer-events: auto;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
    CURSOARE — calculatorul de economii
    ══════════════════════════════════════════════════════════════ */
 
+/* Pista rămâne de 2px, dar elementul are 44px înălțime: pe touch trebuie
+   să poți apuca cursorul fără să nimerești o linie de doi pixeli. */
 .slider {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
+  height: 44px;
+  margin-block: -0.75rem;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-runnable-track {
   height: 2px;
   border-radius: 99px;
   background: var(--line-mid);
-  outline: none;
-  cursor: pointer;
+}
+.slider::-moz-range-track {
+  height: 2px;
+  border-radius: 99px;
+  background: var(--line-mid);
 }
 
 .slider::-webkit-slider-thumb {
@@ -850,6 +895,7 @@ html.has-cursor [role='button'] { cursor: none; }
   appearance: none;
   width: 22px;
   height: 22px;
+  margin-top: -10px;
   border-radius: 99px;
   background: var(--green);
   border: 4px solid var(--ink);
