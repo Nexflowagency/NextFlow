@@ -13,6 +13,12 @@ export const WHATSAPP_URL = `https://wa.me/40767422497?text=${encodeURIComponent
    cineva care vine să-și exercite un drept GDPR. */
 export const WHATSAPP_PLAIN = 'https://wa.me/40767422497'
 
+/* Formularul de calificare („Formular ICP — Despre Business & Probleme").
+   Atenție: adresa este cea publică, form.typeform.com/to/<id>. Linkul din
+   panoul Typeform (admin.typeform.com/form/<id>/create) e ecranul de
+   editare și trimite vizitatorii la login. */
+export const TYPEFORM_URL = 'https://form.typeform.com/to/IdcZF8Tv'
+
 export const INSTAGRAM_URL = 'https://www.instagram.com/nextflow_agency.ai/'
 export const SITE_URL = 'https://nextflow.ro/'
 

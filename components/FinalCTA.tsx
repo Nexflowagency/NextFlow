@@ -1,7 +1,7 @@
 'use client'
 
 import { useScrollReveal } from '@/hooks/useScrollReveal'
-import { WHATSAPP_URL, PHONE_DISPLAY, PHONE_E164 } from '@/lib/contact'
+import { WHATSAPP_URL, PHONE_DISPLAY, PHONE_E164, TYPEFORM_URL } from '@/lib/contact'
 
 const included = [
   'Îți spun ce pierzi acum, cu cifre',
@@ -65,8 +65,9 @@ export default function FinalCTA() {
               className="reveal d2 mb-10 max-w-[42ch] text-[1.0625rem] leading-relaxed"
               style={{ color: 'rgba(10,9,8,0.62)' }}
             >
-              Scrie-mi pe WhatsApp ce afacere ai. Îți răspund personal și îți
-              spun sincer dacă te pot ajuta sau nu.
+              Scrie-mi pe WhatsApp ce afacere ai, sau completează formularul
+              dacă preferi să-mi lași totul în scris. Îți răspund personal și
+              îți spun sincer dacă te pot ajuta sau nu.
             </p>
 
             <div className="reveal d3 flex flex-col gap-3 sm:flex-row">
@@ -83,8 +84,21 @@ export default function FinalCTA() {
                 Scrie-mi pe WhatsApp
               </a>
               </span>
-              <a href={`tel:${PHONE_E164}`} className="btn btn-ink-line px-8 py-[1.15rem]">
-                {PHONE_DISPLAY}
+              <a
+                href={TYPEFORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-ink-line px-8 py-[1.15rem]"
+              >
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <path
+                    d="M3 4.5h12M3 9h12M3 13.5h7"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                Completează formularul
               </a>
             </div>
 
@@ -92,7 +106,10 @@ export default function FinalCTA() {
               className="mono-sm reveal d4 mt-8"
               style={{ color: 'rgba(10,9,8,0.45)' }}
             >
-              Răspund personal · Fără angajament · Fără prezentare de vânzare
+              Răspund personal · Fără angajament ·{' '}
+              <a href={`tel:${PHONE_E164}`} className="underline-draw">
+                sau sună la {PHONE_DISPLAY}
+              </a>
             </p>
           </div>
 

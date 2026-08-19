@@ -1,6 +1,7 @@
 import Logo from './Logo'
 import {
   WHATSAPP_URL,
+  TYPEFORM_URL,
   PHONE_DISPLAY,
   PHONE_E164,
   INSTAGRAM_URL,
@@ -38,6 +39,7 @@ const columns = [
     links: [
       { label: 'WhatsApp', href: WHATSAPP_URL },
       { label: PHONE_DISPLAY, href: `tel:${PHONE_E164}` },
+      { label: 'Completează formularul', href: TYPEFORM_URL },
       { label: 'Instagram', href: INSTAGRAM_URL },
     ],
   },
