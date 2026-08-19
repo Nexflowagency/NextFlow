@@ -7,15 +7,7 @@ const specs = [
   { k: 'Status', v: 'Sisteme active', live: true },
   { k: 'Timp răspuns', v: '< 2 min' },
   { k: 'Implementare', v: '2–4 săptămâni' },
-  { k: 'Afaceri', v: '50+' },
-]
-
-const proof = [
-  { initials: 'AR', accent: false },
-  { initials: 'MC', accent: false },
-  { initials: 'DP', accent: true },
-  { initials: 'IL', accent: false },
-  { initials: 'SB', accent: false },
+  { k: 'Afaceri', v: '20' },
 ]
 
 export default function Hero() {
@@ -157,27 +149,10 @@ export default function Hero() {
         style={{ borderColor: 'var(--line)', ...fade(900) }}
       >
         <div className="shell flex flex-wrap items-center justify-between gap-6 py-6">
-          <div className="flex items-center gap-4">
-            <div className="flex">
-              {proof.map((p, i) => (
-                <span
-                  key={p.initials}
-                  className="num -ml-1.5 flex h-8 w-8 items-center justify-center rounded-full text-[0.625rem] font-semibold first:ml-0"
-                  style={{
-                    background: p.accent ? 'var(--green)' : 'var(--ink-3)',
-                    color: p.accent ? 'var(--ink)' : 'var(--bone-72)',
-                    border: '1px solid var(--ink)',
-                    zIndex: proof.length - i,
-                  }}
-                >
-                  {p.initials}
-                </span>
-              ))}
-            </div>
-            <p className="mono-sm" style={{ color: 'var(--bone-46)' }}>
-              <span style={{ color: 'var(--bone)' }}>50+ afaceri</span> automatizate
-            </p>
-          </div>
+          <p className="mono-sm flex items-center gap-2.5" style={{ color: 'var(--bone-46)' }}>
+            <span className="live" aria-hidden="true" />
+            <span style={{ color: 'var(--bone)' }}>20 de afaceri</span> automatizate
+          </p>
 
           <div className="mono-sm flex items-center gap-3" style={{ color: 'var(--bone-30)' }}>
             Derulează
