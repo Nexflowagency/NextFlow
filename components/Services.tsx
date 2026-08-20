@@ -2,6 +2,7 @@
 
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import Words from './Words'
+import type { SectionProps } from '@/lib/nav'
 
 /* Explicat pe cât se poate de simplu: o scenă concretă din ziua clientului,
    nu descrieri tehnice. Fără cuvinte precum „workflow" sau „integrare". */
@@ -19,7 +20,7 @@ const services = [
     title: 'Un robot care răspunde în locul tău',
     plain:
       'Cineva îți scrie la 11 noaptea. Robotul răspunde pe loc, îi zice prețul și îl trece în programări. Tu dormi.',
-    win: 'Răspuns în 10 secunde',
+    win: 'Răspunde pe loc',
   },
   {
     n: '03',
@@ -44,13 +45,13 @@ const services = [
   },
 ]
 
-export default function Services() {
+export default function Services({ hideHeader = false }: SectionProps) {
   const ref = useScrollReveal<HTMLDivElement>()
 
   return (
     <section
       id="servicii"
-      className="section relative overflow-hidden"
+      className={`section relative overflow-hidden ${hideHeader ? 'section-head-off' : ''}`}
       style={{ background: 'var(--paper)', color: 'var(--on-paper)' }}
     >
       <div
@@ -65,26 +66,28 @@ export default function Services() {
 
       <div className="shell relative" ref={ref}>
         {/* ── Antet ── */}
-        <div className="g12 mb-14 items-end gap-y-8 lg:mb-20">
-          <div className="col-span-12 lg:col-span-8">
-            <p className="mono eyebrow eyebrow-paper reveal mb-7">Ce facem, pe scurt</p>
-            <h2 className="display d-lg">
-              <Words>Pun roboți să facă</Words>
-              <Words delay={110} style={{ color: 'var(--on-paper-40)' }}>
-                munca plictisitoare.
-              </Words>
-            </h2>
+        {!hideHeader && (
+          <div className="g12 mb-14 items-end gap-y-8 lg:mb-20">
+            <div className="col-span-12 lg:col-span-8">
+              <p className="mono eyebrow eyebrow-paper reveal mb-7">Ce facem, pe scurt</p>
+              <h2 className="display d-lg">
+                <Words>Pun roboți să facă</Words>
+                <Words delay={110} style={{ color: 'var(--on-paper-40)' }}>
+                  munca plictisitoare.
+                </Words>
+              </h2>
+            </div>
+            <div className="col-span-12 lg:col-span-3 lg:col-start-10">
+              <p
+                className="reveal d2 border-t pt-6 text-[1rem] leading-relaxed"
+                style={{ color: 'var(--on-paper-64)', borderColor: 'var(--line-paper)' }}
+              >
+                Tu faci ce știi tu să faci. Mesajele, telefoanele, programările și
+                aducerile aminte le ia sistemul.
+              </p>
+            </div>
           </div>
-          <div className="col-span-12 lg:col-span-3 lg:col-start-10">
-            <p
-              className="reveal d2 border-t pt-6 text-[1rem] leading-relaxed"
-              style={{ color: 'var(--on-paper-64)', borderColor: 'var(--line-paper)' }}
-            >
-              Tu faci ce știi tu să faci. Mesajele, telefoanele, programările și
-              aducerile aminte le ia sistemul.
-            </p>
-          </div>
-        </div>
+        )}
 
         {/* ── Cardurile ── */}
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">

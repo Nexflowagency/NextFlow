@@ -11,13 +11,12 @@ export const metadata: Metadata = {
 }
 
 const services = [
-  'Agenți vocali AI',
+  'Creare site de prezentare',
   'Chatboți pentru website',
-  'Automatizare CRM',
-  'Automatizare social media',
-  'Email & WhatsApp marketing',
-  'Programare automată (calendar AI)',
-  'Sisteme de follow-up automat',
+  'Agenți vocali AI care preiau apelurile',
+  'Programare automată (calendar sincronizat)',
+  'Automatizare CRM și evidența clienților',
+  'Mesaje automate de confirmare, reamintire și revenire',
   'Integrări și automatizări custom',
 ]
 
@@ -65,8 +64,9 @@ const sections: LegalSection[] = [
           ))}
         </ul>
         <p>
-          Specificațiile exacte, livrabilele și termenele sunt definite în oferta comercială și/sau
-          contractul semnat individual cu fiecare client.
+          Lista de mai sus este orientativă, nu limitativă. Specificațiile exacte, livrabilele și
+          termenele sunt definite în oferta comercială și/sau contractul semnat individual cu
+          fiecare client.
         </p>
       </>
     ),
@@ -308,7 +308,7 @@ export default function TermeniSiConditii() {
       eyebrow="Document legal"
       titleTop="Termeni"
       titleAccent="și condiții"
-      updated="Iunie 2026"
+      updated="August 2026"
       standard="Guvernate de legislația română"
       sections={sections}
       footerNote={

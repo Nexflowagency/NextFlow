@@ -105,7 +105,7 @@ export default function LegalPage({
           <p className="mono-sm mb-5" style={{ color: 'var(--bone-30)' }}>
             Cuprins
           </p>
-          <ol className="mb-16 grid grid-cols-1 gap-x-8 gap-y-2.5 sm:grid-cols-2">
+          <ol className="legal-toc mb-16 grid grid-cols-1 gap-x-8 gap-y-2.5 sm:grid-cols-2">
             {sections.map((section) => (
               <li key={section.id} className="flex items-baseline gap-3">
                 <span className="num shrink-0 text-[0.6875rem]" style={{ color: 'var(--bone-16)' }}>

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import Words from './Words'
 import { WHATSAPP_URL } from '@/lib/contact'
+import type { SectionProps } from '@/lib/nav'
 
 /* ──────────────────────────────────────────────────────────────
    Ipotezele calculului. Sunt afișate lângă fiecare rezultat, ca
@@ -98,7 +99,7 @@ function Slider({
   )
 }
 
-export default function ImpactSection() {
+export default function ImpactSection({ hideHeader = false }: SectionProps) {
   const ref = useScrollReveal<HTMLDivElement>()
   const [perDay, setPerDay] = useState(15)
   const [clientValue, setClientValue] = useState(200)
@@ -117,7 +118,7 @@ export default function ImpactSection() {
       label: 'Ore pe care le iei înapoi',
       value: `${roFormat.format(hoursShown)} h`,
       unit: 'în fiecare lună',
-      how: `${roFormat.format(monthly)} mesaje × ${MIN_PER_MESSAGE} min, din care ${Math.round(
+      how: `Ipoteză: ${roFormat.format(monthly)} mesaje × ${MIN_PER_MESSAGE} min, din care ${Math.round(
         AUTOMATED_SHARE * 100
       )}% le preia sistemul`,
     },
@@ -125,7 +126,9 @@ export default function ImpactSection() {
       label: 'Clienți pe care nu-i mai pierzi',
       value: roFormat.format(recoveredShown),
       unit: 'în fiecare lună',
-      how: `${Math.round(LOST_SHARE * 100)}% din cereri se pierd azi — răspuns întârziat sau după program`,
+      how: `Ipoteză: ${Math.round(
+        LOST_SHARE * 100
+      )}% din cereri se pierd azi — răspuns întârziat sau după program`,
     },
     {
       label: 'Bani în plus',
@@ -139,33 +142,35 @@ export default function ImpactSection() {
   return (
     <section
       id="impact"
-      className="section relative overflow-hidden"
+      className={`section relative overflow-hidden ${hideHeader ? 'section-head-off' : ''}`}
       style={{ background: 'var(--ink)' }}
     >
       <div className="mesh" style={{ opacity: 0.7 }} aria-hidden="true" />
 
       <div className="shell relative" ref={ref}>
         {/* ── Antet ── */}
-        <div className="g12 mb-14 items-end gap-y-8">
-          <div className="col-span-12 lg:col-span-8">
-            <p className="mono eyebrow reveal mb-7">Cât te costă, de fapt</p>
-            <h2 className="display d-lg">
-              <Words>Mută cursoarele.</Words>
-              <Words delay={110} style={{ color: 'var(--green)' }}>
-                Vezi ce pierzi.
-              </Words>
-            </h2>
+        {!hideHeader && (
+          <div className="g12 mb-14 items-end gap-y-8">
+            <div className="col-span-12 lg:col-span-8">
+              <p className="mono eyebrow reveal mb-7">Cât te costă, de fapt</p>
+              <h2 className="display d-lg">
+                <Words>Mută cursoarele.</Words>
+                <Words delay={110} style={{ color: 'var(--green)' }}>
+                  Vezi ce pierzi.
+                </Words>
+              </h2>
+            </div>
+            <div className="col-span-12 lg:col-span-3 lg:col-start-10">
+              <p
+                className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
+                style={{ color: 'var(--bone-46)', borderColor: 'var(--line-mid)' }}
+              >
+                Două întrebări despre afacerea ta. Vezi pe loc cât timp și cât ban
+                stau blocate în muncă pe care o poate face un robot.
+              </p>
+            </div>
           </div>
-          <div className="col-span-12 lg:col-span-3 lg:col-start-10">
-            <p
-              className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
-              style={{ color: 'var(--bone-46)', borderColor: 'var(--line-mid)' }}
-            >
-              Două întrebări despre afacerea ta. Vezi pe loc cât timp și cât ban
-              stau blocate în muncă pe care o poate face un robot.
-            </p>
-          </div>
-        </div>
+        )}
 
         <div className="g12 items-start gap-y-12">
           {/* ── Cursoarele ── */}
@@ -252,8 +257,9 @@ export default function ImpactSection() {
               className="reveal d5 mt-6 text-[0.8125rem] leading-relaxed"
               style={{ color: 'var(--bone-30)' }}
             >
-              Estimare orientativă, pe baza ipotezelor de mai sus. Cifrele reale
-              depind de afacerea ta — le calculăm împreună, cu datele tale.
+              Nu sunt cifre măsurate, ci o estimare pe baza ipotezelor de mai
+              sus. Cât iese la tine depinde de afacerea ta — calculăm împreună,
+              cu numerele tale reale.
             </p>
           </div>
         </div>

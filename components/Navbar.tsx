@@ -4,14 +4,7 @@ import { useEffect, useState } from 'react'
 import Logo from './Logo'
 
 import { WHATSAPP_URL, PHONE_DISPLAY, PHONE_E164 } from '@/lib/contact'
-
-const navLinks = [
-  { index: '01', label: 'Ce facem', href: '#servicii' },
-  { index: '02', label: 'Proces', href: '#proces' },
-  { index: '03', label: 'Cât câștigi', href: '#impact' },
-  { index: '04', label: 'Păreri', href: '#pareri' },
-  { index: '05', label: 'Proiecte', href: '#proiecte' },
-]
+import { menuPages as navLinks } from '@/lib/nav'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -47,7 +40,7 @@ export default function Navbar() {
         <div className="shell">
           <nav className="flex h-16 items-center justify-between md:h-[76px]">
             {/* Doar marca, fără wordmark */}
-            <a href="#" aria-label="Nextflow.ai — acasă" className="relative z-10">
+            <a href="/" aria-label="Nextflow.ai — acasă" className="relative z-10">
               <Logo showWordmark={false} size={36} uid="nf-nav" />
             </a>
 
@@ -76,7 +69,7 @@ export default function Navbar() {
 
             <div className="hidden items-center gap-6 lg:flex">
               <a
-                href="#cta"
+                href="/contact"
                 className="mono underline-draw transition-colors duration-300"
                 style={{ color: 'var(--bone-46)' }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--bone)')}
@@ -100,7 +93,7 @@ export default function Navbar() {
             {/* Buton meniu mobil */}
             <button
               onClick={() => setMenuOpen((v) => !v)}
-              className="relative z-10 flex h-10 w-10 flex-col items-center justify-center gap-[5px] lg:hidden"
+              className="relative z-10 -mr-1 flex h-11 w-11 flex-col items-center justify-center gap-[5px] lg:hidden"
               aria-label={menuOpen ? 'Închide meniul' : 'Deschide meniul'}
               aria-expanded={menuOpen}
             >
@@ -180,7 +173,7 @@ export default function Navbar() {
             <a
               href={`tel:${PHONE_E164}`}
               onClick={() => setMenuOpen(false)}
-              className="mono py-3 text-center"
+              className="mono py-4 text-center"
               style={{ color: 'var(--bone-46)' }}
             >
               {PHONE_DISPLAY}

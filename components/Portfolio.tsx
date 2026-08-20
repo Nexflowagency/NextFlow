@@ -2,6 +2,7 @@
 
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import Words from './Words'
+import type { SectionProps } from '@/lib/nav'
 
 const projects = [
   {
@@ -46,36 +47,38 @@ const projects = [
   },
 ]
 
-export default function Portfolio() {
+export default function Portfolio({ hideHeader = false }: SectionProps) {
   const ref = useScrollReveal<HTMLDivElement>()
 
   return (
     <section
       id="proiecte"
-      className="section relative overflow-hidden"
+      className={`section relative overflow-hidden ${hideHeader ? 'section-head-off' : ''}`}
       style={{ background: 'var(--ink)' }}
     >
       <div className="shell relative" ref={ref}>
         {/* ── Antet ── */}
-        <div className="g12 mb-14 items-end gap-y-8">
-          <div className="col-span-12 lg:col-span-8">
-            <p className="mono eyebrow reveal mb-7">Proiecte livrate</p>
-            <h2 className="display d-lg">
-              <Words>Site-uri pe care</Words>
-              <Words delay={110} style={{ color: 'var(--bone-30)' }}>
-                le-am construit.
-              </Words>
-            </h2>
+        {!hideHeader && (
+          <div className="g12 mb-14 items-end gap-y-8">
+            <div className="col-span-12 lg:col-span-8">
+              <p className="mono eyebrow reveal mb-7">Proiecte livrate</p>
+              <h2 className="display d-lg">
+                <Words>Site-uri pe care</Words>
+                <Words delay={110} style={{ color: 'var(--bone-30)' }}>
+                  le-am construit.
+                </Words>
+              </h2>
+            </div>
+            <div className="col-span-12 lg:col-span-3 lg:col-start-10">
+              <p
+                className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
+                style={{ color: 'var(--bone-46)', borderColor: 'var(--line-mid)' }}
+              >
+                Apasă pe oricare și îl vezi live, așa cum îl vede clientul tău.
+              </p>
+            </div>
           </div>
-          <div className="col-span-12 lg:col-span-3 lg:col-start-10">
-            <p
-              className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
-              style={{ color: 'var(--bone-46)', borderColor: 'var(--line-mid)' }}
-            >
-              Apasă pe oricare și îl vezi live, așa cum îl vede clientul tău.
-            </p>
-          </div>
-        </div>
+        )}
 
         {/* ── Cardurile cu capturi ── */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">

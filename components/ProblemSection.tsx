@@ -4,8 +4,8 @@ import { useScrollReveal } from '@/hooks/useScrollReveal'
 import Words from './Words'
 
 const pains = [
-  { n: '01', line: 'Răspunzi manual la fiecare mesaj.', cost: '3h / zi pierdute' },
-  { n: '02', line: 'Pierzi clienți în fiecare zi.', cost: '−20% venit' },
+  { n: '01', line: 'Răspunzi manual la fiecare mesaj.', cost: 'Timp mâncat zilnic' },
+  { n: '02', line: 'Cine scrie noaptea rămâne fără răspuns.', cost: 'Clienți pierduți' },
   { n: '03', line: 'Faci același lucru în fiecare zi.', cost: 'Zero scalare' },
   { n: '04', line: 'Afacerea depinde 100% de tine.', cost: 'Risc maxim' },
 ]
@@ -84,8 +84,8 @@ export default function ProblemSection() {
               Costul real
             </span>
             <p className="display d-sm" style={{ color: 'var(--bone)' }}>
-              Pierzi <span style={{ color: 'var(--clay)' }}>20–40% din clienți</span>{' '}
-              fără să știi.
+              Pierzi <span style={{ color: 'var(--clay)' }}>clienți</span> fără să
+              afli vreodată de ei.
             </p>
           </div>
         </div>

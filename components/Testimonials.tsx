@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import Words from './Words'
+import type { SectionProps } from '@/lib/nav'
 
 /* ──────────────────────────────────────────────────────────────
    Recenzii video — fișierele sunt găzduite la noi, nu încărcate
@@ -118,40 +119,42 @@ function ReelPlayer({ reel, onClose }: { reel: Reel; onClose: () => void }) {
   )
 }
 
-export default function Testimonials() {
+export default function Testimonials({ hideHeader = false }: SectionProps) {
   const ref = useScrollReveal<HTMLDivElement>()
   const [open, setOpen] = useState<Reel | null>(null)
 
   return (
     <section
       id="pareri"
-      className="section relative overflow-hidden"
+      className={`section relative overflow-hidden ${hideHeader ? 'section-head-off' : ''}`}
       style={{ background: 'var(--ink-1)' }}
     >
       <div className="mesh" style={{ opacity: 0.5 }} aria-hidden="true" />
 
       <div className="shell relative" ref={ref}>
         {/* ── Antet ── */}
-        <div className="g12 mb-14 items-end gap-y-8">
-          <div className="col-span-12 lg:col-span-8">
-            <p className="mono eyebrow reveal mb-7">Păreri de la cliente</p>
-            <h2 className="display d-lg">
-              <Words>Nu mă crede pe cuvânt.</Words>
-              <Words delay={110} style={{ color: 'var(--green)' }}>
-                Ascultă-le pe ele.
-              </Words>
-            </h2>
+        {!hideHeader && (
+          <div className="g12 mb-14 items-end gap-y-8">
+            <div className="col-span-12 lg:col-span-8">
+              <p className="mono eyebrow reveal mb-7">Păreri de la cliente</p>
+              <h2 className="display d-lg">
+                <Words>Nu mă crede pe cuvânt.</Words>
+                <Words delay={110} style={{ color: 'var(--green)' }}>
+                  Ascultă-le pe ele.
+                </Words>
+              </h2>
+            </div>
+            <div className="col-span-12 lg:col-span-3 lg:col-start-10">
+              <p
+                className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
+                style={{ color: 'var(--bone-46)', borderColor: 'var(--line-mid)' }}
+              >
+                Filmări și mesaje de la cliente, exact așa cum le-am primit.
+                Apasă play și le auzi direct.
+              </p>
+            </div>
           </div>
-          <div className="col-span-12 lg:col-span-3 lg:col-start-10">
-            <p
-              className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
-              style={{ color: 'var(--bone-46)', borderColor: 'var(--line-mid)' }}
-            >
-              Filmări și mesaje de la cliente, exact așa cum le-am primit.
-              Apasă play și le auzi direct.
-            </p>
-          </div>
-        </div>
+        )}
 
         {/* ── Recenzii video ── */}
         <div className="mb-6 grid grid-cols-1 gap-6 sm:grid-cols-2">

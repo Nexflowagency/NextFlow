@@ -5,8 +5,8 @@ import { WHATSAPP_URL } from '@/lib/contact'
 
 const specs = [
   { k: 'Status', v: 'Sisteme active', live: true },
-  { k: 'Timp răspuns', v: '< 2 min' },
-  { k: 'Implementare', v: '2–4 săptămâni' },
+  { k: 'Prima discuție', v: 'Gratuită' },
+  { k: 'Implementare', v: '2–6 săptămâni' },
   { k: 'Afaceri', v: '20' },
 ]
 

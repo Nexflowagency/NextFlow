@@ -8,6 +8,7 @@ import {
   ANPC_SAL_URL,
   EU_SOL_URL,
 } from '@/lib/contact'
+import { pages } from '@/lib/nav'
 
 /* Platformele de soluționare a litigiilor, obligatoriu accesibile din site */
 const disputeResolution = [
@@ -26,13 +27,7 @@ const disputeResolution = [
 const columns = [
   {
     title: 'Navigare',
-    links: [
-      { label: 'Ce facem', href: '/#servicii' },
-      { label: 'Proces', href: '/#proces' },
-      { label: 'Cât câștigi', href: '/#impact' },
-      { label: 'Păreri', href: '/#pareri' },
-      { label: 'Proiecte', href: '/#proiecte' },
-    ],
+    links: pages.map((p) => ({ label: p.label, href: p.href })),
   },
   {
     title: 'Contact',

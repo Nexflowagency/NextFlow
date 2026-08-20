@@ -170,6 +170,18 @@
   position: relative;
 }
 
+/* Secțiune care și-a pierdut antetul: titlul îl poartă antetul paginii,
+   așa că nu mai are rost spațiul plin de deasupra. */
+.section-head-off {
+  padding-top: calc(var(--section) * 0.5);
+}
+
+/* Variantă mai scundă, pentru blocurile de legătură dintre pagini */
+.section-sm {
+  padding-block: calc(var(--section) * 0.58);
+  position: relative;
+}
+
 /* Navbarul e fix — ancorele trebuie să lase loc sub el */
 section[id],
 footer[id] { scroll-margin-top: 6rem; }
@@ -839,6 +851,15 @@ html.has-cursor [role='button'] { cursor: none; }
    ══════════════════════════════════════════════════════════════ */
 
 @media (pointer: coarse) {
+  /* Cuprinsul paginilor legale: linkurile stau unul sub altul, așa că
+     nu pot fi lărgite cu un pseudo-element — s-ar călca pe degete.
+     Le dăm înălțime reală, cu padding. */
+  .legal-toc a {
+    display: inline-block;
+    padding-block: 0.7rem;
+  }
+  .legal-toc { row-gap: 0; }
+
   footer a:not(.btn),
   header a:not(.btn),
   .legal-prose a,

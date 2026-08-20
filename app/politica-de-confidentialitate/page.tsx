@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import LegalPage, { LegalSection } from '@/components/LegalPage'
-import { PHONE_DISPLAY, PHONE_E164, WHATSAPP_PLAIN } from '@/lib/contact'
+import { PHONE_DISPLAY, PHONE_E164, WHATSAPP_PLAIN, TYPEFORM_URL } from '@/lib/contact'
 
 export const metadata: Metadata = {
   title: 'Politică de Confidențialitate — Nextflow',
@@ -17,11 +17,11 @@ const legalBases = [
   },
   {
     temei: 'Consimțământ',
-    scop: 'Trimiterea de comunicări comerciale (newsletter, oferte). Puteți retrage consimțământul oricând.',
+    scop: 'Trimiterea de comunicări comerciale, doar dacă v-ați dat acordul explicit. Îl puteți retrage oricând.',
   },
   {
     temei: 'Interes legitim',
-    scop: 'Îmbunătățirea serviciilor, prevenirea fraudei, analiza traficului pe site.',
+    scop: 'Securitatea site-ului, prevenirea abuzurilor și îmbunătățirea serviciilor.',
   },
   {
     temei: 'Obligație legală',
@@ -83,21 +83,27 @@ const sections: LegalSection[] = [
     title: 'Ce date cu caracter personal colectăm',
     content: (
       <>
-        <p>Colectăm date pe care ni le furnizați în mod direct:</p>
+        <p>
+          Colectăm doar datele pe care ni le trimiteți dumneavoastră, prin unul dintre cele trei
+          canale de contact de pe site: WhatsApp, telefon sau{' '}
+          <a href={TYPEFORM_URL} target="_blank" rel="noopener noreferrer">
+            formularul online
+          </a>
+          . Concret:
+        </p>
         <ul>
           <li>Nume și prenume</li>
-          <li>Adresă de email</li>
-          <li>Număr de telefon</li>
+          <li>Număr de telefon (dacă ne scrieți pe WhatsApp sau ne sunați)</li>
+          <li>Adresă de email, dacă alegeți să ne-o lăsați în formular</li>
           <li>Denumirea și domeniul afacerii dumneavoastră</li>
-          <li>Mesajele transmise prin formularul de contact, WhatsApp sau email</li>
+          <li>Conținutul mesajelor pe care ni le transmiteți</li>
         </ul>
-        <p>Colectăm automat prin cookies și instrumente de analiză:</p>
-        <ul>
-          <li>Adresa IP și locația geografică aproximativă</li>
-          <li>Tipul de browser și sistemul de operare</li>
-          <li>Paginile vizitate și durata sesiunii</li>
-          <li>Sursa de trafic (cum ați ajuns pe site)</li>
-        </ul>
+        <p>
+          <strong>Nu folosim instrumente de analiză a traficului</strong> (Google Analytics sau
+          echivalente) și nu urmărim comportamentul vizitatorilor pe site. Ca la orice site,
+          furnizorul de găzduire înregistrează automat, în jurnalele tehnice, adresa IP și tipul de
+          browser al vizitatorilor — strict pentru livrarea paginii și pentru securitate.
+        </p>
       </>
     ),
   },
@@ -133,8 +139,8 @@ const sections: LegalSection[] = [
             Date de facturare: <strong>10 ani</strong>, conform legislației fiscale române.
           </li>
           <li>
-            Date analitice (cookies): conform politicii furnizorului (Google Analytics — maximum 26 de
-            luni).
+            Jurnale tehnice ale serverului de găzduire: pe termen scurt, conform politicii
+            furnizorului de găzduire.
           </li>
         </ul>
       </>
@@ -148,11 +154,20 @@ const sections: LegalSection[] = [
         <p>Nu vindem datele dumneavoastră. Le putem partaja exclusiv cu:</p>
         <ul>
           <li>
-            <strong>Furnizori de servicii tehnice</strong> (de exemplu Calendly, Make/Zapier, platforme
-            CRM) — strict în scopul furnizării serviciilor
+            <strong>Typeform</strong> — platforma care găzduiește formularul de contact, dacă alegeți
+            să îl completați
           </li>
           <li>
-            <strong>Google LLC</strong> — prin Google Analytics, în condiții de anonimizare IP
+            <strong>WhatsApp (Meta)</strong> — dacă ne scrieți pe WhatsApp, conversația trece prin
+            infrastructura lor
+          </li>
+          <li>
+            <strong>Furnizorul de găzduire a site-ului</strong> — pentru livrarea paginilor și
+            securitate
+          </li>
+          <li>
+            <strong>Furnizori de servicii tehnice</strong> (de exemplu platforme de automatizare sau
+            CRM) — strict pentru realizarea proiectului contractat
           </li>
           <li>
             <strong>Autorități publice</strong> — exclusiv când legea o impune
@@ -199,25 +214,30 @@ const sections: LegalSection[] = [
     title: 'Cookie-uri',
     content: (
       <>
-        <p>Folosim două categorii de cookie-uri:</p>
+        <p>
+          Site-ul nextflow.ro <strong>nu instalează cookie-uri de analiză, de publicitate sau de
+          urmărire</strong>. Din acest motiv nu veți vedea niciun banner de consimțământ: nu avem
+          pentru ce să vi-l cerem.
+        </p>
         <div className="legal-grid">
           <div className="legal-box">
-            <strong>Cookie-uri strict necesare</strong>
+            <strong>Pe site-ul nostru</strong>
             <p style={{ marginTop: '0.35rem' }}>
-              Necesare funcționării site-ului (sesiune, securitate). Nu necesită consimțământ.
+              Doar ce este strict necesar livrării paginii și securității. Fără profilare, fără
+              publicitate comportamentală.
             </p>
           </div>
           <div className="legal-box">
-            <strong>Cookie-uri analitice (Google Analytics)</strong>
+            <strong>Pe site-urile către care facem legătură</strong>
             <p style={{ marginTop: '0.35rem' }}>
-              Colectăm date anonime despre trafic pentru a îmbunătăți site-ul. Activate doar cu
-              consimțământul dumneavoastră.
+              Formularul de contact (Typeform), WhatsApp și Instagram se deschid pe domeniile lor și
+              își aplică propriile politici de cookie-uri.
             </p>
           </div>
         </div>
         <p>
-          Puteți gestiona preferințele cookie din setările browserului sau prin bannerul de
-          consimțământ.
+          Puteți oricând să blocați sau să ștergeți cookie-urile din setările browserului
+          dumneavoastră.
         </p>
       </>
     ),
@@ -239,9 +259,10 @@ const sections: LegalSection[] = [
     title: 'Transferuri internaționale',
     content: (
       <p>
-        Unele instrumente utilizate (de exemplu Google Analytics, Calendly) pot transfera date în afara
-        UE/SEE. Aceste transferuri se realizează în baza mecanismelor legale aprobate de Comisia
-        Europeană (Clauze Contractuale Standard sau certificare Privacy Framework).
+        Unele instrumente pe care le folosim (Typeform, WhatsApp/Meta, furnizorul de găzduire) pot
+        transfera date în afara UE/SEE. Aceste transferuri se realizează în baza mecanismelor legale
+        aprobate de Comisia Europeană (Clauze Contractuale Standard sau certificare Data Privacy
+        Framework).
       </p>
     ),
   },
@@ -251,8 +272,9 @@ const sections: LegalSection[] = [
     content: (
       <p>
         Putem actualiza această politică pentru a reflecta modificări legislative sau schimbări în
-        practicile noastre. Vom afișa data actualizării în partea de sus. Pentru modificări
-        semnificative, vă vom notifica prin email dacă avem adresa dumneavoastră.
+        practicile noastre. Data ultimei actualizări este afișată în partea de sus a paginii. Dacă
+        modificările sunt semnificative și avem un contract în derulare cu dumneavoastră, vă anunțăm
+        direct, pe canalul prin care comunicăm.
       </p>
     ),
   },
@@ -264,7 +286,7 @@ export default function PoliticaDeConfidentialitate() {
       eyebrow="Document legal"
       titleTop="Politică de"
       titleAccent="confidențialitate"
-      updated="Iunie 2026"
+      updated="August 2026"
       standard="Conform Regulamentului (UE) 2016/679 (GDPR)"
       sections={sections}
       footerNote={

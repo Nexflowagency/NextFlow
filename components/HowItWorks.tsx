@@ -3,6 +3,7 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import Words from './Words'
 import { WHATSAPP_URL } from '@/lib/contact'
+import type { SectionProps } from '@/lib/nav'
 
 const steps = [
   {
@@ -15,7 +16,7 @@ const steps = [
   {
     n: '02',
     title: 'Construiesc',
-    duration: '2–4 săptămâni',
+    duration: '2–6 săptămâni',
     description:
       'Fac eu tot. Îmi dai acces la ce folosești deja și primești totul gata pus la punct, nu o grămadă de setări de dus la capăt.',
   },
@@ -28,37 +29,39 @@ const steps = [
   },
 ]
 
-export default function HowItWorks() {
+export default function HowItWorks({ hideHeader = false }: SectionProps) {
   const ref = useScrollReveal<HTMLDivElement>()
 
   return (
     <section
       id="proces"
-      className="section relative overflow-hidden"
+      className={`section relative overflow-hidden ${hideHeader ? 'section-head-off' : ''}`}
       style={{ background: 'var(--paper-2)', color: 'var(--on-paper)' }}
     >
       <div className="shell relative" ref={ref}>
         {/* ── Antet ── */}
-        <div className="g12 mb-16 items-end gap-y-8 lg:mb-24">
-          <div className="col-span-12 lg:col-span-8">
-            <p className="mono eyebrow eyebrow-paper reveal mb-7">Cum funcționează</p>
-            <h2 className="display d-lg">
-              <Words>Trei pași.</Words>
-              <Words delay={110} style={{ color: 'var(--on-paper-40)' }}>
-                Fără bătăi de cap.
-              </Words>
-            </h2>
+        {!hideHeader && (
+          <div className="g12 mb-16 items-end gap-y-8 lg:mb-24">
+            <div className="col-span-12 lg:col-span-8">
+              <p className="mono eyebrow eyebrow-paper reveal mb-7">Cum funcționează</p>
+              <h2 className="display d-lg">
+                <Words>Trei pași.</Words>
+                <Words delay={110} style={{ color: 'var(--on-paper-40)' }}>
+                  Fără bătăi de cap.
+                </Words>
+              </h2>
+            </div>
+            <div className="col-span-12 lg:col-span-3 lg:col-start-10">
+              <p
+                className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
+                style={{ color: 'var(--on-paper-64)', borderColor: 'var(--line-paper)' }}
+              >
+                Nu-ți trebuie cunoștințe tehnice și nu schimbi nimic din ce
+                folosești deja.
+              </p>
+            </div>
           </div>
-          <div className="col-span-12 lg:col-span-3 lg:col-start-10">
-            <p
-              className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
-              style={{ color: 'var(--on-paper-64)', borderColor: 'var(--line-paper)' }}
-            >
-              Nu-ți trebuie cunoștințe tehnice și nu schimbi nimic din ce
-              folosești deja.
-            </p>
-          </div>
-        </div>
+        )}
 
         {/* ── Linia de proces, se umple la scroll ── */}
         <div className="fill-line reveal mb-12 hidden h-px lg:block" />
