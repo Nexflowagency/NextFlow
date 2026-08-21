@@ -67,7 +67,7 @@ export default function Services({ hideHeader = false }: SectionProps) {
       <div className="shell relative" ref={ref}>
         {/* ── Antet ── */}
         {!hideHeader && (
-          <div className="g12 mb-14 items-end gap-y-8 lg:mb-20">
+          <div className="g12 mb-14 lg:mb-20">
             <div className="col-span-12 lg:col-span-8">
               <p className="mono eyebrow eyebrow-paper reveal mb-7">Ce facem, pe scurt</p>
               <h2 className="display d-lg">
@@ -76,15 +76,6 @@ export default function Services({ hideHeader = false }: SectionProps) {
                   munca plictisitoare.
                 </Words>
               </h2>
-            </div>
-            <div className="col-span-12 lg:col-span-3 lg:col-start-10">
-              <p
-                className="reveal d2 border-t pt-6 text-[1rem] leading-relaxed"
-                style={{ color: 'var(--on-paper-64)', borderColor: 'var(--line-paper)' }}
-              >
-                Tu faci ce știi tu să faci. Mesajele, telefoanele, programările și
-                aducerile aminte le ia sistemul.
-              </p>
             </div>
           </div>
         )}

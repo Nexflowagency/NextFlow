@@ -29,13 +29,6 @@ export default function ProblemSection() {
               Dar nu productiv.
             </Words>
           </h2>
-          <p
-            className="reveal d2 mt-7 max-w-[34ch] text-[0.9375rem] leading-relaxed"
-            style={{ color: 'var(--bone-46)' }}
-          >
-            Problema nu e că nu muncești destul. E că totul trece prin tine.
-            Și te costă în fiecare zi.
-          </p>
         </div>
 
         {/* ── Lista de simptome ── */}

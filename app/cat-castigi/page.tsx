@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Cât câștigi — calculator de timp și bani',
     description:
-      'Două întrebări despre afacerea ta și vezi pe loc ce pierzi în munca pe care o poate face un robot.',
+      'Cursorul din stânga e volumul tău de mesaje, cel din dreapta cât îți lasă un client. Restul îl calculează pagina.',
     url: 'https://nextflow.ro/cat-castigi',
     type: 'website',
     locale: 'ro_RO',
@@ -25,7 +25,7 @@ export default function CatCastigiPage() {
       eyebrow="Cât te costă, de fapt"
       titleTop="Mută cursoarele."
       titleAccent="Vezi ce pierzi."
-      lede="Două întrebări despre afacerea ta. Vezi pe loc cât timp și cât ban stau blocate în muncă pe care o poate face un robot."
+      lede="Cursorul din stânga e volumul tău de mesaje. Cel din dreapta, cât îți lasă un client. Restul îl calculează pagina."
       facts={[
         { k: 'Întrebări', v: '2' },
         { k: 'Durează', v: '10 secunde' },

@@ -41,7 +41,7 @@ export default function HowItWorks({ hideHeader = false }: SectionProps) {
       <div className="shell relative" ref={ref}>
         {/* ── Antet ── */}
         {!hideHeader && (
-          <div className="g12 mb-16 items-end gap-y-8 lg:mb-24">
+          <div className="g12 mb-16 lg:mb-24">
             <div className="col-span-12 lg:col-span-8">
               <p className="mono eyebrow eyebrow-paper reveal mb-7">Cum funcționează</p>
               <h2 className="display d-lg">
@@ -50,15 +50,6 @@ export default function HowItWorks({ hideHeader = false }: SectionProps) {
                   Fără bătăi de cap.
                 </Words>
               </h2>
-            </div>
-            <div className="col-span-12 lg:col-span-3 lg:col-start-10">
-              <p
-                className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
-                style={{ color: 'var(--on-paper-64)', borderColor: 'var(--line-paper)' }}
-              >
-                Nu-ți trebuie cunoștințe tehnice și nu schimbi nimic din ce
-                folosești deja.
-              </p>
             </div>
           </div>
         )}

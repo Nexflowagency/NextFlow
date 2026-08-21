@@ -165,13 +165,6 @@ export default function ContactSection() {
               <br />
               <span style={{ color: 'var(--bone-30)' }}>mai departe.</span>
             </h2>
-            <p
-              className="reveal d2 mt-7 max-w-[34ch] text-[0.9375rem] leading-relaxed"
-              style={{ color: 'var(--bone-46)' }}
-            >
-              Fără pași ascunși și fără să te sun de cinci ori. Uite exact cum
-              decurge.
-            </p>
           </div>
 
           <div className="col-span-12 lg:col-span-7 lg:col-start-6">

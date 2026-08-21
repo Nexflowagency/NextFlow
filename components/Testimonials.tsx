@@ -134,7 +134,7 @@ export default function Testimonials({ hideHeader = false }: SectionProps) {
       <div className="shell relative" ref={ref}>
         {/* ── Antet ── */}
         {!hideHeader && (
-          <div className="g12 mb-14 items-end gap-y-8">
+          <div className="g12 mb-14">
             <div className="col-span-12 lg:col-span-8">
               <p className="mono eyebrow reveal mb-7">Păreri de la cliente</p>
               <h2 className="display d-lg">
@@ -143,15 +143,6 @@ export default function Testimonials({ hideHeader = false }: SectionProps) {
                   Ascultă-le pe ele.
                 </Words>
               </h2>
-            </div>
-            <div className="col-span-12 lg:col-span-3 lg:col-start-10">
-              <p
-                className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
-                style={{ color: 'var(--bone-46)', borderColor: 'var(--line-mid)' }}
-              >
-                Filmări și mesaje de la cliente, exact așa cum le-am primit.
-                Apasă play și le auzi direct.
-              </p>
             </div>
           </div>
         )}

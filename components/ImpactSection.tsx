@@ -150,7 +150,7 @@ export default function ImpactSection({ hideHeader = false }: SectionProps) {
       <div className="shell relative" ref={ref}>
         {/* ── Antet ── */}
         {!hideHeader && (
-          <div className="g12 mb-14 items-end gap-y-8">
+          <div className="g12 mb-14">
             <div className="col-span-12 lg:col-span-8">
               <p className="mono eyebrow reveal mb-7">Cât te costă, de fapt</p>
               <h2 className="display d-lg">
@@ -159,15 +159,6 @@ export default function ImpactSection({ hideHeader = false }: SectionProps) {
                   Vezi ce pierzi.
                 </Words>
               </h2>
-            </div>
-            <div className="col-span-12 lg:col-span-3 lg:col-start-10">
-              <p
-                className="reveal d2 border-t pt-6 text-[0.9375rem] leading-relaxed"
-                style={{ color: 'var(--bone-46)', borderColor: 'var(--line-mid)' }}
-              >
-                Două întrebări despre afacerea ta. Vezi pe loc cât timp și cât ban
-                stau blocate în muncă pe care o poate face un robot.
-              </p>
             </div>
           </div>
         )}
