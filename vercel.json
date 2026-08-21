@@ -4,6 +4,14 @@
     {
       "source": "/googleae9d4b32d3a71b40.html",
       "destination": "/googleae9d4b32d3a71b40/"
+    },
+    {
+      "source": "/opengraph-image",
+      "destination": "/og.jpg"
+    },
+    {
+      "source": "/opengraph-image/",
+      "destination": "/og.jpg"
     }
   ]
 }
