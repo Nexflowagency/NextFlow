@@ -634,6 +634,47 @@ footer[id] { scroll-margin-top: 6rem; }
 }
 
 /* ══════════════════════════════════════════════════════════════
+   UNELTE — un semnal trece pe rând prin fiecare
+   ══════════════════════════════════════════════════════════════ */
+
+/* Liniile dintre plăci sunt de fapt fundalul grilei, lăsat la vedere
+   prin gap-px. Așa nu se dublează niciodată două chenaruri alăturate. */
+.tool {
+  transition: background 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.tool:hover {
+  background: var(--ink-2);
+  transform: translateY(-3px);
+}
+
+.tool-icon { color: var(--bone-46); transition: color 0.5s var(--ease); }
+.tool:hover .tool-icon { color: var(--green); }
+.tool-icon svg { width: 100%; height: 100%; display: block; }
+
+/* Stratul care se aprinde. Se animează doar opacitatea, deci treaba
+   o face placa video, nu firul principal — zece straturi care pulsează
+   la nesfârșit n-au voie să coste nimic. */
+.tool-signal {
+  position: absolute;
+  inset: -1px;
+  border: 1px solid var(--green);
+  background: var(--green-06);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tool-signal { animation: toolSignal 6s linear infinite; }
+}
+
+@keyframes toolSignal {
+  0%          { opacity: 0; }
+  3%          { opacity: 1; }
+  5%          { opacity: 1; }
+  11%, 100%   { opacity: 0; }
+}
+
+/* ══════════════════════════════════════════════════════════════
    TITLURI CUVÂNT CU CUVÂNT
    ══════════════════════════════════════════════════════════════ */
 
