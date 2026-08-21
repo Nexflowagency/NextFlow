@@ -57,7 +57,7 @@ export default function LegalPage({
       >
         <div className="shell flex h-16 items-center justify-between md:h-[76px]">
           <a href="/" aria-label="Nextflow.ai — acasă">
-            <Logo uid="nf-legal" size={34} />
+            <Logo size={34} />
           </a>
           <a
             href="/"

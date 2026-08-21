@@ -54,7 +54,7 @@ export default function Footer() {
           {/* ── Brand ── */}
           <div className="col-span-12 lg:col-span-5">
             <a href="/" aria-label="Nextflow.ai — acasă" className="inline-block">
-              <Logo uid="nf-foot" />
+              <Logo />
             </a>
             <p
               className="mt-6 max-w-[34ch] text-[0.9375rem] leading-relaxed"

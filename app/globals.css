@@ -611,13 +611,13 @@ footer[id] { scroll-margin-top: 6rem; }
 .intro-mark { overflow: visible; }
 
 .intro-line {
-  /* traseul se desenează: linia e „ascunsă" în propria lungime.
-     54 ≈ lungimea reală a traseului (16,3 + 14,9 + 21,3), ca desenarea
-     să înceapă imediat, nu după o pauză moartă. */
-  stroke-dasharray: 54;
-  stroke-dashoffset: 54;
+  /* Traseul se desenează: linia e „ascunsă" în propria lungime.
+     Toate segmentele cad la 45°, deci lungimea e (10 + 6 + 14) × √2 ≈ 43.
+     Cifra trebuie să fie cea reală — dacă e mai mare, desenarea începe
+     după o pauză moartă; dacă e mai mică, linia apare deja pornită. */
+  stroke-dasharray: 43;
+  stroke-dashoffset: 43;
   animation: draw 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-  filter: drop-shadow(0 0 14px rgba(23, 217, 139, 0.35));
 }
 .intro-line-1 { animation-delay: 0.12s; }
 .intro-line-2 { animation-delay: 0.34s; }

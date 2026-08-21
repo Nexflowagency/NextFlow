@@ -41,7 +41,7 @@ export default function Navbar() {
           <nav className="flex h-16 items-center justify-between md:h-[76px]">
             {/* Doar marca, fără wordmark */}
             <a href="/" aria-label="Nextflow.ai — acasă" className="relative z-10">
-              <Logo showWordmark={false} size={36} uid="nf-nav" />
+              <Logo showWordmark={false} size={36} />
             </a>
 
             {/* Navigație desktop — etichete mono cu index */}

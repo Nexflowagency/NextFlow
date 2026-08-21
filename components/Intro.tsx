@@ -42,29 +42,22 @@ export default function Intro() {
 
   return (
     <div className={`intro ${phase === 'leaving' ? 'intro-leaving' : ''}`} aria-hidden="true">
-      <svg width="132" height="116" viewBox="0 0 48 42" fill="none" className="intro-mark">
-        <defs>
-          <linearGradient id="intro-g" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0%" stopColor="var(--green-deep)" />
-            <stop offset="55%" stopColor="var(--green)" />
-            <stop offset="100%" stopColor="var(--green-soft)" />
-          </linearGradient>
-        </defs>
+      <svg width="126" height="126" viewBox="0 0 35 35" fill="none" className="intro-mark">
         <path
           className="intro-line intro-line-2"
-          d="M5 35 L16 23 L27 33 L43 19"
-          stroke="url(#intro-g)"
-          strokeWidth="5.4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          d="M2.5 32.5 L12.5 22.5 L18.5 28.5 L32.5 14.5"
+          stroke="var(--green)"
+          strokeWidth="5"
+          strokeLinecap="butt"
+          strokeLinejoin="miter"
         />
         <path
           className="intro-line intro-line-1"
-          d="M5 23 L16 11 L27 21 L43 7"
-          stroke="#FFFFFF"
-          strokeWidth="5.4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          d="M2.5 20.5 L12.5 10.5 L18.5 16.5 L32.5 2.5"
+          stroke="var(--bone)"
+          strokeWidth="5"
+          strokeLinecap="butt"
+          strokeLinejoin="miter"
         />
       </svg>
     </div>
