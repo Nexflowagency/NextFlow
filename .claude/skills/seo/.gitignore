@@ -1,0 +1,5 @@
+# Runtime generat local de `claude-seo setup` — nu se comite.
+.venv/
+ms-playwright/
+runtime-state.json
+scripts/__pycache__/

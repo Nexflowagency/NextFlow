@@ -1,0 +1,357 @@
+<title>Buletin SEO ESTHEA</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Archivo:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#F5F7F6; --surface:#FFFFFF; --surface-2:#EDF1EF;
+    --ink:#181F1C; --ink-2:#3D4B45; --muted:#68776F; --line:#D7DEDA;
+    --accent:#2E6F5E; --accent-soft:#DCEAE4;
+    --crit:#A93B2B; --high:#B26A22; --med:#3A6480; --low:#4A8A6F;
+    --crit-bg:#F6E4E0; --high-bg:#F7EBDC; --med-bg:#E2ECF3; --low-bg:#E0EFE7;
+    --serif:"Newsreader",Georgia,"Times New Roman",serif;
+    --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#101512; --surface:#181E1A; --surface-2:#1F2723;
+      --ink:#E9EEEB; --ink-2:#BAC6C0; --muted:#8B9A93; --line:#2C3630;
+      --accent:#63B79B; --accent-soft:#1E332C;
+      --crit:#E0806E; --high:#DFA45F; --med:#7FAFCC; --low:#7DC1A2;
+      --crit-bg:#33201C; --high-bg:#33281A; --med-bg:#1C2A33; --low-bg:#1B2E26;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#101512; --surface:#181E1A; --surface-2:#1F2723;
+    --ink:#E9EEEB; --ink-2:#BAC6C0; --muted:#8B9A93; --line:#2C3630;
+    --accent:#63B79B; --accent-soft:#1E332C;
+    --crit:#E0806E; --high:#DFA45F; --med:#7FAFCC; --low:#7DC1A2;
+    --crit-bg:#33201C; --high-bg:#33281A; --med-bg:#1C2A33; --low-bg:#1B2E26;
+  }
+
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--ink);font-family:var(--sans);
+       font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:930px;margin:0 auto;padding:0 24px 96px}
+
+  /* ---------- masthead ---------- */
+  .mast{border-bottom:2px solid var(--ink);padding:52px 0 20px;margin-bottom:36px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+          color:var(--accent);margin:0 0 18px}
+  .mast h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.4rem,6vw,3.6rem);
+           line-height:1.05;margin:0 0 14px;text-wrap:balance;letter-spacing:-.015em}
+  .mast p{margin:0;color:var(--ink-2);max-width:62ch;font-size:1.05rem}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:22px;
+        font-family:var(--mono);font-size:11.5px;color:var(--muted);
+        letter-spacing:.04em;text-transform:uppercase}
+  .meta b{color:var(--ink-2);font-weight:500}
+
+  /* ---------- score ---------- */
+  .verdict{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr);gap:40px;
+           align-items:start;background:var(--surface);border:1px solid var(--line);
+           padding:32px;margin-bottom:14px}
+  @media(max-width:680px){.verdict{grid-template-columns:1fr;gap:28px}}
+  .bignum{font-family:var(--serif);font-size:5.6rem;line-height:.85;font-weight:500;
+          letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+  .bignum span{font-size:1.6rem;color:var(--muted);letter-spacing:0}
+  .scorelabel{font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+              text-transform:uppercase;color:var(--muted);margin-top:12px}
+
+  .bars{display:flex;flex-direction:column;gap:11px;min-width:0}
+  .bar{display:grid;grid-template-columns:minmax(0,1fr) 46px;gap:14px;align-items:center}
+  .bar-name{font-size:13.5px;color:var(--ink-2);display:flex;justify-content:space-between;
+            gap:10px;margin-bottom:5px}
+  .bar-name em{font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+  .track{height:7px;background:var(--surface-2);position:relative;overflow:hidden}
+  .fill{height:100%;background:var(--accent)}
+  .fill.weak{background:var(--crit)}
+  .fill.mid{background:var(--high)}
+  .bar-val{font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums;
+           text-align:right;color:var(--ink)}
+
+  .note{font-size:13.5px;color:var(--muted);margin:0 0 44px;padding-left:2px}
+
+  /* ---------- sections ---------- */
+  h2{font-family:var(--serif);font-weight:500;font-size:1.85rem;letter-spacing:-.01em;
+     margin:56px 0 6px;padding-top:26px;border-top:1px solid var(--line);text-wrap:balance}
+  h2:first-of-type{margin-top:40px}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 26px}
+  h3{font-family:var(--sans);font-weight:600;font-size:1.02rem;margin:30px 0 8px;
+     letter-spacing:-.005em}
+  p{max-width:68ch}
+  a{color:var(--accent)}
+
+  /* ---------- findings ---------- */
+  .find{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--muted);
+        padding:18px 22px;margin:14px 0}
+  .find.c{border-left-color:var(--crit)} .find.h{border-left-color:var(--high)}
+  .find.m{border-left-color:var(--med)}  .find.l{border-left-color:var(--low)}
+  .find.ok{border-left-color:var(--accent);background:var(--accent-soft)}
+  .find h4{margin:0 0 7px;font-size:.98rem;font-weight:600;display:flex;
+           align-items:baseline;gap:11px;flex-wrap:wrap}
+  .find p{margin:0 0 9px;font-size:14.5px;color:var(--ink-2)}
+  .find p:last-child{margin-bottom:0}
+  .chip{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+        padding:3px 8px;border-radius:2px;font-weight:500;white-space:nowrap}
+  .chip.c{background:var(--crit-bg);color:var(--crit)}
+  .chip.h{background:var(--high-bg);color:var(--high)}
+  .chip.m{background:var(--med-bg);color:var(--med)}
+  .chip.l{background:var(--low-bg);color:var(--low)}
+  .chip.ok{background:var(--accent-soft);color:var(--accent)}
+
+  code{font-family:var(--mono);font-size:.86em;background:var(--surface-2);
+       padding:2px 5px;border-radius:2px}
+  pre{font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--surface-2);
+      border:1px solid var(--line);padding:14px 16px;overflow-x:auto;margin:12px 0}
+  pre code{background:none;padding:0}
+
+  /* ---------- tables ---------- */
+  .scroll{overflow-x:auto;margin:18px 0;border:1px solid var(--line)}
+  table{border-collapse:collapse;width:100%;font-size:14px;background:var(--surface)}
+  th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+     text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);
+     color:var(--muted);font-weight:500;white-space:nowrap}
+  td{padding:11px 14px;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink)}
+  .tot td{font-weight:600;color:var(--ink);background:var(--surface-2)}
+
+  ul{padding-left:20px;max-width:68ch}
+  li{margin:6px 0;color:var(--ink-2)}
+  li::marker{color:var(--muted)}
+  .lead{font-size:1.06rem;color:var(--ink-2);max-width:64ch}
+
+  .end{margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
+       font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--muted);
+       display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <p class="kicker">Audit SEO · esthea.ro</p>
+    <h1>Un site frumos pe care Google nu are motive să-l arate</h1>
+    <p>ESTHEA e un cabinet estetic din Bacău cu un site care arată scump și convertește bine pe cine ajunge la el. Problema e că aproape nimeni nu ajunge. Fundația tehnică e corectă; ce lipsește sunt un H1, 22 MB de imagini optimizate și orice motiv editorial pentru care un motor de căutare ar trimite pe cineva aici.</p>
+    <div class="meta">
+      <span><b>Domeniu</b> esthea.ro</span>
+      <span><b>Pagini</b> 6 (din sitemap)</span>
+      <span><b>Tip</b> Business local · cabinet estetic</span>
+      <span><b>Data</b> 1 sept. 2026</span>
+    </div>
+  </header>
+
+  <section class="verdict">
+    <div>
+      <div class="bignum">53<span>/100</span></div>
+      <div class="scorelabel">SEO Health Score</div>
+    </div>
+    <div class="bars">
+      <div class="bar">
+        <div>
+          <div class="bar-name"><span>Content Quality</span><em>pondere 23%</em></div>
+          <div class="track"><div class="fill mid" style="width:48%"></div></div>
+        </div><div class="bar-val">48</div>
+      </div>
+      <div class="bar">
+        <div>
+          <div class="bar-name"><span>Technical SEO</span><em>pondere 22%</em></div>
+          <div class="track"><div class="fill" style="width:72%"></div></div>
+        </div><div class="bar-val">72</div>
+      </div>
+      <div class="bar">
+        <div>
+          <div class="bar-name"><span>On-Page SEO</span><em>pondere 20%</em></div>
+          <div class="track"><div class="fill mid" style="width:58%"></div></div>
+        </div><div class="bar-val">58</div>
+      </div>
+      <div class="bar">
+        <div>
+          <div class="bar-name"><span>Schema / Structured Data</span><em>pondere 10%</em></div>
+          <div class="track"><div class="fill mid" style="width:55%"></div></div>
+        </div><div class="bar-val">55</div>
+      </div>
+      <div class="bar">
+        <div>
+          <div class="bar-name"><span>Performance (CWV)</span><em>pondere 10%</em></div>
+          <div class="track"><div class="fill weak" style="width:25%"></div></div>
+        </div><div class="bar-val">25</div>
+      </div>
+      <div class="bar">
+        <div>
+          <div class="bar-name"><span>AI Search Readiness</span><em>pondere 10%</em></div>
+          <div class="track"><div class="fill weak" style="width:40%"></div></div>
+        </div><div class="bar-val">40</div>
+      </div>
+      <div class="bar">
+        <div>
+          <div class="bar-name"><span>Images</span><em>pondere 5%</em></div>
+          <div class="track"><div class="fill mid" style="width:55%"></div></div>
+        </div><div class="bar-val">55</div>
+      </div>
+    </div>
+  </section>
+  <p class="note">Scorurile sunt ponderate. Performanța trage cel mai tare în jos, dar conținutul — cu ponderea cea mai mare — e cel care blochează creșterea pe termen lung.</p>
+
+  <h2>Cele cinci lucruri care contează</h2>
+  <p class="sub">Ordonate după impact, nu după categorie.</p>
+
+  <div class="find c">
+    <h4><span class="chip c">Critic</span> Homepage-ul nu are niciun H1</h4>
+    <p>Pagina cea mai importantă a site-ului are <strong>zero</strong> elemente <code>&lt;h1&gt;</code>. Structura pornește direct de la <code>&lt;h2&gt;ESTHEA Cabinet Estetic · Bacău</code>. Google trebuie să deducă subiectul paginii exclusiv din <code>&lt;title&gt;</code>.</p>
+    <p>Celelalte cinci pagini au H1 corect — e o scăpare izolată, reparabilă în cinci minute.</p>
+  </div>
+
+  <div class="find c">
+    <h4><span class="chip c">Critic</span> 22 MB de cadre JPEG pe homepage</h4>
+    <p>Homepage-ul rulează <strong>trei</strong> secvențe scroll-cinematic a câte 179 de cadre — 537 de fișiere JPEG în total.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Secvență</th><th>Cadre</th><th>Medie / cadru</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td><code>frames/hero/</code></td><td class="n">179</td><td class="n">35 KB</td><td class="n">~6 MB</td></tr>
+          <tr><td><code>frames/room/</code></td><td class="n">179</td><td class="n">53 KB</td><td class="n">~9 MB</td></tr>
+          <tr><td><code>frames/serum/</code></td><td class="n">179</td><td class="n">45 KB</td><td class="n">~7 MB</td></tr>
+          <tr class="tot"><td>Total</td><td class="n">537</td><td class="n">—</td><td class="n">~22 MB</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Publicul unui cabinet estetic e majoritar pe mobil, pe date mobile. Efectul asupra INP și asupra ratei de abandon e direct.</p>
+  </div>
+
+  <div class="find c">
+    <h4><span class="chip c">Critic</span> Cache-ul e anulat pe toate cele 537 de fișiere</h4>
+    <p>Fiecare resursă statică e servită cu <code>cache-control: public,max-age=0,must-revalidate</code> — default-ul Netlify pentru fișiere fără hash în nume. Fiecare vizitator revalidează fiecare cadru la fiecare vizită, deci a doua vizită costă aproape cât prima.</p>
+    <pre><code># netlify.toml
+[[headers]]
+  for = "/frames/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"</code></pre>
+  </div>
+
+  <div class="find h">
+    <h4><span class="chip h">Ridicat</span> Site-ul nu apare nici măcar pentru propriul brand</h4>
+    <p>O căutare pentru „cabinet estetic Bacău curățare facială esthea” — cu numele brandului inclus — întoarce contul de Instagram <code>@__esthea__</code>, directoare medicale și concurenți locali. Nu și esthea.ro.</p>
+    <p>Instagramul e activul digital care rankează acum. Site-ul are nevoie de legături în ambele sensuri și de citări externe ca să existe pentru motoare.</p>
+  </div>
+
+  <div class="find h">
+    <h4><span class="chip h">Ridicat</span> ~2.300 de cuvinte pe tot domeniul, zero conținut informațional</h4>
+    <p>Site-ul e o broșură, nu o sursă. Nu există blog, ghid sau secțiune de întrebări. Căutările din care vin clienți noi — „cât costă curățarea facială”, „hydrafacial sau ultrasunete”, „cât de des se face curățare facială” — nu au unde ateriza.</p>
+  </div>
+
+  <h2>Ce e deja bine făcut</h2>
+  <p class="sub">Merită spus, pentru că e peste media pieței locale.</p>
+
+  <div class="find ok">
+    <h4><span class="chip ok">Solid</span> Fundația tehnică</h4>
+    <p><code>robots.txt</code> permisiv și corect, <code>sitemap.xml</code> valid cu toate cele 6 pagini, canonical self-referențial absolut pe fiecare pagină, HTTPS cu HSTS, redirect 301 de la <code>www</code> către apex, 404 real pentru URL-uri inexistente, <code>lang="ro"</code> peste tot.</p>
+  </div>
+
+  <div class="find ok">
+    <h4><span class="chip ok">Solid</span> Alt text scris de om</h4>
+    <p>Toate cele șase imagini de conținut au <code>alt</code> descriptiv în română — „Rezultat înainte și după LuminFusion la ESTHEA”, „Doina — cosmetolog ESTHEA”. Zero imagini fără alt, zero alt gol, toate cu <code>loading="lazy"</code>.</p>
+  </div>
+
+  <div class="find ok">
+    <h4><span class="chip ok">Solid</span> Prețuri publicate și marcate</h4>
+    <p><code>OfferCatalog</code> listează toate cele 12 tratamente cu preț și monedă. Concurența locală de obicei ascunde prețurile — aici sunt publice și citibile de mașini.</p>
+  </div>
+
+  <h2>Structured data</h2>
+  <p class="sub">Bine construit, cu patru defecte care îl fac parțial invizibil.</p>
+
+  <div class="find h">
+    <h4><span class="chip h">Ridicat</span> URL-uri relative în JSON-LD</h4>
+    <p><code>"image": "assets/treatment.jpg"</code> pe homepage și <code>"assets/owner.jpg"</code> pe recenzii. Schema.org cere URL absolut — Google nu poate rezolva calea și ignoră proprietatea.</p>
+  </div>
+
+  <div class="find h">
+    <h4><span class="chip h">Ridicat</span> /contact.html nu are deloc schema</h4>
+    <p>Pagina cu adresa, telefonul și harta — exact pagina pe care Google o caută pentru un business local — nu are niciun bloc JSON-LD.</p>
+  </div>
+
+  <div class="find m">
+    <h4><span class="chip m">Mediu</span> Două entități <code>BeautySalon</code> fără <code>@id</code> comun</h4>
+    <p>Homepage și /recenzii.html declară fiecare câte un <code>BeautySalon</code> cu proprietăți diferite. Fără un <code>@id</code> identic, Google le poate trata drept două afaceri distincte. Fix: <code>"@id": "https://esthea.ro/#business"</code> pe amândouă.</p>
+  </div>
+
+  <div class="find m">
+    <h4><span class="chip m">Mediu</span> Recenziile de pe site propriu nu vor produce stele</h4>
+    <p>Din 2019 Google nu mai afișează rich results pentru recenzii „self-serving” pe <code>LocalBusiness</code>. Markup-ul e corect tehnic, dar stelele din SERP vin din Google Business Profile, nu de aici. Nu-l scoateți — ajută la înțelegerea entității — dar calibrați așteptările.</p>
+  </div>
+
+  <h2>Planul, pe faze</h2>
+  <p class="sub">Fazele 1 și 2 repară infrastructura. Faza 3 e singura care aduce trafic nou.</p>
+
+  <h3>Faza 1 — Săptămâna 1 · fix-uri critice, ~3 ore</h3>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Acțiune</th><th>Efort</th></tr></thead>
+      <tbody>
+        <tr><td>Adaugă <code>&lt;h1&gt;</code> pe homepage</td><td class="n">5 min</td></tr>
+        <tr><td>Cache headers în <code>netlify.toml</code></td><td class="n">15 min</td></tr>
+        <tr><td>URL-uri absolute în JSON-LD</td><td class="n">10 min</td></tr>
+        <tr><td><code>width</code>/<code>height</code> pe cele 6 imagini</td><td class="n">20 min</td></tr>
+        <tr><td>Schema <code>BeautySalon</code> pe /contact.html</td><td class="n">20 min</td></tr>
+        <tr><td>Unifică entitatea prin <code>@id</code></td><td class="n">20 min</td></tr>
+        <tr><td>Scurtează meta description homepage la ≤160 caractere</td><td class="n">5 min</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Faza 2 — Săptămânile 2–3 · performanță</h3>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Acțiune</th><th>Efort</th><th>Câștig</th></tr></thead>
+      <tbody>
+        <tr><td>Convertește cadrele la AVIF</td><td class="n">2–3 h</td><td>−50…70%</td></tr>
+        <tr><td>Redu secvențele de la 179 la ~60 de cadre</td><td class="n">2 h</td><td>încă −65%</td></tr>
+        <tr><td>Pe mobil, doar secvența <code>hero</code>; restul imagine statică</td><td class="n">2 h</td><td>~−16 MB</td></tr>
+        <tr><td>Comprimă <code>owner.jpg</code> (458 KB → sub 80 KB)</td><td class="n">15 min</td><td>−380 KB</td></tr>
+        <tr><td>Self-hostează Lenis în loc de unpkg</td><td class="n">20 min</td><td>−1 third-party</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Faza 3 — Luna 2 · conținut</h3>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Acțiune</th><th>Efort</th></tr></thead>
+      <tbody>
+        <tr><td>Pagină „Despre Doina”: formare, certificări, ani de practică (400–600 cuvinte) + <code>Person</code> schema</td><td class="n">3 h</td></tr>
+        <tr><td>Secțiune FAQ pe /servicii.html + <code>FAQPage</code> schema</td><td class="n">3 h</td></tr>
+        <tr><td>Pagini dedicate pentru cele 4 tratamente scumpe: Exozomi (700 lei), Microneedling (420), Glass Skin Infusion (420), Hydra Glow (350)</td><td class="n">8 h</td></tr>
+        <tr><td>Adaugă în text: durata tratamentelor, intervalul de repetare, tipul de ten potrivit</td><td class="n">2 h</td></tr>
+        <tr><td>Linkuri interne contextuale din corpul textului</td><td class="n">1 h</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Întrebările pentru FAQ trebuie să vină din ce întreabă clientele la telefon, nu dintr-un tool de keywords. Acelea sunt exact interogările pe care le fac și în Google.</p>
+
+  <h3>Faza 4 — Continuu</h3>
+  <ul>
+    <li>Revendică și completează Google Business Profile — sursa reală a stelelor din SERP</li>
+    <li>Extinde <code>sameAs</code> cu GBP, Facebook și directoare locale</li>
+    <li>Adaugă <code>llms.txt</code> (acum returnează 404)</li>
+    <li>Verifică lunar indexarea în Search Console</li>
+    <li>Rulează <code>seo-drift</code> înainte și după fiecare deploy, ca să prinzi regresiile</li>
+  </ul>
+
+  <h2>Ce nu merită făcut</h2>
+  <p class="lead">Un audit e util și prin ce exclude.</p>
+  <ul>
+    <li><strong>Nu renunțați la efectul scroll-cinematic.</strong> E diferențiatorul vizual al site-ului și motivul pentru care arată scump. Problema e greutatea, nu conceptul — iar greutatea se rezolvă cu AVIF și mai puține cadre.</li>
+    <li><strong>Nu scoateți markup-ul de recenzii</strong> chiar dacă nu produce stele. Ajută la recunoașterea entității.</li>
+    <li><strong>Nu adăugați un blog generic</strong> scris pentru volume de căutare. Pentru un cabinet cu programări limitate, patru pagini de tratament bine făcute bat patruzeci de articole.</li>
+  </ul>
+
+  <div class="end">
+    <span>Audit generat cu Claude SEO skills · 6 pagini analizate</span>
+    <span>esthea.ro · 1 sept. 2026</span>
+  </div>
+
+</div>

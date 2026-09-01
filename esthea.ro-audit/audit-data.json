@@ -1,0 +1,133 @@
+{
+  "summary": {
+    "health_score": 53,
+    "business_type": "Local Service — Beauty/Aesthetics clinic (brick-and-mortar, Bacău, RO)",
+    "pages_crawled": 6,
+    "crawl_source": "sitemap.xml",
+    "top_findings": [
+      "Homepage nu are niciun element H1",
+      "~22 MB de cadre JPEG pe homepage (3 secvente x 179 cadre)",
+      "cache-control: max-age=0 pe toate cele 537 de fisiere statice",
+      "URL-uri relative in proprietatea image din JSON-LD",
+      "/contact.html nu are deloc structured data"
+    ],
+    "quick_wins": [
+      "Adauga H1 pe homepage (5 min)",
+      "Cache headers in netlify.toml (15 min)",
+      "URL-uri absolute in JSON-LD (10 min)",
+      "width/height pe cele 6 imagini (20 min)",
+      "Scurteaza meta description homepage la 160 caractere (5 min)"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 72,
+      "weight": 0.22
+    },
+    {
+      "name": "Content Quality",
+      "score": 48,
+      "weight": 0.23
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 58,
+      "weight": 0.2
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 55,
+      "weight": 0.1
+    },
+    {
+      "name": "Performance (CWV)",
+      "score": 25,
+      "weight": 0.1
+    },
+    {
+      "name": "AI Search Readiness",
+      "score": 40,
+      "weight": 0.1
+    },
+    {
+      "name": "Images",
+      "score": 55,
+      "weight": 0.05
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Faza 1: Fix-uri critice",
+        "timeframe": "Saptamana 1",
+        "items": 7
+      },
+      {
+        "name": "Faza 2: Performanta",
+        "timeframe": "Saptamanile 2-3",
+        "items": 5
+      },
+      {
+        "name": "Faza 3: Continut",
+        "timeframe": "Luna 2",
+        "items": 5
+      },
+      {
+        "name": "Faza 4: Monitorizare",
+        "timeframe": "Continuu",
+        "items": 5
+      }
+    ]
+  },
+  "evidence": {
+    "frames": {
+      "sequences": [
+        "hero",
+        "room",
+        "serum"
+      ],
+      "frames_each": 179,
+      "total_files": 537,
+      "avg_kb": {
+        "hero": 34,
+        "room": 52,
+        "serum": 44
+      },
+      "estimated_total_mb": 22
+    },
+    "cache_control": "public,max-age=0,must-revalidate",
+    "words_per_page": {
+      "home": 611,
+      "servicii": 449,
+      "recenzii": 293,
+      "contact": 234,
+      "termeni": 395,
+      "confidentialitate": 339
+    },
+    "schema_types": {
+      "home": [
+        "BeautySalon"
+      ],
+      "servicii": [
+        "OfferCatalog"
+      ],
+      "recenzii": [
+        "BeautySalon"
+      ],
+      "contact": []
+    },
+    "h1_count": {
+      "home": 0,
+      "servicii": 1,
+      "recenzii": 1,
+      "contact": 1,
+      "termeni": 1,
+      "confidentialitate": 1
+    }
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": null
+  }
+}
