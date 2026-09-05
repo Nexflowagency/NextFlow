@@ -1,0 +1,584 @@
+<title>Audit LinkedIn NextFlow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Schibsted+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ink:#0A0908; --ink-1:#0E0C0B; --ink-2:#141110; --ink-3:#1C1815;
+    --bone:#EDE7DC; --bone-72:rgba(237,231,220,.72); --bone-46:rgba(237,231,220,.46);
+    --bone-30:rgba(237,231,220,.30); --bone-16:rgba(237,231,220,.16);
+    --line:rgba(237,231,220,.09); --line-mid:rgba(237,231,220,.16); --line-hi:rgba(237,231,220,.28);
+    --green:#17D98B; --green-deep:#0FAE70; --green-12:rgba(23,217,139,.12); --green-06:rgba(23,217,139,.06);
+    --clay:#D9552E; --clay-14:rgba(217,85,46,.14);
+    --paper:#F2EEE6; --paper-2:#E7E1D4; --on-paper:#131110; --on-paper-64:rgba(19,17,16,.64);
+    --on-paper-40:rgba(19,17,16,.40); --line-paper:rgba(19,17,16,.13);
+    --shell:1060px; --gutter:clamp(1.1rem,4.5vw,3rem);
+    --ease:cubic-bezier(.16,1,.3,1);
+    --sans:"Schibsted Grotesk",system-ui,-apple-system,sans-serif;
+    --display:"Fraunces",Georgia,"Times New Roman",serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--ink);color:var(--bone);font-family:var(--sans);line-height:1.6;
+       -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:var(--green);color:var(--ink)}
+  :focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:2px}
+  a{color:var(--green);text-decoration-color:rgba(23,217,139,.4);text-underline-offset:3px}
+
+  .shell{max-width:var(--shell);margin-inline:auto;padding-inline:var(--gutter)}
+  .mono{font-family:var(--mono);font-size:.6875rem;letter-spacing:.11em;text-transform:uppercase}
+  .disp{font-family:var(--display);font-weight:400;line-height:1.05;letter-spacing:-.015em;text-wrap:balance}
+
+  /* ── Bara fixă de progres ── */
+  .bar{position:sticky;top:0;z-index:20;background:rgba(10,9,8,.92);
+       -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .bar-in{display:flex;align-items:center;gap:clamp(.9rem,3vw,2rem);
+          padding-block:.8rem;flex-wrap:wrap}
+  .mark{display:flex;align-items:center;gap:.5rem;color:var(--bone-72);white-space:nowrap}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--green);
+       box-shadow:0 0 0 3px var(--green-12);flex:none}
+  .meter{flex:1;min-width:130px;height:3px;background:var(--bone-16);position:relative;overflow:hidden}
+  .meter i{position:absolute;inset:0 auto 0 0;width:0;background:var(--green);
+           transition:width .5s var(--ease)}
+  .tally{font-family:var(--mono);font-size:.8125rem;font-variant-numeric:tabular-nums;
+         color:var(--bone);white-space:nowrap}
+  .tally b{color:var(--green);font-weight:500}
+  .tally span{color:var(--bone-46)}
+
+  /* ── Antet ── */
+  header{padding-block:clamp(3.2rem,8vw,5.5rem) clamp(2rem,5vw,3rem);position:relative;overflow:hidden}
+  .grid-bg{position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(237,231,220,.055) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(237,231,220,.055) 1px,transparent 1px);
+    background-size:96px 96px;
+    -webkit-mask-image:radial-gradient(ellipse 120% 100% at 8% -10%,#000 0%,transparent 68%);
+    mask-image:radial-gradient(ellipse 120% 100% at 8% -10%,#000 0%,transparent 68%)}
+  header .shell{position:relative}
+  .eyebrow{color:var(--green);margin-bottom:1.6rem;display:flex;align-items:center;gap:.6rem}
+  h1{font-size:clamp(2.15rem,6.4vw,3.9rem);margin:0 0 1.4rem}
+  h1 em{font-style:normal;color:var(--bone-30)}
+  .lede{max-width:60ch;color:var(--bone-72);font-size:1.05rem}
+  .who{margin-top:2.2rem;display:flex;flex-wrap:wrap;gap:.5rem 2.2rem;
+       padding-top:1.4rem;border-top:1px solid var(--line)}
+  .who div{display:flex;flex-direction:column;gap:.25rem}
+  .who dt{color:var(--bone-46)}
+  .who dd{margin:0;font-family:var(--mono);font-size:.8125rem;color:var(--bone)}
+
+  /* ── Constatare / notă ── */
+  .note{display:grid;grid-template-columns:auto 1fr;gap:1.1rem;padding:1.35rem 1.5rem;
+        border:1px solid var(--line-mid);background:var(--ink-2);margin-block:1.1rem}
+  .note.warn{border-left:2px solid var(--clay);background:linear-gradient(90deg,var(--clay-14),transparent 55%),var(--ink-2)}
+  .note.ok{border-left:2px solid var(--green);background:linear-gradient(90deg,var(--green-06),transparent 55%),var(--ink-2)}
+  .note .ico{font-family:var(--mono);font-size:.75rem;color:var(--bone-46);padding-top:.15rem}
+  .note h3{font-family:var(--sans);font-size:.95rem;font-weight:700;margin:0 0 .35rem}
+  .note p{margin:0;color:var(--bone-72);font-size:.9375rem}
+  .note code{font-family:var(--mono);font-size:.8125rem;background:var(--ink-3);
+             padding:.12em .4em;border:1px solid var(--line);color:var(--bone)}
+
+  /* ── Secțiuni ── */
+  section{padding-block:clamp(2.6rem,6vw,4.2rem)}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
+            padding-bottom:.9rem;border-bottom:1px solid var(--line-mid);margin-bottom:.4rem;flex-wrap:wrap}
+  .sec-head h2{font-family:var(--display);font-weight:400;font-size:clamp(1.5rem,3.6vw,2.1rem);margin:0;letter-spacing:-.015em}
+  .sec-head .mono{color:var(--bone-46)}
+  .sec-note{color:var(--bone-46);font-size:.9375rem;margin:.9rem 0 1.8rem;max-width:62ch}
+
+  /* ── Rânduri de bifat ── */
+  .group{margin-top:2.4rem}
+  .group:first-of-type{margin-top:1.4rem}
+  .group > .mono{color:var(--green);padding-bottom:.6rem;border-bottom:1px solid var(--line);
+                 display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+  .group > .mono em{font-style:normal;color:var(--bone-30);font-size:.6875rem}
+  .item{display:grid;grid-template-columns:auto 1fr auto;gap:.5rem 1rem;align-items:start;
+        padding:1rem .2rem;border-bottom:1px solid var(--line);cursor:pointer;
+        transition:background .18s var(--ease)}
+  .item:hover{background:rgba(237,231,220,.022)}
+  .box{width:19px;height:19px;border:1px solid var(--line-hi);flex:none;margin-top:.15rem;
+       display:grid;place-items:center;transition:.18s var(--ease);background:transparent}
+  .box svg{width:11px;height:11px;opacity:0;transform:scale(.6);transition:.18s var(--ease)}
+  .item[data-on="1"] .box{background:var(--green);border-color:var(--green)}
+  .item[data-on="1"] .box svg{opacity:1;transform:scale(1)}
+  .item[data-on="1"] .t{color:var(--bone-30);text-decoration:line-through;
+                        text-decoration-color:var(--bone-16)}
+  .item[data-on="1"] .w{color:var(--bone-16)}
+  .t{font-weight:500;font-size:.9875rem;transition:color .18s var(--ease)}
+  .w{grid-column:2;color:var(--bone-46);font-size:.875rem;margin-top:.15rem;
+     transition:color .18s var(--ease)}
+  .chip{font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;
+        padding:.28em .55em;border:1px solid var(--line-mid);color:var(--bone-46);
+        white-space:nowrap;align-self:start;margin-top:.2rem}
+  .chip.c{color:var(--clay);border-color:rgba(217,85,46,.35)}
+  .chip.i{color:var(--bone-72)}
+
+  /* ── Kit de copiat, pe hârtie ── */
+  .kit{background:var(--paper);color:var(--on-paper);margin-top:clamp(3rem,7vw,5rem)}
+  .kit .sec-head{border-color:var(--line-paper)}
+  .kit .sec-head .mono{color:var(--on-paper-40)}
+  .kit .sec-note{color:var(--on-paper-64)}
+  .block{border:1px solid var(--line-paper);background:#FBF9F4;margin-bottom:1.1rem}
+  .block-h{display:flex;align-items:center;justify-content:space-between;gap:1rem;
+           padding:.85rem 1.1rem;border-bottom:1px solid var(--line-paper);flex-wrap:wrap}
+  .block-h .mono{color:var(--on-paper-40)}
+  .block-h .lbl{font-weight:700;font-size:.9375rem}
+  .count{font-family:var(--mono);font-size:.75rem;font-variant-numeric:tabular-nums;
+         color:var(--on-paper-40)}
+  .count.over{color:var(--clay)}
+  .copy{font-family:var(--mono);font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;
+        background:var(--on-paper);color:var(--paper);border:0;padding:.5em .85em;cursor:pointer;
+        transition:background .18s var(--ease)}
+  .copy:hover{background:var(--green-deep)}
+  .copy[data-done="1"]{background:var(--green);color:var(--on-paper)}
+  .src{margin:0;padding:1.1rem;font-family:var(--mono);font-size:.8125rem;line-height:1.75;
+       white-space:pre-wrap;overflow-x:auto;color:var(--on-paper)}
+  .hint{padding:0 1.1rem 1.1rem;color:var(--on-paper-64);font-size:.875rem;margin:0}
+  .rec{display:inline-block;font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;
+       text-transform:uppercase;background:var(--green);color:var(--on-paper);padding:.28em .55em}
+
+  ol.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+  ol.steps li{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:1.1rem;
+              padding:1.05rem 0;border-bottom:1px solid var(--line)}
+  ol.steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--mono);
+                      font-size:.75rem;color:var(--green);padding-top:.2rem}
+  ol.steps b{display:block;font-size:.9875rem;margin-bottom:.2rem}
+  ol.steps span{color:var(--bone-46);font-size:.875rem}
+
+  footer{border-top:1px solid var(--line);padding-block:2.4rem 3.4rem;color:var(--bone-46);font-size:.875rem}
+  footer a{margin-right:1.2rem}
+
+  @media (max-width:640px){
+    .item{grid-template-columns:auto 1fr;gap:.4rem .8rem}
+    .chip{grid-column:2;justify-self:start;margin-top:.4rem}
+    .w{margin-top:.25rem}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="bar">
+  <div class="shell bar-in">
+    <span class="mark mono"><span class="dot"></span>NextFlow · LinkedIn</span>
+    <span class="meter"><i id="fill"></i></span>
+    <span class="tally"><b id="done">0</b><span id="tot">/0 făcute</span> <span id="crit"></span></span>
+  </div>
+</div>
+
+<header>
+  <div class="grid-bg"></div>
+  <div class="shell">
+    <p class="eyebrow mono">Fișă de lucru · profil personal</p>
+    <h1 class="disp">Profilul e reclama.<br><em>Conținutul e doar traficul.</em></h1>
+    <p class="lede">Bifează ce ai deja pe profil. Ce rămâne nebifat este, în ordinea asta,
+      planul tău de lucru. Textele gata scrise sunt mai jos — se copiază și se lipesc.</p>
+    <dl class="who">
+      <div><dt class="mono">Cont</dt><dd>iustin-maftei-5b8289340</dd></div>
+      <div><dt class="mono">Agenție</dt><dd>NextFlow.AI · nextflow.ro</dd></div>
+      <div><dt class="mono">ICP pe LinkedIn</dt><dd>Firme 5–50 oameni, RO</dd></div>
+      <div><dt class="mono">Obiectiv lună 3</dt><dd>8 discuții programate</dd></div>
+    </dl>
+  </div>
+</header>
+
+<div class="shell">
+  <div class="note warn">
+    <span class="ico">01</span>
+    <div>
+      <h3>Un singur lucru am putut verifica din exterior — și e de reparat azi</h3>
+      <p>URL-ul tău e <code>/in/iustin-maftei-5b8289340</code>. Sufixul de cifre înseamnă că
+        <b>nu ți-ai setat niciodată adresa personalizată</b>. Arată a cont neatins, se scrie greu
+        într-un mesaj și nu ajută la căutare. Setări → Profil public → Editează URL →
+        <code>/in/iustin-maftei</code>. Durează 30 de secunde.</p>
+    </div>
+  </div>
+  <div class="note">
+    <span class="ico">02</span>
+    <div>
+      <h3>Restul profilului nu l-am putut citi</h3>
+      <p>LinkedIn blochează accesul automat la profiluri (HTTP 999, inclusiv prin browser real).
+        De aceea auditul de mai jos e făcut ca să-l poți completa tu în zece minute. Dacă vrei
+        verdictul meu pe ce ai acum, trimite-mi textul din headline și din About, sau
+        două capturi de ecran.</p>
+    </div>
+  </div>
+</div>
+
+<section class="shell" id="audit">
+  <div class="sec-head">
+    <h2>Auditul</h2>
+    <span class="mono">bifează ce ai deja</span>
+  </div>
+  <p class="sec-note">Punctele marcate <b style="color:var(--clay)">critic</b> sunt cele care
+    fac diferența între un profil care convertește și unul care doar există. Fă-le pe alea
+    întâi, în ordinea din listă.</p>
+  <div id="list"></div>
+</section>
+
+<div class="kit">
+<section class="shell">
+  <div class="sec-head">
+    <h2>Kit de copiat</h2>
+    <span class="mono">gata scris · lipești direct</span>
+  </div>
+  <p class="sec-note">Scris în vocea de pe nextflow.ro — direct, fără jargon, cu dovezile
+    tale reale. Nu am inventat nicio cifră: unde trebuie una pe care n-o am, e marcată
+    ca de completat.</p>
+
+  <div class="block">
+    <div class="block-h">
+      <span class="lbl">Headline — varianta A <span class="rec">recomandat</span></span>
+      <span style="display:flex;gap:.7rem;align-items:center">
+        <span class="count" data-count></span>
+        <button class="copy" type="button">Copiază</button>
+      </span>
+    </div>
+    <pre class="src" data-src>Automatizez cu AI firmele din România | Roboți care răspund, sună și programează în locul tău | 20+ afaceri · Implementare 2–6 săptămâni · nextflow.ro</pre>
+    <p class="hint">Rezultatul stă în primele 60 de caractere — atât se vede pe telefon.
+      „Automatizez", „AI" și „România" sunt și cuvinte după care ești căutat.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-h">
+      <span class="lbl">Headline — varianta B (pe durere)</span>
+      <span style="display:flex;gap:.7rem;align-items:center">
+        <span class="count" data-count></span>
+        <button class="copy" type="button">Copiază</button>
+      </span>
+    </div>
+    <pre class="src" data-src>Îți pierzi clienți la 11 noaptea pentru că nu răspunde nimeni. Eu rezolv asta. | Automatizări AI & agenți vocali | NextFlow.AI · 20+ implementări</pre>
+    <p class="hint">Mai memorabil, mai slab la căutare. Merită testat o lună după varianta A,
+      ca să compari vizualizările de profil.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-h">
+      <span class="lbl">About — textul complet</span>
+      <span style="display:flex;gap:.7rem;align-items:center">
+        <span class="count" data-count data-max="2600"></span>
+        <button class="copy" type="button">Copiază</button>
+      </span>
+    </div>
+    <pre class="src" data-src>Un client îți scrie la 23:40. Tu dormi. Dimineața și-a găsit pe altcineva.
+
+Asta e problema pe care o rezolv.
+
+Firmele mici din România nu pierd bani pentru că muncesc prea puțin. Pierd pentru că mesajele stau necitite, apelurile sună în gol, iar programările se notează pe hârtie.
+
+Construiesc sisteme care fac munca aia în locul oamenilor:
+
+· Un robot care răspunde la mesaje pe WhatsApp și Instagram, non-stop
+· Un agent vocal care preia apelurile și dă programări, vorbind normal
+· Un calendar care se completează singur, cu confirmări și memento-uri
+· O listă cu toți clienții, care le scrie singură celor care n-au mai venit
+· Site-uri care aduc clienți, nu doar arată bine
+
+Până acum: 20 de afaceri. Dermiq (Bacău), Esthea, Prestige Beauty Salon (Suceava), Contour Collective (Cluj). Implementare în 2–6 săptămâni, nu în șase luni.
+
+Lucrez cu firme de 2–50 de oameni: clinici, cabinete, imobiliare, service auto, saloane, magazine online. Dacă primești peste 30 de mesaje pe zi și le tratezi manual, avem despre ce vorbi.
+
+Prima discuție e gratuită și durează 20 de minute. Scrie-mi AUDIT în mesaje.</pre>
+    <p class="hint">Primele două rânduri sunt singurele vizibile înainte de „see more" —
+      de aceea încep cu o scenă, nu cu „Sunt fondatorul...". Un singur CTA, la final.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-h">
+      <span class="lbl">Banner — textul care intră în imagine</span>
+      <span style="display:flex;gap:.7rem;align-items:center">
+        <span class="count" data-count></span>
+        <button class="copy" type="button">Copiază</button>
+      </span>
+    </div>
+    <pre class="src" data-src>1584 × 396 px · fundal #0A0908 · text #EDE7DC · accent #17D98B
+
+RÂNDUL MARE (Fraunces, stânga):
+Pun roboți să facă munca plictisitoare.
+
+SUB EL (JetBrains Mono, mic, cu accent verde pe cifre):
+20 DE AFACERI  ·  IMPLEMENTARE 2–6 SĂPTĂMÂNI  ·  PRIMA DISCUȚIE GRATUITĂ
+
+COLȚ DREAPTA-JOS:
+nextflow.ro
+
+ATENȚIE: zona din stânga-jos, ~350×350 px, e acoperită de poza de profil
+pe desktop. Nu pune text acolo.</pre>
+    <p class="hint">Îl pot genera cu skill-ul de design — zi-mi și îl ai în câteva minute.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-h">
+      <span class="lbl">Featured — cele 4 elemente, în ordine</span>
+      <span style="display:flex;gap:.7rem;align-items:center">
+        <button class="copy" type="button">Copiază</button>
+      </span>
+    </div>
+    <pre class="src" data-src>1. POSTAREA despre problemă — cea care descrie mesajele necitite și apelurile
+   pierdute. Rolul ei: vizitatorul se recunoaște.
+
+2. STUDIU DE CAZ — Dermiq sau Esthea. Ce era înainte, ce am schimbat,
+   ce s-a văzut după. Cu cifre.
+
+3. TESTIMONIAL VIDEO — clipurile cu Diana și Doina, urcate ca video nativ
+   pe LinkedIn. Nu ca link către Instagram: linkul extern taie reach-ul.
+
+4. UN SINGUR PAS URMĂTOR — formularul de calificare (Typeform) sau
+   nextflow.ro. Nu amândouă.</pre>
+    <p class="hint">E prima zonă pe care un vizitator poate da click. Traseu de dovadă,
+      nu raft de depozitare.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-h">
+      <span class="lbl">Skills — primele 3 sunt cele afișate</span>
+      <span style="display:flex;gap:.7rem;align-items:center">
+        <button class="copy" type="button">Copiază</button>
+      </span>
+    </div>
+    <pre class="src" data-src>PRIMELE 3 (fixează-le în ordinea asta):
+Automatizare AI
+Agenți vocali AI
+Chatbot / Conversational AI
+
+RESTUL:
+n8n · CRM Automation · WhatsApp Business API · Marketing Automation
+Next.js · Automatizare procese · Inteligență artificială · Web design</pre>
+    <p class="hint">LinkedIn e un motor de căutare. Aici pui exact cuvintele pe care le-ar
+      tasta un administrator de clinică, nu titluri care sună bine.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-h">
+      <span class="lbl">Secvența de outreach — 4 mesaje</span>
+      <span style="display:flex;gap:.7rem;align-items:center">
+        <button class="copy" type="button">Copiază</button>
+      </span>
+    </div>
+    <pre class="src" data-src>ZIUA 0–5 · ÎNCĂLZIRE (niciun mesaj)
+Comentezi la 2 postări de-ale lui. Reacționezi la a treia.
+
+ZIUA 6 · INVITAȚIA
+Salut, [Nume] — urmăresc ce faceți la [Firmă]. Mă interesează zona de
+[nișă], hai să rămânem în legătură.
+
+ZIUA 7–8 · PRIMUL MESAJ (zero pitch)
+Mersi de accept, [Nume].
+Am văzut că [observație specifică de pe site-ul sau profilul lui].
+Lucrez cu [3 clinici] din România pe partea de răspuns automat la mesaje
+și programări. Am observat un tipar la toate — și n-are legătură cu
+software-ul. Îți trimit în 2 rânduri ce am văzut, dacă te interesează?
+
+ZIUA 9–10 · VALOAREA (doar dacă a zis da)
+[4–6 rânduri concrete, fără link.]
+Dacă vrei, îți arăt în 15 minute cum arată la [Firmă] — cu numerele
+voastre. Fără prezentare, fără ofertă. Dacă nu e pentru voi, îți zic
+eu primul.
+
+ZIUA 15 · ÎNCHIDEREA, apoi te oprești
+[Nume], închid subiectul ca să nu te bat la cap. Dacă ajungeți în punctul
+în care mesajele necitite devin o problemă, scrie-mi. Rămâne valabil.</pre>
+    <p class="hint">Sub 20 de invitații pe zi. Dacă rata de acceptare scade sub 30%,
+      LinkedIn îți taie singur plafonul — oprește-te o săptămână.</p>
+  </div>
+</section>
+</div>
+
+<section class="shell">
+  <div class="sec-head">
+    <h2>Ordinea în care le faci</h2>
+    <span class="mono">săptămâna asta</span>
+  </div>
+  <ol class="steps">
+    <li><b>URL personalizat.</b><span>30 de secunde. Singurul lucru pe care l-am putut verifica și singurul care e sigur de reparat.</span></li>
+    <li><b>Headline + About.</b><span>Le ai copiate mai sus. 10 minute.</span></li>
+    <li><b>Poză și banner.</b><span>Fără ele, restul se citește ca un profil abandonat.</span></li>
+    <li><b>Creator mode ON, apoi Featured cu cele 4 elemente.</b><span>Featured apare doar cu Creator mode pornit.</span></li>
+    <li><b>Lista de 100 de conturi ICP.</b><span>Clinici, imobiliare, service auto, contabilitate. Nu saloane — alea sunt pe Instagram.</span></li>
+    <li><b>Prima postare, abia acum.</b><span>Traficul are unde să aterizeze doar după ce profilul e gata.</span></li>
+  </ol>
+</section>
+
+<footer class="shell">
+  <p>Strategia completă — algoritm, piloni de conținut, metrici, planul pe 90 de zile —
+    e în <code style="font-family:var(--mono);font-size:.8125rem">docs/linkedin-playbook.md</code>
+    din repo. Pentru postări și DM-uri gata scrise, cere-mi-le: skill-ul
+    <code style="font-family:var(--mono);font-size:.8125rem">nextflow-linkedin</code> e activ.</p>
+</footer>
+
+<script>
+(function(){
+  var DATA = [
+    ["Profil — fundația", "se face o dată, corect", [
+      ["url","URL personalizat: /in/iustin-maftei","Verificat: nu e setat. Sufixul de cifre arată a cont neatins.","c"],
+      ["poza","Poză pe fundal simplu, fața ~60% din cadru","Fără logo, fără poză de grup. Contrast mare, privire în cameră.","c"],
+      ["banner","Banner 1584×396 cu promisiune + 3 dovezi + nextflow.ro","Cel mai ieftin panou publicitar de pe internet. 95% îl lasă gol.","c"],
+      ["head60","Rezultatul și dovada încap în primele 60 de caractere","Atât se vede pe telefon. Restul headline-ului e bonus.","c"],
+      ["head220","Headline folosește 150+ din cele 220 de caractere","Fiecare caracter nefolosit e un cuvânt-cheie pe care nu-l ai.","i"],
+      ["about2","Primele 2 rânduri din About sunt un cârlig, nu o prezentare","Doar ele se văd înainte de „see more”. Acolo se decide clickul.","c"],
+      ["aboutcta","About se termină cu un singur CTA","Două CTA-uri înseamnă zero. „Scrie-mi AUDIT în mesaje.”","i"],
+      ["creator","Creator mode ON","Deblochează Featured, newsletter și butonul „Follow”.","c"],
+      ["featured","Featured are 4 elemente: problemă → dovadă → video → pas următor","Prima zonă pe care se poate da click pe tot profilul.","c"],
+      ["video","Testimonialele Diana și Doina urcate ca video nativ","Ca link spre Instagram, reach-ul scade cu ~60%.","i"],
+      ["exp","Experience: „Fondator & AI Automation Consultant · NextFlow.AI”","Descriere pe rezultate, nu pe activități. Cu capturi din site-urile livrate.","i"],
+      ["skills","Primele 3 Skills sunt cuvintele după care vrei să fii găsit","Doar trei se afișează. Restul contează doar pentru căutare.","i"],
+      ["services","Secțiunea „Services” completată","Te scoate în căutări ca furnizor și deblochează cererea de ofertă. Gratis.","i"],
+      ["public","„Open to work” OFF · profil public 100% vizibil","Vinzi servicii, nu cauți job. Și vrei să te vadă și cei nelogați.","c"]
+    ]],
+    ["Conținut — motorul de trafic", "3 postări pe săptămână, minim", [
+      ["calendar","Calendar cu cei 5 piloni, minimum 3 postări/săptămână","Consistența bate volumul. Sporadic = invizibil.","c"],
+      ["nolinks","Zero linkuri externe în postări","Scad reach-ul cu ~60%. Și „link în primul comentariu” e penalizat din 2026.","c"],
+      ["intrebare","Fiecare postare se termină cu o întrebare specifică","Comentariile cântăresc mult mai mult decât like-urile.","c"],
+      ["carusel","Minimum un carusel sau document pe săptămână","De 2–3× mai mult timp de citire decât textul simplu.","i"],
+      ["reels","Reels-urile refolosite ca video nativ, cu subtitrare arsă","Ai deja producția pe Instagram. Aici doar reformatezi.","i"],
+      ["comentarii","20–30 min pe zi comentarii la 8–10 postări ale ICP-ului","În primele 60 de zile aduc mai mult decât postările tale.","c"],
+      ["caz","Primul studiu de caz publicat, cu cifre reale","Dovada bate afirmația. Un client, un număr, un înainte/după.","i"]
+    ]],
+    ["Outreach — fără să-ți arzi contul", "contul e activul, nu lista", [
+      ["lista","Listă cu 100 de conturi ICP","Clinici, imobiliare, service auto, contabilitate, HR. Nu saloane.","c"],
+      ["limita","Sub 20 de invitații pe zi, cu 5–7 zile de încălzire înainte","Peste asta intri în radarul LinkedIn.","c"],
+      ["acceptare","Rata de acceptare urmărită, peste 30%","Sub 30%, LinkedIn îți restrânge automat plafonul de invitații.","c"],
+      ["secventa","Secvența de 3 atingeri scrisă și salvată","O ai copiată mai sus. Fără pitch în invitație, niciodată.","i"],
+      ["loom","Un Loom de 90s personalizat pentru prospecții mari","10 minute de muncă, cel mai bun ROI din tot outreach-ul.","b"]
+    ]],
+    ["Conversie — unde aterizează traficul", "fără asta, restul e vanitate", [
+      ["magnet","Magnet de lead scris și pus în Featured","PDF: „Cele 7 locuri prin care o firmă pierde clienți fără să știe.”","i"],
+      ["cuvant","Cuvânt-cheie în DM configurat („AUDIT”) cu livrare automată","Cel mai bun CTA de pe LinkedIn în 2026. Zero penalizare de link.","c"],
+      ["calendarlink","Link de programare direct, în Featured","Un pas mai puțin între interes și discuție.","i"],
+      ["typeform","Typeform conectat la notificare pe WhatsApp, sub 5 minute","Ești agenție de automatizări. Arată-o pe propriul flux.","b"]
+    ]]
+  ];
+
+  var KEY = "nf-linkedin-audit-v1";
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch(e) { state = {}; }
+
+  var listEl = document.getElementById("list");
+  var doneEl = document.getElementById("done");
+  var totEl  = document.getElementById("tot");
+  var critEl = document.getElementById("crit");
+  var fillEl = document.getElementById("fill");
+  var total = 0, items = [];
+
+  var TICK = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 6.2l3 3L10.5 2.5" fill="none" stroke="#0A0908" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var LABEL = { c:"critic", i:"important", b:"bonus" };
+
+  DATA.forEach(function(group){
+    var g = document.createElement("div");
+    g.className = "group";
+    var h = document.createElement("p");
+    h.className = "mono";
+    h.innerHTML = "<span>" + group[0] + "</span><em>" + group[1] + "</em>";
+    g.appendChild(h);
+
+    group[2].forEach(function(row){
+      total++;
+      var el = document.createElement("div");
+      el.className = "item";
+      el.setAttribute("role","checkbox");
+      el.setAttribute("tabindex","0");
+      el.dataset.id = row[0];
+      el.dataset.sev = row[3];
+      el.innerHTML = '<span class="box">' + TICK + '</span>'
+        + '<span class="t"></span>'
+        + '<span class="chip ' + row[3] + '">' + LABEL[row[3]] + '</span>'
+        + '<span class="w"></span>';
+      el.querySelector(".t").textContent = row[1];
+      el.querySelector(".w").textContent = row[2];
+      el.addEventListener("click", function(){ toggle(el); });
+      el.addEventListener("keydown", function(ev){
+        if (ev.key === " " || ev.key === "Enter") { ev.preventDefault(); toggle(el); }
+      });
+      items.push(el);
+      g.appendChild(el);
+    });
+    listEl.appendChild(g);
+  });
+
+  function paint(){
+    var n = 0, critLeft = 0;
+    items.forEach(function(el){
+      var on = !!state[el.dataset.id];
+      el.dataset.on = on ? "1" : "0";
+      el.setAttribute("aria-checked", on ? "true" : "false");
+      if (on) n++; else if (el.dataset.sev === "c") critLeft++;
+    });
+    doneEl.textContent = n;
+    totEl.textContent = "/" + total + " făcute";
+    critEl.textContent = critLeft ? "· " + critLeft + " critice rămase" : (n === total ? "· gata" : "");
+    fillEl.style.width = (total ? (n / total) * 100 : 0) + "%";
+  }
+
+  var saveTimer = null;
+  function toggle(el){
+    var id = el.dataset.id;
+    if (state[id]) { delete state[id]; } else { state[id] = 1; }
+    paint();
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {}
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(push, 900);
+  }
+  paint();
+
+  /* ── Numărătoare de caractere + copiere ── */
+  document.querySelectorAll(".block").forEach(function(block){
+    var pre = block.querySelector("[data-src]");
+    var cnt = block.querySelector("[data-count]");
+    var btn = block.querySelector(".copy");
+    if (!pre) return;
+    var text = pre.textContent;
+    if (cnt) {
+      var max = parseInt(cnt.dataset.max || "220", 10);
+      cnt.textContent = text.length + " / " + max;
+      if (text.length > max) cnt.classList.add("over");
+    }
+    if (btn) btn.addEventListener("click", function(){
+      var ok = function(){
+        btn.textContent = "Copiat";
+        btn.dataset.done = "1";
+        setTimeout(function(){ btn.textContent = "Copiază"; btn.dataset.done = "0"; }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(ok, fallback);
+      } else { fallback(); }
+      function fallback(){
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly","");
+        ta.style.cssText = "position:fixed;top:-1000px;opacity:0";
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); ok(); }
+        catch(e) { btn.textContent = "Selectează manual"; }
+        document.body.removeChild(ta);
+      }
+    });
+  });
+
+  /* ── Sincronizare între dispozitive, dacă e disponibilă ── */
+  var ref = null, ready = false;
+  function push(){
+    if (!ref) return;
+    try { ref.set({ items: state, updatedAt: new Date().toISOString() }); } catch(e) {}
+  }
+  if (window.claude && typeof window.claude.use === "function") {
+    window.claude.use("db").then(function(db){
+      if (!db) return;
+      try {
+        ref = db.doc("progres/audit-linkedin");
+        ref.onSnapshot(function(snap){
+          if (!snap.exists) { ready = true; return; }
+          var body = snap.data() || {};
+          var remote = body.items;
+          if (remote && typeof remote === "object") {
+            var merged = {};
+            Object.keys(remote).forEach(function(k){ if (remote[k]) merged[k] = 1; });
+            if (!ready) {
+              Object.keys(state).forEach(function(k){ merged[k] = 1; });
+            }
+            state = merged;
+            try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {}
+            paint();
+          }
+          if (!ready) { ready = true; push(); }
+        }, function(){ ref = null; });
+      } catch(e) { ref = null; }
+    }, function(){});
+  }
+})();
+</script>

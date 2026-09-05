@@ -15,7 +15,7 @@ extins (setup profil, metrici, plan 90 de zile). Skill-ul ăsta e pentru **produ
 programări automate în calendar, CRM cu reactivare automată
 **Dovezi**: 20 de afaceri · Dermiq (Bacău), Esthea, Prestige Beauty (Suceava), Contour Collective (Cluj)
 · implementare 2–6 săptămâni · prima discuție gratuită
-**Brand**: verde #00C896, fundal întunecat, ton direct fără jargon
+**Brand**: verde #17D98B, negru cald #0A0908, os #EDE7DC, ton direct fără jargon
 
 ### ICP pe LinkedIn (diferit de Instagram/TikTok)
 Pe Instagram vinzi saloanelor. **Pe LinkedIn vinzi decidenților din firme de 5–50 de oameni**:

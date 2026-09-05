@@ -47,7 +47,7 @@ Ce trebuie să conțină, în 3 elemente:
 2. **3 dovezi scurte** — „20 de afaceri · Implementare în 2–6 săptămâni · Prima discuție gratuită"
 3. **Un CTA vizual** — „nextflow.ro" + săgeată care indică spre butonul de Featured/Contact.
 
-Culori: verdele NextFlow (#00C896) pe fundal întunecat (`--ink`), exact ca site-ul. Consistența
+Culori: verdele NextFlow (#17D98B) pe fundal întunecat (`--ink`), exact ca site-ul. Consistența
 vizuală între banner → site → propunere face diferența între „agenție" și „freelancer".
 
 > Îl poți genera cu skill-ul `banner-design` (platformă: LinkedIn) sau `design`.
