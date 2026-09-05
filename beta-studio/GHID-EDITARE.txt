@@ -143,9 +143,8 @@
 --------------------------------------------------------------------
 9. ACTUALIZĂRI (imagine hero, Mero, echipă, program)
 --------------------------------------------------------------------
-  IMAGINE HERO: hero-ul de pe prima pagină este acum o POZĂ cu salonul
-    (un cadru extras din videoul salonului, mărit la 4K cu un upscaler
-    AI pentru claritate maximă).
+  IMAGINE HERO: hero-ul de pe prima pagină este o POZĂ profesională a
+    salonului, mărită la 4K cu un upscaler AI pentru claritate maximă.
     Fișiere:  assets/img/hero.webp (mare, 2400px)
               assets/img/hero-1600.webp  +  assets/img/hero-1280.webp
               (variante mai mici, pentru încărcare rapidă pe telefon).
