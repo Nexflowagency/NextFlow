@@ -178,4 +178,71 @@
   document.querySelectorAll("[data-day]").forEach(function (row) {
     if (parseInt(row.getAttribute("data-day"), 10) === todayIdx) row.classList.add("today");
   });
+
+  /* ---------- Salon gallery lightbox (interactive) ---------- */
+  (function () {
+    var figs = Array.prototype.slice.call(document.querySelectorAll(".salon-gallery figure"));
+    if (!figs.length) return;
+    var items = figs.map(function (f) {
+      var img = f.querySelector("img");
+      return {
+        full: f.getAttribute("data-full") || img.getAttribute("data-src") || img.currentSrc || img.src,
+        alt: img.getAttribute("alt") || ""
+      };
+    });
+    var overlay = null, imgEl = null, countEl = null, idx = 0;
+    function build() {
+      overlay = document.createElement("div");
+      overlay.className = "lightbox";
+      overlay.setAttribute("aria-hidden", "true");
+      overlay.innerHTML =
+        '<button class="lightbox__close" aria-label="Închide">×</button>' +
+        '<button class="lightbox__nav lightbox__prev" aria-label="Imaginea anterioară">‹</button>' +
+        '<figure class="lightbox__stage"><img alt=""></figure>' +
+        '<button class="lightbox__nav lightbox__next" aria-label="Imaginea următoare">›</button>' +
+        '<div class="lightbox__count"></div>';
+      document.body.appendChild(overlay);
+      imgEl = overlay.querySelector("img");
+      countEl = overlay.querySelector(".lightbox__count");
+      overlay.addEventListener("click", function (e) {
+        if (e.target === overlay || e.target.classList.contains("lightbox__close")) close();
+      });
+      overlay.querySelector(".lightbox__prev").addEventListener("click", function (e) { e.stopPropagation(); show(idx - 1); });
+      overlay.querySelector(".lightbox__next").addEventListener("click", function (e) { e.stopPropagation(); show(idx + 1); });
+    }
+    function show(i) {
+      idx = (i + items.length) % items.length;
+      imgEl.src = items[idx].full;
+      imgEl.alt = items[idx].alt;
+      if (countEl) countEl.textContent = (idx + 1) + " / " + items.length;
+    }
+    function open(i) {
+      if (!overlay) build();
+      show(i);
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.documentElement.style.overflow = "hidden";
+    }
+    function close() {
+      if (!overlay) return;
+      overlay.classList.remove("open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.documentElement.style.overflow = "";
+    }
+    figs.forEach(function (f, i) {
+      f.setAttribute("tabindex", "0");
+      f.setAttribute("role", "button");
+      f.setAttribute("aria-label", "Mărește imaginea");
+      f.addEventListener("click", function () { open(i); });
+      f.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(i); }
+      });
+    });
+    document.addEventListener("keydown", function (e) {
+      if (!overlay || !overlay.classList.contains("open")) return;
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowLeft") show(idx - 1);
+      else if (e.key === "ArrowRight") show(idx + 1);
+    });
+  })();
 })();
