@@ -1,17 +1,17 @@
 /** Date de contact, într-un singur loc. */
 
-export const PHONE_DISPLAY = '0767 422 497'
-export const PHONE_E164 = '+40767422497'
+export const PHONE_DISPLAY = '0750 414 787'
+export const PHONE_E164 = '+40750414787'
 
 const WA_MESSAGE =
   'Bună! Am văzut site-ul Nextflow și vreau să discutăm despre afacerea mea.'
 
-export const WHATSAPP_URL = `https://wa.me/40767422497?text=${encodeURIComponent(WA_MESSAGE)}`
+export const WHATSAPP_URL = `https://wa.me/40750414787?text=${encodeURIComponent(WA_MESSAGE)}`
 
 /* Varianta fără mesaj precompletat. Pe paginile legale, un text de tipul
    „vreau să discutăm despre afacerea mea" ar fi nelalocul lui pentru
    cineva care vine să-și exercite un drept GDPR. */
-export const WHATSAPP_PLAIN = 'https://wa.me/40767422497'
+export const WHATSAPP_PLAIN = 'https://wa.me/40750414787'
 
 /* Formularul de calificare („Formular ICP — Despre Business & Probleme").
    Atenție: adresa este cea publică, form.typeform.com/to/<id>. Linkul din

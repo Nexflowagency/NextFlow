@@ -89,7 +89,7 @@ const structuredData = {
       logo: 'https://nextflow.ro/icon.svg',
       description:
         'Site-uri și automatizări AI care răspund clienților, îi programează și țin evidența, non-stop. Pentru saloane, clinici și afaceri locale din România.',
-      telephone: '+40767422497',
+      telephone: '+40750414787',
       areaServed: { '@type': 'Country', name: 'România' },
       address: { '@type': 'PostalAddress', addressCountry: 'RO' },
       knowsLanguage: 'ro',
