@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#0A0908">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
 <style>
 :root{
   color-scheme:dark;
@@ -17,9 +17,10 @@
   --line:rgba(237,231,220,.10);--line-mid:rgba(237,231,220,.18);
   --green:#17D98B;--green-deep:#0FAE70;
   --paper:#F2EEE6;--on-paper:#131110;--on-paper-60:rgba(19,17,16,.60);--line-paper:rgba(19,17,16,.14);
-  --display:"Fraunces",ui-serif,Georgia,"Times New Roman",serif;
-  --sans:"Schibsted Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --display:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --serif:"Newsreader",ui-serif,Georgia,"Times New Roman",serif;
+  --sans:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --gutter:clamp(18px,4.5vw,56px);
   --ease:cubic-bezier(.16,1,.3,1);
 }
@@ -32,16 +33,16 @@ a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--green);outline-offset:3px}
 
 .shell{max-width:1200px;margin:0 auto;padding-inline:max(var(--gutter),env(safe-area-inset-left))}
-.mono{font:500 11.5px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase}
-.display{font-family:var(--display);font-weight:400;font-variation-settings:"opsz" 144;letter-spacing:-.025em;line-height:.98;margin:0}
-.display em{font-style:italic}
+.mono{font:500 11.5px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.display{font-family:var(--display);font-weight:500;letter-spacing:-.05em;line-height:1.02;margin:0}
+.display em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.03em}
 .dot{color:var(--green)}
 section{padding-block:clamp(72px,11vw,140px)}
 
 /* ── Header ── */
 header{position:sticky;top:0;z-index:20;background:rgba(10,9,8,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .bar{display:flex;align-items:center;justify-content:space-between;height:60px}
-.logo{display:inline-flex;align-items:center;gap:10px;font:600 17px/1 var(--display);letter-spacing:-.02em}
+.logo{display:inline-flex;align-items:center;gap:10px;font:600 16px/1 var(--sans);letter-spacing:-.02em}
 .logo svg{width:26px;height:26px}
 .bar-link{display:inline-flex;align-items:center;gap:8px;color:var(--green)}
 .bar-link::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green)}
@@ -49,7 +50,7 @@ header{position:sticky;top:0;z-index:20;background:rgba(10,9,8,.86);-webkit-back
 /* ── Hero ── */
 .hero{padding-top:clamp(56px,10vw,120px);padding-bottom:0}
 .hero .mono{color:var(--bone-46)}
-.hero h1{font-size:clamp(46px,10.4vw,128px);margin-top:28px}
+.hero h1{font-size:clamp(44px,10vw,124px);margin-top:28px}
 .hero h1 em{color:var(--bone-46)}
 .hero-row{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px;margin-top:clamp(28px,4vw,48px)}
 .hero-row p{margin:0;max-width:30ch;font-size:clamp(17px,1.6vw,19px);color:var(--bone-72)}
@@ -71,7 +72,7 @@ header{position:sticky;top:0;z-index:20;background:rgba(10,9,8,.86);-webkit-back
 .svc{list-style:none;margin:0;padding:0;border-top:1px solid var(--line-paper)}
 .svc li{display:grid;grid-template-columns:56px 1fr 1.1fr;align-items:baseline;gap:16px;padding:26px 0;border-bottom:1px solid var(--line-paper)}
 .svc .n{color:var(--on-paper-60)}
-.svc h3{font:400 clamp(24px,3vw,34px)/1.1 var(--display);letter-spacing:-.02em;margin:0}
+.svc h3{font:500 clamp(22px,2.6vw,30px)/1.1 var(--display);letter-spacing:-.035em;margin:0}
 .svc p{margin:0;color:var(--on-paper-60);font-size:16px}
 .svc-note{margin:28px 0 0;display:flex;align-items:center;gap:10px;color:var(--on-paper-60)}
 .svc-note::before{content:"";width:18px;height:1.5px;background:var(--green-deep)}
@@ -90,7 +91,7 @@ header{position:sticky;top:0;z-index:20;background:rgba(10,9,8,.86);-webkit-back
 .meta{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-top:16px}
 .meta .name{display:flex;align-items:baseline;gap:12px;min-width:0}
 .meta .n{color:var(--bone-30)}
-.meta h3{font:400 clamp(22px,2.4vw,30px)/1.1 var(--display);letter-spacing:-.02em;margin:0}
+.meta h3{font:500 clamp(20px,2.2vw,26px)/1.1 var(--display);letter-spacing:-.035em;margin:0}
 .meta .where{color:var(--bone-46);display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
 .meta .where svg{width:13px;height:13px;transition:transform .4s var(--ease),color .3s}
 .proj:hover .where svg{transform:translate(2px,-2px);color:var(--green)}
@@ -108,14 +109,14 @@ header{position:sticky;top:0;z-index:20;background:rgba(10,9,8,.86);-webkit-back
 .cover:hover .play{transform:scale(1.08)}
 .reel.on .cover{opacity:0;pointer-events:none}
 .reel figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:14px}
-.reel .who{font:400 21px/1.15 var(--display);letter-spacing:-.015em}
+.reel .who{font:500 19px/1.15 var(--display);letter-spacing:-.03em}
 .reel .role{display:block;margin-top:6px;color:var(--bone-46)}
 .reel .ig{color:var(--bone-46);white-space:nowrap;transition:color .3s}
 .reel .ig:hover{color:var(--green)}
 
 /* ── Contact ── */
 .cta{border-top:1px solid var(--line);text-align:left}
-.cta h2{font-size:clamp(56px,13vw,176px)}
+.cta h2{font-size:clamp(52px,12vw,160px)}
 .cta-row{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px;margin-top:clamp(28px,4vw,48px)}
 .cta-row p{margin:0;max-width:34ch;color:var(--bone-72);font-size:clamp(17px,1.6vw,19px)}
 
